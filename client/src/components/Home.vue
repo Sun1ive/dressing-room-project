@@ -31,14 +31,15 @@
     <app-loader v-if="showLoader"></app-loader>
   </transition>
 
-    <v-container v-if="showLinks">
+    <v-container grid-list-xl v-if="showLinks">
       <v-layout justify-center align-center wrap>
         <v-flex xs12 sm4 v-for="(item, i) in items" :key="i" class="text-xs-center">
-          <v-card flat height="200">
+          <v-card height="550">
+            <v-card-media height="400" :src="item.src"></v-card-media>
             <v-card-text><a :href="item.link">{{ item.title }}</a></v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn>Купить</v-btn>
+              <v-btn :href="item.link">Купить</v-btn>
               <v-spacer></v-spacer>
             </v-card-actions>
           </v-card>
