@@ -33,11 +33,13 @@
 
     <v-container v-if="showLinks">
       <v-layout justify-center align-center wrap>
-        <v-flex xs12 sm4 v-for="(item, i) in items" :key="i">
+        <v-flex xs12 sm4 v-for="(item, i) in items" :key="i" class="text-xs-center">
           <v-card flat height="200">
             <v-card-text><a :href="item.link">{{ item.title }}</a></v-card-text>
             <v-card-actions>
+              <v-spacer></v-spacer>
               <v-btn>Купить</v-btn>
+              <v-spacer></v-spacer>
             </v-card-actions>
           </v-card>
         </v-flex>
@@ -70,6 +72,7 @@ export default {
       showLoader: false,
       showLinks: false,
       items: [],
+      imgs: [],
     };
   },
   methods: {
@@ -89,11 +92,11 @@ export default {
       }, 500);
       try {
         const response = await axios.get('https://woonode.herokuapp.com/woo');
-        this.items = response.data.filter(x => )
+        this.items = response.data.filter(x => x.price <= 900)
         this.showLoader = false;
         this.showLinks = true;
       } catch (error) {
-        console.log(error);
+        throw new Error(error);
       }
     },
   },
