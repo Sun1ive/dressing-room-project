@@ -13,7 +13,7 @@ app.get('/woo', (req, res) => {
   async function getData() {
     try {
       const arr = [];
-      const response = await WooCommerce.getAsync('products/?per_page=5');
+      const response = await WooCommerce.getAsync('products/?per_page=100');
       const resolved = await JSON.parse(response.body);
 
       resolved.forEach(x => {
@@ -22,7 +22,7 @@ app.get('/woo', (req, res) => {
           title: x.name,
           price: x.price,
           link: x.permalink,
-          attr: x.attributes,
+          // attr: x.attributes,
         });
       });
       res.send(arr);
