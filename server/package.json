@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engine": {
+    "node": "8.9.1"
+  },
   "scripts": {
     "start": "rm -rf ./dist && babel -d ./dist ./src -s && node dist/main.js",
     "dev": "nodemon dev.js"
