@@ -1,1 +1,0 @@
-{"version":3,"sources":["../src/server.js"],"names":["app"],"mappings":";;AAAA;;;;AACA;;;;AAEA,MAAMA,MAAM,wBAAZ","file":"server.js","sourcesContent":["import express from 'express';\r\nimport { each } from 'lodash/each';\r\n\r\nconst app = express();\r\n\r\n"]}
