@@ -1,23 +1,56 @@
 <template>
   <v-container fluid>
-    <app-Breast @setBreast="setBreast"></app-Breast>
-    <app-Waist @setWaist="setWaist"></app-Waist>
-    <app-Hips @setHips="setHips"></app-Hips>
 
-    <v-layout justify-center align-center>
-      <v-flex xs12 sm6 class="text-xs-center">
-        <v-card>
-          <v-card-text>
-          Ваш итоговый размер <strong>{{ getSize }}</strong>
-          </v-card-text>
-        </v-card>
-      </v-flex>
-    </v-layout>
+  <transition name="fade">
+    <v-container v-if="isActive">
+
+      <app-Breast @setBreast="setBreast"></app-Breast>
+      <app-Waist @setWaist="setWaist"></app-Waist>
+      <app-Hips @setHips="setHips"></app-Hips>
+
+      <v-layout justify-center align-center>
+        <v-flex xs12 sm6 class="text-xs-center">
+          <v-card>
+            <v-card-text>
+            Ваш итоговый размер <strong>{{ getSize }}</strong>
+            </v-card-text>
+          </v-card>
+        </v-flex>
+      </v-layout>
+
+      <v-layout justify-center align-center>
+        <v-flex xs12 sm6 class="text-xs-center">
+          <v-btn color="primary" @click="showDresses">Посмотреть</v-btn>
+        </v-flex>
+      </v-layout>
+
+    </v-container>
+  </transition>
+
+  <transition name="fade">
+    <app-loader v-if="showLoader"></app-loader>
+  </transition>
+
+    <v-container v-if="showLinks">
+      <v-layout justify-center align-center wrap>
+        <v-flex xs12 sm4 v-for="(item, i) in items" :key="i">
+          <v-card flat height="200">
+            <v-card-text><a :href="item.link">{{ item.title }}</a></v-card-text>
+            <v-card-actions>
+              <v-btn>Купить</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-flex>
+      </v-layout>
+    </v-container>
+
   </v-container>
 </template>
 
 
 <script>
+import axios from 'axios';
+
 import Breast from './views/Breast';
 import Waist from './views/Waist';
 import Hips from './views/Hips';
@@ -33,6 +66,10 @@ export default {
       breast: null,
       waist: null,
       hips: null,
+      isActive: true,
+      showLoader: false,
+      showLinks: false,
+      items: [],
     };
   },
   methods: {
@@ -44,6 +81,20 @@ export default {
     },
     setHips(value) {
       this.hips = value;
+    },
+    async showDresses() {
+      this.isActive = false;
+      setTimeout(() => {
+        this.showLoader = true;
+      }, 500);
+      try {
+        const response = await axios.get('https://woonode.herokuapp.com/woo');
+        this.items = response.data.filter(x => )
+        this.showLoader = false;
+        this.showLinks = true;
+      } catch (error) {
+        console.log(error);
+      }
     },
   },
   computed: {
@@ -248,4 +299,12 @@ export default {
 </script>
 
 
-<style scoped lang="stylus"></style>
+<style scoped lang="stylus">
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.5s;
+}
+
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
+</style>

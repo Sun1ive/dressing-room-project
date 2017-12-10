@@ -18,17 +18,13 @@ export default {
     'app-Header': Header,
     'app-Home': Home,
     'app-Footer': Footer,
-  },
-  data() {
-    return {};
-  },
-  computed: {},
+  }
 };
 </script>
 
 <style lang="stylus">
 html {
-  overflow-y: hidden;
+  // overflow-y: hidden;
 }
 
 #app {

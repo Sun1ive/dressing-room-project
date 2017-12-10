@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import Loader from '@/components/Loader';
 
 import {
   Vuetify,
@@ -12,9 +13,10 @@ import {
   VToolbar,
   VCard,
   VSlider,
-  transitions
+  VProgressCircular,
+  transitions,
 } from 'vuetify';
-import '../node_modules/vuetify/src/stylus/app.styl'
+import '../node_modules/vuetify/src/stylus/app.styl';
 
 import App from './App';
 
@@ -30,6 +32,7 @@ Vue.use(Vuetify, {
     VToolbar,
     VCard,
     VSlider,
+    VProgressCircular,
     transitions,
   },
   theme: {
@@ -42,6 +45,8 @@ Vue.use(Vuetify, {
     warning: '#FFC107',
   },
 });
+
+Vue.component('app-loader', Loader);
 
 Vue.config.productionTip = false;
 
