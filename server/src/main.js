@@ -1,5 +1,6 @@
 import express from 'express';
 import cors from 'cors';
+import { each } from 'lodash';
 import WooCommerce from './api';
 
 const app = express();
@@ -16,16 +17,19 @@ app.get('/woo', (req, res) => {
       const response = await WooCommerce.getAsync('products/?per_page=100');
       const resolved = await JSON.parse(response.body);
 
-      resolved.forEach(x => {
+      each(resolved ,x => {
         arr.push({
           id: x.id,
           title: x.name,
           price: x.price,
           link: x.permalink,
-          // attr: x.attributes,
+          attr: x.attributes,
+          src: x.images[0].src,
+          images: x.images,
         });
       });
       res.send(arr);
+
     } catch (error) {
       res.sendStatus(400);
     }
