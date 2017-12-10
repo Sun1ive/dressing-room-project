@@ -10,6 +10,8 @@ import {
   VIcon,
   VGrid,
   VToolbar,
+  VCard,
+  VSlider,
   transitions
 } from 'vuetify';
 import '../node_modules/vuetify/src/stylus/app.styl'
@@ -26,17 +28,19 @@ Vue.use(Vuetify, {
     VIcon,
     VGrid,
     VToolbar,
-    transitions
+    VCard,
+    VSlider,
+    transitions,
   },
   theme: {
-    primary: '#ee44aa',
+    primary: '#1976D2',
     secondary: '#424242',
     accent: '#82B1FF',
     error: '#FF5252',
     info: '#2196F3',
     success: '#4CAF50',
-    warning: '#FFC107'
-  }
+    warning: '#FFC107',
+  },
 });
 
 Vue.config.productionTip = false;

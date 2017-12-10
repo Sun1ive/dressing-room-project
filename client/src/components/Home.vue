@@ -21,6 +21,7 @@
 import Breast from './views/Breast';
 import Waist from './views/Waist';
 import Hips from './views/Hips';
+
 export default {
   components: {
     'app-Breast': Breast,

@@ -12,6 +12,7 @@
 import Header from '@/components/Header';
 import Home from '@/components/Home';
 import Footer from '@/components/Footer';
+
 export default {
   components: {
     'app-Header': Header,
@@ -21,22 +22,30 @@ export default {
   data() {
     return {};
   },
-  computed: {
-  }
+  computed: {},
 };
 </script>
 
 <style lang="stylus">
-html
-  overflow-y hidden
-#app
-  max-width 700px
-  margin 0 auto
-  outline none
-  .container
-    padding 0
-.input-group--slider
-  outline-style none
-.content--wrap
-  align-items center
+html {
+  overflow-y: hidden;
+}
+
+#app {
+  max-width: 700px;
+  margin: 0 auto;
+  outline: none;
+
+  .container {
+    padding: 0;
+  }
+}
+
+.input-group--slider {
+  outline-style: none;
+}
+
+.content--wrap {
+  align-items: center;
+}
 </style>
