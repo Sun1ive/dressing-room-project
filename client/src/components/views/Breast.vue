@@ -21,30 +21,41 @@ export default {
   data() {
     return {
       breast: null,
-    }
+      prevComparison: null,
+    };
   },
   computed: {
     getBreast() {
-      return this.breast
+      return this.breast;
     },
     getBreastSize() {
-      let size = null;
+      const params = {
+        size: null,
+        number: null,
+      };
+
       if (this.getBreast >= 82 && this.getBreast < 86) {
-        size = 'XS'
+        params.size = 'XS';
+        params.number = this.getBreast
       }
       if (this.getBreast > 85 && this.getBreast < 90) {
-        size = 'S'
+        params.size = 'S';
+        params.number = this.getBreast
       }
       if (this.getBreast > 89 && this.getBreast < 94) {
-        size = 'M'
+        params.size = 'M';
+        params.number = this.getBreast
       }
       if (this.getBreast > 93 && this.getBreast <= 97) {
-        size = 'L'
+        params.size = 'L';
+        params.number = this.getBreast
       }
-      this.$emit('setBreast', size);
-      return size
-    }
-  }
+
+      this.$emit('setBreast', params);
+
+      return params.size;
+    },
+  },
 };
 </script>
 

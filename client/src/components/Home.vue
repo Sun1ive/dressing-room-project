@@ -66,9 +66,18 @@ export default {
   },
   data() {
     return {
-      breast: null,
-      waist: null,
-      hips: null,
+      breast: {
+        size: null,
+        number: null,
+      },
+      waist: {
+        size: null,
+        number: null,
+      },
+      hips: {
+        size: null,
+        number: null,
+      },
       isActive: true,
       showLoader: false,
       showLinks: false,
