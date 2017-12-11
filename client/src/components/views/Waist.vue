@@ -16,36 +16,6 @@
   </v-container>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      waist: null,
-    };
-  },
-  computed: {
-    getWaist() {
-      return this.waist;
-    },
-    getWaistSize() {
-      let size = null;
-      if (this.getWaist >= 63 && this.getWaist < 67) {
-        size = 'XS';
-      }
-      if (this.getWaist > 66 && this.getWaist < 71) {
-        size = 'S';
-      }
-      if (this.getWaist > 70 && this.getWaist < 75) {
-        size = 'M';
-      }
-      if (this.getWaist > 74 && this.getWaist <= 77) {
-        size = 'L';
-      }
-      this.$emit('setWaist', size);
-      return size;
-    },
-  },
-};
-</script>
+<script src="./Waist"></script>
 
 <style scoped lang="stylus"></style>
