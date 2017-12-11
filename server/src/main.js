@@ -19,6 +19,19 @@ app.get('/', (req, res) => {
 app.use('/orders', ordersRoutes);
 
 app.get('/woo', (req, res) => {
+  
+  function myShortParser(str) {
+    const reg1 = /(&#171;|&#187;)/g;
+    str = str.replace(reg1, '"');
+    str = str.replace('<p>', '[');
+    str = str.replace('</p>', ']');
+    const begin = str.indexOf('[');
+    const end = str.indexOf(']') + 1;
+    const substr = str.substr(begin, end - begin);
+    const result = JSON.parse(substr);
+    return result;
+  }
+
   async function getData() {
     try {
       const arr = [];
@@ -31,19 +44,19 @@ app.get('/woo', (req, res) => {
           title: x.name,
           price: x.price,
           link: x.permalink,
-          attr: x.attributes,
+          short: myShortParser(x.short_description),
+          // attr: x.attributes,
           src: x.images[0].src,
-          images: x.images,
         });
       });
+
       res.send(arr);
+      // res.send(resolved)
     } catch (error) {
-      res.sendStatus(400);
+      res.send(error)
     }
   }
   getData();
 });
 
 app.listen(port, () => console.log('Server is on at port ', port));
-
-
