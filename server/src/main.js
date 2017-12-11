@@ -19,23 +19,25 @@ app.get('/', (req, res) => {
 app.use('/orders', ordersRoutes);
 
 app.get('/woo', (req, res) => {
-  
   function myShortParser(str) {
+    if (str === undefined || str === null || str === '') return;
+
     const reg1 = /(&#171;|&#187;)/g;
-    str = str.replace(reg1, '"');
-    str = str.replace('<p>', '[');
-    str = str.replace('</p>', ']');
-    const begin = str.indexOf('[');
-    const end = str.indexOf(']') + 1;
-    const substr = str.substr(begin, end - begin);
+    const str1 = str.replace(reg1, '"');
+    const str2 = str1.replace('<p>', '[');
+    const str3 = str2.replace('</p>', ']');
+    const begin = str3.indexOf('[');
+    const end = str3.indexOf(']') + 1;
+    const substr = str3.substr(begin, end - begin);
     const result = JSON.parse(substr);
+
     return result;
   }
 
   async function getData() {
     try {
       const arr = [];
-      const response = await WooCommerce.getAsync('products/?per_page=100');
+      const response = await WooCommerce.getAsync('products/?per_page=3');
       const resolved = await JSON.parse(response.body);
 
       each(resolved, x => {
@@ -50,10 +52,10 @@ app.get('/woo', (req, res) => {
         });
       });
 
-      res.send(arr);
-      // res.send(resolved)
+      // res.send(arr);
+      res.send(resolved)
     } catch (error) {
-      res.send(error)
+      res.sendStatus(400);
     }
   }
   getData();
