@@ -53,6 +53,7 @@
 
 <script>
 import axios from 'axios';
+import { each } from 'lodash';
 
 import Breast from './views/Breast';
 import Waist from './views/Waist';
@@ -97,13 +98,50 @@ export default {
     },
     async showDresses() {
       this.isActive = false;
-      setTimeout(() => {
-        this.showLoader = true;
-      }, 500);
+      // setTimeout(() => {
+      //   this.showLoader = true;
+      // }, 500);
       try {
-        const response = await axios.get('https://woonode.herokuapp.com/woo');
-        this.items = response.data.filter(x => x.price <= 900)
-        this.showLoader = false;
+        const response = await axios.get('https://dressing-room-f35be.firebaseio.com/dresses.json');
+        const data = response.data;
+
+        console.log('breast', this.breast.number);
+        console.log('bedra', this.hips.number);
+        console.log('talia', this.waist.number);
+
+        console.log(data);
+    each(data, item => {
+      each(item, x => {
+        each(x.grids, size => {
+          if (this.breast.number <= size.breast && this.hips.number <= size.hips && this.waist.number <= size.waist) {
+            this.items.push({
+              title: x.title,
+              src: x.src,
+              link: x.link,
+              size: size.size,
+            });
+          }
+          console.log(this.items);
+        });
+      });
+    });
+    this.items.pop();
+
+        // const response = await axios.get('https://woonode.herokuapp.com/woo');
+        // const response = await axios.get('http://localhost:8081/woo');
+        // this.items = await response.data.filter(x => x.short);
+        // this.items = await response.data.slice(0, 2);
+
+        // each(data, x => {
+        //   each(x, item => {
+        //     if (this.breast.number <= item.gridXS.b) {
+        //       this.items.push(item);
+        //     }
+        //   });
+        // });
+        // console.log(this.items);
+
+        // this.showLoader = false;
         this.showLinks = true;
       } catch (error) {
         throw new Error(error);
