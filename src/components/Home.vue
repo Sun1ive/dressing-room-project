@@ -96,36 +96,43 @@ export default {
     setHips(value) {
       this.hips = value;
     },
+    filterData(data) {
+      each(data, item => {
+        each(item, x => {
+          each(x.grids, size => {
+            if (this.breast.number <= size.breast &&
+              this.hips.number <= size.hips &&
+              this.waist.number <= size.waist) {
+              this.items.push({
+                title: x.title,
+                src: x.src,
+                link: x.link,
+                size: size.size,
+              });
+              console.log(this.items);
+            }
+          });
+        });
+      });
+      this.items.pop();
+    },
     async showDresses() {
       this.isActive = false;
-      // setTimeout(() => {
-      //   this.showLoader = true;
-      // }, 500);
+      setTimeout(() => {
+        this.showLoader = true;
+      }, 500);
+      
       try {
         const response = await axios.get('https://dressing-room-f35be.firebaseio.com/dresses.json');
         const data = response.data;
+        this.filterData(data);
 
-        console.log('breast', this.breast.number);
-        console.log('bedra', this.hips.number);
-        console.log('talia', this.waist.number);
+        // console.log('breast', this.breast.number);
+        // console.log('bedra', this.hips.number);
+        // console.log('talia', this.waist.number);
 
-        console.log(data);
-    each(data, item => {
-      each(item, x => {
-        each(x.grids, size => {
-          if (this.breast.number <= size.breast && this.hips.number <= size.hips && this.waist.number <= size.waist) {
-            this.items.push({
-              title: x.title,
-              src: x.src,
-              link: x.link,
-              size: size.size,
-            });
-          }
-          console.log(this.items);
-        });
-      });
-    });
-    this.items.pop();
+        // console.log(data);
+
 
         // const response = await axios.get('https://woonode.herokuapp.com/woo');
         // const response = await axios.get('http://localhost:8081/woo');
@@ -141,8 +148,12 @@ export default {
         // });
         // console.log(this.items);
 
-        // this.showLoader = false;
-        this.showLinks = true;
+        setTimeout(() => {
+          this.showLoader = false;
+          setTimeout(() => {
+            this.showLinks = true;
+          }, 500);
+        }, 1000);
       } catch (error) {
         throw new Error(error);
       }
