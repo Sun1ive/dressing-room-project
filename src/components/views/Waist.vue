@@ -48,7 +48,8 @@ export default {
         params.size = 'L';
         params.number = this.getWaist;
       }
-      this.$emit('setWaist', params);
+      this.$store.commit('setWaist', params);
+      
       return params.size;
     },
   },
