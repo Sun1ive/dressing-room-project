@@ -51,7 +51,8 @@ export default {
         params.number = this.getBreast;
       }
 
-      this.$store.commit('setBreast', params);
+      // this.$store.commit('setBreast', params);
+      this.$emit('setBreast', params);
 
       return params.size;
     },

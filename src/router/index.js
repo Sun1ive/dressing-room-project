@@ -2,7 +2,8 @@ import Vue from 'vue';
 import Router from 'vue-router';
 
 import Admin from '@/components/Admin';
-import Root from '@/components/Root';
+import Params from '@/components/Params';
+import Starter from '@/components/Starter';
 
 Vue.use(Router);
 
@@ -16,9 +17,14 @@ export default new Router({
       // beforeEnter: AuthGuard,
     },
     {
+      path: '/params',
+      name: 'Params',
+      component: Params,
+    },
+    {
       path: '/',
-      name: 'Root',
-      component: Root,
+      name: 'Starter',
+      component: Starter,
     },
   ],
 });

@@ -48,7 +48,8 @@ export default {
         params.size = 'L';
         params.number = this.getHips;
       }
-      this.$store.commit('setHips', params);
+      // this.$store.commit('setHips', params);
+      this.$emit('setHips', params);
       return params.size;
     },
   },

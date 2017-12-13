@@ -7,31 +7,11 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
   state: {
-    breast: {
-      size: null,
-      number: null,
-    },
-    waist: {
-      size: null,
-      number: null,
-    },
-    hips: {
-      size: null,
-      number: null,
-    },
     loadedItems: [],
     errorState: false,
+    loadingState: false,
   },
   mutations: {
-    setBreast(state, payload) {
-      state.breast = payload;
-    },
-    setWaist(state, payload) {
-      state.waist = payload;
-    },
-    setHips(state, payload) {
-      state.hips = payload;
-    },
     setLoadedItems(state, payload) {
       state.loadedItems = payload;
     },
@@ -81,6 +61,7 @@ const store = new Vuex.Store({
   },
   getters: {
     errorState: state => state.errorState,
+    loadingState: state => state.loadingState,
   },
 });
 
