@@ -1,7 +1,7 @@
 <template>
   <v-container fluid>
     <v-layout justify-center align-center>
-      <v-flex xs12 sm6>
+      <v-flex xs12 sm8>
         <v-form @submit.prevent="addToBase">
 
           <v-text-field v-model.lazy="item.title" label="title"></v-text-field>
@@ -132,9 +132,40 @@ export default {
   methods: {
     async addToBase() {
       await this.item.sizes.push(this.xs, this.s, this.m, this.l);
-
-      console.log(this.item);
       this.$store.dispatch('uploadItem', this.item);
+
+      this.item = {
+        title: '',
+        link: '',
+        id: null,
+        src: '',
+        sizes: [],
+      };
+      this.xs = {
+        size: 'XS',
+        breast: null,
+        waist: null,
+        hips: null,
+      };
+
+      this.s = {
+        size: 'S',
+        breast: null,
+        waist: null,
+        hips: null,
+      };
+      this.m = {
+        size: 'M',
+        breast: null,
+        waist: null,
+        hips: null,
+      };
+      this.l = {
+        size: 'L',
+        breast: null,
+        waist: null,
+        hips: null,
+      };
     },
   },
 };

@@ -26,10 +26,8 @@ const store = new Vuex.Store({
           const dresses = [];
           const obj = data.val();
 
-          each(obj, key => {
-            each(key, item => {
-              dresses.push(item);
-            });
+          each(obj, item => {
+            dresses.push(item);
           });
 
           commit('setLoadedItems', dresses);
@@ -46,10 +44,13 @@ const store = new Vuex.Store({
         id: payload.id,
         src: payload.src,
         sizes: payload.sizes,
-      }
+      };
       async function upload() {
         try {
-          await firebase.database().ref('dresses').push(item);
+          await firebase
+            .database()
+            .ref('dresses')
+            .push(item);
         } catch (error) {
           throw new Error('something bad happened ', error);
         }
