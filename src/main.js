@@ -14,12 +14,15 @@ import {
   VToolbar,
   VCard,
   VSlider,
+  VForm,
+  VTextField,
   VProgressCircular,
   transitions,
 } from 'vuetify';
 import '../node_modules/vuetify/src/stylus/app.styl';
 
 import App from './App';
+import router from './router';
 
 Vue.use(Vuetify, {
   components: {
@@ -33,6 +36,8 @@ Vue.use(Vuetify, {
     VToolbar,
     VCard,
     VSlider,
+    VForm,
+    VTextField,
     VProgressCircular,
     transitions,
   },
@@ -54,6 +59,7 @@ Vue.config.productionTip = false;
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
+  router,
   render: h => h(App),
   created() {
     firebase.initializeApp({

@@ -2,7 +2,8 @@
   <v-app light>
     <app-Header />
     <v-content>
-      <app-Home />
+      <router-view />
+      <!-- <app-Home /> -->
     </v-content>
     <app-Footer />
   </v-app>
@@ -23,25 +24,22 @@ export default {
 </script>
 
 <style lang="stylus">
-html {
+html
   // overflow-y: hidden;
-}
 
-#app {
+#app
   max-width: 700px;
   margin: 0 auto;
   outline: none;
 
-  .container {
-    padding: 0;
-  }
-}
+.container
+  padding: 0;
 
-.input-group--slider {
+.input-group--slider
   outline-style: none;
-}
 
-.content--wrap {
-  align-items: center;
-}
+.content--wrap
+  align-items: center
+
+
 </style>
