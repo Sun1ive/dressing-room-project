@@ -32,8 +32,6 @@ const store = new Vuex.Store({
           })
 
           commit('setLoadedItems', dresses);
-          console.log(obj);
-          console.log(dresses);
         } catch (error) {
           throw new Error('something bad happened ', error);
         }
