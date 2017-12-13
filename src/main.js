@@ -73,6 +73,6 @@ new Vue({
       storageBucket: 'dressing-room-f35be.appspot.com',
       messagingSenderId: '602558021113',
     });
-    this.$store.dispatch('setLoadedItems');
+    // this.$store.dispatch('setLoadedItems');
   },
 });

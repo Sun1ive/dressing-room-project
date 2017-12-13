@@ -8,6 +8,7 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
   state: {
     loadedItems: [],
+    errorState: false,
   },
   mutations: {
     setLoadedItems(state, payload) {
@@ -27,9 +28,9 @@ const store = new Vuex.Store({
 
           each(obj, key => {
             each(key, item => {
-              dresses.push(item)
-            })
-          })
+              dresses.push(item);
+            });
+          });
 
           commit('setLoadedItems', dresses);
         } catch (error) {
@@ -38,8 +39,24 @@ const store = new Vuex.Store({
       }
       getItems();
     },
+    uploadItem(payload) {
+      async function upload() {
+        try {
+          await firebase
+            .database()
+            .ref('dresses')
+            .push(payload);
+          
+        } catch (error) {
+          throw new Error('something bad happened ', error);
+        }
+      }
+      upload();
+    },
   },
-  getters: {},
+  getters: {
+    errorState: state => state.errorState,
+  },
 });
 
 export default store;

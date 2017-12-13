@@ -3,8 +3,11 @@
     <v-layout justify-center align-center>
       <v-flex xs12 sm6>
         <v-form @submit.prevent="addToBase">
-          <v-text-field v-model="item.title" label="title"></v-text-field>
-          <v-text-field v-model="item.link" label="link"></v-text-field>
+
+          <v-text-field v-model.lazy="item.title" label="title"></v-text-field>
+          <v-text-field type="tel" v-model.lazy="item.id" label="id"></v-text-field>
+          <v-text-field v-model.lazy="item.src" label="src"></v-text-field>
+          <v-text-field v-model.lazy="item.link" label="link"></v-text-field>
           
           <v-layout justify-center>
             <v-flex xs12 class="text-xs-center">
@@ -12,13 +15,13 @@
                 <v-card-text>XS</v-card-text>
                 <v-layout justify-center>
                   <v-flex xs3 class="mx-2">
-                    <v-text-field v-model="item.xs.breast" label="Грудь"></v-text-field>
+                    <v-text-field v-model.lazy="xs.breast" label="Грудь"></v-text-field>
                   </v-flex>
                   <v-flex xs3 class="mx-2">
-                    <v-text-field v-model="item.xs.waist" label="Талия"></v-text-field>
+                    <v-text-field v-model.lazy="xs.waist" label="Талия"></v-text-field>
                   </v-flex>
                   <v-flex xs3 class="mx-2">
-                    <v-text-field v-model="item.xs.hips" label="Бедра"></v-text-field>
+                    <v-text-field v-model.lazy="xs.hips" label="Бедра"></v-text-field>
                   </v-flex>
                 </v-layout>
               </v-card>
@@ -31,13 +34,13 @@
                 <v-card-text>S</v-card-text>
                 <v-layout justify-center>
                   <v-flex xs3 class="mx-2">
-                    <v-text-field v-model="item.s.breast" label="Грудь"></v-text-field>
+                    <v-text-field v-model.lazy="s.breast" label="Грудь"></v-text-field>
                   </v-flex>
                   <v-flex xs3 class="mx-2">
-                    <v-text-field v-model="item.s.waist" label="Талия"></v-text-field>
+                    <v-text-field v-model.lazy="s.waist" label="Талия"></v-text-field>
                   </v-flex>
                   <v-flex xs3 class="mx-2">
-                    <v-text-field v-model="item.s.hips" label="Бедра"></v-text-field>
+                    <v-text-field v-model.lazy="s.hips" label="Бедра"></v-text-field>
                   </v-flex>
                 </v-layout>
               </v-card>
@@ -50,13 +53,13 @@
                 <v-card-text>M</v-card-text>
                 <v-layout justify-center>
                   <v-flex xs3 class="mx-2">
-                    <v-text-field v-model="item.m.breast" label="Грудь"></v-text-field>
+                    <v-text-field v-model.lazy="m.breast" label="Грудь"></v-text-field>
                   </v-flex>
                   <v-flex xs3 class="mx-2">
-                    <v-text-field v-model="item.m.waist" label="Талия"></v-text-field>
+                    <v-text-field v-model.lazy="m.waist" label="Талия"></v-text-field>
                   </v-flex>
                   <v-flex xs3 class="mx-2">
-                    <v-text-field v-model="item.m.hips" label="Бедра"></v-text-field>
+                    <v-text-field v-model.lazy="m.hips" label="Бедра"></v-text-field>
                   </v-flex>
                 </v-layout>
               </v-card>
@@ -69,22 +72,20 @@
                 <v-card-text>L</v-card-text>
                 <v-layout justify-center>
                   <v-flex xs3 class="mx-2">
-                    <v-text-field v-model="item.l.breast" label="Грудь"></v-text-field>
+                    <v-text-field v-model.lazy="l.breast" label="Грудь"></v-text-field>
                   </v-flex>
                   <v-flex xs3 class="mx-2">
-                    <v-text-field v-model="item.l.waist" label="Талия"></v-text-field>
+                    <v-text-field v-model.lazy="l.waist" label="Талия"></v-text-field>
                   </v-flex>
                   <v-flex xs3 class="mx-2">
-                    <v-text-field v-model="item.l.hips" label="Бедра"></v-text-field>
+                    <v-text-field v-model.lazy="l.hips" label="Бедра"></v-text-field>
                   </v-flex>
                 </v-layout>
               </v-card>
             </v-flex>
           </v-layout>
 
-
-
-          <v-btn color="primary" right type="submit">Submit</v-btn>
+          <v-btn color="primary" type="submit">Submit</v-btn>
         </v-form>
       </v-flex>
     </v-layout>
@@ -98,35 +99,43 @@ export default {
       item: {
         title: '',
         link: '',
-        xs: {
-          breast: '',
-          waist: '',
-          hips: '',
-        },
-        s: {
-          breast: '',
-          waist: '',
-          hips: '',
-        },
-        m: {
-          breast: '',
-          waist: '',
-          hips: '',
-        },
-        l: {
-          breast: '',
-          waist: '',
-          hips: '',
-        },
+        id: null,
+        src: '',
         sizes: [],
+      },
+      xs: {
+        size: 'XS',
+        breast: null,
+        waist: null,
+        hips: null,
+      },
+      s: {
+        size: 'S',
+        breast: null,
+        waist: null,
+        hips: null,
+      },
+      m: {
+        size: 'M',
+        breast: null,
+        waist: null,
+        hips: null,
+      },
+      l: {
+        size: 'L',
+        breast: null,
+        waist: null,
+        hips: null,
       },
     };
   },
   methods: {
     addToBase() {
-      this.item.sizes.push(this.item.xs, this.item.s,this.item.m,this.item.l)
-      console.log(this.item.sizes);
-    }
+      this.item.sizes.push(this.xs, this.s, this.m, this.l);
+
+      console.log(this.item);
+      // this.$store.dispatch('uploadItem', this.item);
+    },
   },
 };
 </script>
