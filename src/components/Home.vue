@@ -34,8 +34,9 @@
     <v-container grid-list-xl v-if="showLinks">
       <v-layout justify-center align-center wrap>
         <v-flex xs12 sm4 v-for="(item, i) in items" :key="i" class="text-xs-center">
-          <v-card height="550">
+          <v-card height="600">
             <v-card-media height="400" :src="item.src"></v-card-media>
+            <v-card-text>{{ item.size }}</v-card-text>
             <v-card-text><a :href="item.link">{{ item.title }}</a></v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
@@ -83,7 +84,6 @@ export default {
       showLoader: false,
       showLinks: false,
       items: [],
-      imgs: [],
     };
   },
   methods: {
@@ -114,7 +114,7 @@ export default {
           });
         });
       });
-      this.items.pop();
+      // this.items.pop();
     },
     async showDresses() {
       this.isActive = false;
@@ -362,11 +362,10 @@ export default {
 
 
 <style scoped lang="stylus">
-.fade-enter-active, .fade-leave-active {
-  transition: opacity 0.5s;
-}
+.fade-enter-active, .fade-leave-active
+  transition: opacity 0.5s
 
-.fade-enter, .fade-leave-to {
-  opacity: 0;
-}
+.fade-enter, .fade-leave-to
+  opacity: 0
+
 </style>

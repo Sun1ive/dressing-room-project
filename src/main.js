@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Loader from '@/components/Loader';
+import * as firebase from 'firebase';
 
 import {
   Vuetify,
@@ -54,4 +55,14 @@ Vue.config.productionTip = false;
 new Vue({
   el: '#app',
   render: h => h(App),
+  created() {
+    firebase.initializeApp({
+      apiKey: 'AIzaSyDCxHsSoNNG2un3PQmZEnubatCAfdds3jU',
+      authDomain: 'dressing-room-f35be.firebaseapp.com',
+      databaseURL: 'https://dressing-room-f35be.firebaseio.com',
+      projectId: 'dressing-room-f35be',
+      storageBucket: 'dressing-room-f35be.appspot.com',
+      messagingSenderId: '602558021113',
+    });
+  },
 });
