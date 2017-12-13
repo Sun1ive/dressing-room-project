@@ -5,7 +5,7 @@
         <v-form @submit.prevent="addToBase">
 
           <v-text-field v-model.lazy="item.title" label="title"></v-text-field>
-          <v-text-field type="tel" v-model.lazy="item.id" label="id"></v-text-field>
+          <v-text-field v-model.number.lazy="item.id" label="id"></v-text-field>
           <v-text-field v-model.lazy="item.src" label="src"></v-text-field>
           <v-text-field v-model.lazy="item.link" label="link"></v-text-field>
           
@@ -15,13 +15,13 @@
                 <v-card-text>XS</v-card-text>
                 <v-layout justify-center>
                   <v-flex xs3 class="mx-2">
-                    <v-text-field v-model.lazy="xs.breast" label="Грудь"></v-text-field>
+                    <v-text-field v-model.number.lazy="xs.breast" label="Грудь"></v-text-field>
                   </v-flex>
                   <v-flex xs3 class="mx-2">
-                    <v-text-field v-model.lazy="xs.waist" label="Талия"></v-text-field>
+                    <v-text-field v-model.number.lazy="xs.waist" label="Талия"></v-text-field>
                   </v-flex>
                   <v-flex xs3 class="mx-2">
-                    <v-text-field v-model.lazy="xs.hips" label="Бедра"></v-text-field>
+                    <v-text-field v-model.number.lazy="xs.hips" label="Бедра"></v-text-field>
                   </v-flex>
                 </v-layout>
               </v-card>
@@ -34,13 +34,13 @@
                 <v-card-text>S</v-card-text>
                 <v-layout justify-center>
                   <v-flex xs3 class="mx-2">
-                    <v-text-field v-model.lazy="s.breast" label="Грудь"></v-text-field>
+                    <v-text-field v-model.number.lazy="s.breast" label="Грудь"></v-text-field>
                   </v-flex>
                   <v-flex xs3 class="mx-2">
-                    <v-text-field v-model.lazy="s.waist" label="Талия"></v-text-field>
+                    <v-text-field v-model.number.lazy="s.waist" label="Талия"></v-text-field>
                   </v-flex>
                   <v-flex xs3 class="mx-2">
-                    <v-text-field v-model.lazy="s.hips" label="Бедра"></v-text-field>
+                    <v-text-field v-model.number.lazy="s.hips" label="Бедра"></v-text-field>
                   </v-flex>
                 </v-layout>
               </v-card>
@@ -53,13 +53,13 @@
                 <v-card-text>M</v-card-text>
                 <v-layout justify-center>
                   <v-flex xs3 class="mx-2">
-                    <v-text-field v-model.lazy="m.breast" label="Грудь"></v-text-field>
+                    <v-text-field v-model.number.lazy="m.breast" label="Грудь"></v-text-field>
                   </v-flex>
                   <v-flex xs3 class="mx-2">
-                    <v-text-field v-model.lazy="m.waist" label="Талия"></v-text-field>
+                    <v-text-field v-model.number.lazy="m.waist" label="Талия"></v-text-field>
                   </v-flex>
                   <v-flex xs3 class="mx-2">
-                    <v-text-field v-model.lazy="m.hips" label="Бедра"></v-text-field>
+                    <v-text-field v-model.number.lazy="m.hips" label="Бедра"></v-text-field>
                   </v-flex>
                 </v-layout>
               </v-card>
@@ -72,13 +72,13 @@
                 <v-card-text>L</v-card-text>
                 <v-layout justify-center>
                   <v-flex xs3 class="mx-2">
-                    <v-text-field v-model.lazy="l.breast" label="Грудь"></v-text-field>
+                    <v-text-field v-model.number.lazy="l.breast" label="Грудь"></v-text-field>
                   </v-flex>
                   <v-flex xs3 class="mx-2">
-                    <v-text-field v-model.lazy="l.waist" label="Талия"></v-text-field>
+                    <v-text-field v-model.number.lazy="l.waist" label="Талия"></v-text-field>
                   </v-flex>
                   <v-flex xs3 class="mx-2">
-                    <v-text-field v-model.lazy="l.hips" label="Бедра"></v-text-field>
+                    <v-text-field v-model.number.lazy="l.hips" label="Бедра"></v-text-field>
                   </v-flex>
                 </v-layout>
               </v-card>
