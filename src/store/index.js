@@ -39,14 +39,17 @@ const store = new Vuex.Store({
       }
       getItems();
     },
-    uploadItem(payload) {
+    uploadItem({ commit }, payload) {
+      const item = {
+        title: payload.title,
+        link: payload.link,
+        id: payload.id,
+        src: payload.src,
+        sizes: payload.sizes,
+      }
       async function upload() {
         try {
-          await firebase
-            .database()
-            .ref('dresses')
-            .push(payload);
-          
+          await firebase.database().ref('dresses').push(item);
         } catch (error) {
           throw new Error('something bad happened ', error);
         }

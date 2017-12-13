@@ -130,11 +130,11 @@ export default {
     };
   },
   methods: {
-    addToBase() {
-      this.item.sizes.push(this.xs, this.s, this.m, this.l);
+    async addToBase() {
+      await this.item.sizes.push(this.xs, this.s, this.m, this.l);
 
       console.log(this.item);
-      // this.$store.dispatch('uploadItem', this.item);
+      this.$store.dispatch('uploadItem', this.item);
     },
   },
 };
