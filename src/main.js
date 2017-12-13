@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Loader from '@/components/Loader';
 import * as firebase from 'firebase';
 
+
 import {
   Vuetify,
   VApp,
@@ -23,6 +24,7 @@ import '../node_modules/vuetify/src/stylus/app.styl';
 
 import App from './App';
 import router from './router';
+import store from './store'
 
 Vue.use(Vuetify, {
   components: {
@@ -60,6 +62,7 @@ Vue.config.productionTip = false;
 new Vue({
   el: '#app',
   router,
+  store,
   render: h => h(App),
   created() {
     firebase.initializeApp({
@@ -70,5 +73,6 @@ new Vue({
       storageBucket: 'dressing-room-f35be.appspot.com',
       messagingSenderId: '602558021113',
     });
+    this.$store.dispatch('setLoadedItems');
   },
 });
