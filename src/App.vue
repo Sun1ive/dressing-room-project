@@ -2,8 +2,9 @@
   <v-app light>
     <app-Header />
     <v-content>
-      <router-view />
-      <!-- <app-Home /> -->
+      <transition name="fade">
+        <router-view />
+      </transition>
     </v-content>
     <app-Footer />
   </v-app>
@@ -19,7 +20,7 @@ export default {
     'app-Header': Header,
     'app-Home': Home,
     'app-Footer': Footer,
-  }
+  },
 };
 </script>
 

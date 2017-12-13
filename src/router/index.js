@@ -2,8 +2,11 @@ import Vue from 'vue';
 import Router from 'vue-router';
 
 import Admin from '@/components/Admin';
-import Params from '@/components/Params';
 import Starter from '@/components/Starter';
+import Breast from '@/components/views/Breast';
+import Waist from '@/components/views/Waist';
+import Hips from '@/components/views/Hips';
+
 
 Vue.use(Router);
 
@@ -17,14 +20,24 @@ export default new Router({
       // beforeEnter: AuthGuard,
     },
     {
-      path: '/params',
-      name: 'Params',
-      component: Params,
-    },
-    {
       path: '/',
       name: 'Starter',
       component: Starter,
+    },
+    {
+      path: '/breast',
+      name: 'Breast',
+      component: Breast,
+    },
+    {
+      path: '/waist',
+      name: 'Waist',
+      component: Waist,
+    },
+    {
+      path: '/hips',
+      name: 'Hips',
+      component: Hips,
     },
   ],
 });

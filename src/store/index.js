@@ -7,6 +7,18 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
   state: {
+    breast: {
+      number: null,
+      size: null,
+    },
+    waist: {
+      number: null,
+      size: null,
+    },
+    hips: {
+      number: null,
+      size: null,
+    } ,
     loadedItems: [],
     errorState: false,
     loadingState: false,

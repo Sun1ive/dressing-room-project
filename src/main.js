@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Loader from '@/components/Loader';
+import wrapper from '@/components/template/wrapper';
 import * as firebase from 'firebase';
 
 
@@ -55,6 +56,7 @@ Vue.use(Vuetify, {
 });
 
 Vue.component('app-loader', Loader);
+Vue.component('wrapper', wrapper);
 
 Vue.config.productionTip = false;
 
