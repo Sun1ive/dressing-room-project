@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Loader from '@/components/templates/Loader';
 import wrapper from '@/components/templates/wrapper';
-
+import pWrapper from '@/components/templates/paramsWrapper';
 
 import {
   Vuetify,
@@ -24,7 +24,7 @@ import '../node_modules/vuetify/src/stylus/app.styl';
 
 import App from './App';
 import router from './router';
-import store from './store'
+import store from './store';
 
 Vue.use(Vuetify, {
   components: {
@@ -56,6 +56,7 @@ Vue.use(Vuetify, {
 
 Vue.component('app-loader', Loader);
 Vue.component('wrapper', wrapper);
+Vue.component('paramsWrapper', pWrapper);
 
 Vue.config.productionTip = false;
 
@@ -67,5 +68,5 @@ new Vue({
   render: h => h(App),
   created() {
     this.$store.dispatch('getDresses');
-  }
+  },
 });

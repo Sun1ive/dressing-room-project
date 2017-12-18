@@ -1,39 +1,98 @@
 <template>
   <v-container fluid>
-      
+
     <v-layout justify-center>
       <v-flex xs12 sm6 class="text-xs-center">
         <h1>Узнайте свой размер</h1>
       </v-flex>
     </v-layout>
 
-    <v-layout justify-center>
+    <v-layout justify-center v-if="!isSetBreast">
       <v-flex xs12 sm6 class="text-xs-center">
-        <v-btn color="primary" to="/breast">Обхват груди</v-btn>
-      </v-flex>
-    </v-layout>
-    
-    <v-layout justify-center>
-      <v-flex xs12 sm6 class="text-xs-center">
-        <v-btn color="primary" to="/waist">Обхват талии</v-btn>
+        <v-btn
+        color="primary"
+        to="/breast">Обхват груди</v-btn>
       </v-flex>
     </v-layout>
 
-    <v-layout justify-center>
+    <paramsWrapper v-if="isSetBreast">
+      <v-card-text slot="params">{{ isSetBreast }} см</v-card-text>
+    </paramsWrapper>
+
+
+    <v-layout justify-center v-if="!isSetWaist">
       <v-flex xs12 sm6 class="text-xs-center">
-        <v-btn color="primary" to="/hips">Обхват бедер</v-btn>
+        <v-btn
+        color="primary"
+        to="/waist">Обхват талии</v-btn>
       </v-flex>
     </v-layout>
 
+    <paramsWrapper v-if="isSetWaist">
+      <v-card-text slot="params">{{ isSetWaist }} см</v-card-text>
+    </paramsWrapper>
+
+    <v-layout justify-center v-if="!isSetHips">
+      <v-flex xs12 sm6 class="text-xs-center">
+        <v-btn
+        color="primary"
+        to="/hips">Обхват бедер</v-btn>
+      </v-flex>
+    </v-layout>
+
+    <paramsWrapper v-if="isSetHips">
+      <v-card-text slot="params">{{ isSetHips }} см</v-card-text>
+    </paramsWrapper>
+
+    <v-layout justify-center>
+      <v-flex xs12 sm6 class="text-xs-center">
+        <v-btn v-if="isReady">Посмотреть</v-btn>
+      </v-flex>
+    </v-layout>
 
   </v-container>
 </template>
 
+
+<script>
+export default {
+  components: {},
+  data() {
+    return {};
+  },
+  computed: {
+    isSetBreast() {
+      return this.$store.getters.getBreast;
+    },
+    isSetWaist() {
+      return this.$store.getters.getWaist;
+    },
+    isSetHips() {
+      return this.$store.getters.getHips;
+    },
+    isReady() {
+      return this.isSetHips !== null && this.isSetWaist !== null && this.isSetBreast !== null
+        ? true
+        : false;
+    },
+  },
+};
+</script>
+
+
+
+
+
+
+
+
+
 <style scoped lang="stylus">
-.fade-enter-active, .fade-leave-active
-  transition: opacity 0.5s
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.5s;
+}
 
-.fade-enter, .fade-leave-to
-  opacity: 0
-
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
 </style>

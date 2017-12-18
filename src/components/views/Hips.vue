@@ -5,6 +5,7 @@
     <v-card-text slot="slider">
       <v-slider :min="90" thumb-label :max="105" v-model="hips"></v-slider>
     </v-card-text>
+    <v-btn slot="button" @click="onSave">Сохранить</v-btn>
   </wrapper>
 </template>
 
@@ -15,6 +16,12 @@ export default {
       hips: null,
     };
   },
+  methods: {
+    onSave() {
+      this.$store.commit('setHips', this.getHips);
+      this.$router.push('/');
+    },
+  },
   computed: {
     getHips() {
       return this.hips;
@@ -24,29 +31,30 @@ export default {
         size: null,
         number: null,
       };
-      if (this.getHips >= 90 && this.getHips <= 93) {
+
+      const y = this.getHips;
+      if (y >= 90 && y <= 93) {
         params.size = 'XS';
-        params.number = this.getHips;
+        params.number = y;
       }
-      if (this.getHips >= 94 && this.getHips <= 97) {
+      if (y >= 94 && y <= 97) {
         params.size = 'S';
-        params.number = this.getHips;
+        params.number = y;
       }
-      if (this.getHips >= 98 && this.getHips <= 101) {
+      if (y >= 98 && y <= 101) {
         params.size = 'M';
-        params.number = this.getHips;
+        params.number = y;
       }
-      if (this.getHips >= 102 && this.getHips <= 105) {
+      if (y >= 102 && y <= 105) {
         params.size = 'L';
-        params.number = this.getHips;
+        params.number = y;
       }
 
       // this.$store.commit('setHips', params);
-      this.$emit('setHips', params);
+      // this.$emit('setHips', params);
+
       return params.size;
     },
   },
 };
 </script>
-
-<style scoped lang="stylus"></style>

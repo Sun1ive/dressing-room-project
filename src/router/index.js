@@ -7,6 +7,7 @@ import Breast from '@/components/views/Breast';
 import Waist from '@/components/views/Waist';
 import Hips from '@/components/views/Hips';
 
+// import AdminGuard from './AdminGuard';
 
 Vue.use(Router);
 
@@ -17,7 +18,7 @@ export default new Router({
       path: '/admin',
       name: 'Admin',
       component: Admin,
-      // beforeEnter: AuthGuard,
+      // beforeEnter: AdminGuard,
     },
     {
       path: '/',

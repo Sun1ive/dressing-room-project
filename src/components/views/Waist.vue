@@ -18,7 +18,9 @@ export default {
   },
   methods: {
     onSave() {
-    }
+      this.$store.commit('setWaist', this.getWaist);
+      this.$router.push('/');
+    },
   },
   computed: {
     getWaist() {
@@ -29,24 +31,26 @@ export default {
         size: null,
         number: null,
       };
-      if (this.getWaist >= 63 && this.getWaist < 67) {
+      const z = this.getWaist;
+
+      if (z >= 63 && z < 67) {
         params.size = 'XS';
-        params.number = this.getWaist;
+        params.number = z;
       }
-      if (this.getWaist > 66 && this.getWaist < 71) {
+      if (z > 66 && z < 71) {
         params.size = 'S';
-        params.number = this.getWaist;
+        params.number = z;
       }
-      if (this.getWaist > 70 && this.getWaist < 75) {
+      if (z > 70 && z < 75) {
         params.size = 'M';
-        params.number = this.getWaist;
+        params.number = z;
       }
-      if (this.getWaist > 74 && this.getWaist <= 77) {
+      if (z > 74 && z <= 77) {
         params.size = 'L';
-        params.number = this.getWaist;
+        params.number = z;
       }
       // this.$store.commit('setWaist', params);
-      this.$emit('setWaist', params);
+      // this.$emit('setWaist', params);
 
       return params.size;
     },

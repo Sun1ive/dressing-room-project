@@ -2,9 +2,7 @@
   <v-app light>
     <app-Header />
     <v-content>
-      <transition name="fade">
-        <router-view />
-      </transition>
+      <router-view />
     </v-content>
     <app-Footer />
   </v-app>
@@ -12,35 +10,44 @@
 
 <script>
 import Header from '@/components/Header';
-import Home from '@/components/Home';
 import Footer from '@/components/Footer';
 
 export default {
   components: {
     'app-Header': Header,
-    'app-Home': Home,
     'app-Footer': Footer,
   },
 };
 </script>
 
 <style lang="stylus">
-html
+html {
   // overflow-y: hidden;
+}
 
-#app
+#app {
   max-width: 700px;
   margin: 0 auto;
   outline: none;
+}
 
-.container
+.container {
   padding: 0;
+}
 
-.input-group--slider
+.input-group--slider {
   outline-style: none;
+}
 
-.content--wrap
-  align-items: center
+.content--wrap {
+  align-items: center;
+}
 
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.7s linear;
+}
 
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
 </style>
