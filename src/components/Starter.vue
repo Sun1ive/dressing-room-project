@@ -11,12 +11,18 @@
       <v-flex xs12 sm6 class="text-xs-center">
         <v-btn
         color="primary"
-        to="/breast">Обхват груди</v-btn>
+        to="/breast"
+        >Обхват груди</v-btn>
       </v-flex>
     </v-layout>
 
     <paramsWrapper v-if="isSetBreast">
-      <v-card-text slot="params">{{ isSetBreast }} см</v-card-text>
+      <v-card-text slot="params">{{ isSetBreast }} см <v-btn
+      fab
+      to="/breast"
+      ><v-icon>mode_edit</v-icon>
+      </v-btn>
+      </v-card-text>
     </paramsWrapper>
 
 
@@ -29,7 +35,10 @@
     </v-layout>
 
     <paramsWrapper v-if="isSetWaist">
-      <v-card-text slot="params">{{ isSetWaist }} см</v-card-text>
+      <v-card-text slot="params">{{ isSetWaist }} см <v-btn
+      fab
+      to="/waist"
+      ><v-icon>mode_edit</v-icon></v-btn></v-card-text>
     </paramsWrapper>
 
     <v-layout justify-center v-if="!isSetHips">
@@ -41,7 +50,13 @@
     </v-layout>
 
     <paramsWrapper v-if="isSetHips">
-      <v-card-text slot="params">{{ isSetHips }} см</v-card-text>
+      <v-card-text slot="params">{{ isSetHips }} см <v-btn
+      fab
+      to="/hips"
+      >
+      <v-icon>mode_edit</v-icon>
+      </v-btn>
+      </v-card-text>
     </paramsWrapper>
 
     <v-layout justify-center>
