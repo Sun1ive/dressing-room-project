@@ -69,16 +69,24 @@ export default {
       const breast = this.$store.getters.getBreast;
       const waist = this.$store.getters.getWaist;
       const hips = this.$store.getters.getHips;
-
-      console.log(breast, waist, hips);
+      const myArr = [];
 
       each(data, item => {
         each(item.sizes, x => {
+          const itemID = item.id;
           if (breast <= x.breast && waist <= x.waist && hips <= x.hips) {
-            this.items.push(item);
+            if (myArr.length <= 0) {
+              myArr.push(item);
+            }
+            const id = myArr[myArr.length - 1].id;
+            if (myArr.length > 0 && id !== itemID) {
+              myArr.push(item);
+            }
           }
         });
       });
+
+      console.log(myArr);
       console.log(this.items);
     },
   },
