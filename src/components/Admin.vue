@@ -8,7 +8,7 @@
           <v-text-field v-model.number.lazy="item.id" label="id"></v-text-field>
           <v-text-field v-model.lazy="item.src" label="src"></v-text-field>
           <v-text-field v-model.lazy="item.link" label="link"></v-text-field>
-          
+
           <v-layout justify-center>
             <v-flex xs12 class="text-xs-center">
               <v-card>
@@ -27,7 +27,7 @@
               </v-card>
             </v-flex>
           </v-layout>
-          
+
           <v-layout justify-center>
             <v-flex xs12 class="text-xs-center">
               <v-card>
@@ -46,7 +46,7 @@
               </v-card>
             </v-flex>
           </v-layout>
-          
+
           <v-layout justify-center>
             <v-flex xs12 class="text-xs-center">
               <v-card>
@@ -93,6 +93,8 @@
 </template>
 
 <script>
+import API from './services/Api';
+
 export default {
   data() {
     return {
@@ -131,41 +133,13 @@ export default {
   },
   methods: {
     async addToBase() {
-      await this.item.sizes.push(this.xs, this.s, this.m, this.l);
-      this.$store.dispatch('uploadItem', this.item);
-
-      this.item = {
-        title: '',
-        link: '',
-        id: null,
-        src: '',
-        sizes: [],
-      };
-      this.xs = {
-        size: 'XS',
-        breast: null,
-        waist: null,
-        hips: null,
-      };
-
-      this.s = {
-        size: 'S',
-        breast: null,
-        waist: null,
-        hips: null,
-      };
-      this.m = {
-        size: 'M',
-        breast: null,
-        waist: null,
-        hips: null,
-      };
-      this.l = {
-        size: 'L',
-        breast: null,
-        waist: null,
-        hips: null,
-      };
+      try {
+        await this.item.sizes.push(this.xs, this.s, this.m, this.l);
+        const response = await API().post('/products', this.item);
+        console.log(response);
+      } catch (error) {
+        throw new Error('Something bad happened ', error)
+      }
     },
   },
 };

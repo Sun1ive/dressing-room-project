@@ -1,7 +1,6 @@
 import Vue from 'vue';
-import Loader from '@/components/Loader';
-import wrapper from '@/components/template/wrapper';
-import * as firebase from 'firebase';
+import Loader from '@/components/templates/Loader';
+import wrapper from '@/components/templates/wrapper';
 
 
 import {
@@ -66,15 +65,4 @@ new Vue({
   router,
   store,
   render: h => h(App),
-  created() {
-    firebase.initializeApp({
-      apiKey: 'AIzaSyDCxHsSoNNG2un3PQmZEnubatCAfdds3jU',
-      authDomain: 'dressing-room-f35be.firebaseapp.com',
-      databaseURL: 'https://dressing-room-f35be.firebaseio.com',
-      projectId: 'dressing-room-f35be',
-      storageBucket: 'dressing-room-f35be.appspot.com',
-      messagingSenderId: '602558021113',
-    });
-    this.$store.dispatch('setLoadedItems');
-  },
 });
