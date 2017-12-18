@@ -16,7 +16,7 @@
     </v-layout>
 
     <paramsWrapper v-if="isSetBreast">
-      <v-card-text slot="params">{{ isSetBreast }} см</v-card-text>
+      <v-card-text slot="params"><v-icon>check</v-icon>{{ isSetBreast }} см</v-card-text>
     </paramsWrapper>
 
 
@@ -58,11 +58,6 @@
 import { each } from 'lodash';
 
 export default {
-  data() {
-    return {
-      items: [],
-    };
-  },
   methods: {
     check() {
       const data = this.$store.state.items;
@@ -98,10 +93,10 @@ export default {
             }
           }
         });
-      });
 
-      console.log(myArr);
-      // console.log(this.items);
+        this.$store.commit('setFilteredDresses', myArr);
+        this.$router.push('/result');
+      });
     },
   },
   computed: {

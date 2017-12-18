@@ -6,6 +6,7 @@ import Starter from '@/components/Starter';
 import Breast from '@/components/views/Breast';
 import Waist from '@/components/views/Waist';
 import Hips from '@/components/views/Hips';
+import Result from '@/components/Result';
 
 // import AdminGuard from './AdminGuard';
 
@@ -39,6 +40,11 @@ export default new Router({
       path: '/hips',
       name: 'Hips',
       component: Hips,
+    },
+    {
+      path: '/result',
+      name: 'Result',
+      component: Result,
     },
   ],
 });

@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import API from '@/services/Api';
-// import { each } from 'lodash';
 
 Vue.use(Vuex);
 
@@ -11,6 +10,7 @@ export default new Vuex.Store({
     breast: null,
     waist: null,
     hips: null,
+    filtered: null,
   },
   mutations: {
     setLoadedDresses(state, payload) {
@@ -24,6 +24,9 @@ export default new Vuex.Store({
     },
     setHips(state, payload) {
       state.hips = payload;
+    },
+    setFilteredDresses(state, payload) {
+      state.filtered = payload;
     },
   },
   actions: {
@@ -45,5 +48,6 @@ export default new Vuex.Store({
     getBreast: state => state.breast,
     getWaist: state => state.waist,
     getHips: state => state.hips,
+    filtered: state => state.filtered,
   },
 });
