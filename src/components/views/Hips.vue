@@ -50,9 +50,6 @@ export default {
         params.number = y;
       }
 
-      // this.$store.commit('setHips', params);
-      // this.$emit('setHips', params);
-
       return params.size;
     },
   },

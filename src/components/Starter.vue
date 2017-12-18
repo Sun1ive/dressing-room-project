@@ -16,7 +16,7 @@
     </v-layout>
 
     <paramsWrapper v-if="isSetBreast">
-      <v-card-text slot="params"><v-icon>check</v-icon>{{ isSetBreast }} см</v-card-text>
+      <v-card-text slot="params">{{ isSetBreast }} см</v-card-text>
     </paramsWrapper>
 
 

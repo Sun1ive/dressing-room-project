@@ -49,8 +49,6 @@ export default {
         params.size = 'L';
         params.number = z;
       }
-      // this.$store.commit('setWaist', params);
-      // this.$emit('setWaist', params);
 
       return params.size;
     },

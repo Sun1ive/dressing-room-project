@@ -52,9 +52,6 @@ export default {
         params.size = 'L';
       }
 
-      // this.$store.commit('setBreast', params);
-      // this.$emit('setBreast', params);
-
       return params.size;
     },
   },
