@@ -76,18 +76,32 @@ export default {
           const itemID = item.id;
           if (breast <= x.breast && waist <= x.waist && hips <= x.hips) {
             if (myArr.length <= 0) {
-              myArr.push(item);
+              myArr.push({
+                title: item.title,
+                src: item.src,
+                id: item.id,
+                link: item.link,
+                size: x.size,
+              });
             }
             const id = myArr[myArr.length - 1].id;
-            if (myArr.length > 0 && id !== itemID) {
-              myArr.push(item);
+            if (myArr.length > 0) {
+              if (id !== itemID) {
+                myArr.push({
+                  title: item.title,
+                  src: item.src,
+                  link: item.link,
+                  id: item.id,
+                  size: x.size,
+                });
+              }
             }
           }
         });
       });
 
       console.log(myArr);
-      console.log(this.items);
+      // console.log(this.items);
     },
   },
   computed: {
