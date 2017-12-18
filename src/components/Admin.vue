@@ -135,10 +135,35 @@ export default {
     async addToBase() {
       try {
         await this.item.sizes.push(this.xs, this.s, this.m, this.l);
-        const response = await API().post('/products', this.item);
-        console.log(response);
+        await API().post('/products', this.item);
+
+        this.xs = {
+          size: 'XS',
+          breast: null,
+          waist: null,
+          hips: null,
+        };
+
+        this.s = {
+          size: 'S',
+          breast: null,
+          waist: null,
+          hips: null,
+        };
+        this.m = {
+          size: 'M',
+          breast: null,
+          waist: null,
+          hips: null,
+        };
+        this.l = {
+          size: 'L',
+          breast: null,
+          waist: null,
+          hips: null,
+        };
       } catch (error) {
-        throw new Error('Something bad happened ', error)
+        throw new Error('Something bad happened ', error);
       }
     },
   },

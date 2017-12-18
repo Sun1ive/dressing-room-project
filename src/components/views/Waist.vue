@@ -18,7 +18,6 @@ export default {
   },
   methods: {
     onSave() {
-      console.log(this.waist);
     }
   },
   computed: {
