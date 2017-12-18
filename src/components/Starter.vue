@@ -46,7 +46,7 @@
 
     <v-layout justify-center>
       <v-flex xs12 sm6 class="text-xs-center">
-        <v-btn v-if="isReady">Посмотреть</v-btn>
+        <v-btn v-if="isReady" @click="check">Посмотреть</v-btn>
       </v-flex>
     </v-layout>
 
@@ -55,10 +55,32 @@
 
 
 <script>
+import { each } from 'lodash';
+
 export default {
-  components: {},
   data() {
-    return {};
+    return {
+      items: [],
+    };
+  },
+  methods: {
+    check() {
+      const data = this.$store.state.items;
+      const breast = this.$store.getters.getBreast;
+      const waist = this.$store.getters.getWaist;
+      const hips = this.$store.getters.getHips;
+
+      console.log(breast, waist, hips);
+
+      each(data, item => {
+        each(item.sizes, x => {
+          if (breast <= x.breast && waist <= x.waist && hips <= x.hips) {
+            this.items.push(item);
+          }
+        });
+      });
+      console.log(this.items);
+    },
   },
   computed: {
     isSetBreast() {
@@ -71,9 +93,7 @@ export default {
       return this.$store.getters.getHips;
     },
     isReady() {
-      return this.isSetHips !== null && this.isSetWaist !== null && this.isSetBreast !== null
-        ? true
-        : false;
+      return this.isSetHips !== null && this.isSetWaist !== null && this.isSetBreast !== null;
     },
   },
 };

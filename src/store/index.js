@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import API from '@/services/Api';
+// import { each } from 'lodash';
 
 Vue.use(Vuex);
 
