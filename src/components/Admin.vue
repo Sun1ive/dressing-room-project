@@ -93,7 +93,7 @@
 </template>
 
 <script>
-import API from './services/Api';
+import API from '../services/Api';
 
 export default {
   data() {
@@ -136,6 +136,13 @@ export default {
       try {
         await this.item.sizes.push(this.xs, this.s, this.m, this.l);
         await API().post('/products', this.item);
+        this.item = {
+          title: '',
+          link: '',
+          id: null,
+          src: '',
+          sizes: [],
+        };
 
         this.xs = {
           size: 'XS',
