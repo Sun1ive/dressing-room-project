@@ -64,6 +64,16 @@ export default {
       const breast = this.$store.getters.getBreast;
       const waist = this.$store.getters.getWaist;
       const hips = this.$store.getters.getHips;
+
+      const localData = {
+        breast,
+        waist,
+        hips,
+      };
+      const storage = JSON.stringify(localData);
+
+      localStorage.setItem('DressingUserData', storage);
+
       const myArr = [];
 
       each(data, item => {

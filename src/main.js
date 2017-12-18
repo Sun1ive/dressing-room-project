@@ -67,6 +67,12 @@ new Vue({
   store,
   render: h => h(App),
   created() {
+    if (localStorage.getItem('DressingUserData')) {
+      const userInfo = JSON.parse(localStorage.getItem('DressingUserData'));
+      this.$store.commit('setBreast', userInfo.breast);
+      this.$store.commit('setWaist', userInfo.waist);
+      this.$store.commit('setHips', userInfo.hips);
+    }
     this.$store.dispatch('getDresses');
   },
 });
