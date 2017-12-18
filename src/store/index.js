@@ -7,10 +7,22 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     items: null,
+    breast: null,
+    waist: null,
+    hips: null,
   },
   mutations: {
     setLoadedDresses(state, payload) {
       state.items = payload;
+    },
+    setBreast(state, payload) {
+      state.breast = payload;
+    },
+    setWaist(state, payload) {
+      state.waist = payload;
+    },
+    setHips(state, payload) {
+      state.hips = payload;
     },
   },
   actions: {
@@ -28,5 +40,9 @@ export default new Vuex.Store({
       fetchDresses();
     },
   },
-  getters: {},
+  getters: {
+    getBreast: state => state.breast,
+    getWaist: state => state.waist,
+    getHips: state => state.hips,
+  },
 });

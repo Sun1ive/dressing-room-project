@@ -5,6 +5,7 @@
     <v-card-text slot="slider">
       <v-slider :min="82" thumb-label :max="97" v-model="breast"></v-slider>
     </v-card-text>
+    <v-btn slot="button" @click="onSave">Сохранить</v-btn>
   </wrapper>
 </template>
 
@@ -16,35 +17,43 @@ export default {
       prevComparison: null,
     };
   },
+  methods: {
+    onSave() {
+      this.$store.commit('setBreast', this.breast);
+      this.$router.push('/');
+    },
+  },
   computed: {
     getBreast() {
       return this.breast;
     },
     getBreastSize() {
       const params = {
-        size: null,
         number: null,
+        size: null,
       };
 
-      if (this.getBreast >= 82 && this.getBreast < 86) {
+      const x = this.getBreast;
+
+      if (x >= 82 && x < 86) {
+        params.number = x;
         params.size = 'XS';
-        params.number = this.getBreast;
       }
-      if (this.getBreast > 85 && this.getBreast < 90) {
+      if (x > 85 && x < 90) {
+        params.number = x;
         params.size = 'S';
-        params.number = this.getBreast;
       }
-      if (this.getBreast > 89 && this.getBreast < 94) {
+      if (x > 89 && x < 94) {
+        params.number = x;
         params.size = 'M';
-        params.number = this.getBreast;
       }
-      if (this.getBreast > 93 && this.getBreast <= 97) {
+      if (x > 93 && x <= 97) {
+        params.number = x;
         params.size = 'L';
-        params.number = this.getBreast;
       }
 
       // this.$store.commit('setBreast', params);
-      this.$emit('setBreast', params);
+      // this.$emit('setBreast', params);
 
       return params.size;
     },
