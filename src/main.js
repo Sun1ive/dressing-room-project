@@ -55,9 +55,9 @@ Vue.use(Vuetify, {
   },
 });
 
-Vue.component('app-loader', Loader);
-Vue.component('wrapper', wrapper);
-Vue.component('paramsWrapper', pWrapper);
+Vue.component('AppLoader', Loader);
+Vue.component('Wrapper', wrapper);
+Vue.component('ParamsWrapper', pWrapper);
 
 Vue.config.productionTip = false;
 
@@ -78,8 +78,7 @@ new Vue({
   },
   mounted() {
     const pathname = window.location.href;
-    const result = Path(pathname);
 
-    this.$store.commit('setSelectedItem', result);
+    this.$store.commit('setSelectedItem', Path(pathname));
   },
 });
