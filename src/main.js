@@ -73,10 +73,6 @@ new Vue({
       this.$store.commit('setWaist', userInfo.waist);
       this.$store.commit('setHips', userInfo.hips);
     }
-    if (localStorage.getItem('PreferredItem')) {
-      const item = JSON.parse(localStorage.getItem('PreferredItem'));
-      this.$store.commit('setPreferredItem', item);
-    }
     this.$store.dispatch('getDresses');
   },
 });
