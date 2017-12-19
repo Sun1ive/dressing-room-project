@@ -11,10 +11,14 @@ export default new Vuex.Store({
     waist: null,
     hips: null,
     filtered: null,
+    prefItem: null,
   },
   mutations: {
     setLoadedDresses(state, payload) {
       state.items = payload;
+    },
+    setPreferredItem(state, payload) {
+      state.prefItem = payload;
     },
     setBreast(state, payload) {
       state.breast = payload;

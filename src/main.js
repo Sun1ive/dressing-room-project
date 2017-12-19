@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Loader from '@/components/templates/Loader';
-import wrapper from '@/components/templates/wrapper';
-import pWrapper from '@/components/templates/paramsWrapper';
+import wrapper from '@/components/templates/Wrapper';
+import pWrapper from '@/components/templates/ParamsWrapper';
 
 import {
   Vuetify,
@@ -72,6 +72,10 @@ new Vue({
       this.$store.commit('setBreast', userInfo.breast);
       this.$store.commit('setWaist', userInfo.waist);
       this.$store.commit('setHips', userInfo.hips);
+    }
+    if (localStorage.getItem('PreferredItem')) {
+      const item = JSON.parse(localStorage.getItem('PreferredItem'));
+      this.$store.commit('setPreferredItem', item);
     }
     this.$store.dispatch('getDresses');
   },

@@ -17,7 +17,7 @@
     </v-layout>
 
     <paramsWrapper v-if="isSetBreast">
-      <v-card-text slot="params">{{ isSetBreast }} см <v-btn
+      <v-card-text slot="params">Грудь: {{ isSetBreast }} см <v-btn
       fab
       to="/breast"
       ><v-icon>mode_edit</v-icon>
@@ -35,7 +35,7 @@
     </v-layout>
 
     <paramsWrapper v-if="isSetWaist">
-      <v-card-text slot="params">{{ isSetWaist }} см <v-btn
+      <v-card-text slot="params">Талия: {{ isSetWaist }} см <v-btn
       fab
       to="/waist"
       ><v-icon>mode_edit</v-icon></v-btn></v-card-text>
@@ -50,7 +50,7 @@
     </v-layout>
 
     <paramsWrapper v-if="isSetHips">
-      <v-card-text slot="params">{{ isSetHips }} см <v-btn
+      <v-card-text slot="params">Бедра: {{ isSetHips }} см <v-btn
       fab
       to="/hips"
       >
@@ -123,6 +123,7 @@ export default {
         this.$router.push('/result');
       });
     },
+    singleCheck() {},
   },
   computed: {
     isSetBreast() {
