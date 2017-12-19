@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Loader from '@/components/templates/Loader';
+import Path from '@/services/Path';
 import wrapper from '@/components/templates/Wrapper';
 import pWrapper from '@/components/templates/ParamsWrapper';
 
@@ -74,5 +75,11 @@ new Vue({
       this.$store.commit('setHips', userInfo.hips);
     }
     this.$store.dispatch('getDresses');
+  },
+  mounted() {
+    const pathname = window.location.href;
+    const result = Path(pathname);
+
+    this.$store.commit('setSelectedItem', result);
   },
 });
