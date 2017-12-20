@@ -16,7 +16,6 @@ export default (array, breast, waist, hips, newArr) => {
             size: x.size,
           });
         }
-        // const id = newArr[newArr.length - 1].id;
         const id = last(newArr).id;
         if (newArr.length > 0) {
           if (id !== itemID) {

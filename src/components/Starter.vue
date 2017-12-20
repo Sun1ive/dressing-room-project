@@ -65,7 +65,7 @@
       <v-flex xs12 sm6 class="text-xs-center">
         <v-btn
         v-if="isShowSingleCompare"
-        @click="checkOne"
+        @click="checkSingleItem"
         >Посмотреть</v-btn>
         <v-btn
         v-else
@@ -96,7 +96,7 @@ export default {
       this.$store.commit('setFilteredDresses', this.userArr);
       this.$router.push('/result');
     },
-    checkOne() {
+    checkSingleItem() {
       this.setLocalData();
       const filteredItem = this.items.filter(item => item.link === this.selectedItem);
 
@@ -108,6 +108,7 @@ export default {
 
       this.$store.commit('setFilteredDresses', this.userArr);
       this.$router.push('/result');
+      this.$store.commit('setLoading', true);
     },
     setLocalData() {
       const localData = {
@@ -136,7 +137,7 @@ export default {
     },
     isShowSingleCompare() {
       return this.$store.getters.selectedItem !== null && this.$store.getters.selectedItem !== '';
-    },
+    }
   },
 };
 </script>
