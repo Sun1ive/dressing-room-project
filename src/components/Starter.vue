@@ -61,7 +61,7 @@
 
     <v-layout justify-center>
       <v-flex xs12 sm6 class="text-xs-center">
-        <v-btn v-if="isShowSingleCompare" :disabled="!isReady" @click="singleCheck">Посмотреть</v-btn>
+        <v-btn v-if="isShowSingleCompare" @click="singleCheck">Посмотреть</v-btn>
         <v-btn v-else @click="check">Посмотреть</v-btn>
       </v-flex>
     </v-layout>
@@ -74,11 +74,14 @@
 import { each } from 'lodash';
 
 export default {
+  data() {
+    return {
+      userArr: [],
+    };
+  },
   methods: {
     check() {
-      const myArr = [];
-
-      each(this.items, item => {
+      /* each(this.items, item => {
         each(item.sizes, x => {
           const itemID = item.id;
           if (
@@ -86,8 +89,8 @@ export default {
             this.isSetWaist <= x.waist &&
             this.isSetHips <= x.hips
           ) {
-            if (myArr.length <= 0) {
-              myArr.push({
+            if (this.userArr.length <= 0) {
+              this.userArr.push({
                 title: item.title,
                 src: item.src,
                 id: item.id,
@@ -95,10 +98,10 @@ export default {
                 size: x.size,
               });
             }
-            const id = myArr[myArr.length - 1].id;
-            if (myArr.length > 0) {
+            const id = this.userArr[this.userArr.length - 1].id;
+            if (this.userArr.length > 0) {
               if (id !== itemID) {
-                myArr.push({
+                this.userArr.push({
                   title: item.title,
                   src: item.src,
                   link: item.link,
@@ -109,21 +112,95 @@ export default {
             }
           }
         });
-
-        this.$store.commit('setFilteredDresses', myArr);
-        this.$router.push('/result');
-      });
+      }); */
+      this.setLocalData();
+      this.onCompare(this.items);
+      this.$store.commit('setFilteredDresses', this.userArr);
+      this.$router.push('/result');
     },
     singleCheck() {
+      this.setLocalData();
+      const filteredItem = this.items.filter(item => item.link === this.selectedItem);
+
+      this.onCompare(filteredItem);
+
+      this.$store.commit('setFilteredDresses', this.userArr);
+      this.$router.push('/result');
+
+      /*  this.userArr = each(filteredItem, item => {
+        const itemID = item.id;
+        each(item.sizes, x => {
+          if (
+            this.isSetBreast <= x.breast &&
+            this.isSetWaist <= x.waist &&
+            this.isSetHips <= x.hips
+          ) {
+            if (this.userArr.length <= 0) {
+              this.userArr.push({
+                title: item.title,
+                src: item.src,
+                id: item.id,
+                link: item.link,
+                size: x.size,
+              });
+            }
+            const id = this.userArr[this.userArr.length - 1].id;
+            if (this.userArr.length > 0) {
+              if (id !== itemID) {
+                this.userArr.push({
+                  title: item.title,
+                  src: item.src,
+                  link: item.link,
+                  id: item.id,
+                  size: x.size,
+                });
+              }
+            }
+          }
+        });
+      }); */
+    },
+    onCompare(array) {
+      each(array, item => {
+        each(item.sizes, x => {
+          const itemID = item.id;
+          if (
+            this.isSetBreast <= x.breast &&
+            this.isSetWaist <= x.waist &&
+            this.isSetHips <= x.hips
+          ) {
+            if (this.userArr.length <= 0) {
+              this.userArr.push({
+                title: item.title,
+                src: item.src,
+                id: item.id,
+                link: item.link,
+                size: x.size,
+              });
+            }
+            const id = this.userArr[this.userArr.length - 1].id;
+            if (this.userArr.length > 0) {
+              if (id !== itemID) {
+                this.userArr.push({
+                  title: item.title,
+                  src: item.src,
+                  link: item.link,
+                  id: item.id,
+                  size: x.size,
+                });
+              }
+            }
+          }
+        });
+      });
+    },
+    setLocalData() {
       const localData = {
         breast: this.isSetBreast,
         waist: this.isSetWaist,
         hips: this.isSetHips,
       };
       localStorage.setItem('DressingUserData', JSON.stringify(localData));
-
-      const filteredItem = this.items.filter(item => item.link === this.selectedItem);
-      console.log(filteredItem);
     },
   },
   computed: {
@@ -141,9 +218,6 @@ export default {
     },
     isSetHips() {
       return this.$store.getters.getHips;
-    },
-    isReady() {
-      return this.isSetBreast !== null && this.isSetWaist !== null && this.isSetHips !== null;
     },
     isShowSingleCompare() {
       return this.$store.getters.selectedItem !== null && this.$store.getters.selectedItem !== '';
