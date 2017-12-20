@@ -3,7 +3,7 @@
 
     <v-layout justify-center>
       <v-flex xs12 sm6 class="text-xs-center">
-        <h1>Узнайте свой размер</h1>
+        <h1>Укажите свои параметры</h1>
       </v-flex>
     </v-layout>
 
@@ -30,7 +30,8 @@
       <v-flex xs12 sm6 class="text-xs-center">
         <v-btn
         color="primary"
-        to="/waist">Обхват талии</v-btn>
+        to="/waist"
+        >Обхват талии</v-btn>
       </v-flex>
     </v-layout>
 
@@ -45,7 +46,8 @@
       <v-flex xs12 sm6 class="text-xs-center">
         <v-btn
         color="primary"
-        to="/hips">Обхват бедер</v-btn>
+        to="/hips"
+        >Обхват бедер</v-btn>
       </v-flex>
     </v-layout>
 
@@ -61,8 +63,14 @@
 
     <v-layout justify-center>
       <v-flex xs12 sm6 class="text-xs-center">
-        <v-btn v-if="isShowSingleCompare" @click="singleCheck">Посмотреть</v-btn>
-        <v-btn v-else @click="check">Посмотреть</v-btn>
+        <v-btn
+        v-if="isShowSingleCompare"
+        @click="checkSingleItem"
+        >Посмотреть</v-btn>
+        <v-btn
+        v-else
+        @click="checkAll"
+        >Посмотреть</v-btn>
       </v-flex>
     </v-layout>
 
@@ -71,7 +79,7 @@
 
 
 <script>
-import { each } from 'lodash';
+import Compare from '@/Utils/Compare';
 
 export default {
   data() {
@@ -80,119 +88,27 @@ export default {
     };
   },
   methods: {
-    check() {
-      /* each(this.items, item => {
-        each(item.sizes, x => {
-          const itemID = item.id;
-          if (
-            this.isSetBreast <= x.breast &&
-            this.isSetWaist <= x.waist &&
-            this.isSetHips <= x.hips
-          ) {
-            if (this.userArr.length <= 0) {
-              this.userArr.push({
-                title: item.title,
-                src: item.src,
-                id: item.id,
-                link: item.link,
-                size: x.size,
-              });
-            }
-            const id = this.userArr[this.userArr.length - 1].id;
-            if (this.userArr.length > 0) {
-              if (id !== itemID) {
-                this.userArr.push({
-                  title: item.title,
-                  src: item.src,
-                  link: item.link,
-                  id: item.id,
-                  size: x.size,
-                });
-              }
-            }
-          }
-        });
-      }); */
+    checkAll() {
       this.setLocalData();
-      this.onCompare(this.items);
+
+      Compare(this.items, this.isSetBreast, this.isSetWaist, this.isSetHips, this.userArr);
+
       this.$store.commit('setFilteredDresses', this.userArr);
       this.$router.push('/result');
     },
-    singleCheck() {
+    checkSingleItem() {
       this.setLocalData();
       const filteredItem = this.items.filter(item => item.link === this.selectedItem);
 
-      this.onCompare(filteredItem);
+      if (filteredItem.length === 0) {
+        Compare(this.items, this.isSetBreast, this.isSetWaist, this.isSetHips, this.userArr);
+      }
+
+      Compare(filteredItem, this.isSetBreast, this.isSetWaist, this.isSetHips, this.userArr);
 
       this.$store.commit('setFilteredDresses', this.userArr);
       this.$router.push('/result');
-
-      /*  this.userArr = each(filteredItem, item => {
-        const itemID = item.id;
-        each(item.sizes, x => {
-          if (
-            this.isSetBreast <= x.breast &&
-            this.isSetWaist <= x.waist &&
-            this.isSetHips <= x.hips
-          ) {
-            if (this.userArr.length <= 0) {
-              this.userArr.push({
-                title: item.title,
-                src: item.src,
-                id: item.id,
-                link: item.link,
-                size: x.size,
-              });
-            }
-            const id = this.userArr[this.userArr.length - 1].id;
-            if (this.userArr.length > 0) {
-              if (id !== itemID) {
-                this.userArr.push({
-                  title: item.title,
-                  src: item.src,
-                  link: item.link,
-                  id: item.id,
-                  size: x.size,
-                });
-              }
-            }
-          }
-        });
-      }); */
-    },
-    onCompare(array) {
-      each(array, item => {
-        each(item.sizes, x => {
-          const itemID = item.id;
-          if (
-            this.isSetBreast <= x.breast &&
-            this.isSetWaist <= x.waist &&
-            this.isSetHips <= x.hips
-          ) {
-            if (this.userArr.length <= 0) {
-              this.userArr.push({
-                title: item.title,
-                src: item.src,
-                id: item.id,
-                link: item.link,
-                size: x.size,
-              });
-            }
-            const id = this.userArr[this.userArr.length - 1].id;
-            if (this.userArr.length > 0) {
-              if (id !== itemID) {
-                this.userArr.push({
-                  title: item.title,
-                  src: item.src,
-                  link: item.link,
-                  id: item.id,
-                  size: x.size,
-                });
-              }
-            }
-          }
-        });
-      });
+      this.$store.commit('setLoading', true);
     },
     setLocalData() {
       const localData = {
@@ -221,7 +137,7 @@ export default {
     },
     isShowSingleCompare() {
       return this.$store.getters.selectedItem !== null && this.$store.getters.selectedItem !== '';
-    },
+    }
   },
 };
 </script>

@@ -12,6 +12,7 @@ export default new Vuex.Store({
     hips: null,
     filtered: null,
     selectedItem: null,
+    loading: false,
   },
   mutations: {
     setLoadedDresses(state, payload) {
@@ -32,6 +33,9 @@ export default new Vuex.Store({
     setFilteredDresses(state, payload) {
       state.filtered = payload;
     },
+    setLoading(state, payload) {
+      state.loading = payload;
+    },
   },
   actions: {
     getDresses({ commit }) {
@@ -42,7 +46,7 @@ export default new Vuex.Store({
 
           commit('setLoadedDresses', resolved);
         } catch (error) {
-          throw new Error('Couldnt fetch data ', error);
+          throw new Error('Could not fetch data ', error);
         }
       }
       fetchDresses();
@@ -54,6 +58,7 @@ export default new Vuex.Store({
     getWaist: state => state.waist,
     getHips: state => state.hips,
     filtered: state => state.filtered,
-    selectedItem: state => state.selectedItem
+    selectedItem: state => state.selectedItem,
+    isLoading: state => state.loading,
   },
 });

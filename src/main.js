@@ -24,8 +24,8 @@ import {
 import '../node_modules/vuetify/src/stylus/app.styl';
 
 import App from './App';
-import router from './router';
-import store from './store';
+import router from './router/Index';
+import store from './store/Index';
 
 Vue.use(Vuetify, {
   components: {
@@ -78,7 +78,6 @@ new Vue({
   },
   mounted() {
     const pathname = window.location.href;
-
     this.$store.commit('setSelectedItem', Path(pathname));
   },
 });
