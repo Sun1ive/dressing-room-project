@@ -42,7 +42,7 @@ export default new Vuex.Store({
 
           commit('setLoadedDresses', resolved);
         } catch (error) {
-          throw new Error('Couldnt fetch data ', error);
+          throw new Error('Could not fetch data ', error);
         }
       }
       fetchDresses();

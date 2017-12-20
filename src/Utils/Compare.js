@@ -1,4 +1,6 @@
-import { each } from 'lodash';
+import each from 'lodash/each';
+import last from 'lodash/last';
+
 
 export default (array, breast, waist, hips, newArr) => {
   each(array, item => {
@@ -14,7 +16,8 @@ export default (array, breast, waist, hips, newArr) => {
             size: x.size,
           });
         }
-        const id = newArr[newArr.length - 1].id;
+        // const id = newArr[newArr.length - 1].id;
+        const id = last(newArr).id;
         if (newArr.length > 0) {
           if (id !== itemID) {
             newArr.push({

@@ -78,7 +78,6 @@ new Vue({
   },
   mounted() {
     const pathname = window.location.href;
-    // if (pathname === 'http://localhost:8080/' || 'https://dev.indresser.com/') return
     this.$store.commit('setSelectedItem', Path(pathname));
   },
 });
