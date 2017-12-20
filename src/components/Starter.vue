@@ -61,7 +61,8 @@
 
     <v-layout justify-center>
       <v-flex xs12 sm6 class="text-xs-center">
-        <v-btn v-if="isReady" @click="check">Посмотреть</v-btn>
+        <v-btn v-if="isShowSingleCompare" :disabled="!isReady" @click="singleCheck">Посмотреть</v-btn>
+        <v-btn v-else @click="check">Посмотреть</v-btn>
       </v-flex>
     </v-layout>
 
@@ -75,26 +76,16 @@ import { each } from 'lodash';
 export default {
   methods: {
     check() {
-      const data = this.$store.state.items;
-      const breast = this.$store.getters.getBreast;
-      const waist = this.$store.getters.getWaist;
-      const hips = this.$store.getters.getHips;
-
-      const localData = {
-        breast,
-        waist,
-        hips,
-      };
-      const storage = JSON.stringify(localData);
-
-      localStorage.setItem('DressingUserData', storage);
-
       const myArr = [];
 
-      each(data, item => {
+      each(this.items, item => {
         each(item.sizes, x => {
           const itemID = item.id;
-          if (breast <= x.breast && waist <= x.waist && hips <= x.hips) {
+          if (
+            this.isSetBreast <= x.breast &&
+            this.isSetWaist <= x.waist &&
+            this.isSetHips <= x.hips
+          ) {
             if (myArr.length <= 0) {
               myArr.push({
                 title: item.title,
@@ -123,9 +114,25 @@ export default {
         this.$router.push('/result');
       });
     },
-    singleCheck() {},
+    singleCheck() {
+      const localData = {
+        breast: this.isSetBreast,
+        waist: this.isSetWaist,
+        hips: this.isSetHips,
+      };
+      localStorage.setItem('DressingUserData', JSON.stringify(localData));
+
+      const filteredItem = this.items.filter(item => item.link === this.selectedItem);
+      console.log(filteredItem);
+    },
   },
   computed: {
+    items() {
+      return this.$store.getters.items;
+    },
+    selectedItem() {
+      return this.$store.getters.selectedItem;
+    },
     isSetBreast() {
       return this.$store.getters.getBreast;
     },
@@ -136,7 +143,10 @@ export default {
       return this.$store.getters.getHips;
     },
     isReady() {
-      return this.isSetHips !== null && this.isSetWaist !== null && this.isSetBreast !== null;
+      return this.isSetBreast !== null && this.isSetWaist !== null && this.isSetHips !== null;
+    },
+    isShowSingleCompare() {
+      return this.$store.getters.selectedItem !== null && this.$store.getters.selectedItem !== '';
     },
   },
 };

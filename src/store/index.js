@@ -49,9 +49,11 @@ export default new Vuex.Store({
     },
   },
   getters: {
+    items: state => state.items,
     getBreast: state => state.breast,
     getWaist: state => state.waist,
     getHips: state => state.hips,
     filtered: state => state.filtered,
+    selectedItem: state => state.selectedItem
   },
 });
