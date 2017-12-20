@@ -72,6 +72,7 @@
 
 <script>
 import { each } from 'lodash';
+import Compare from '@/Utils/Compare';
 
 export default {
   data() {
@@ -114,7 +115,10 @@ export default {
         });
       }); */
       this.setLocalData();
-      this.onCompare(this.items);
+      // this.onCompare(this.items);
+
+      Compare(this.items, this.isSetBreast, this.isSetWaist, this.isSetHips, this.userArr);
+
       this.$store.commit('setFilteredDresses', this.userArr);
       this.$router.push('/result');
     },
@@ -122,7 +126,9 @@ export default {
       this.setLocalData();
       const filteredItem = this.items.filter(item => item.link === this.selectedItem);
 
-      this.onCompare(filteredItem);
+      // this.onCompare(filteredItem);
+
+      Compare(filteredItem, this.isSetBreast, this.isSetWaist, this.isSetHips, this.userArr);
 
       this.$store.commit('setFilteredDresses', this.userArr);
       this.$router.push('/result');
