@@ -3,6 +3,7 @@ import Loader from '@/components/templates/Loader';
 import Path from '@/services/Path';
 import wrapper from '@/components/templates/Wrapper';
 import pWrapper from '@/components/templates/ParamsWrapper';
+import Storage from '@/Utils/LocalStorage';
 
 import {
   Vuetify,
@@ -68,8 +69,8 @@ new Vue({
   store,
   render: h => h(App),
   created() {
-    if (localStorage.getItem('DressingUserData')) {
-      const userInfo = JSON.parse(localStorage.getItem('DressingUserData'));
+    if (Storage.get('DressingUserData')) {
+      const userInfo = Storage.get('DressingUserData');
       this.$store.commit('setBreast', userInfo.breast);
       this.$store.commit('setWaist', userInfo.waist);
       this.$store.commit('setHips', userInfo.hips);
