@@ -79,7 +79,8 @@
 
 
 <script>
-import Compare from '@/Utils/Compare';
+import onCompare from '@/Utils/Compare';
+import Storage from '@/Utils/LocalStorage';
 
 export default {
   data() {
@@ -91,7 +92,7 @@ export default {
     checkAll() {
       this.setLocalData();
 
-      Compare(this.items, this.isSetBreast, this.isSetWaist, this.isSetHips, this.userArr);
+      onCompare(this.items, this.isSetBreast, this.isSetWaist, this.isSetHips, this.userArr);
 
       this.$store.commit('setFilteredDresses', this.userArr);
       this.$router.push('/result');
@@ -101,22 +102,23 @@ export default {
       const filteredItem = this.items.filter(item => item.link === this.selectedItem);
 
       if (filteredItem.length === 0) {
-        Compare(this.items, this.isSetBreast, this.isSetWaist, this.isSetHips, this.userArr);
+        onCompare(this.items, this.isSetBreast, this.isSetWaist, this.isSetHips, this.userArr);
       }
 
-      Compare(filteredItem, this.isSetBreast, this.isSetWaist, this.isSetHips, this.userArr);
+      onCompare(filteredItem, this.isSetBreast, this.isSetWaist, this.isSetHips, this.userArr);
 
       this.$store.commit('setFilteredDresses', this.userArr);
       this.$router.push('/result');
       this.$store.commit('setLoading', true);
     },
     setLocalData() {
+      Storage.remove('DressingUserData');
       const localData = {
         breast: this.isSetBreast,
         waist: this.isSetWaist,
         hips: this.isSetHips,
       };
-      localStorage.setItem('DressingUserData', JSON.stringify(localData));
+      Storage.set('DressingUserData', localData);
     },
   },
   computed: {
