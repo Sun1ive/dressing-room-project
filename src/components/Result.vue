@@ -3,11 +3,13 @@
     <v-layout row wrap>
       <v-flex xs12 sm6 md4 v-for="(item, i) in filtered" :key="i">
         <v-card>
-          <v-card-media height="500" :src="item.src"></v-card-media>
-          <v-card-text>{{ item.title }}</v-card-text>
-          <v-card-text>{{ item.size }}</v-card-text>
+          <v-card-media height="300" :src="item.src"></v-card-media>
+          <v-card-text>
+            <div class="mb-2">{{ item.title }}</div>
+            <div>Ваш предпочитаемый размер: <strong>{{ item.size }}</strong></div>
+          </v-card-text>
           <v-card-actions>
-            <v-btn :href="item.link">Перейти</v-btn>
+            <v-btn :href="item.link" target="_blank">Перейти</v-btn>
           </v-card-actions>
         </v-card>
       </v-flex>
@@ -24,3 +26,9 @@ export default {
   },
 };
 </script>
+
+<style lang="stylus" scoped>
+.card__text
+  min-height 200px !important
+</style>
+

@@ -14,7 +14,8 @@
 export default {
   methods: {
     home() {
-      this.$router.push('/');
+      const path = this.$store.state.selectedItem;
+      this.$router.push(`/?${path}`);
     },
   },
 };

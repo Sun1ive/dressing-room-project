@@ -3,7 +3,7 @@
 
     <v-layout justify-center>
       <v-flex xs12 sm6 class="text-xs-center">
-        <h1>Узнайте свой размер</h1>
+        <h1>Укажите свои параметры</h1>
       </v-flex>
     </v-layout>
 
@@ -30,7 +30,8 @@
       <v-flex xs12 sm6 class="text-xs-center">
         <v-btn
         color="primary"
-        to="/waist">Обхват талии</v-btn>
+        to="/waist"
+        >Обхват талии</v-btn>
       </v-flex>
     </v-layout>
 
@@ -45,7 +46,8 @@
       <v-flex xs12 sm6 class="text-xs-center">
         <v-btn
         color="primary"
-        to="/hips">Обхват бедер</v-btn>
+        to="/hips"
+        >Обхват бедер</v-btn>
       </v-flex>
     </v-layout>
 
@@ -61,8 +63,14 @@
 
     <v-layout justify-center>
       <v-flex xs12 sm6 class="text-xs-center">
-        <v-btn v-if="isShowSingleCompare" @click="singleCheck">Посмотреть</v-btn>
-        <v-btn v-else @click="check">Посмотреть</v-btn>
+        <v-btn
+        v-if="isShowSingleCompare"
+        @click="singleCheck"
+        >Посмотреть</v-btn>
+        <v-btn
+        v-else
+        @click="check"
+        >Посмотреть</v-btn>
       </v-flex>
     </v-layout>
 
@@ -125,6 +133,9 @@ export default {
     singleCheck() {
       this.setLocalData();
       const filteredItem = this.items.filter(item => item.link === this.selectedItem);
+      if (filteredItem.length === 0) {
+        Compare(this.items, this.isSetBreast, this.isSetWaist, this.isSetHips, this.userArr);
+      }
 
       // this.onCompare(filteredItem);
 
