@@ -1,6 +1,8 @@
+// @flow
+
 import Vue from 'vue';
 import Vuex from 'vuex';
-import API from '@/services/Api';
+import API from '../services/Api';
 
 Vue.use(Vuex);
 
@@ -15,7 +17,7 @@ export default new Vuex.Store({
     loading: false,
   },
   mutations: {
-    setLoadedDresses(state, payload) {
+    setLoadedDresses(state: Object, payload: Array<mixed>) {
       state.items = payload;
     },
     setSelectedItem(state, payload) {
@@ -45,7 +47,7 @@ export default new Vuex.Store({
           const resolved = response.data;
           commit('setLoadedDresses', resolved);
         } catch (error) {
-          throw new Error('Could not fetch data ', error);
+          throw new Error(`Could not fetch data ${error}`);
         }
       }
       fetchDresses();

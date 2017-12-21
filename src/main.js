@@ -1,9 +1,6 @@
 import Vue from 'vue';
 import Loader from '@/components/templates/Loader';
 import Path from '@/services/Path';
-import wrapper from '@/components/templates/Wrapper';
-import pWrapper from '@/components/templates/ParamsWrapper';
-import Storage from '@/Utils/LocalStorage';
 
 import {
   Vuetify,
@@ -27,6 +24,9 @@ import '../node_modules/vuetify/src/stylus/app.styl';
 import App from './App';
 import router from './router/Index';
 import store from './store/Index';
+import wrapper from './components/templates/wrapper';
+import pWrapper from './components/templates/paramsWrapper';
+import Storage from './Utils/LocalStorage';
 
 Vue.use(Vuetify, {
   components: {
