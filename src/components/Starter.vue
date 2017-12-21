@@ -97,6 +97,7 @@ export default {
 
       this.$store.commit('setFilteredDresses', this.userArr);
       this.$router.push('/result');
+      // this.$store.commit('setLoading', true);
     },
     // checkSingleItem() {
     //   this.setLocalData();
