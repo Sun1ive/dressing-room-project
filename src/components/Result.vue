@@ -5,12 +5,12 @@
         <v-card>
           <v-card-media height="350" :src="item.src"></v-card-media>
           <v-card-text>
-            <div>Коэффициент {{ item.procent }} %</div>
+            <div>Коэффициент {{ item.percent }} %</div>
             <div class="mb-2">{{ item.title }}</div>
             <div>Ваш предпочитаемый размер: <strong>{{ item.size }}</strong></div>
           </v-card-text>
           <v-card-actions>
-            <v-btn :href="item.link" target="_blank">Перейти</v-btn>
+            <v-btn :href="`${item.link}?attribute_pa_size=${item.size}`" target="_blank">Посмотреть</v-btn>
           </v-card-actions>
         </v-card>
       </v-flex>

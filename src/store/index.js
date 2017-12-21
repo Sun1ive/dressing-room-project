@@ -43,7 +43,6 @@ export default new Vuex.Store({
         try {
           const response = await API().get('/products');
           const resolved = response.data;
-
           commit('setLoadedDresses', resolved);
         } catch (error) {
           throw new Error('Could not fetch data ', error);
