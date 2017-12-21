@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-layout justify-center align-center>
-      <v-progress-circular indeterminate :size="60" color="primary"></v-progress-circular>
+      <v-progress-circular indeterminate :size="70" color="primary"></v-progress-circular>
     </v-layout>
   </v-container>
 </template>

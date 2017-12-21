@@ -63,14 +63,14 @@
 
     <v-layout justify-center>
       <v-flex xs12 sm6 class="text-xs-center">
-        <!-- <v-btn
+        <v-btn
         v-if="isShowSingleCompare"
         @click="checkSingleItem"
-        >Посмотреть</v-btn> -->
-        <v-btn
+        >Посмотреть Single</v-btn>
 
+        <v-btn
         @click="checkAll"
-        >Посмотреть</v-btn>
+        >Посмотреть All</v-btn>
       </v-flex>
     </v-layout>
 

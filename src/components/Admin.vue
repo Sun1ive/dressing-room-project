@@ -8,6 +8,9 @@
           <v-text-field v-model.number.lazy="item.id" label="id"></v-text-field>
           <v-text-field v-model.lazy="item.src" label="src"></v-text-field>
           <v-text-field v-model.lazy="item.link" label="link"></v-text-field>
+          <v-text-field v-model.lazy="item.brand" label="brand"></v-text-field>
+          <v-text-field v-model.lazy="item.price" label="price"></v-text-field>
+          <v-text-field v-model.lazy="item.color" label="color"></v-text-field>
 
           <v-layout justify-center>
             <v-flex xs12 class="text-xs-center">
@@ -104,6 +107,9 @@ export default {
         id: null,
         src: '',
         sizes: [],
+        brand: '',
+        price: null,
+        color: '',
       },
       xs: {
         size: 'XS',
@@ -142,6 +148,9 @@ export default {
           id: null,
           src: '',
           sizes: [],
+          brand: '',
+          price: null,
+          color: ''
         };
 
         this.xs = {
