@@ -91,30 +91,28 @@ export default {
   methods: {
     checkAll() {
       this.setLocalData();
-      console.log(this.userArr);
+
       this.userArr = onCompare(this.items, this.isSetBreast, this.isSetWaist, this.isSetHips);
-      console.log(this.userArr);
 
       this.$store.commit('setFilteredDresses', this.userArr);
+      this.$store.commit('setLoading', true);
+
       this.$router.push('/result');
-      // this.$store.commit('setLoading', true);
     },
-    // checkSingleItem() {
-    //   this.setLocalData();
-    //   const filteredItem = this.items.filter(item => item.link === this.selectedItem);
-    //   console.log(this.userArr);
-    //   if (filteredItem.length === 0) {
-    //     onCompare(this.items, this.isSetBreast, this.isSetWaist, this.isSetHips, this.userArr);
-    //   }
-    //   console.log(this.userArr);
-    //   onCompare(filteredItem, this.isSetBreast, this.isSetWaist, this.isSetHips, this.userArr);
+    checkSingleItem() {
+      this.setLocalData();
+      const filteredItem = this.items.filter(item => item.link === this.selectedItem);
 
-    //   console.log(this.userArr);
+      if (filteredItem.length === 0) {
+        this.userArr = onCompare(this.items, this.isSetBreast, this.isSetWaist, this.isSetHips);
+      }
+      this.userArr = onCompare(filteredItem, this.isSetBreast, this.isSetWaist, this.isSetHips);
 
-    //   this.$store.commit('setFilteredDresses', this.userArr);
-    //   this.$router.push('/result');
-    //   this.$store.commit('setLoading', true);
-    // },
+      this.$store.commit('setFilteredDresses', this.userArr);
+      this.$store.commit('setLoading', true);
+
+      this.$router.push('/result');
+    },
     setLocalData() {
       Storage.remove('DressingUserData');
       const localData = {
