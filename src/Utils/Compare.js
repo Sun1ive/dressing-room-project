@@ -1,6 +1,6 @@
 import each from 'lodash/each';
 import last from 'lodash/last';
-
+import Coefficient from './Coefficient';
 
 export default (array, breast, waist, hips, newArr) => {
   each(array, item => {
@@ -14,6 +14,7 @@ export default (array, breast, waist, hips, newArr) => {
             id: item.id,
             link: item.link,
             size: x.size,
+            procent: Coefficient(breast, x.breast, waist, x.waist, hips, x.hips),
           });
         }
         const id = last(newArr).id;
@@ -25,6 +26,7 @@ export default (array, breast, waist, hips, newArr) => {
               link: item.link,
               id: item.id,
               size: x.size,
+              procent: Coefficient(breast, x.breast, waist, x.waist, hips, x.hips),
             });
           }
         }

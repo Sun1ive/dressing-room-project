@@ -7,6 +7,7 @@
           <v-card-text>
             <div class="mb-2">{{ item.title }}</div>
             <div>Ваш предпочитаемый размер: <strong>{{ item.size }}</strong></div>
+            <div>Коэффициент {{ item.procent }} %</div>
           </v-card-text>
           <v-card-actions>
             <v-btn :href="item.link" target="_blank">Перейти</v-btn>
