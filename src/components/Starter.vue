@@ -63,12 +63,12 @@
 
     <v-layout justify-center>
       <v-flex xs12 sm6 class="text-xs-center">
-        <v-btn
+        <!-- <v-btn
         v-if="isShowSingleCompare"
         @click="checkSingleItem"
-        >Посмотреть</v-btn>
+        >Посмотреть</v-btn> -->
         <v-btn
-        v-else
+
         @click="checkAll"
         >Посмотреть</v-btn>
       </v-flex>
@@ -91,26 +91,29 @@ export default {
   methods: {
     checkAll() {
       this.setLocalData();
-
-      onCompare(this.items, this.isSetBreast, this.isSetWaist, this.isSetHips, this.userArr);
+      console.log(this.userArr);
+      this.userArr = onCompare(this.items, this.isSetBreast, this.isSetWaist, this.isSetHips);
+      console.log(this.userArr);
 
       this.$store.commit('setFilteredDresses', this.userArr);
       this.$router.push('/result');
     },
-    checkSingleItem() {
-      this.setLocalData();
-      const filteredItem = this.items.filter(item => item.link === this.selectedItem);
+    // checkSingleItem() {
+    //   this.setLocalData();
+    //   const filteredItem = this.items.filter(item => item.link === this.selectedItem);
+    //   console.log(this.userArr);
+    //   if (filteredItem.length === 0) {
+    //     onCompare(this.items, this.isSetBreast, this.isSetWaist, this.isSetHips, this.userArr);
+    //   }
+    //   console.log(this.userArr);
+    //   onCompare(filteredItem, this.isSetBreast, this.isSetWaist, this.isSetHips, this.userArr);
 
-      if (filteredItem.length === 0) {
-        onCompare(this.items, this.isSetBreast, this.isSetWaist, this.isSetHips, this.userArr);
-      }
+    //   console.log(this.userArr);
 
-      onCompare(filteredItem, this.isSetBreast, this.isSetWaist, this.isSetHips, this.userArr);
-
-      this.$store.commit('setFilteredDresses', this.userArr);
-      this.$router.push('/result');
-      this.$store.commit('setLoading', true);
-    },
+    //   this.$store.commit('setFilteredDresses', this.userArr);
+    //   this.$router.push('/result');
+    //   this.$store.commit('setLoading', true);
+    // },
     setLocalData() {
       Storage.remove('DressingUserData');
       const localData = {
@@ -139,7 +142,7 @@ export default {
     },
     isShowSingleCompare() {
       return this.$store.getters.selectedItem !== null && this.$store.getters.selectedItem !== '';
-    }
+    },
   },
 };
 </script>

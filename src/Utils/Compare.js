@@ -1,14 +1,16 @@
 import each from 'lodash/each';
 import last from 'lodash/last';
+import Coefficient from './Coefficient';
 
-
-export default (array, breast, waist, hips, newArr) => {
+export default (array, breast, waist, hips) => {
+  const newArr = [];
   each(array, item => {
     each(item.sizes, x => {
       const itemID = item.id;
       if (breast <= x.breast && waist <= x.waist && hips <= x.hips) {
         if (newArr.length <= 0) {
           newArr.push({
+            procent: Coefficient(breast, x.breast, waist, x.waist, hips, x.hips),
             title: item.title,
             src: item.src,
             id: item.id,
@@ -20,6 +22,7 @@ export default (array, breast, waist, hips, newArr) => {
         if (newArr.length > 0) {
           if (id !== itemID) {
             newArr.push({
+              procent: Coefficient(breast, x.breast, waist, x.waist, hips, x.hips),
               title: item.title,
               src: item.src,
               link: item.link,
@@ -31,4 +34,5 @@ export default (array, breast, waist, hips, newArr) => {
       }
     });
   });
+  return newArr
 };
