@@ -31,5 +31,5 @@ export default (array, breast, waist, hips) => {
   });
   return sortBy(newArr, 'percent')
     .reverse()
-    .filter(item => item.percent >= 90);
+    .filter(item => item.percent >= 70);
 };
