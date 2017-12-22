@@ -7,6 +7,7 @@ import Breast from '@/components/views/Breast';
 import Waist from '@/components/views/Waist';
 import Hips from '@/components/views/Hips';
 import Result from '@/components/pages/Result';
+import SingleResult from '@/components/pages/SingleResult';
 import Insert from '@/components/pages/Insert';
 
 // import AdminGuard from './AdminGuard';
@@ -51,6 +52,11 @@ export default new Router({
       path: '/result',
       name: 'Result',
       component: Result,
+    },
+    {
+      path: '/single-result',
+      name: 'SingleResult',
+      component: SingleResult,
     },
   ],
 });

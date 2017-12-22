@@ -1,4 +1,3 @@
-// @flow
 type ResultType = {
   (breast: string): number,
   (waist: string): number,
@@ -6,13 +5,13 @@ type ResultType = {
 };
 
 export default class Storage {
-  static get(key: string): Function {
+  static get(key: string): ResultType {
     const item: string = window.localStorage.getItem(key);
-    const result: ResultType = JSON.parse(item);
+    const result: ResultType = JSON.parse(item: string);
     return result;
   }
   static set(key: string, value: { breast: number, waist: number, hips: number }) {
-    window.localStorage.setItem(key, JSON.stringify(value));
+    window.localStorage.setItem(key, JSON.stringify(value: {}));
   }
   static remove(key: string) {
     window.localStorage.removeItem(key);

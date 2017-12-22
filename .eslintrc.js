@@ -11,7 +11,7 @@ module.exports = {
   },
   extends: ['airbnb-base', 'prettier'],
   // required to lint *.vue files
-  plugins: ['html', 'flowtype'],
+  plugins: ['html'],
   // check if imports actually resolve
   settings: {
     'import/resolver': {
@@ -45,7 +45,7 @@ module.exports = {
     ],
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
-    'flowtype/boolean-style': [2, 'boolean'],
+    /* 'flowtype/boolean-style': [2, 'boolean'],
     'flowtype/define-flow-type': 1,
     'flowtype/delimiter-dangle': [2, 'never'],
     'flowtype/generic-spacing': [2, 'never'],
@@ -63,6 +63,6 @@ module.exports = {
     'flowtype/type-id-match': [2, '^([A-Z][a-z0-9]+)+Type$'],
     'flowtype/union-intersection-spacing': [2, 'always'],
     'flowtype/use-flow-type': 1,
-    'flowtype/valid-syntax': 1,
+    'flowtype/valid-syntax': 1, */
   },
 };
