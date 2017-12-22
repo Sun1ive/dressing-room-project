@@ -82,6 +82,8 @@
 import onCompare from '@/Utils/Compare';
 import Storage from '@/Utils/LocalStorage';
 
+import { mapGetters } from 'vuex';
+
 export default {
   methods: {
     setLocalData() {
@@ -114,21 +116,13 @@ export default {
     },
   },
   computed: {
-    items() {
-      return this.$store.getters.items;
-    },
-    selectedItem() {
-      return this.$store.getters.selectedItem;
-    },
-    isSetBreast() {
-      return this.$store.getters.getBreast;
-    },
-    isSetWaist() {
-      return this.$store.getters.getWaist;
-    },
-    isSetHips() {
-      return this.$store.getters.getHips;
-    },
+    ...mapGetters({
+        items: 'items',
+        selectedItem: 'selectedItems',
+        isSetBreast: 'getBreast',
+        isSetWaist: 'getWaist',
+        isSetHips: 'getHips'
+    }),
     isShowSingleCompare() {
       return this.$store.getters.selectedItem !== null && this.$store.getters.selectedItem !== '';
     },

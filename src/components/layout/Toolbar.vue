@@ -67,7 +67,7 @@ export default {
           icon: 'view_list'
         },
       ],
-      drawer: true,
+      drawer: false,
     };
   },
 };
