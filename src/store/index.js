@@ -4,6 +4,8 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import API from '../services/Api';
 
+import type { DataStateType } from '../types/DataStore';
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -17,25 +19,25 @@ export default new Vuex.Store({
     loading: false,
   },
   mutations: {
-    setLoadedDresses(state: {}, payload: Array<mixed>) {
+    setLoadedDresses(state: DataStateType, payload: Array<mixed>) {
       state.items = payload;
     },
-    setSelectedItem(state, payload) {
+    setSelectedItem(state: DataStateType, payload: string) {
       state.selectedItem = payload;
     },
-    setBreast(state, payload) {
+    setBreast(state: DataStateType, payload: number) {
       state.breast = payload;
     },
-    setWaist(state, payload) {
+    setWaist(state: DataStateType, payload: number) {
       state.waist = payload;
     },
-    setHips(state, payload) {
+    setHips(state: DataStateType, payload: number) {
       state.hips = payload;
     },
-    setFilteredDresses(state, payload) {
+    setFilteredDresses(state: DataStateType, payload: Array<mixed>) {
       state.filtered = payload;
     },
-    setLoading(state, payload) {
+    setLoading(state: DataStateType, payload: boolean) {
       state.loading = payload;
     },
   },
@@ -54,12 +56,12 @@ export default new Vuex.Store({
     },
   },
   getters: {
-    items: state => state.items,
-    getBreast: state => state.breast,
-    getWaist: state => state.waist,
-    getHips: state => state.hips,
-    filtered: state => state.filtered,
-    selectedItem: state => state.selectedItem,
-    isLoading: state => state.loading,
+    items: (state: DataStateType) => state.items,
+    getBreast: (state: DataStateType) => state.breast,
+    getWaist: (state: DataStateType) => state.waist,
+    getHips: (state: DataStateType) => state.hips,
+    filtered: (state: DataStateType) => state.filtered,
+    selectedItem: (state: DataStateType) => state.selectedItem,
+    isLoading: (state: DataStateType) => state.loading,
   },
 });

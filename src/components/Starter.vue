@@ -79,6 +79,8 @@
 
 
 <script>
+// @flow
+
 import onCompare from '@/Utils/Compare';
 import Storage from '@/Utils/LocalStorage';
 
@@ -146,14 +148,8 @@ export default {
     },
   },
 };
+
 </script>
-
-
-
-
-
-
-
 
 
 <style scoped lang="stylus">

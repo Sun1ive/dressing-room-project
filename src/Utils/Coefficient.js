@@ -8,5 +8,5 @@ export default (
   userHips: number,
   itemHips: number,
 ) =>
-  Math.floor((userBreast / itemBreast) * (userWaist / itemWaist) * (userHips / itemHips) *100,
+  Math.floor((userBreast / itemBreast) * (userWaist / itemWaist) * (userHips / itemHips) * 100,
   );

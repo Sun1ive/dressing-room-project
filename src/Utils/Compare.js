@@ -5,7 +5,7 @@ import last from 'lodash/last';
 import sortBy from 'lodash/sortBy';
 import Coefficient from './Coefficient';
 
-export default (array: Array<mixed>, breast: number, waist: number, hips: number) => {
+export default (array: Array<mixed>, breast: number, waist: number, hips: number): Array<mixed> => {
   const newArr = [];
   each(array, item => {
     const itemID = item.id;
