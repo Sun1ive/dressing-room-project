@@ -41,7 +41,7 @@ export default new Vuex.Store({
     setLoading(state: DataStateType, payload: boolean) {
       state.loading = payload;
     },
-    runCompare(state: DataStateType, payload: Array<mixed>) {
+    runCompare(state: DataStateType, payload: any) {
       const result: Array<mixed> = onCompare(payload, state.breast, state.waist, state.hips);
       state.filtered = result;
     },
