@@ -1,12 +1,12 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
-import Admin from '@/components/Admin';
-import Starter from '@/components/Starter';
+import Admin from '@/components/pages/Admin';
+import Starter from '@/components/pages/Starter';
 import Breast from '@/components/views/Breast';
 import Waist from '@/components/views/Waist';
 import Hips from '@/components/views/Hips';
-import Result from '@/components/Result';
+import Result from '@/components/pages/Result';
 
 // import AdminGuard from './AdminGuard';
 

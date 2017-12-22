@@ -1,9 +1,9 @@
 <template>
-  <header @click="home">
+  <header>
     <v-container fluid>
       <v-layout class="primary" justify-center align-center>
         <v-flex class="text-xs-center white--text">
-          Онлайн примерочная inDresser
+          <app-toolbar></app-toolbar>
         </v-flex>
       </v-layout>
     </v-container>
@@ -11,25 +11,14 @@
 </template>
 
 <script>
+import Toolbar from './Toolbar';
+
 export default {
-  methods: {
-    home() {
-      this.$router.push(`/`);
-    },
+  components: {
+    'app-toolbar': Toolbar,
   },
 };
 </script>
 
 
-<style scoped lang="stylus">
-header {
-  cursor: pointer;
-
-  .container {
-    .layout {
-      min-height: 50px;
-      font-size: responsive 1rem 1.6rem;
-    }
-  }
-}
-</style>
+<style scoped lang="stylus"></style>
