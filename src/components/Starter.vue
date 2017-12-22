@@ -120,6 +120,8 @@ export default {
         waist: this.isSetWaist,
         hips: this.isSetHips,
       };
+
+      console.log(typeof localData.breast, typeof localData.waist, typeof localData.hips);
       Storage.set('DressingUserData', localData);
     },
   },

@@ -17,7 +17,7 @@ export default new Vuex.Store({
     loading: false,
   },
   mutations: {
-    setLoadedDresses(state: Object, payload: Array<mixed>) {
+    setLoadedDresses(state: {}, payload: Array<mixed>) {
       state.items = payload;
     },
     setSelectedItem(state, payload) {

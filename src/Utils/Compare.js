@@ -1,9 +1,11 @@
+// @flow
+
 import each from 'lodash/each';
 import last from 'lodash/last';
 import sortBy from 'lodash/sortBy';
 import Coefficient from './Coefficient';
 
-export default (array, breast, waist, hips) => {
+export default (array: Array<mixed>, breast: number, waist: number, hips: number) => {
   const newArr = [];
   each(array, item => {
     const itemID = item.id;
