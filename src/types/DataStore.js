@@ -7,7 +7,7 @@ export type DataStateType = {
   waist: null | number,
   hips: null | number,
   filtered: null | Array<mixed>,
-  loading: boolean,
+  loading: boolean
 };
 
 export type ItemType = {
@@ -16,22 +16,22 @@ export type ItemType = {
   id: number,
   link: string,
   sizes: Array<mixed>,
-  price: number,
+  price: number
 };
 
-export type FilteredObject = {
+export type FilteredObjectType = {
   title: string,
   src: string,
   link: string,
   price: number,
   id: number,
   percent: number,
-  size: number,
+  size: number
 };
 
 export type EachSizeType = {
   breast: number,
   hips: number,
   size: string,
-  waist: number,
+  waist: number
 };

@@ -68,7 +68,7 @@ new Vue({
   el: '#app',
   router,
   store,
-  render: (h: Function) => h(App),
+  render: h => h(App),
   created() {
     if (Storage.get('DressingUserData')) {
       const userInfo: string = Storage.get('DressingUserData');
