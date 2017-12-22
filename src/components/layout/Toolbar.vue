@@ -5,7 +5,7 @@
       dark
       v-model="drawer"
       absolute
-      temporary
+      persistent
       clipped
     >
       <v-list>

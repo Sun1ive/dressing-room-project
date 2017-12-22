@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-layout align-center justify-center>
-      <v-flex xs12 sm8 lg6 class="text-xs-center">
+      <v-flex xs10 sm8 md6 lg4 class="text-xs-center">
         <v-form @submit.prevent="runCompare">
           <h1>Вставьте ссылку на товар</h1>
           <v-text-field label="Вставьте ссылку" v-model.lazy="link"></v-text-field>

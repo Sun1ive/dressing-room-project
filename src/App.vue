@@ -27,7 +27,7 @@ html {
 
 #app {
   // max-width: 700px;
-  max-width: 950px;
+  // max-width: 950px;
   margin: 0 auto;
   outline: none;
 }
