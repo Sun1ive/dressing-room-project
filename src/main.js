@@ -3,7 +3,7 @@ import Loader from '@/components/templates/Loader';
 import Path from '@/services/Path';
 import wrapper from '@/components/templates/Wrapper';
 import pWrapper from '@/components/templates/ParamsWrapper';
-import Storage from '@/Utils/LocalStorage';
+
 
 import {
   Vuetify,
@@ -25,8 +25,9 @@ import {
 import '../node_modules/vuetify/src/stylus/app.styl';
 
 import App from './App';
-import router from './router/Index';
-import store from './store/Index';
+import Storage from './Utils/LocalStorage';
+import router from './router'
+import store from './store';
 
 Vue.use(Vuetify, {
   components: {
@@ -70,7 +71,7 @@ new Vue({
   render: h => h(App),
   created() {
     if (Storage.get('DressingUserData')) {
-      const userInfo = Storage.get('DressingUserData');
+      const userInfo: string = Storage.get('DressingUserData');
       this.$store.commit('setBreast', userInfo.breast);
       this.$store.commit('setWaist', userInfo.waist);
       this.$store.commit('setHips', userInfo.hips);

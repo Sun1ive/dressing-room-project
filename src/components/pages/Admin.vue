@@ -96,7 +96,7 @@
 </template>
 
 <script>
-import API from '../services/Api';
+import API from '../../services/Api'
 
 export default {
   data() {

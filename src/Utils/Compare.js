@@ -1,18 +1,23 @@
+/* @flow */
+
 import each from 'lodash/each';
 import last from 'lodash/last';
 import sortBy from 'lodash/sortBy';
 import Coefficient from './Coefficient';
 
-export default (array, breast, waist, hips) => {
-  const newArr = [];
-  each(array, item => {
-    const itemID = item.id;
+import type { ItemType, FilteredObjectType } from '../types/DataStore';
+
+export default (array: Array<mixed>, breast: number, waist: number, hips: number): Array<mixed> => {
+  const newArr: Array<mixed> = [];
+  each(array, (item: ItemType) => {
+    const itemID: number = item.id;
     each(item.sizes, x => {
-      const myObj = {
+      const myObj: FilteredObjectType = {
         title: item.title,
         src: item.src,
         id: item.id,
         link: item.link,
+        price: item.price,
         size: x.size,
         percent: Coefficient(breast, x.breast, waist, x.waist, hips, x.hips),
       };
@@ -21,7 +26,7 @@ export default (array, breast, waist, hips) => {
         if (newArr.length === 0) {
           newArr.push(myObj);
         } else {
-          const id = last(newArr).id;
+          const id: number = last(newArr).id;
           if (id !== itemID) {
             newArr.push(myObj);
           }
@@ -31,5 +36,5 @@ export default (array, breast, waist, hips) => {
   });
   return sortBy(newArr, 'percent')
     .reverse()
-    .filter(item => item.percent >= 70);
+    .filter((item: FilteredObjectType) => item.percent >= 70);
 };

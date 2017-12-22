@@ -1,6 +1,11 @@
+/* @flow */
 import Vue from 'vue';
 import Vuex from 'vuex';
-import API from '@/services/Api';
+import API from '../services/Api';
+
+import onCompare from '../Utils/Compare';
+
+import type { DataStateType } from '../types/DataStore';
 
 Vue.use(Vuex);
 
@@ -15,26 +20,30 @@ export default new Vuex.Store({
     loading: false,
   },
   mutations: {
-    setLoadedDresses(state, payload) {
+    setLoadedDresses(state: DataStateType, payload: Array<mixed>) {
       state.items = payload;
     },
-    setSelectedItem(state, payload) {
+    setSelectedItem(state: DataStateType, payload: string) {
       state.selectedItem = payload;
     },
-    setBreast(state, payload) {
+    setBreast(state: DataStateType, payload: number) {
       state.breast = payload;
     },
-    setWaist(state, payload) {
+    setWaist(state: DataStateType, payload: number) {
       state.waist = payload;
     },
-    setHips(state, payload) {
+    setHips(state: DataStateType, payload: number) {
       state.hips = payload;
     },
-    setFilteredDresses(state, payload) {
+    setFilteredDresses(state: DataStateType, payload: Array<mixed>) {
       state.filtered = payload;
     },
-    setLoading(state, payload) {
+    setLoading(state: DataStateType, payload: boolean) {
       state.loading = payload;
+    },
+    runCompare(state: DataStateType, payload: any) {
+      const result: Array<mixed> = onCompare(payload, state.breast, state.waist, state.hips);
+      state.filtered = result;
     },
   },
   actions: {
@@ -45,19 +54,19 @@ export default new Vuex.Store({
           const resolved = response.data;
           commit('setLoadedDresses', resolved);
         } catch (error) {
-          throw new Error('Could not fetch data ', error);
+          throw new Error(`Could not fetch data ${error}`);
         }
       }
       fetchDresses();
     },
   },
   getters: {
-    items: state => state.items,
-    getBreast: state => state.breast,
-    getWaist: state => state.waist,
-    getHips: state => state.hips,
-    filtered: state => state.filtered,
-    selectedItem: state => state.selectedItem,
-    isLoading: state => state.loading,
+    items: (state: DataStateType) => state.items,
+    getBreast: (state: DataStateType) => state.breast,
+    getWaist: (state: DataStateType) => state.waist,
+    getHips: (state: DataStateType) => state.hips,
+    filtered: (state: DataStateType) => state.filtered,
+    selectedItem: (state: DataStateType) => state.selectedItem,
+    isLoading: (state: DataStateType) => state.loading,
   },
 });

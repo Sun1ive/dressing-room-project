@@ -1,12 +1,14 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
-import Admin from '@/components/Admin';
-import Starter from '@/components/Starter';
+import Admin from '@/components/pages/Admin';
+import Starter from '@/components/pages/Starter';
 import Breast from '@/components/views/Breast';
 import Waist from '@/components/views/Waist';
 import Hips from '@/components/views/Hips';
-import Result from '@/components/Result';
+import Result from '@/components/pages/Result';
+import SingleResult from '@/components/pages/SingleResult';
+import Insert from '@/components/pages/Insert';
 
 // import AdminGuard from './AdminGuard';
 
@@ -20,6 +22,11 @@ export default new Router({
       name: 'Admin',
       component: Admin,
       // beforeEnter: AdminGuard,
+    },
+    {
+      path: '/insert',
+      name: 'Insert',
+      component: Insert,
     },
     {
       path: '/',
@@ -45,6 +52,11 @@ export default new Router({
       path: '/result',
       name: 'Result',
       component: Result,
+    },
+    {
+      path: '/single-result',
+      name: 'SingleResult',
+      component: SingleResult,
     },
   ],
 });

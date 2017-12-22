@@ -83,18 +83,19 @@ import onCompare from '@/Utils/Compare';
 import Storage from '@/Utils/LocalStorage';
 
 export default {
-  data() {
-    return {
-      userArr: [],
-    };
-  },
   methods: {
+    setLocalData() {
+      Storage.remove('DressingUserData');
+      const localData = {
+        breast: this.isSetBreast,
+        waist: this.isSetWaist,
+        hips: this.isSetHips,
+      };
+      Storage.set('DressingUserData', localData);
+    },
     checkAll() {
       this.setLocalData();
-
-      this.userArr = onCompare(this.items, this.isSetBreast, this.isSetWaist, this.isSetHips);
-
-      this.$store.commit('setFilteredDresses', this.userArr);
+      this.$store.commit('setFilteredDresses', onCompare(this.items, this.isSetBreast, this.isSetWaist, this.isSetHips));
       this.$store.commit('setLoading', true);
 
       this.$router.push('/result');
@@ -104,23 +105,12 @@ export default {
       const filteredItem = this.items.filter(item => item.link === this.selectedItem);
 
       if (filteredItem.length === 0) {
-        this.userArr = onCompare(this.items, this.isSetBreast, this.isSetWaist, this.isSetHips);
+        this.$store.commit('runCompare', this.$store.getters.items);
       }
-      this.userArr = onCompare(filteredItem, this.isSetBreast, this.isSetWaist, this.isSetHips);
-
-      this.$store.commit('setFilteredDresses', this.userArr);
+      this.$store.commit('runCompare', filteredItem);
       this.$store.commit('setLoading', true);
 
-      this.$router.push('/result');
-    },
-    setLocalData() {
-      Storage.remove('DressingUserData');
-      const localData = {
-        breast: this.isSetBreast,
-        waist: this.isSetWaist,
-        hips: this.isSetHips,
-      };
-      Storage.set('DressingUserData', localData);
+      this.$router.push('/single-result');
     },
   },
   computed: {
@@ -145,13 +135,6 @@ export default {
   },
 };
 </script>
-
-
-
-
-
-
-
 
 
 <style scoped lang="stylus">

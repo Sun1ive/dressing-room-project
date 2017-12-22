@@ -1,9 +1,9 @@
 <template>
-  <v-app light>
+  <v-app>
     <app-Header />
-    <v-content>
-      <router-view />
-    </v-content>
+      <v-content>
+        <router-view />
+      </v-content>
     <app-Footer />
   </v-app>
 </template>
@@ -26,7 +26,8 @@ html {
 }
 
 #app {
-  max-width: 700px;
+  // max-width: 700px;
+  max-width: 950px;
   margin: 0 auto;
   outline: none;
 }
