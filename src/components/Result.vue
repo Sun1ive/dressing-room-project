@@ -1,6 +1,6 @@
 <template>
   <v-container fluid grid-list-xl>
-    <v-layout row wrap v-if="!isLoading">
+    <v-layout justify-center align-center row wrap v-if="!isLoading">
       <v-flex xs12 sm6 md4 v-for="(item, i) in filtered" :key="i">
         <v-card>
           <v-card-media height="350" :src="item.src"></v-card-media>

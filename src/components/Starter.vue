@@ -79,8 +79,6 @@
 
 
 <script>
-// @flow
-
 import onCompare from '@/Utils/Compare';
 import Storage from '@/Utils/LocalStorage';
 
@@ -122,8 +120,6 @@ export default {
         waist: this.isSetWaist,
         hips: this.isSetHips,
       };
-
-      console.log(typeof localData.breast, typeof localData.waist, typeof localData.hips);
       Storage.set('DressingUserData', localData);
     },
   },
