@@ -1,9 +1,9 @@
 <template>
   <v-app light>
     <app-Header />
-    <v-content>
-      <router-view />
-    </v-content>
+      <v-content>
+        <router-view />
+      </v-content>
     <app-Footer />
   </v-app>
 </template>
