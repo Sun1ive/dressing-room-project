@@ -107,7 +107,7 @@ export default {
       const filteredItem = this.items.filter(item => item.link === this.selectedItem);
 
       if (filteredItem.length === 0) {
-        this.$store.commit('runCompare', this.$store.getters.items);
+        this.$store.commit('runCompare', this.items);
       }
       this.$store.commit('runCompare', filteredItem);
       this.$store.commit('setLoading', true);
@@ -118,7 +118,7 @@ export default {
   computed: {
     ...mapGetters({
         items: 'items',
-        selectedItem: 'selectedItems',
+        selectedItem: 'selectedItem',
         isSetBreast: 'getBreast',
         isSetWaist: 'getWaist',
         isSetHips: 'getHips'
