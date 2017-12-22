@@ -1,4 +1,4 @@
-// @flow
+/* @flow */
 
 import each from 'lodash/each';
 import last from 'lodash/last';
