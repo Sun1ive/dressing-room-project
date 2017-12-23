@@ -26,7 +26,6 @@
     <v-toolbar dark color="primary">
       <v-spacer></v-spacer>
       <v-toolbar-side-icon
-        class="hidden-md-and-up"
         @click="drawer = !drawer"
       ></v-toolbar-side-icon>
       <v-toolbar-items
@@ -36,6 +35,7 @@
           v-for="(item, index) in menuItems"
           :key="index"
           :to="item.path"
+          exact
         >{{ item.title }}</v-btn>
       </v-toolbar-items>
       <v-spacer></v-spacer>
@@ -62,12 +62,18 @@ export default {
         },
         {
           title: 'Посмотреть все',
-          path: '/',
+          path: '/checkAll',
           id: 3,
           icon: 'view_list'
         },
+        {
+          title: 'Указать параметры',
+          path: '/params',
+          id: 4,
+          icon: 'settings'
+        }
       ],
-      drawer: true,
+      drawer: false,
     };
   },
 };

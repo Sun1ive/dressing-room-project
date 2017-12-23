@@ -1,4 +1,5 @@
-/* @flow */
+// @flow
+
 import type { ResultType } from '../types/DataStore';
 
 export default class Storage {

@@ -3,6 +3,7 @@
     <v-layout align-center justify-center>
       <v-flex xs12 sm6 class="text-xs-center">
         <v-card>
+          <slot name="pic"></slot>
           <slot name="text"></slot>
           <slot name="size"></slot>
           <slot name="slider"></slot>
