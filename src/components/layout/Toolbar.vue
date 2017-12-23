@@ -71,6 +71,12 @@ export default {
           path: '/params',
           id: 4,
           icon: 'settings'
+        },
+        {
+          title: 'Admin',
+          path: '/admin',
+          id: 5,
+          icon: 'account_box'
         }
       ],
       drawer: false,
