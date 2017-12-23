@@ -21,34 +21,28 @@ export default {
 </script>
 
 <style lang="stylus">
-html {
+html
   // overflow-y: hidden;
-}
 
-#app {
+#app
   // max-width: 700px;
   // max-width: 950px;
   margin: 0 auto;
   outline: none;
-}
 
-.container {
+.container
   padding: 0;
-}
 
-.input-group--slider {
+.input-group--slider
   outline-style: none;
-}
 
-.content--wrap {
+.content--wrap
   align-items: center;
-}
 
-.fade-enter-active, .fade-leave-active {
-  transition: opacity 0.7s linear;
-}
+.fade-enter-active, .fade-leave-active
+  transition: opacity .5s
 
-.fade-enter, .fade-leave-to {
-  opacity: 0;
-}
+.fade-enter, .fade-leave-to
+  opacity: 0
+
 </style>

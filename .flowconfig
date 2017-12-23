@@ -1,6 +1,13 @@
-[include]
 [ignore]
-*/node_modules/*
-*/build/*
-*/dist/*
+/node_modules/*
+/dist/
+/build/
+[include]
+
 [libs]
+
+[lints]
+
+[options]
+
+[strict]

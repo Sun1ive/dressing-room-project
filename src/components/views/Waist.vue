@@ -19,7 +19,7 @@ export default {
   methods: {
     onSave() {
       this.$store.commit('setWaist', this.getWaist);
-      this.$router.push('/');
+      this.$router.push('/params');
     },
   },
   computed: {
@@ -55,5 +55,3 @@ export default {
   },
 };
 </script>
-
-<style scoped lang="stylus"></style>

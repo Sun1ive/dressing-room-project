@@ -3,6 +3,7 @@ import Router from 'vue-router';
 
 import Admin from '@/components/pages/Admin';
 import Starter from '@/components/pages/Starter';
+import Home from '@/components/pages/Home';
 import Breast from '@/components/views/Breast';
 import Waist from '@/components/views/Waist';
 import Hips from '@/components/views/Hips';
@@ -30,7 +31,12 @@ export default new Router({
     },
     {
       path: '/',
-      name: 'Starter',
+      name: 'Home',
+      component: Home,
+    },
+    {
+      path: '/params',
+      name: 'Params',
       component: Starter,
     },
     {

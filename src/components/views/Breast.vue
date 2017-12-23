@@ -14,13 +14,12 @@ export default {
   data() {
     return {
       breast: null,
-      prevComparison: null,
     };
   },
   methods: {
     onSave() {
       this.$store.commit('setBreast', this.breast);
-      this.$router.push('/');
+      this.$router.push('/params');
     },
   },
   computed: {
@@ -57,3 +56,8 @@ export default {
   },
 };
 </script>
+
+<style lang="stylus" scoped>
+.card__media
+  margin 0 auto
+</style>

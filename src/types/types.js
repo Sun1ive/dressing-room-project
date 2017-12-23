@@ -1,12 +1,19 @@
 // @flow
 
+
+export type ResultType = {
+  breast: number,
+  waist: number,
+  hips: number
+};
+
 export type DataStateType = {
-  items: null | Array<mixed>,
-  selectedItem: null | string,
-  breast: null | number,
-  waist: null | number,
-  hips: null | number,
-  filtered: null | Array<mixed>,
+  items: Array<mixed>,
+  selectedItem: string,
+  breast: number,
+  waist: number,
+  hips: number,
+  filtered: Array<mixed>,
   loading: boolean
 };
 

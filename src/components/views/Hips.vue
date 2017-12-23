@@ -19,7 +19,7 @@ export default {
   methods: {
     onSave() {
       this.$store.commit('setHips', this.getHips);
-      this.$router.push('/');
+      this.$router.push('/params');
     },
   },
   computed: {
