@@ -5,7 +5,7 @@ import API from '../services/Api';
 
 import onCompare from '../Utils/Compare';
 
-import type { DataStateType } from '../types/DataStore';
+import type { DataStateType } from '../types/types';
 
 Vue.use(Vuex);
 
@@ -41,7 +41,7 @@ export default new Vuex.Store({
     setLoading(state: DataStateType, payload: boolean) {
       state.loading = payload;
     },
-    runCompare(state: DataStateType, payload: any) {
+    runCompare(state: DataStateType, payload: Array<mixed>) {
       const result: Array<mixed> = onCompare(payload, state.breast, state.waist, state.hips);
       state.filtered = result;
     },

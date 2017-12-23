@@ -5,7 +5,7 @@ import last from 'lodash/last';
 import sortBy from 'lodash/sortBy';
 import Coefficient from './Coefficient';
 
-import type { ItemType, FilteredObjectType } from '../types/DataStore';
+import type { ItemType, FilteredObjectType } from '../types/types';
 
 export default (array: Array<mixed>, breast: number, waist: number, hips: number): Array<mixed> => {
   const newArr: Array<mixed> = [];

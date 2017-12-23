@@ -1,6 +1,6 @@
 // @flow
 
-import type { ResultType } from '../types/DataStore';
+import type { ResultType } from '../types/types';
 
 export default class Storage {
   static get(key: string): ResultType {
