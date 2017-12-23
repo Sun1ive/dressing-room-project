@@ -1,10 +1,5 @@
 /* @flow */
-
-type ResultType = {
-  (breast: string): number,
-  (waist: string): number,
-  (hips: string): number,
-};
+import type { ResultType } from '../types/DataStore';
 
 export default class Storage {
   static get(key: string): ResultType {
@@ -13,7 +8,7 @@ export default class Storage {
     return result;
   }
   static set(key: string, value: { breast: number, waist: number, hips: number }) {
-    window.localStorage.setItem(key, JSON.stringify(value: {}));
+    window.localStorage.setItem(key, JSON.stringify(value));
   }
   static remove(key: string) {
     window.localStorage.removeItem(key);

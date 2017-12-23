@@ -1,5 +1,11 @@
 // @flow
 
+export type ResultType = {
+  breast: number,
+  waist: number,
+  hips: number
+};
+
 export type DataStateType = {
   items: null | Array<mixed>,
   selectedItem: null | string,
