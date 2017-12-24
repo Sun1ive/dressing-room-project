@@ -93,11 +93,15 @@ export default {
         waist: this.isSetWaist,
         hips: this.isSetHips,
       };
+
       Storage.set('DressingUserData', localData);
     },
     checkAll() {
       this.setLocalData();
-      this.$store.commit('setFilteredDresses', onCompare(this.items, this.isSetBreast, this.isSetWaist, this.isSetHips));
+      this.$store.commit(
+        'setFilteredDresses',
+        onCompare(this.items, this.isSetBreast, this.isSetWaist, this.isSetHips),
+      );
       this.$store.commit('setLoading', true);
 
       this.$router.push('/result');
@@ -117,11 +121,11 @@ export default {
   },
   computed: {
     ...mapGetters({
-        items: 'items',
-        selectedItem: 'selectedItem',
-        isSetBreast: 'getBreast',
-        isSetWaist: 'getWaist',
-        isSetHips: 'getHips'
+      items: 'items',
+      selectedItem: 'selectedItem',
+      isSetBreast: 'getBreast',
+      isSetWaist: 'getWaist',
+      isSetHips: 'getHips',
     }),
     isShowSingleCompare() {
       return this.$store.getters.selectedItem !== null && this.$store.getters.selectedItem !== '';
@@ -132,11 +136,4 @@ export default {
 
 
 <style scoped lang="stylus">
-.fade-enter-active, .fade-leave-active {
-  transition: opacity 0.5s;
-}
-
-.fade-enter, .fade-leave-to {
-  opacity: 0;
-}
 </style>

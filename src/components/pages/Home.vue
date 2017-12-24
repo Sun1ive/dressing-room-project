@@ -1,7 +1,7 @@
 <template>
   <v-container fluid>
     <v-layout justify-center align-center>
-      <v-flex xs12 sm6>
+      <v-flex xs12 sm6 class="text-xs-center">
         <h1>Добро пожаловать в онлайн примерочную</h1>
         <p>Здесь вы можете примерить на себе конкретную вещь или же все вещи из нашей базы.</p>
       </v-flex>
