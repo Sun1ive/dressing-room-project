@@ -52,6 +52,20 @@
           exact
         >{{ item.title }}</v-btn>
       </v-toolbar-items>
+      <v-spacer />
+      <v-toolbar-items>
+        <v-menu offset-y>
+          <v-btn
+          flat
+          slot="activator"
+          >Admin Menu</v-btn>
+          <v-list>
+            <v-list-tile v-for="item in adminMenu" :key="item.title" @click="$router.push(item.path)">
+              <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+            </v-list-tile>
+          </v-list>
+        </v-menu>
+      </v-toolbar-items>
       <v-spacer></v-spacer>
     </v-toolbar>
   </nav>
@@ -78,20 +92,38 @@ export default {
           title: 'Посмотреть все',
           path: '/checkAll',
           id: 3,
-          icon: 'view_list'
+          icon: 'view_list',
         },
         {
           title: 'Указать параметры',
           path: '/params',
           id: 4,
-          icon: 'settings'
+          icon: 'settings',
+        },
+        // {
+        //   title: 'Admin',
+        //   path: '/admin',
+        //   id: 5,
+        //   icon: 'account_box'
+        // }
+      ],
+      adminMenu: [
+        {
+          title: 'Admin Page',
+          path: '/admin',
         },
         {
-          title: 'Admin',
-          path: '/admin',
-          id: 5,
-          icon: 'account_box'
-        }
+          title: 'Admin View Page',
+          path: '/admin/view',
+        },
+        {
+          title: 'Admin Create Page',
+          path: '/admin/create',
+        },
+        {
+          title: 'Admin Edit Page',
+          path: '/admin/edit',
+        },
       ],
       drawer: false,
     };

@@ -20,6 +20,7 @@ import {
   VForm,
   VTextField,
   VProgressCircular,
+  VMenu,
   transitions,
 } from 'vuetify';
 import '../node_modules/vuetify/src/stylus/app.styl';
@@ -44,6 +45,7 @@ Vue.use(Vuetify, {
     VForm,
     VTextField,
     VProgressCircular,
+    VMenu,
     transitions,
   },
   theme: {
