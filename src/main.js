@@ -71,7 +71,7 @@ new Vue({
   render: h => h(App),
   created() {
     if (Storage.get('DressingUserData')) {
-      const userInfo: string = Storage.get('DressingUserData');
+      const userInfo = Storage.get('DressingUserData');
       this.$store.commit('setBreast', userInfo.breast);
       this.$store.commit('setWaist', userInfo.waist);
       this.$store.commit('setHips', userInfo.hips);

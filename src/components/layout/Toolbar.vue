@@ -5,7 +5,7 @@
       dark
       v-model="drawer"
       absolute
-      persistent
+      temporary
       clipped
     >
       <v-list>
@@ -21,11 +21,25 @@
             <v-list-tile-title>{{ item.title }}</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
+        <v-list-tile @click="drawer = !drawer">
+          <v-list-tile-action>
+            <v-icon dark>close</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            Свернуть
+          </v-list-tile-content>
+        </v-list-tile>
       </v-list>
     </v-navigation-drawer>
     <v-toolbar dark color="primary">
+      <v-toolbar-items>
+        <v-btn
+        flat
+        @click="drawer = !drawer">Меню</v-btn>
+      </v-toolbar-items>
       <v-spacer></v-spacer>
       <v-toolbar-side-icon
+        class="hidden-sm-and-up"
         @click="drawer = !drawer"
       ></v-toolbar-side-icon>
       <v-toolbar-items
