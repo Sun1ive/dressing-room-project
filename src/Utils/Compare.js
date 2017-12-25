@@ -3,7 +3,7 @@
 import each from 'lodash/each';
 import last from 'lodash/last';
 import sortBy from 'lodash/sortBy';
-import Coefficient from './Coefficient';
+import coefficient from './coefficient';
 
 import type { ItemType, FilteredObjectType } from '../types/types';
 
@@ -19,7 +19,7 @@ export default (array: Array<mixed>, breast: number, waist: number, hips: number
         link: item.link,
         price: item.price,
         size: x.size,
-        percent: Coefficient(breast, x.breast, waist, x.waist, hips, x.hips),
+        percent: coefficient(breast, x.breast, waist, x.waist, hips, x.hips),
       };
 
       if (breast <= x.breast && waist <= x.waist && hips <= x.hips) {

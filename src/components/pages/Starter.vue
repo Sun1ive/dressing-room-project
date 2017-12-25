@@ -79,7 +79,7 @@
 
 
 <script>
-import onCompare from '@/Utils/Compare';
+import onCompare from '@/Utils/compare';
 import Storage from '@/Utils/LocalStorage';
 
 import { mapGetters } from 'vuex';

@@ -60,7 +60,11 @@
           slot="activator"
           >Admin Menu</v-btn>
           <v-list>
-            <v-list-tile v-for="item in adminMenu" :key="item.title" @click="$router.push(item.path)">
+            <v-list-tile
+            v-for="item in adminMenu"
+            :key="item.title"
+            @click="$router.push(item.path)"
+            >
               <v-list-tile-title>{{ item.title }}</v-list-tile-title>
             </v-list-tile>
           </v-list>
@@ -100,12 +104,6 @@ export default {
           id: 4,
           icon: 'settings',
         },
-        // {
-        //   title: 'Admin',
-        //   path: '/admin',
-        //   id: 5,
-        //   icon: 'account_box'
-        // }
       ],
       adminMenu: [
         {

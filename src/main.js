@@ -1,8 +1,8 @@
 import Vue from 'vue';
 import Loader from '@/components/templates/Loader';
 import Path from '@/services/path';
-import wrapper from '@/components/templates/Wrapper';
-import pWrapper from '@/components/templates/ParamsWrapper';
+import wrapper from '@/components/templates/wrapper';
+import pWrapper from '@/components/templates/paramsWrapper';
 
 
 import {

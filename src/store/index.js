@@ -4,7 +4,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import API from '../services/api';
 
-import onCompare from '../Utils/Compare';
+import onCompare from '../Utils/compare';
 
 import type { DataStateType } from '../types/types';
 
