@@ -1,7 +1,9 @@
 <template>
   <v-container>
     <v-layout>
-      <v-flex></v-flex>
+      <v-flex>
+        <h1>hello edit page</h1>
+      </v-flex>
     </v-layout>
   </v-container>
 </template>

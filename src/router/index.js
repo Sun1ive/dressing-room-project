@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
-import AdminPage from '@/components/admin/AdminMain';
 import AdminCreate from '@/components/admin/AdminCreate';
 import AdminEdit from '@/components/admin/AdminEdit';
 import AdminView from '@/components/admin/AdminView';
@@ -24,24 +23,19 @@ export default new Router({
   mode: 'history',
   routes: [
     {
-      path: '/admin',
-      name: 'Admin',
-      component: AdminPage,
-      children: [
-        {
-          path: 'create',
-          component: AdminCreate,
-        },
-        {
-          path: 'view',
-          component: AdminView,
-        },
-        {
-          path: 'edit',
-          component: AdminEdit,
-        },
-      ],
-      // beforeEnter: AdminGuard,
+      path: '/admin/create',
+      name: 'adminCreate',
+      component: AdminCreate,
+    },
+    {
+      path: '/admin/view',
+      name: 'adminView',
+      component: AdminView,
+    },
+    {
+      path: '/admin/Edit',
+      name: 'adminEdit',
+      component: AdminEdit,
     },
     {
       path: '/insert',
