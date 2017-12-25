@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
-import Admin from '@/components/pages/Admin';
+import AdminPage from '@/components/admin/AdminMain';
 import Starter from '@/components/pages/Starter';
 import Home from '@/components/pages/Home';
 import Breast from '@/components/views/Breast';
@@ -21,7 +21,21 @@ export default new Router({
     {
       path: '/admin',
       name: 'Admin',
-      component: Admin,
+      component: AdminPage,
+      // children: [
+      //   {
+      //     path: 'create',
+      //     component: AdminCreate,
+      //   },
+      //   {
+      //     path: 'view',
+      //     component: AdminView,
+      //   },
+      //   {
+      //     path: 'edit',
+      //     component: AdminEdit,
+      //   },
+      // ],
       // beforeEnter: AdminGuard,
     },
     {

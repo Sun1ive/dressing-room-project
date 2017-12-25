@@ -2,7 +2,7 @@
 
 import Vue from 'vue';
 import Vuex from 'vuex';
-import API from '../services/Api';
+import API from '../services/api';
 
 import onCompare from '../Utils/Compare';
 

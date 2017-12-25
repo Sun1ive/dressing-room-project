@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-layout align-center justify-center>
-      <v-flex xs12 sm6 class="text-xs-center">
+      <v-flex xs12 sm6 lg3 class="text-xs-center">
         <v-card>
           <slot name="pic"></slot>
           <slot name="text"></slot>

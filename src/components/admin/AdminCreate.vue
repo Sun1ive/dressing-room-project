@@ -1,8 +1,8 @@
 <template>
   <v-container fluid>
     <v-layout justify-center align-center>
-      <v-flex xs12 sm8>
-        <v-form @submit.prevent="addToBase">
+      <v-flex xs12 sm6 lg4>
+        <v-form class="form" @submit.prevent="addToBase">
 
           <v-text-field v-model.lazy="item.title" label="title"></v-text-field>
           <v-text-field v-model.number.lazy="item.id" label="id"></v-text-field>
@@ -96,7 +96,7 @@
 </template>
 
 <script>
-import API from '../../services/Api'
+import API from '../../services/api'
 
 export default {
   data() {
@@ -186,5 +186,6 @@ export default {
 };
 </script>
 
+<style scoped lang="stylus">
 
-<style scoped lang="stylus"></style>
+</style>
