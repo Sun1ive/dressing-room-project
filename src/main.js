@@ -81,6 +81,9 @@ new Vue({
       this.$store.commit('setArm', userInfo.arm);
     }
     this.$store.dispatch('getDresses');
+    if (window.sessionStorage.getItem('user')) {
+      this.$store.commit('setUserSignIn', true);
+    }
   },
   mounted() {
     const pathname = window.location.href;

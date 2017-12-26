@@ -5,7 +5,7 @@ import Vuex from 'vuex';
 import { withAuth, withOutAuth } from '../services/api';
 import onCompare from '../Utils/compare';
 
-import type { DataStateType, Credentials } from '../types/types';
+import type { DataStateType, CredentialsType } from '../types/types';
 
 Vue.use(Vuex);
 
@@ -21,10 +21,6 @@ export default new Vuex.Store({
     loading: false,
     error: false,
     isUserSignIn: false,
-    userCredentials: {
-      username: '',
-      password: null,
-    },
   },
   mutations: {
     setLoadedDresses(state: DataStateType, payload: Array<mixed>) {
@@ -54,12 +50,6 @@ export default new Vuex.Store({
     setUserSignIn(state: DataStateType, payload: boolean) {
       state.isUserSignIn = payload;
     },
-    setUserCredentials(state: DataStateType, payload: Credentials) {
-      state.userCredentials = {
-        username: payload.username,
-        password: payload.password,
-      };
-    },
     runCompare(state: DataStateType, payload: Array<mixed>) {
       const result: Array<mixed> = onCompare(payload, state.breast, state.waist, state.hips);
       state.filtered = result;
@@ -85,8 +75,13 @@ export default new Vuex.Store({
             'http://localhost:8081/login',
           );
           if (response.status === 200) {
+
+            const credentials: CredentialsType = {
+              username: payload.username,
+              password: payload.password
+            }
+            window.sessionStorage.setItem('user', JSON.stringify(credentials));
             commit('setUserSignIn', true);
-            commit('setUserCredentials', payload)
           }
         } catch (error) {
           throw new Error(`Wrong login or password ${error}`);
@@ -106,6 +101,5 @@ export default new Vuex.Store({
     isLoading: (state: DataStateType) => state.loading,
     isError: (state: DataStateType) => state.error,
     isUserSignIn: (state: DataStateType) => state.isUserSignIn,
-    userCredentials: (state: DataStateType) => state.userCredentials
   },
 });
