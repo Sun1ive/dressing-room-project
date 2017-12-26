@@ -25,7 +25,6 @@
       </v-card-text>
     </ParamsWrapper>
 
-
     <v-layout justify-center v-if="!isSetWaist">
       <v-flex xs12 sm6 class="text-xs-center">
         <v-btn
@@ -55,6 +54,25 @@
       <v-card-text slot="params">Бедра: {{ isSetHips }} см <v-btn
       fab
       to="/hips"
+      >
+      <v-icon>mode_edit</v-icon>
+      </v-btn>
+      </v-card-text>
+    </ParamsWrapper>
+
+    <v-layout justify-center v-if="!isSetArms">
+      <v-flex xs12 sm6 class="text-xs-center">
+        <v-btn
+        color="primary"
+        to="/arm"
+        >Обхват руки</v-btn>
+      </v-flex>
+    </v-layout>
+
+    <ParamsWrapper v-if="isSetArms">
+      <v-card-text slot="params">Рука: {{ isSetArms }} см <v-btn
+      fab
+      to="/arm"
       >
       <v-icon>mode_edit</v-icon>
       </v-btn>
@@ -92,6 +110,7 @@ export default {
         breast: this.isSetBreast,
         waist: this.isSetWaist,
         hips: this.isSetHips,
+        arm: this.isSetArms,
       };
 
       Storage.set('DressingUserData', localData);
@@ -126,6 +145,7 @@ export default {
       isSetBreast: 'getBreast',
       isSetWaist: 'getWaist',
       isSetHips: 'getHips',
+      isSetArms: 'getArm'
     }),
     isShowSingleCompare() {
       return this.$store.getters.selectedItem !== null && this.$store.getters.selectedItem !== '';

@@ -12,6 +12,7 @@ export type DataStateType = {
   breast: number,
   waist: number,
   hips: number,
+  arm: number,
   filtered: Array<mixed>,
   loading: boolean,
   error: boolean,

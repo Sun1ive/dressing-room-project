@@ -7,11 +7,14 @@ import AdminView from '@/components/admin/AdminView';
 
 import SignIn from '@/components/user/SignIn';
 
-import Starter from '@/components/pages/Starter';
+import Params from '@/components/pages/Params';
 import Home from '@/components/pages/Home';
+
 import Breast from '@/components/views/Breast';
 import Waist from '@/components/views/Waist';
 import Hips from '@/components/views/Hips';
+import Arm from '@/components/views/Arm';
+
 import Result from '@/components/pages/Result';
 import SingleResult from '@/components/pages/SingleResult';
 import Insert from '@/components/pages/Insert';
@@ -56,7 +59,7 @@ export default new Router({
     {
       path: '/params',
       name: 'Params',
-      component: Starter,
+      component: Params,
     },
     {
       path: '/breast',
@@ -72,6 +75,11 @@ export default new Router({
       path: '/hips',
       name: 'Hips',
       component: Hips,
+    },
+    {
+      path: '/arm',
+      name: 'Arm',
+      component: Arm,
     },
     {
       path: '/result',

@@ -15,6 +15,7 @@ export default new Vuex.Store({
     breast: null,
     waist: null,
     hips: null,
+    arm: null,
     filtered: null,
     selectedItem: null,
     loading: false,
@@ -36,6 +37,9 @@ export default new Vuex.Store({
     },
     setHips(state: DataStateType, payload: number) {
       state.hips = payload;
+    },
+    setArm(state: DataStateType, payload: number) {
+      state.arm = payload;
     },
     setFilteredDresses(state: DataStateType, payload: Array<mixed>) {
       state.filtered = payload;
@@ -85,6 +89,7 @@ export default new Vuex.Store({
     getBreast: (state: DataStateType) => state.breast,
     getWaist: (state: DataStateType) => state.waist,
     getHips: (state: DataStateType) => state.hips,
+    getArm: (state: DataStateType) => state.arm,
     filtered: (state: DataStateType) => state.filtered,
     selectedItem: (state: DataStateType) => state.selectedItem,
     isLoading: (state: DataStateType) => state.loading,

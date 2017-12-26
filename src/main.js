@@ -78,6 +78,7 @@ new Vue({
       this.$store.commit('setBreast', userInfo.breast);
       this.$store.commit('setWaist', userInfo.waist);
       this.$store.commit('setHips', userInfo.hips);
+      this.$store.commit('setArm', userInfo.arm);
     }
     this.$store.dispatch('getDresses');
   },
