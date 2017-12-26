@@ -25,10 +25,11 @@ export default {
   methods: {
     onLogIn() {
       this.$store.dispatch('onSignIn', this.credentials);
-      if (this.$store.getters.isUserSignIn) {
-        window.sessionStorage.setItem('userIsAuth', 'true');
-        this.$router.push('/');
-      }
+      setTimeout(() => {
+        if (this.$store.getters.isUserSignIn) {
+          this.$router.push('/');
+        }
+      }, 500);
     },
   },
 };
