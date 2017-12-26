@@ -156,7 +156,7 @@ export default {
   methods: {
     async addToBase() {
       try {
-        const credentials = JSON.parse(window.sessionStorage.getItem('user'));
+        const credentials = JSON.parse(window.sessionStorage.getItem('userAdminCredentials'));
 
         this.item.sizes.push(this.xs, this.s, this.m, this.l);
 

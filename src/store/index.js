@@ -68,7 +68,7 @@ export default new Vuex.Store({
       }
       fetchDresses();
     },
-    onSignIn({ commit }, payload) {
+    onSignIn({ commit }, payload: CredentialsType) {
       async function onLogIn() {
         try {
           const response = await withAuth(payload.username, payload.password).get(
@@ -80,7 +80,7 @@ export default new Vuex.Store({
               username: payload.username,
               password: payload.password
             }
-            window.sessionStorage.setItem('user', JSON.stringify(credentials));
+            window.sessionStorage.setItem('userAdminCredentials', JSON.stringify(credentials));
             commit('setUserSignIn', true);
           }
         } catch (error) {

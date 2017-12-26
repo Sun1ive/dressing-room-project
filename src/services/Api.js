@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const withAuth = (username, password) =>
+export const withAuth: Function = (username, password) =>
   axios.create({
     // baseURL: `https://node-room.herokuapp.com/`,
     baseURL: `http://localhost:8081/`,
@@ -11,7 +11,7 @@ export const withAuth = (username, password) =>
     },
   });
 
-export const withOutAuth = () =>
+export const withOutAuth: Function = () =>
   axios.create({
     // baseURL: `https://node-room.herokuapp.com/`,
     baseURL: `http://localhost:8081/`,
