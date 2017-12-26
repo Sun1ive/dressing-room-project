@@ -10,12 +10,12 @@ import type { ItemType, FilteredObjectType } from '../types/types';
 export default (array: Array<mixed>, breast: number, waist: number, hips: number): Array<mixed> => {
   const newArr: Array<mixed> = [];
   each(array, (item: ItemType) => {
-    const itemID: number = item.id;
+    const itemID: number = item._id;
     each(item.sizes, x => {
       const myObj: FilteredObjectType = {
         title: item.title,
         src: item.src,
-        id: item.id,
+        id: item._id,
         link: item.link,
         price: item.price,
         size: x.size,
@@ -36,5 +36,5 @@ export default (array: Array<mixed>, breast: number, waist: number, hips: number
   });
   return sortBy(newArr, 'percent')
     .reverse()
-    .filter((item: FilteredObjectType) => item.percent >= 70);
+    .filter((item: FilteredObjectType) => item.percent >= 0);
 };

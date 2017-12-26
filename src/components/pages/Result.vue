@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid grid-list-xl>
+  <v-container id="container" fluid grid-list-xl>
     <v-layout justify-center align-center row wrap v-if="!isLoading">
       <v-flex xs12 sm6 md4 v-for="(item, i) in filtered" :key="i">
         <v-card>
@@ -38,8 +38,11 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.card__text {
+.card__text
   min-height: 200px !important;
-}
+
+#container
+  max-width 1280px
+  margin 0 auto
 </style>
 

@@ -126,39 +126,35 @@ export default {
           price: null,
           color: ''
         };
-        this.xs = null;
-        this.s = null;
-        this.m = null;
-        this.l = null;
 
-        // this.xs = {
-        //   size: 'XS',
-        //   breast: null,
-        //   waist: null,
-        //   hips: null,
-        //   arm: null,
-        // };
-        // this.s = {
-        //   size: 'S',
-        //   breast: null,
-        //   waist: null,
-        //   hips: null,
-        //   arm: null,
-        // };
-        // this.m = {
-        //   size: 'M',
-        //   breast: null,
-        //   waist: null,
-        //   hips: null,
-        //   arm: null,
-        // };
-        // this.l = {
-        //   size: 'L',
-        //   breast: null,
-        //   waist: null,
-        //   hips: null,
-        //   arm: null,
-        // };
+        this.xs = {
+          size: 'XS',
+          breast: null,
+          waist: null,
+          hips: null,
+          arm: null,
+        };
+        this.s = {
+          size: 'S',
+          breast: null,
+          waist: null,
+          hips: null,
+          arm: null,
+        };
+        this.m = {
+          size: 'M',
+          breast: null,
+          waist: null,
+          hips: null,
+          arm: null,
+        };
+        this.l = {
+          size: 'L',
+          breast: null,
+          waist: null,
+          hips: null,
+          arm: null,
+        };
       } catch (error) {
         throw new Error('Something bad happened ', error);
       }
