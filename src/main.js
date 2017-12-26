@@ -82,7 +82,7 @@ new Vue({
       this.$store.commit('setArm', userInfo.arm);
     }
     this.$store.dispatch('getDresses');
-    if (window.sessionStorage.getItem('user')) {
+    if (window.sessionStorage.getItem('userAdminCredentials')) {
       this.$store.commit('setUserSignIn', true);
     }
   },

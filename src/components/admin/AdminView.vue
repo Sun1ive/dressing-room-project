@@ -24,8 +24,7 @@ export default {
     return {};
   },
   methods: {
-    edit(id) {
-      alert(id)
+    edit() {
     },
   },
   computed: {
