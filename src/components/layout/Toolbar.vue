@@ -32,7 +32,7 @@
       </v-list>
     </v-navigation-drawer>
     <v-toolbar dark color="primary">
-      <v-toolbar-items>
+      <v-toolbar-items class="hidden-sm-and-down">
         <v-btn
         flat
         @click="drawer = !drawer">Меню</v-btn>

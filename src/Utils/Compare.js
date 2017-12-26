@@ -10,8 +10,7 @@ import type { ItemType, FilteredObjectType } from '../types/types';
 export default (array: Array<mixed>, breast: number, waist: number, hips: number): Array<mixed> => {
   const newArr: Array<mixed> = [];
   each(array, (item: ItemType) => {
-    const itemID: number = item._id;
-    console.log(itemID);
+    const itemID: number = item._id; 
     each(item.sizes, x => {
       const myObj: FilteredObjectType = {
         title: item.title,
@@ -28,7 +27,6 @@ export default (array: Array<mixed>, breast: number, waist: number, hips: number
           newArr.push(myObj);
         } else {
           const id: number = last(newArr).id;
-          console.log(id);
           if (id !== itemID) {
             newArr.push(myObj);
           }
