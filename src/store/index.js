@@ -71,15 +71,12 @@ export default new Vuex.Store({
     onSignIn({ commit }, payload: CredentialsType) {
       async function onLogIn() {
         try {
-          const response = await withAuth(payload.username, payload.password).get(
-            'http://localhost:8081/login',
-          );
+          const response = await withAuth(payload.username, payload.password).get('/login');
           if (response.status === 200) {
-
             const credentials: CredentialsType = {
               username: payload.username,
-              password: payload.password
-            }
+              password: payload.password,
+            };
             window.sessionStorage.setItem('userAdminCredentials', JSON.stringify(credentials));
             commit('setUserSignIn', true);
           }

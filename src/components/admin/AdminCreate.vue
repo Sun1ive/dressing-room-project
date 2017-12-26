@@ -55,14 +55,13 @@
 </template>
 
 <script>
-import { withAuth } from '../../services/api'
+import { withAuth } from '../../services/api';
 
-import createContainer from '../templates/createContainer'
-
+import createContainer from '../templates/createContainer';
 
 export default {
   components: {
-    'app-create': createContainer
+    'app-create': createContainer,
   },
   data() {
     return {
@@ -115,7 +114,6 @@ export default {
 
         await withAuth(credentials.username, credentials.password).post('/products', this.item);
 
-
         this.item = {
           title: '',
           link: '',
@@ -124,7 +122,7 @@ export default {
           sizes: [],
           brand: '',
           price: null,
-          color: ''
+          color: '',
         };
 
         this.xs = {
@@ -164,5 +162,4 @@ export default {
 </script>
 
 <style scoped lang="stylus">
-
 </style>

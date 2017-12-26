@@ -70,9 +70,7 @@ export default {
   },
   data() {
     return {
-      item: {
-        sizes: [],
-      },
+      item: {},
       xs: {
         size: 'XS',
         breast: null,
@@ -107,7 +105,11 @@ export default {
     async onEdit() {
       try {
         const c = JSON.parse(window.sessionStorage.getItem('userAdminCredentials'));
-        await withAuth(c.username, c.password).patch(`products/${this.id}`, this.item);
+
+        this.item.sizes.push(this.xs, this.s, this.m, this.l);
+
+        await withAuth(c.username, c.password).patch(`/products/${this.id}`, this.item);
+        this.$router.push('/admin/view');
       } catch (error) {
         throw new Error('Something bad happened ', error);
       }
@@ -120,6 +122,7 @@ export default {
         title: x.title,
         link: x.link,
         src: x.src,
+        sizes: [],
         brand: x.brand,
         price: x.price,
         color: x.color,

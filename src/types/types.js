@@ -27,7 +27,7 @@ export type DataStateType = {
 export type ItemType = {
   title: string,
   src: string,
-  id: number,
+  id: string,
   link: string,
   sizes: Array<mixed>,
   price: number,
