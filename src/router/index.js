@@ -24,7 +24,7 @@ export default new Router({
   mode: 'history',
   routes: [
     {
-      path: '/singin',
+      path: '/signin',
       name: 'SignIn',
       component: SignIn,
     },

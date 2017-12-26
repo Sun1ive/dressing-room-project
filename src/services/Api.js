@@ -5,8 +5,8 @@ export default () =>
     // baseURL: `https://node-room.herokuapp.com/`,
     baseURL: `http://localhost:8081/`,
     responseType: 'json',
-    auth: {
+    /*     auth: {
       username: 'Sunlive',
       password: 'Secret'
-    },
+    }, */
   });
