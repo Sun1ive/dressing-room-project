@@ -2,7 +2,7 @@
 
 import Vue from 'vue';
 import Vuex from 'vuex';
-import API from '../services/api';
+import { withAuth, withOutAuth } from '../services/api';
 import onCompare from '../Utils/compare';
 
 import type { DataStateType } from '../types/types';
@@ -18,6 +18,7 @@ export default new Vuex.Store({
     filtered: null,
     selectedItem: null,
     loading: false,
+    error: false,
     isUserSignIn: false,
   },
   mutations: {
@@ -54,7 +55,7 @@ export default new Vuex.Store({
     getDresses({ commit }) {
       async function fetchDresses() {
         try {
-          const response = await API().get('/products');
+          const response = await withOutAuth().get('/products');
           const resolved = response.data;
           commit('setLoadedDresses', resolved);
         } catch (error) {
@@ -62,6 +63,21 @@ export default new Vuex.Store({
         }
       }
       fetchDresses();
+    },
+    onSignIn({ commit }, payload) {
+      async function onLogIn() {
+        try {
+          const response = await withAuth(payload.username, payload.password).get(
+            'http://localhost:8081/login',
+          );
+          if (response.status === 200) {
+            commit('setUserSignIn', true);
+          }
+        } catch (error) {
+          throw new Error(`Wrong login or password ${error}`);
+        }
+      }
+      onLogIn();
     },
   },
   getters: {
@@ -72,6 +88,7 @@ export default new Vuex.Store({
     filtered: (state: DataStateType) => state.filtered,
     selectedItem: (state: DataStateType) => state.selectedItem,
     isLoading: (state: DataStateType) => state.loading,
-    isUserSignIn: (state: DataStateType) => state.isUserSignIn
+    isError: (state: DataStateType) => state.error,
+    isUserSignIn: (state: DataStateType) => state.isUserSignIn,
   },
 });

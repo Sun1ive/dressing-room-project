@@ -3,8 +3,8 @@
     <v-layout justify-center align-center>
       <v-flex xs12 sm6 lg4>
         <v-form @submit.prevent="onLogIn">
-          <v-text-field v-model="username" label="Username" />
-          <v-text-field v-model="password" label="Password" type="password" />
+          <v-text-field v-model="credentials.username" label="Username" />
+          <v-text-field v-model="credentials.password" label="Password" type="password" />
           <v-btn type="submit">Sign in</v-btn>
         </v-form>
       </v-flex>
@@ -16,14 +16,17 @@
 export default {
   data() {
     return {
-      username: '',
-      password: null,
-    }
+      credentials: {
+        username: '',
+        password: null,
+      },
+    };
   },
   methods: {
     onLogIn() {
-    }
-  }
+      this.$store.dispatch('onSignIn', this.credentials);
+    },
+  },
 };
 </script>
 

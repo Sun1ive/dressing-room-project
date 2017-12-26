@@ -14,6 +14,7 @@ export type DataStateType = {
   hips: number,
   filtered: Array<mixed>,
   loading: boolean,
+  error: boolean,
   isUserSignIn: boolean,
 };
 
