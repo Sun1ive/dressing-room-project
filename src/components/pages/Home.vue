@@ -8,7 +8,10 @@
     </v-layout>
     <v-layout justify-center>
       <v-flex xs12 sm6 class="text-xs-center">
-        <v-btn to="/params">Начать</v-btn>
+        <v-btn
+        color="primary"
+        to="/params"
+        >Начать</v-btn>
       </v-flex>
     </v-layout>
   </v-container>

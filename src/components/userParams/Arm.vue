@@ -34,19 +34,19 @@ export default {
 
       const x = this.getArm;
 
-      if (x >= 18 && x < 22) {
+      if (x >= 18 && x < 23) {
         params.number = x;
         params.size = 'XS';
       }
-      if (x > 21 && x < 25) {
+      if (x > 22 && x < 27) {
         params.number = x;
         params.size = 'S';
       }
-      if (x > 24 && x < 28) {
+      if (x > 26 && x < 31) {
         params.number = x;
         params.size = 'M';
       }
-      if (x > 27 && x <= 31) {
+      if (x > 31 && x <= 35) {
         params.number = x;
         params.size = 'L';
       }

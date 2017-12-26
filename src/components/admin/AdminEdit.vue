@@ -107,11 +107,7 @@ export default {
     async onEdit() {
       try {
         const c = JSON.parse(window.sessionStorage.getItem('userAdminCredentials'));
-
-        await withAuth(c.username, c.password).patch(
-          `products/${this.id}`,
-          this.item,
-        );
+        await withAuth(c.username, c.password).patch(`products/${this.id}`, this.item);
       } catch (error) {
         throw new Error('Something bad happened ', error);
       }
