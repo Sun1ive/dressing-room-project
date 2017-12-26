@@ -159,7 +159,7 @@ export default {
         const credentials = this.$store.getters.userCredentials;
 
         await this.item.sizes.push(this.xs, this.s, this.m, this.l);
-        await withAuth(credentialsusername, credentials.password).post('/products', this.item);
+        await withAuth(credentials.username, credentials.password).post('/products', this.item);
         this.item = {
           title: '',
           link: '',
