@@ -5,7 +5,7 @@
         <v-form class="form" @submit.prevent="addToBase">
 
           <v-text-field v-model.lazy="item.title" label="title" />
-          <v-text-field v-model.number.lazy="item.id" label="id" />
+          <!-- <v-text-field v-model.number.lazy="item.id" label="id" /> -->
           <v-text-field v-model.lazy="item.src" label="src" />
           <v-text-field v-model.lazy="item.link" label="link" />
           <v-text-field v-model.lazy="item.brand" label="brand" />
@@ -69,7 +69,7 @@ export default {
       item: {
         title: '',
         link: '',
-        id: null,
+        // id: null,
         src: '',
         sizes: [],
         brand: '',
@@ -119,7 +119,7 @@ export default {
         this.item = {
           title: '',
           link: '',
-          id: null,
+          // id: null,
           src: '',
           sizes: [],
           brand: '',

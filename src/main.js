@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Loader from '@/components/templates/Loader';
 import wrapper from '@/components/templates/wrapper';
 import pWrapper from '@/components/templates/paramsWrapper';
+import 'babel-polyfill';
 
 
 
