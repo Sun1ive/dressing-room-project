@@ -6,6 +6,11 @@ export type ResultType = {
   hips: number,
 };
 
+export type Credentials = {
+  username: string,
+  password: string
+}
+
 export type DataStateType = {
   items: Array<mixed>,
   selectedItem: string,
@@ -17,6 +22,7 @@ export type DataStateType = {
   loading: boolean,
   error: boolean,
   isUserSignIn: boolean,
+  userCredentials: {},
 };
 
 export type ItemType = {
