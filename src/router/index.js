@@ -10,13 +10,13 @@ import SignIn from '@/components/user/SignIn';
 import Params from '@/components/pages/Params';
 import Home from '@/components/pages/Home';
 
-import Breast from '@/components/views/Breast';
-import Waist from '@/components/views/Waist';
-import Hips from '@/components/views/Hips';
-import Arm from '@/components/views/Arm';
+import Breast from '@/components/userParams/Breast';
+import Waist from '@/components/userParams/Waist';
+import Hips from '@/components/userParams/Hips';
+import Arm from '@/components/userParams/Arm';
 
 import Result from '@/components/pages/Result';
-import SingleResult from '@/components/pages/SingleResult';
+import singleResult from '@/components/pages/singleResult';
 import Insert from '@/components/pages/Insert';
 
 // import AdminGuard from './AdminGuard';
@@ -89,7 +89,7 @@ export default new Router({
     {
       path: '/single-result',
       name: 'SingleResult',
-      component: SingleResult,
+      component: singleResult,
     },
   ],
 });
