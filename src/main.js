@@ -1,8 +1,8 @@
 import Vue from 'vue';
 import Loader from '@/components/templates/Loader';
-import Path from '@/services/path';
 import wrapper from '@/components/templates/wrapper';
 import pWrapper from '@/components/templates/paramsWrapper';
+
 
 
 import {
@@ -29,6 +29,7 @@ import App from './App';
 import Storage from './Utils/LocalStorage';
 import router from './router'
 import store from './store';
+import Path from '../src/services/path';
 
 Vue.use(Vuetify, {
   components: {

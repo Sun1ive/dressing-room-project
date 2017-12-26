@@ -79,10 +79,10 @@
 
 
 <script>
-import onCompare from '@/Utils/compare';
-import Storage from '@/Utils/LocalStorage';
-
 import { mapGetters } from 'vuex';
+
+import onCompare from '../../Utils/compare'
+import Storage from '../../Utils/LocalStorage';
 
 export default {
   methods: {
