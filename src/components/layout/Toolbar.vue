@@ -53,7 +53,7 @@
         >{{ item.title }}</v-btn>
       </v-toolbar-items>
       <v-spacer />
-      <v-toolbar-items>
+      <v-toolbar-items v-if="userIsAuth">
         <v-menu offset-y>
           <v-btn
           flat
@@ -78,7 +78,26 @@
 export default {
   data() {
     return {
-      menuItems: [
+      drawer: false,
+      adminMenu: [
+        {
+          title: 'Admin View Page',
+          path: '/admin/view',
+        },
+        {
+          title: 'Admin Create Page',
+          path: '/admin/create',
+        },
+        {
+          title: 'Admin Edit Page',
+          path: '/admin/edit',
+        },
+      ],
+    };
+  },
+  computed: {
+    menuItems() {
+      let menuItems = [
         {
           title: 'Главная',
           path: '/',
@@ -107,25 +126,42 @@ export default {
           title: 'Sign in',
           path: '/signin',
           id: 5,
-          icon: 'verified_user'
-        }
-      ],
-      adminMenu: [
-        {
-          title: 'Admin View Page',
-          path: '/admin/view',
+          icon: 'verified_user',
         },
-        {
-          title: 'Admin Create Page',
-          path: '/admin/create',
-        },
-        {
-          title: 'Admin Edit Page',
-          path: '/admin/edit',
-        },
-      ],
-      drawer: false,
-    };
+      ];
+      if (this.userIsAuth) {
+        menuItems = [
+          {
+            title: 'Главная',
+            path: '/',
+            id: 1,
+            icon: 'home',
+          },
+          {
+            title: 'Ссылка',
+            path: '/insert',
+            id: 2,
+            icon: 'link',
+          },
+          {
+            title: 'Посмотреть все',
+            path: '/checkAll',
+            id: 3,
+            icon: 'view_list',
+          },
+          {
+            title: 'Указать параметры',
+            path: '/params',
+            id: 4,
+            icon: 'settings',
+          },
+        ];
+      }
+      return menuItems;
+    },
+    userIsAuth() {
+      return this.$store.getters.isUserSignIn;
+    },
   },
 };
 </script>
