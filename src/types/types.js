@@ -1,10 +1,9 @@
 // @flow
 
-
 export type ResultType = {
   breast: number,
   waist: number,
-  hips: number
+  hips: number,
 };
 
 export type DataStateType = {
@@ -14,7 +13,8 @@ export type DataStateType = {
   waist: number,
   hips: number,
   filtered: Array<mixed>,
-  loading: boolean
+  loading: boolean,
+  isUserSignIn: boolean,
 };
 
 export type ItemType = {
@@ -23,7 +23,7 @@ export type ItemType = {
   id: number,
   link: string,
   sizes: Array<mixed>,
-  price: number
+  price: number,
 };
 
 export type FilteredObjectType = {
@@ -33,12 +33,12 @@ export type FilteredObjectType = {
   price: number,
   id: number,
   percent: number,
-  size: number
+  size: number,
 };
 
 export type EachSizeType = {
   breast: number,
   hips: number,
   size: string,
-  waist: number
+  waist: number,
 };

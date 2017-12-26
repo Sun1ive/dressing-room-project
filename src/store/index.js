@@ -2,9 +2,8 @@
 
 import Vue from 'vue';
 import Vuex from 'vuex';
-import API from '../services/api'
+import API from '../services/api';
 import onCompare from '../Utils/compare';
-
 
 import type { DataStateType } from '../types/types';
 
@@ -19,6 +18,7 @@ export default new Vuex.Store({
     filtered: null,
     selectedItem: null,
     loading: false,
+    isUserSignIn: false,
   },
   mutations: {
     setLoadedDresses(state: DataStateType, payload: Array<mixed>) {
@@ -41,6 +41,9 @@ export default new Vuex.Store({
     },
     setLoading(state: DataStateType, payload: boolean) {
       state.loading = payload;
+    },
+    setUserSignIn(state: DataStateType, payload: boolean) {
+      state.isUserSignIn = payload;
     },
     runCompare(state: DataStateType, payload: Array<mixed>) {
       const result: Array<mixed> = onCompare(payload, state.breast, state.waist, state.hips);
@@ -69,5 +72,6 @@ export default new Vuex.Store({
     filtered: (state: DataStateType) => state.filtered,
     selectedItem: (state: DataStateType) => state.selectedItem,
     isLoading: (state: DataStateType) => state.loading,
+    isUserSignIn: (state: DataStateType) => state.isUserSignIn
   },
 });

@@ -70,7 +70,6 @@
           </v-list>
         </v-menu>
       </v-toolbar-items>
-      <v-spacer></v-spacer>
     </v-toolbar>
   </nav>
 </template>

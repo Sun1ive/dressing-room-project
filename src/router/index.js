@@ -5,6 +5,7 @@ import AdminCreate from '@/components/admin/AdminCreate';
 import AdminEdit from '@/components/admin/AdminEdit';
 import AdminView from '@/components/admin/AdminView';
 
+import SignIn from '@/components/user/SignIn';
 
 import Starter from '@/components/pages/Starter';
 import Home from '@/components/pages/Home';
@@ -22,6 +23,11 @@ Vue.use(Router);
 export default new Router({
   mode: 'history',
   routes: [
+    {
+      path: '/singin',
+      name: 'SignIn',
+      component: SignIn,
+    },
     {
       path: '/admin/create',
       name: 'adminCreate',
