@@ -3,6 +3,7 @@ import Loader from '@/components/templates/Loader';
 import wrapper from '@/components/templates/wrapper';
 import pWrapper from '@/components/templates/paramsWrapper';
 import myContainer from '@/components/templates/myContainer';
+import Path from '@/services/path'
 import 'babel-polyfill';
 
 import {
@@ -29,7 +30,6 @@ import App from './App';
 import { LocalStorage, SessionStorage } from './utils/storage';
 import router from './router';
 import store from './store';
-import Path from '../src/services/path';
 
 Vue.use(Vuetify, {
   components: {
