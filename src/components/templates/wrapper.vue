@@ -1,5 +1,5 @@
 <template>
-  <app-container justify-center fluid align-center>
+  <app-container justify-center fluid align-center row wrap>
     <v-card>
       <slot name="pic"></slot>
       <slot name="text"></slot>
@@ -11,13 +11,3 @@
     </v-card>
   </app-container>
 </template>
-
-<script>
-import myContainer from './myContainer';
-
-export default {
-  components: {
-    'app-container': myContainer,
-  },
-};
-</script>

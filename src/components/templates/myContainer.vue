@@ -17,12 +17,20 @@ export default {
     },
     alignCenter: {
       type: Boolean,
-      default: false
+      default: false,
     },
     justifyCenter: {
       type: Boolean,
-      default: false
-    }
-  }
-}
+      default: false,
+    },
+    row: {
+      type: Boolean,
+      default: false,
+    },
+    wrap: {
+      type: Boolean,
+      default: false,
+    },
+  },
+};
 </script>

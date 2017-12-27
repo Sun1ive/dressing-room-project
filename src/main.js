@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Loader from '@/components/templates/Loader';
 import wrapper from '@/components/templates/wrapper';
 import pWrapper from '@/components/templates/paramsWrapper';
+import myContainer from '@/components/templates/myContainer';
 import 'babel-polyfill';
 
 
@@ -64,6 +65,7 @@ Vue.use(Vuetify, {
 Vue.component('AppLoader', Loader);
 Vue.component('Wrapper', wrapper);
 Vue.component('app-params', pWrapper);
+Vue.component('app-container', myContainer);
 
 Vue.config.productionTip = false;
 
