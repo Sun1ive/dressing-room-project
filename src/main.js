@@ -28,7 +28,7 @@ import {
 import '../node_modules/vuetify/src/stylus/app.styl';
 
 import App from './App';
-import { LocalStorage, SessionStorage } from './Utils/storage';
+import { LocalStorage, SessionStorage } from './utils/storage';
 import router from './router'
 import store from './store';
 import Path from '../src/services/path';

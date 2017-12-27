@@ -3,8 +3,8 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import { withAuth, withOutAuth } from '../services/api';
-import compare from '../Utils/compare';
-import { SessionStorage } from '../Utils/storage';
+import compare from '../utils/compare';
+import { SessionStorage } from '../utils/storage';
 
 import type { DataStateType, CredentialsType } from '../types/types';
 
