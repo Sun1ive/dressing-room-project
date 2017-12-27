@@ -23,14 +23,7 @@ module.exports = {
   // add your custom rules here
   rules: {
     // don't require .vue extension when importing
-    'import/extensions': [
-      'error',
-      'always',
-      {
-        js: 'never',
-        vue: 'never',
-      },
-    ],
+    'import/extensions': 0,
     'linebreak-style': 0,
     'no-param-reassign': [2, { props: false }],
     'no-underscore-dangle': 0,
