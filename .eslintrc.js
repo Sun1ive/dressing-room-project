@@ -33,6 +33,7 @@ module.exports = {
     ],
     'linebreak-style': 0,
     'no-param-reassign': [2, { props: false }],
+    'no-underscore-dangle': [2, { props: false }],
     // allow optionalDependencies
     'import/no-extraneous-dependencies': [
       'error',
