@@ -63,7 +63,7 @@ Vue.use(Vuetify, {
 
 Vue.component('AppLoader', Loader);
 Vue.component('Wrapper', wrapper);
-Vue.component('ParamsWrapper', pWrapper);
+Vue.component('app-params', pWrapper);
 
 Vue.config.productionTip = false;
 

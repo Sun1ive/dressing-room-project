@@ -3,7 +3,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import { withAuth, withOutAuth } from '../services/api';
-import onCompare from '../Utils/compare';
+import compare from '../Utils/compare';
 import { SessionStorage } from '../Utils/storage';
 
 import type { DataStateType, CredentialsType } from '../types/types';
@@ -52,7 +52,7 @@ export default new Vuex.Store({
       state.isUserSignIn = payload;
     },
     runCompare(state: DataStateType, payload: Array<mixed>) {
-      const result: Array<mixed> = onCompare(payload, state.breast, state.waist, state.hips);
+      const result: Array<mixed> = compare(payload, state.breast, state.waist, state.hips);
       state.filtered = result;
     },
   },
