@@ -2,10 +2,16 @@
   <v-container>
     <v-layout align-center justify-center>
       <v-flex xs10 sm8 md6 lg4 class="text-xs-center">
-        <v-form @submit.prevent="runCompare">
+        <v-form @submit.prevent="onCheckout">
           <h1>Вставьте ссылку на товар</h1>
-          <v-text-field label="Вставьте ссылку" v-model.lazy="link"></v-text-field>
-          <v-btn color="primary" type="submit">Посмотреть</v-btn>
+          <v-text-field
+          label="Вставьте ссылку"
+          v-model.lazy="link"
+          ></v-text-field>
+          <v-btn
+          color="primary"
+          type="submit"
+          >Посмотреть</v-btn>
         </v-form>
       </v-flex>
     </v-layout>
@@ -22,16 +28,12 @@ export default {
     };
   },
   methods: {
-    runCompare() {
+    onCheckout() {
       this.setLocalData();
-      const filteredItem = this.items.filter(item => item.link === this.link);
-
-      if (filteredItem.length === 0) {
-        this.$store.commit('runCompare', this.items);
-      }
-      this.$store.commit('runCompare', filteredItem);
       this.$store.commit('setLoading', true);
 
+      const filteredItem = this.items.filter(item => item.link === this.link);
+      this.$store.commit('runCompare', filteredItem);
       this.$router.push('/single-result');
     },
     setLocalData() {
@@ -40,6 +42,7 @@ export default {
         breast: this.$store.getters.getBreast,
         waist: this.$store.getters.getWaist,
         hips: this.$store.getters.getHips,
+        arms: this.$store.getters.getArms,
       };
       LocalStorage.set('DressingUserData', localData);
     },

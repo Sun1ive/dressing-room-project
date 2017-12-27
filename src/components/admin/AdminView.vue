@@ -4,12 +4,19 @@
       <v-flex xs6>
         <v-card>
           <v-card-text>
-            {{ item.title }}
+            <span>{{ item.title }}</span>
+            <v-spacer></v-spacer>
             <v-btn
             flat
             :to="`/admin/edit/${item._id}`"
             >
               <v-icon>edit</v-icon>
+            </v-btn>
+            <v-btn
+            flat
+            @click="deleteItem(item._id)"
+            >
+              <v-icon>delete</v-icon>
             </v-btn>
           </v-card-text>
         </v-card>
@@ -24,8 +31,9 @@ export default {
     return {};
   },
   methods: {
-    edit() {
-    },
+    deleteItem(id) {
+      if (confirm('Are you sure ?')) alert(id);
+    }
   },
   computed: {
     getLoadedItems() {
