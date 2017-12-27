@@ -1,17 +1,24 @@
-// @flow
 
-import type { ResultType } from '../types/types';
-
-export default class Storage {
-  static get(key: string): ResultType {
-    const item: string = window.localStorage.getItem(key);
-    const result: ResultType = JSON.parse(item);
-    return result;
+export class LocalStorage {
+  static get(key) {
+    return JSON.parse(window.localStorage.getItem(key))
   }
-  static set(key: string, value: { breast: number, waist: number, hips: number }) {
+  static set(key, value) {
     window.localStorage.setItem(key, JSON.stringify(value));
   }
-  static remove(key: string) {
+  static remove(key) {
     window.localStorage.removeItem(key);
+  }
+}
+
+export class SessionStorage {
+  static get(key) {
+    return JSON.parse(window.sessionStorage.getItem(key));
+  }
+  static set(key, value) {
+    window.sessionStorage.setItem(key, JSON.stringify(value));
+  }
+  static remove(key) {
+    window.sessionStorage.removeItem(key);
   }
 }

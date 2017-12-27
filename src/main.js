@@ -27,7 +27,7 @@ import {
 import '../node_modules/vuetify/src/stylus/app.styl';
 
 import App from './App';
-import Storage from './Utils/LocalStorage';
+import { LocalStorage, SessionStorage } from './Utils/LocalStorage';
 import router from './router'
 import store from './store';
 import Path from '../src/services/path';
@@ -74,15 +74,15 @@ new Vue({
   store,
   render: h => h(App),
   created() {
-    if (Storage.get('DressingUserData')) {
-      const userInfo = Storage.get('DressingUserData');
+    if (LocalStorage.get('DressingUserData')) {
+      const userInfo = LocalStorage.get('DressingUserData');
       this.$store.commit('setBreast', userInfo.breast);
       this.$store.commit('setWaist', userInfo.waist);
       this.$store.commit('setHips', userInfo.hips);
       this.$store.commit('setArm', userInfo.arm);
     }
     this.$store.dispatch('getDresses');
-    if (window.sessionStorage.getItem('userAdminCredentials')) {
+    if (SessionStorage.get('userAdminCredentials')) {
       this.$store.commit('setUserSignIn', true);
     }
   },

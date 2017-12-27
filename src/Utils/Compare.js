@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 
 import each from 'lodash/each';
 import last from 'lodash/last';
@@ -10,7 +10,7 @@ import type { ItemType, FilteredObjectType } from '../types/types';
 export default (array: Array<mixed>, breast: number, waist: number, hips: number): Array<mixed> => {
   const newArr: Array<mixed> = [];
   each(array, (item: ItemType) => {
-    const itemID: number = item._id; 
+    const itemID: number = item._id;
     each(item.sizes, x => {
       const myObj: FilteredObjectType = {
         title: item.title,

@@ -100,12 +100,12 @@
 import { mapGetters } from 'vuex';
 
 import onCompare from '../../Utils/compare'
-import Storage from '../../Utils/LocalStorage';
+import { LocalStorage } from '../../Utils/LocalStorage';
 
 export default {
   methods: {
     setLocalData() {
-      Storage.remove('DressingUserData');
+      LocalStorage.remove('DressingUserData');
       const localData = {
         breast: this.isSetBreast,
         waist: this.isSetWaist,
@@ -113,7 +113,7 @@ export default {
         arm: this.isSetArms,
       };
 
-      Storage.set('DressingUserData', localData);
+      LocalStorage.set('DressingUserData', localData);
     },
     checkAll() {
       this.setLocalData();
