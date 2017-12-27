@@ -2,7 +2,9 @@
   <v-app>
     <app-Header />
       <v-content>
-        <router-view />
+        <transition name="fade">
+          <router-view />
+        </transition>
       </v-content>
     <app-Footer />
   </v-app>
@@ -21,7 +23,7 @@ export default {
 </script>
 
 
-<style lang="stylus" scoped>
+<style lang="stylus">
 // html
   // overflow-y: hidden;
 
