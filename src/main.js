@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import Loader from '@/components/templates/Loader';
+import Loader from '@/components/templates/loader';
 import wrapper from '@/components/templates/wrapper';
 import pWrapper from '@/components/templates/paramsWrapper';
 import myContainer from '@/components/templates/myContainer';

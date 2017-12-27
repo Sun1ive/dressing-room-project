@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { LocalStorage } from '@/Utils/storage';
+import { LocalStorage } from '@/utils/storage';
 
 export default {
   data() {
