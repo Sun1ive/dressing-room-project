@@ -4,6 +4,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import { withAuth, withOutAuth } from '../services/api';
 import onCompare from '../Utils/compare';
+import { SessionStorage } from '../Utils/storage';
 
 import type { DataStateType, CredentialsType } from '../types/types';
 
@@ -77,7 +78,7 @@ export default new Vuex.Store({
               username: payload.username,
               password: payload.password,
             };
-            window.sessionStorage.setItem('userAdminCredentials', JSON.stringify(credentials));
+            SessionStorage.set('userAdminCredentials', credentials);
             commit('setUserSignIn', true);
           }
         } catch (error) {

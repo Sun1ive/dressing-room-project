@@ -88,10 +88,6 @@ export default {
           title: 'Admin Create Page',
           path: '/admin/create',
         },
-        {
-          title: 'Admin Edit Page',
-          path: '/admin/edit',
-        },
       ],
     };
   },

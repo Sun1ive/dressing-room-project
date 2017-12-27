@@ -100,7 +100,7 @@
 import { mapGetters } from 'vuex';
 
 import onCompare from '../../Utils/compare'
-import { LocalStorage } from '../../Utils/LocalStorage';
+import { LocalStorage } from '../../Utils/storage';
 
 export default {
   methods: {

@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import Storage from '@/Utils/LocalStorage';
+import { LocalStorage } from '@/Utils/storage';
 
 export default {
   data() {
@@ -35,13 +35,13 @@ export default {
       this.$router.push('/single-result');
     },
     setLocalData() {
-      Storage.remove('DressingUserData');
+      LocalStorage.remove('DressingUserData');
       const localData = {
         breast: this.$store.getters.getBreast,
         waist: this.$store.getters.getWaist,
         hips: this.$store.getters.getHips,
       };
-      Storage.set('DressingUserData', localData);
+      LocalStorage.set('DressingUserData', localData);
     },
   },
   computed: {
