@@ -36,5 +36,5 @@ export default (array: Array<mixed>, breast: number, waist: number, hips: number
   });
   return sortBy(newArr, 'percent')
     .reverse()
-    .filter((item: FilteredObjectType) => item.percent >= 0);
+    .filter((item: FilteredObjectType) => item.percent >= 70);
 };
