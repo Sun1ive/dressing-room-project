@@ -19,6 +19,6 @@
 
 <style lang="stylus" scoped>
 .layout
-  min-height 50vh
+  min-height 30vh
 </style>
 

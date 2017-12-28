@@ -22,7 +22,7 @@ export default (array, breast, waist, hips) => {
         if (newArr.length === 0) {
           newArr.push(myObj);
         } else {
-          const id = last(newArr).id;
+          const { id } = last(newArr);
           if (id !== itemID) {
             newArr.push(myObj);
           }

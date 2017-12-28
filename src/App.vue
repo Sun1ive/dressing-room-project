@@ -2,9 +2,7 @@
   <v-app>
     <app-Header />
       <v-content>
-        <transition name="fade">
-          <router-view />
-        </transition>
+        <router-view />
       </v-content>
     <app-Footer />
   </v-app>
