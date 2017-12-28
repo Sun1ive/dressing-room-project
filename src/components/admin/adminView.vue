@@ -5,8 +5,41 @@
         <v-text-field v-model="query" @input="searchQuery" />
       </v-flex>
     </v-layout>
-    <!-- <v-layout class="my-2" justify-center v-for="item in getLoadedItems" :key="item.title"> -->
-    <v-layout class="my-2" justify-center v-for="item in filteredArray" :key="item.title">
+    <v-layout 
+      v-if="query.length === 0"
+      class="my-2"
+      justify-center
+      v-for="item in getLoadedItems"
+      :key="item.title"
+    >
+      <v-flex xs6>
+        <v-card>
+          <v-card-text>
+            <span>{{ item.title }}</span>
+            <v-spacer></v-spacer>
+            <v-btn
+            flat
+            :to="`/admin/edit/${item._id}`"
+            >
+              <v-icon>edit</v-icon>
+            </v-btn>
+            <v-btn
+            flat
+            @click="deleteItem(item._id)"
+            >
+              <v-icon>delete</v-icon>
+            </v-btn>
+          </v-card-text>
+        </v-card>
+      </v-flex>    
+    </v-layout>
+    <v-layout 
+      v-if="query.length > 0"
+      class="my-2"
+      justify-center
+      v-for="item in filteredArray"
+      :key="item.title"
+    >
       <v-flex xs6>
         <v-card>
           <v-card-text>
