@@ -37,7 +37,7 @@
         flat
         @click="drawer = !drawer">Меню</v-btn>
       </v-toolbar-items>
-      <v-spacer></v-spacer>
+      <v-spacer />
       <v-toolbar-side-icon
         class="hidden-sm-and-up"
         @click="drawer = !drawer"
@@ -106,12 +106,12 @@ export default {
           id: 2,
           icon: 'link',
         },
-        {
-          title: 'Посмотреть все',
-          path: '/checkAll',
-          id: 3,
-          icon: 'view_list',
-        },
+        // {
+        //   title: 'Посмотреть все',
+        //   path: '/checkAll',
+        //   id: 3,
+        //   icon: 'view_list',
+        // },
         {
           title: 'Указать параметры',
           path: '/params',
@@ -139,12 +139,12 @@ export default {
             id: 2,
             icon: 'link',
           },
-          {
-            title: 'Посмотреть все',
-            path: '/checkAll',
-            id: 3,
-            icon: 'view_list',
-          },
+          // {
+          //   title: 'Посмотреть все',
+          //   path: '/checkAll',
+          //   id: 3,
+          //   icon: 'view_list',
+          // },
           {
             title: 'Указать параметры',
             path: '/params',
