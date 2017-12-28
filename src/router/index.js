@@ -1,25 +1,23 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
-import AdminCreate from '@/components/admin/AdminCreate';
-import AdminEdit from '@/components/admin/AdminEdit';
-import AdminView from '@/components/admin/AdminView';
+import AdminCreate from '@/components/admin/adminCreate';
+import AdminEdit from '@/components/admin/adminEdit';
+import AdminView from '@/components/admin/adminView';
 
-import SignIn from '@/components/user/SignIn';
+import SignIn from '@/components/user/signIn';
 
-import Params from '@/components/pages/Params';
-import Home from '@/components/pages/Home';
+import Params from '@/components/pages/params';
+import Home from '@/components/pages/home';
 
-import Breast from '@/components/userParams/Breast';
-import Waist from '@/components/userParams/Waist';
-import Hips from '@/components/userParams/Hips';
-import Arm from '@/components/userParams/Arm';
+import Breast from '@/components/user/breast';
+import Waist from '@/components/user/waist';
+import Hips from '@/components/user/hips';
+import Arm from '@/components/user/arm';
 
-import Result from '@/components/pages/Result';
+import Result from '@/components/pages/result';
 import singleResult from '@/components/pages/singleResult';
-import Insert from '@/components/pages/Insert';
-
-// import AdminGuard from './AdminGuard';
+import Insert from '@/components/pages/insert';
 
 Vue.use(Router);
 

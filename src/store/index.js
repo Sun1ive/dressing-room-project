@@ -1,12 +1,8 @@
-/* @flow */
-
 import Vue from 'vue';
 import Vuex from 'vuex';
 import { withAuth, withOutAuth } from '../services/api';
 import compare from '../utils/compare';
 import { SessionStorage } from '../utils/storage';
-
-import type { DataStateType, CredentialsType } from '../types/types';
 
 Vue.use(Vuex);
 
@@ -24,35 +20,35 @@ export default new Vuex.Store({
     isUserSignIn: false,
   },
   mutations: {
-    setLoadedDresses(state: DataStateType, payload: Array<mixed>) {
+    setLoadedDresses(state, payload) {
       state.items = payload;
     },
-    setSelectedItem(state: DataStateType, payload: string) {
+    setSelectedItem(state, payload) {
       state.selectedItem = payload;
     },
-    setBreast(state: DataStateType, payload: number) {
+    setBreast(state, payload) {
       state.breast = payload;
     },
-    setWaist(state: DataStateType, payload: number) {
+    setWaist(state, payload) {
       state.waist = payload;
     },
-    setHips(state: DataStateType, payload: number) {
+    setHips(state, payload) {
       state.hips = payload;
     },
-    setArm(state: DataStateType, payload: number) {
+    setArm(state, payload) {
       state.arm = payload;
     },
-    setFilteredDresses(state: DataStateType, payload: Array<mixed>) {
+    setFilteredDresses(state, payload) {
       state.filtered = payload;
     },
-    setLoading(state: DataStateType, payload: boolean) {
+    setLoading(state, payload) {
       state.loading = payload;
     },
-    setUserSignIn(state: DataStateType, payload: boolean) {
+    setUserSignIn(state, payload) {
       state.isUserSignIn = payload;
     },
-    runCompare(state: DataStateType, payload: Array<mixed>) {
-      const result: Array<mixed> = compare(payload, state.breast, state.waist, state.hips);
+    runCompare(state, payload) {
+      const result = compare(payload, state.breast, state.waist, state.hips);
       state.filtered = result;
     },
   },
@@ -69,12 +65,12 @@ export default new Vuex.Store({
       }
       fetchDresses();
     },
-    onSignIn({ commit }, payload: CredentialsType) {
+    onSignIn({ commit }, payload) {
       async function onLogIn() {
         try {
           const response = await withAuth(payload.username, payload.password).get('/login');
           if (response.status === 200) {
-            const credentials: CredentialsType = {
+            const credentials = {
               username: payload.username,
               password: payload.password,
             };
@@ -89,15 +85,15 @@ export default new Vuex.Store({
     },
   },
   getters: {
-    items: (state: DataStateType) => state.items,
-    getBreast: (state: DataStateType) => state.breast,
-    getWaist: (state: DataStateType) => state.waist,
-    getHips: (state: DataStateType) => state.hips,
-    getArm: (state: DataStateType) => state.arm,
-    filtered: (state: DataStateType) => state.filtered,
-    selectedItem: (state: DataStateType) => state.selectedItem,
-    isLoading: (state: DataStateType) => state.loading,
-    isError: (state: DataStateType) => state.error,
-    isUserSignIn: (state: DataStateType) => state.isUserSignIn,
+    items: (state) => state.items,
+    getBreast: (state) => state.breast,
+    getWaist: (state) => state.waist,
+    getHips: (state) => state.hips,
+    getArm: (state) => state.arm,
+    filtered: (state) => state.filtered,
+    selectedItem: (state) => state.selectedItem,
+    isLoading: (state) => state.loading,
+    isError: (state) => state.error,
+    isUserSignIn: (state) => state.isUserSignIn,
   },
 });

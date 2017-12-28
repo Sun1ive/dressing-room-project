@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import Toolbar from './Toolbar';
+import Toolbar from './toolbar';
 
 export default {
   components: {

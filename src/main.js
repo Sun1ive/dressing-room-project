@@ -1,11 +1,10 @@
 import Vue from 'vue';
-import Loader from '@/components/templates/Loader';
+import Loader from '@/components/templates/loader';
 import wrapper from '@/components/templates/wrapper';
 import pWrapper from '@/components/templates/paramsWrapper';
 import myContainer from '@/components/templates/myContainer';
+import Path from '@/services/path'
 import 'babel-polyfill';
-
-
 
 import {
   Vuetify,
@@ -23,15 +22,15 @@ import {
   VTextField,
   VProgressCircular,
   VMenu,
+  VPagination,
   transitions,
 } from 'vuetify';
 import '../node_modules/vuetify/src/stylus/app.styl';
 
 import App from './App';
 import { LocalStorage, SessionStorage } from './utils/storage';
-import router from './router'
+import router from './router';
 import store from './store';
-import Path from '../src/services/path';
 
 Vue.use(Vuetify, {
   components: {
@@ -49,6 +48,7 @@ Vue.use(Vuetify, {
     VTextField,
     VProgressCircular,
     VMenu,
+    VPagination,
     transitions,
   },
   theme: {

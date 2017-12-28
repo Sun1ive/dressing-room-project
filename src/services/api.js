@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const withAuth = (username: string, password: number | string) =>
+export const withAuth = (username, password) =>
   axios.create({
     baseURL: `https://node-room.herokuapp.com/`,
     // baseURL: `http://localhost:8081/`,

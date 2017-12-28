@@ -9,8 +9,8 @@
 </template>
 
 <script>
-import Header from '@/components/layout/Header';
-import Footer from '@/components/layout/Footer';
+import Header from '@/components/shared/header';
+import Footer from '@/components/shared/footer';
 
 export default {
   components: {
@@ -20,8 +20,9 @@ export default {
 };
 </script>
 
+
 <style lang="stylus">
-html
+// html
   // overflow-y: hidden;
 
 #app
@@ -44,5 +45,4 @@ html
 
 .fade-enter, .fade-leave-to
   opacity: 0
-
 </style>
