@@ -5,8 +5,9 @@
         <v-card>
           <v-card-media height="500" :src="item.src"></v-card-media>
           <v-card-text>
-            <div>Коэффициент {{ item.percent }} %</div>
+            <div>Коэффициент совместимости <strong>{{ item.percent }} %</strong></div>
             <div class="mb-2">{{ item.title }}</div>
+            <div class="my-1">{{ item.brand }}</div>
             <div>Ваш предпочитаемый размер: <strong>{{ item.size }}</strong></div>
           </v-card-text>
           <v-card-actions>

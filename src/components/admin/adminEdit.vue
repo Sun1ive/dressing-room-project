@@ -57,6 +57,7 @@
 <script>
 import createContainer from '../templates/createContainer';
 import { withAuth } from '../../services/api';
+import { SessionStorage } from '../../utils/storage';
 
 export default {
   components: {
@@ -104,8 +105,7 @@ export default {
   methods: {
     async onEdit() {
       try {
-        const c = JSON.parse(window.sessionStorage.getItem('userAdminCredentials'));
-
+        const c = SessionStorage.get('userAdminCredentials');
         this.item.sizes.push(this.xs, this.s, this.m, this.l);
 
         await withAuth(c.username, c.password).patch(`/products/${this.id}`, this.item);
@@ -118,15 +118,57 @@ export default {
   created() {
     const item = this.$store.getters.items.filter(x => x._id === this.id);
     item.forEach(x => {
-      this.item = {
-        title: x.title,
-        link: x.link,
-        src: x.src,
-        sizes: [],
-        brand: x.brand,
-        price: x.price,
-        color: x.color,
-      };
+      x.sizes.forEach(size => {
+        switch (size.size) {
+          case 'XS':
+            this.xs = {
+              size: 'XS',
+              breast: size.breast,
+              waist: size.waist,
+              hips: size.hips,
+              arm: size.arm,
+            };
+            break;
+          case 'S':
+            this.s = {
+              size: 'S',
+              breast: size.breast,
+              waist: size.waist,
+              hips: size.hips,
+              arm: size.arm,
+            };
+            break;
+          case 'M':
+            this.m = {
+              size: 'M',
+              breast: size.breast,
+              waist: size.waist,
+              hips: size.hips,
+              arm: size.arm,
+            };
+            break;
+          case 'L':
+            this.l = {
+              size: 'L',
+              breast: size.breast,
+              waist: size.waist,
+              hips: size.hips,
+              arm: size.arm,
+            };
+            break;
+          default:
+            break;
+        }
+        this.item = {
+          title: x.title,
+          link: x.link,
+          src: x.src,
+          sizes: [],
+          brand: x.brand,
+          price: x.price,
+          color: x.color,
+        };
+      });
     });
   },
 };

@@ -15,6 +15,7 @@ export default (array, breast, waist, hips) => {
         link: item.link,
         price: item.price,
         size: x.size,
+        brand: item.brand,
         percent: coefficient(breast, x.breast, waist, x.waist, hips, x.hips),
       };
 
