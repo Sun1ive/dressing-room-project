@@ -1,6 +1,12 @@
 <template>
   <v-container fluid>
-    <v-layout class="my-2" justify-center v-for="item in getLoadedItems" :key="item.title">
+    <v-layout justify-center>
+      <v-flex xs10 sm6 lg4>
+        <v-text-field v-model="query" @input="searchQuery" />
+      </v-flex>
+    </v-layout>
+    <!-- <v-layout class="my-2" justify-center v-for="item in getLoadedItems" :key="item.title"> -->
+    <v-layout class="my-2" justify-center v-for="item in filteredArray" :key="item.title">
       <v-flex xs6>
         <v-card>
           <v-card-text>
@@ -26,14 +32,25 @@
 </template>
 
 <script>
+import _ from 'lodash';
+
 export default {
   data() {
-    return {};
+    return {
+      query: '',
+      filteredArray: [],
+    };
   },
   methods: {
     deleteItem(id) {
-      if (confirm('Are you sure ?')) alert(id);
-    }
+      // if (confirm('Are you sure ?')) alert(id);
+    },
+    searchQuery() {
+      // this.filteredArray = _.filter(this.getLoadedItems, item => item.title === this.query);
+      this.filteredArray = _.filter(this.getLoadedItems, item =>
+        item.title.toLowerCase().includes(this.query.toLowerCase()),
+      );
+    },
   },
   computed: {
     getLoadedItems() {
@@ -44,8 +61,8 @@ export default {
 </script>
 
 <style scoped lang="stylus">
-.card__text
-  cursor pointer
-  transition .4s ease-in-out
-
+.card__text {
+  cursor: pointer;
+  transition: 0.4s ease-in-out;
+}
 </style>
