@@ -72,34 +72,10 @@ export default {
   data() {
     return {
       item: {},
-      xs: {
-        size: 'XS',
-        breast: null,
-        waist: null,
-        hips: null,
-        arm: null,
-      },
-      s: {
-        size: 'S',
-        breast: null,
-        waist: null,
-        hips: null,
-        arm: null,
-      },
-      m: {
-        size: 'M',
-        breast: null,
-        waist: null,
-        hips: null,
-        arm: null,
-      },
-      l: {
-        size: 'L',
-        breast: null,
-        waist: null,
-        hips: null,
-        arm: null,
-      },
+      xs: {},
+      s: {},
+      m: {},
+      l: {},
     };
   },
   methods: {
