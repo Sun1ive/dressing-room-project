@@ -32,8 +32,6 @@
 </template>
 
 <script>
-import _ from 'lodash';
-
 export default {
   data() {
     return {
@@ -46,10 +44,8 @@ export default {
       // if (confirm('Are you sure ?')) alert(id);
     },
     searchQuery() {
-      // this.filteredArray = _.filter(this.getLoadedItems, item => item.title === this.query);
-      this.filteredArray = _.filter(this.getLoadedItems, item =>
-        item.title.toLowerCase().includes(this.query.toLowerCase()),
-      );
+      this.filteredArray = this.getLoadedItems.filter(x =>
+        x.title.toLowerCase().includes(this.query.toLowerCase()));
     },
   },
   computed: {
