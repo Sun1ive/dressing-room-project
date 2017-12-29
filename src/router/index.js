@@ -19,7 +19,6 @@ import Result from '@/components/pages/result';
 import singleResult from '@/components/pages/singleResult';
 import Insert from '@/components/pages/insert';
 
-import InsertGuard from './insertGuard'
 
 Vue.use(Router);
 
@@ -51,7 +50,6 @@ export default new Router({
       path: '/insert',
       name: 'Insert',
       component: Insert,
-      beforeEnter: InsertGuard
     },
     {
       path: '/',

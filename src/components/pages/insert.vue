@@ -29,12 +29,18 @@ export default {
   },
   methods: {
     onCheckout() {
-      this.setLocalData();
-      this.$store.commit('setLoading', true);
+      const data = LocalStorage.get('DressingUserData');
+      if (data === null || data === undefined || data === {}) {
+        this.$store.commit('setSelectedItem', this.link);
+        this.$router.push('/params');
+      } else {
+        this.setLocalData();
+        this.$store.commit('setLoading', true);
 
-      const filteredItem = this.items.filter(item => item.link === this.link);
-      this.$store.commit('runCompare', filteredItem);
-      this.$router.push('/single-result');
+        const filteredItem = this.items.filter(item => item.link === this.link);
+        this.$store.commit('runCompare', filteredItem);
+        this.$router.push('/single-result');
+      }
     },
     setLocalData() {
       LocalStorage.remove('DressingUserData');
