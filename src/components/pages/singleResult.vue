@@ -1,7 +1,7 @@
 <template>
   <v-container fluid grid-list-xl>
     <v-layout justify-center align-center row wrap v-if="!isLoading">
-      <v-flex xs12 sm6 md4 lg2 v-for="(item, i) in filtered" :key="i">
+      <v-flex xs12 sm6 md4 lg3 v-for="(item, i) in filtered" :key="i">
         <v-card>
           <v-card-media height="500" :src="item.src"></v-card-media>
           <v-card-text>
@@ -12,6 +12,7 @@
           </v-card-text>
           <v-card-actions>
             <v-btn :href="`${item.link}?attribute_pa_size=${item.size}`" target="_blank">Посмотреть</v-btn>
+            <v-btn>Посмотреть все</v-btn>
           </v-card-actions>
         </v-card>
       </v-flex>

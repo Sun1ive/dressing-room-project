@@ -39,7 +39,7 @@
       </v-toolbar-items>
       <v-spacer />
       <v-toolbar-side-icon
-        class="hidden-sm-and-up"
+        class="hidden-md-and-up"
         @click="drawer = !drawer"
       ></v-toolbar-side-icon>
       <v-toolbar-items

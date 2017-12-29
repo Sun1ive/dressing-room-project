@@ -19,8 +19,6 @@ import Hips from '@/components/user/hips';
 import Arm from '@/components/user/arm';
 
 
-
-
 Vue.use(Router);
 
 export default new Router({

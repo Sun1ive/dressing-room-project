@@ -36,7 +36,6 @@ export default {
       } else {
         this.setLocalData();
         this.$store.commit('setLoading', true);
-
         const filteredItem = this.items.filter(item => item.link === this.link);
         this.$store.commit('runCompare', filteredItem);
         this.$router.push('/single-result');
