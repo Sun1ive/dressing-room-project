@@ -6,18 +6,19 @@ import AdminEdit from '@/components/admin/adminEdit';
 import AdminView from '@/components/admin/adminView';
 
 import SignIn from '@/components/user/signIn';
-
 import Params from '@/components/pages/params';
 import Home from '@/components/pages/home';
+import Result from '@/components/pages/result';
+import singleResult from '@/components/pages/singleResult';
+import Insert from '@/components/pages/insert';
+import notFound from '@/components/pages/404';
 
 import Breast from '@/components/user/breast';
 import Waist from '@/components/user/waist';
 import Hips from '@/components/user/hips';
 import Arm from '@/components/user/arm';
 
-import Result from '@/components/pages/result';
-import singleResult from '@/components/pages/singleResult';
-import Insert from '@/components/pages/insert';
+
 
 
 Vue.use(Router);
@@ -90,6 +91,11 @@ export default new Router({
       path: '/single-result',
       name: 'SingleResult',
       component: singleResult,
+    },
+    {
+      path: '/404',
+      name: 'Not Found',
+      component: notFound,
     },
   ],
 });
