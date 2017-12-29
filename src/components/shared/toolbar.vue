@@ -1,9 +1,38 @@
 <template>
   <nav>
-    <app-sidebar
-    :drawer="drawer"
-    @closeBar="drawer = !drawer"
-    ></app-sidebar>
+    <v-navigation-drawer
+      app
+      light
+      v-model="drawer"
+      absolute
+      temporary
+      clipped
+    >
+      <v-list>
+        <v-list-tile
+          v-for="item in filter"
+          :key="item.title"
+          @click=""
+        >
+          <v-list-tile-action>
+            <v-icon dark>{{ item.icon }}</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+        <v-list-tile 
+          @click="drawer = !drawer"
+        >
+          <v-list-tile-action>
+            <v-icon dark>close</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            Свернуть
+          </v-list-tile-content>
+        </v-list-tile>
+      </v-list>
+    </v-navigation-drawer>
     <v-toolbar dark color="primary">
       <v-toolbar-items class="hidden-sm-and-down">
         <v-btn
@@ -48,15 +77,24 @@
 </template>
 
 <script>
-import sideBar from './sideBar';
-
 export default {
-  components: {
-    'app-sidebar': sideBar,
-  },
   data() {
     return {
       drawer: false,
+      filter: [
+        {
+          title: 'Цвет',
+          icon: 'color_lens',
+        },
+        {
+          title: 'Бренд',
+          icon: 'star',
+        },
+        {
+          title: 'Цена',
+          icon: 'attach_money',
+        },
+      ],
       adminMenu: [
         {
           title: 'Admin View Page',
