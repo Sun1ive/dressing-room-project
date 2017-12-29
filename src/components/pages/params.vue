@@ -101,8 +101,13 @@ export default {
 
       if (this.selectedItem !== null) {
         const filteredItem = this.items.filter(item => item.link === this.selectedItem);
-        this.$store.commit('runCompare', filteredItem);
-        this.$router.push('/single-result');
+        if (filteredItem.length === 0) {
+          this.$store.dispatch('sendMail', this.selectedItem);
+          this.$router.push('/404');
+        } else {
+          this.$store.commit('runCompare', filteredItem);
+          this.$router.push('/single-result');
+        }
       } else {
         this.$store.commit('runCompare', this.items);
         this.$router.push('/result');

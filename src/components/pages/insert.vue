@@ -43,6 +43,7 @@ export default {
         this.$store.commit('setLoading', true);
         const filteredItem = this.items.filter(item => item.link === this.link);
         if (filteredItem.length === 0) {
+          this.$store.dispatch('sendMail', this.link);
           this.$router.push('/404');
         } else {
           this.$store.commit('runCompare', filteredItem);

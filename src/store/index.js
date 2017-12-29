@@ -83,17 +83,30 @@ export default new Vuex.Store({
       }
       onLogIn();
     },
+    sendMail({ commit }, payload) {
+      async function sendMeMail() {
+        try {
+          const res = await withOutAuth().post('/mail', {
+            link: payload
+          });
+          console.log(res);
+        } catch (error) {
+          throw new Error(`Couldn't send message ${error}`)
+        }
+      }
+      sendMeMail();
+    },
   },
   getters: {
-    items: (state) => state.items,
-    getBreast: (state) => state.breast,
-    getWaist: (state) => state.waist,
-    getHips: (state) => state.hips,
-    getArm: (state) => state.arm,
-    filtered: (state) => state.filtered,
-    selectedItem: (state) => state.selectedItem,
-    isLoading: (state) => state.loading,
-    isError: (state) => state.error,
-    isUserSignIn: (state) => state.isUserSignIn,
+    items: state => state.items,
+    getBreast: state => state.breast,
+    getWaist: state => state.waist,
+    getHips: state => state.hips,
+    getArm: state => state.arm,
+    filtered: state => state.filtered,
+    selectedItem: state => state.selectedItem,
+    isLoading: state => state.loading,
+    isError: state => state.error,
+    isUserSignIn: state => state.isUserSignIn,
   },
 });
