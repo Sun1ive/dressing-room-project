@@ -1,6 +1,8 @@
 <template>
   <nav>
-    <app-sidebar></app-sidebar>
+    <app-sidebar
+    :drawer="drawer"
+    ></app-sidebar>
     <v-toolbar dark color="primary">
       <v-toolbar-items class="hidden-sm-and-down">
         <v-btn

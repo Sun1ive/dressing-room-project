@@ -91,7 +91,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import { LocalStorage, setLocalData } from '../../utils/storage';
+import { setLocalData } from '../../utils/storage';
 
 export default {
   methods: {

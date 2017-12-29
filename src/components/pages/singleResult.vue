@@ -22,14 +22,11 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   computed: {
-    filtered() {
-      return this.$store.getters.filtered;
-    },
-    isLoading() {
-      return this.$store.getters.isLoading;
-    },
+    ...mapGetters(['filtered', 'isLoading']),
   },
   created() {
     setTimeout(() => {

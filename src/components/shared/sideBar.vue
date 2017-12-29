@@ -9,15 +9,12 @@
     >
       <v-list>
         <v-list-tile
-          v-for="item in menuItems"
-          :key="item.title" 
-           @click="$router.push(`${item.path}`)"
         >
           <v-list-tile-action>
-            <v-icon dark>{{ item.icon }}</v-icon>
+            <v-icon dark></v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+            <v-list-tile-title></v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
         <v-list-tile @click="drawer = !drawer">
@@ -33,11 +30,18 @@
 </template>
 
 <script>
-  export default {
-    
-  }
+export default {
+  props: {
+    drawer: {
+      type: Boolean,
+      required: true,
+    },
+  },
+  data() {
+    return {};
+  },
+};
 </script>
 
-<style scoped>
-
+<style lang="stylus" scoped>
 </style>
