@@ -95,6 +95,15 @@ export default {
     const item = this.$store.getters.items.filter(x => x._id === this.id);
     item.forEach(x => {
       x.sizes.forEach(size => {
+        this.item = {
+          title: x.title,
+          link: x.link,
+          src: x.src,
+          sizes: [],
+          brand: x.brand,
+          price: x.price,
+          color: x.color,
+        };
         switch (size.size) {
           case 'XS':
             this.xs = {
@@ -135,15 +144,6 @@ export default {
           default:
             break;
         }
-        this.item = {
-          title: x.title,
-          link: x.link,
-          src: x.src,
-          sizes: [],
-          brand: x.brand,
-          price: x.price,
-          color: x.color,
-        };
       });
     });
   },

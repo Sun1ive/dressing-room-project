@@ -122,7 +122,7 @@ export default {
           title: 'Sign in',
           path: '/signin',
           id: 5,
-          icon: 'verified_user',
+          icon: 'account_circle',
         },
       ];
       if (this.userIsAuth) {
