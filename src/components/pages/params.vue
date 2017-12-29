@@ -91,22 +91,12 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import { LocalStorage } from '../../utils/storage';
+import { LocalStorage, setLocalData } from '../../utils/storage';
 
 export default {
   methods: {
-    setLocalData() {
-      LocalStorage.remove('DressingUserData');
-      const localData = {
-        breast: this.isSetBreast,
-        waist: this.isSetWaist,
-        hips: this.isSetHips,
-        arm: this.isSetArms,
-      };
-      LocalStorage.set('DressingUserData', localData);
-    },
     onCheckout() {
-      this.setLocalData();
+      setLocalData(this.isSetBreast, this.isSetWaist, this.isSetHips, this.isSetArms);
       this.$store.commit('setLoading', true);
 
       if (this.selectedItem !== null) {

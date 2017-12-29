@@ -21,3 +21,15 @@ export class SessionStorage {
     window.sessionStorage.removeItem(key);
   }
 }
+
+export const setLocalData = (breast, waist, hips, arm) =>  {
+  LocalStorage.remove('DressingUserData');
+  const localData = {
+    breast,
+    waist,
+    hips,
+    arm,
+  };
+  LocalStorage.set('DressingUserData', localData);
+};
+

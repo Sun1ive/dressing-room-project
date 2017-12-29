@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { LocalStorage } from '@/utils/storage';
+import { LocalStorage, setLocalData } from '@/utils/storage';
 
 export default {
   data() {
@@ -34,22 +34,21 @@ export default {
         this.$store.commit('setSelectedItem', this.link);
         this.$router.push('/params');
       } else {
-        this.setLocalData();
+        setLocalData(
+          this.$store.getters.getBreast,
+          this.$store.getters.getWaist,
+          this.$store.getters.getHips,
+          this.$store.getters.getArms,
+        );
         this.$store.commit('setLoading', true);
         const filteredItem = this.items.filter(item => item.link === this.link);
-        this.$store.commit('runCompare', filteredItem);
-        this.$router.push('/single-result');
+        if (filteredItem.length === 0) {
+          this.$router.push('/404');
+        } else {
+          this.$store.commit('runCompare', filteredItem);
+          this.$router.push('/single-result');
+        }
       }
-    },
-    setLocalData() {
-      LocalStorage.remove('DressingUserData');
-      const localData = {
-        breast: this.$store.getters.getBreast,
-        waist: this.$store.getters.getWaist,
-        hips: this.$store.getters.getHips,
-        arms: this.$store.getters.getArms,
-      };
-      LocalStorage.set('DressingUserData', localData);
     },
   },
   computed: {
