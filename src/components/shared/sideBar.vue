@@ -1,7 +1,7 @@
 <template>
   <v-navigation-drawer
       app
-      dark
+      light
       v-model="drawer"
       absolute
       temporary
@@ -9,15 +9,20 @@
     >
       <v-list>
         <v-list-tile
+          v-for="item in filter"
+          :key="item.title"
+          @click=""
         >
           <v-list-tile-action>
-            <v-icon dark></v-icon>
+            <v-icon dark>{{ item.icon }}</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title></v-list-tile-title>
+            <v-list-tile-title>{{ item.title }}</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <v-list-tile @click="drawer = !drawer">
+        <v-list-tile 
+          @click="$emit('closeBar')"
+        >
           <v-list-tile-action>
             <v-icon dark>close</v-icon>
           </v-list-tile-action>
@@ -38,8 +43,23 @@ export default {
     },
   },
   data() {
-    return {};
-  },
+    return {
+      filter: [
+        {
+          title: 'Цвет',
+          icon: 'color_lens'
+        },
+        {
+          title: 'Бренд',
+          icon: 'star'
+        },
+        {
+          title: 'Цена',
+          icon: 'attach_money'
+        }
+      ]
+    };
+  }
 };
 </script>
 

@@ -2,12 +2,13 @@
   <nav>
     <app-sidebar
     :drawer="drawer"
+    @closeBar="drawer = !drawer"
     ></app-sidebar>
     <v-toolbar dark color="primary">
       <v-toolbar-items class="hidden-sm-and-down">
         <v-btn
         flat
-        @click="drawer = !drawer">Меню</v-btn>
+        @click="drawer = !drawer">Фильтр</v-btn>
       </v-toolbar-items>
       <v-spacer />
       <v-toolbar-side-icon

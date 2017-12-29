@@ -26,6 +26,7 @@ import {
   transitions,
 } from 'vuetify';
 import '../node_modules/vuetify/src/stylus/app.styl';
+import './style/main.styl';
 
 import App from './App';
 import { LocalStorage, SessionStorage } from './utils/storage';

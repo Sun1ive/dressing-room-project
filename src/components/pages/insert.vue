@@ -38,7 +38,7 @@ export default {
           this.$store.getters.getBreast,
           this.$store.getters.getWaist,
           this.$store.getters.getHips,
-          this.$store.getters.getArms,
+          this.$store.getters.getArm,
         );
         this.$store.commit('setLoading', true);
         const filteredItem = this.items.filter(item => item.link === this.link);
