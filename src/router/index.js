@@ -17,7 +17,6 @@ import Shoulders from '@/components/user/shoulders';
 import Breast from '@/components/user/breast';
 import Waist from '@/components/user/waist';
 import Hips from '@/components/user/hips';
-import Arm from '@/components/user/arm';
 
 
 Vue.use(Router);
@@ -80,11 +79,6 @@ export default new Router({
       path: '/hips',
       name: 'Hips',
       component: Hips,
-    },
-    {
-      path: '/arm',
-      name: 'Arm',
-      component: Arm,
     },
     {
       path: '/result',

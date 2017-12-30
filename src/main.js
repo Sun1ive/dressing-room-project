@@ -78,10 +78,10 @@ new Vue({
   created() {
     if (LocalStorage.get('DressingUserData')) {
       const userInfo = LocalStorage.get('DressingUserData');
+      this.$store.commit('setShoulders', userInfo.shoulders);
       this.$store.commit('setBreast', userInfo.breast);
       this.$store.commit('setWaist', userInfo.waist);
       this.$store.commit('setHips', userInfo.hips);
-      this.$store.commit('setArm', userInfo.arm);
     }
     this.$store.dispatch('getDresses');
     if (SessionStorage.get('userAdminCredentials')) {

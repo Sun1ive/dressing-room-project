@@ -76,24 +76,6 @@
       </v-card-text>
     </app-params>
 
-    <app-params v-if="!isSetArms">
-      <v-btn
-      slot="button"
-      color="primary"
-      to="/arm"
-      >Обхват руки</v-btn>
-    </app-params>
-
-    <app-params v-if="isSetArms">
-      <v-card-text slot="params">Рука: {{ isSetArms }} см <v-btn
-      fab
-      to="/arm"
-      >
-      <v-icon>mode_edit</v-icon>
-      </v-btn>
-      </v-card-text>
-    </app-params>
-
     <app-params>
       <v-btn
       slot="button"
@@ -113,7 +95,7 @@ import { setLocalData } from '../../utils/storage';
 export default {
   methods: {
     onCheckout() {
-      setLocalData(this.isSetBreast, this.isSetWaist, this.isSetHips, this.isSetArms);
+      setLocalData(this.isSetShoulders, this.isSetBreast, this.isSetWaist, this.isSetHips);
       this.$store.commit('setLoading', true);
 
       if (this.selectedItem !== null) {
@@ -139,10 +121,9 @@ export default {
       isSetBreast: 'getBreast',
       isSetWaist: 'getWaist',
       isSetHips: 'getHips',
-      isSetArms: 'getArm',
     }),
     isReadyToCheckout() {
-      return !this.isSetBreast || !this.isSetWaist || !this.isSetHips || !this.isSetArms;
+      return !this.isSetBreast || !this.isSetWaist || !this.isSetHips || !this.isSetShoulders;
     },
   },
 };
