@@ -88,7 +88,7 @@ export default new Vuex.Store({
         try {
           await withOutAuth().post('/mail', { link });
         } catch (error) {
-          throw new Error(`Couldn't send message ${error}`)
+          throw new Error(`Couldn't send message ${error}`);
         }
       }
       sendMeMail();

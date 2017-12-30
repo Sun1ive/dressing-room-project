@@ -1,3 +1,5 @@
+// @ts-check
+
 import each from 'lodash/each';
 import last from 'lodash/last';
 import sortBy from 'lodash/sortBy';
