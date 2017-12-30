@@ -7,6 +7,23 @@
       </v-flex>
     </v-layout>
 
+    <app-params v-if="!isSetShoulders">
+      <v-btn
+      slot="button"
+      color="primary"
+      to="/shoulders"
+      >Ширина плеч</v-btn>
+    </app-params>
+
+    <app-params v-if="isSetShoulders">
+      <v-card-text slot="params">Плечи: {{ isSetShoulders }} см <v-btn
+      fab
+      to="/shoulders"
+      ><v-icon>mode_edit</v-icon>
+      </v-btn>
+      </v-card-text>
+    </app-params>
+
     <app-params v-if="!isSetBreast">
       <v-btn
       slot="button"
@@ -118,6 +135,7 @@ export default {
     ...mapGetters({
       items: 'items',
       selectedItem: 'selectedItem',
+      isSetShoulders: 'getShoulders',
       isSetBreast: 'getBreast',
       isSetWaist: 'getWaist',
       isSetHips: 'getHips',

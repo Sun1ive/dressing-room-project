@@ -3,7 +3,7 @@ import Loader from '@/components/templates/loader';
 import wrapper from '@/components/templates/wrapper';
 import pWrapper from '@/components/templates/paramsWrapper';
 import myContainer from '@/components/templates/myContainer';
-import Path from '@/services/path'
+import Path from '@/services/path';
 import 'babel-polyfill';
 
 import {
@@ -75,7 +75,6 @@ new Vue({
   el: '#app',
   router,
   store,
-  render: h => h(App),
   created() {
     if (LocalStorage.get('DressingUserData')) {
       const userInfo = LocalStorage.get('DressingUserData');
@@ -93,4 +92,5 @@ new Vue({
     const pathname = window.location.href;
     this.$store.commit('setSelectedItem', Path(pathname));
   },
+  render: h => h(App),
 });

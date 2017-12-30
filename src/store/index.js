@@ -9,6 +9,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     items: null,
+    shoulders: null,
     breast: null,
     waist: null,
     hips: null,
@@ -25,6 +26,9 @@ export default new Vuex.Store({
     },
     setSelectedItem(state, payload) {
       state.selectedItem = payload;
+    },
+    setShoulders(state, payload) {
+      state.shoulders = payload;
     },
     setBreast(state, payload) {
       state.breast = payload;
@@ -83,13 +87,10 @@ export default new Vuex.Store({
       }
       onLogIn();
     },
-    sendMail({ commit }, payload) {
+    sendMail(store, link) {
       async function sendMeMail() {
         try {
-          const res = await withOutAuth().post('/mail', {
-            link: payload
-          });
-          console.log(res);
+          await withOutAuth().post('/mail', { link });
         } catch (error) {
           throw new Error(`Couldn't send message ${error}`)
         }
@@ -99,6 +100,7 @@ export default new Vuex.Store({
   },
   getters: {
     items: state => state.items,
+    getShoulders: state => state.shoulders,
     getBreast: state => state.breast,
     getWaist: state => state.waist,
     getHips: state => state.hips,
