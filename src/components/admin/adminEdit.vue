@@ -14,34 +14,34 @@
 
           <app-create>
             <v-card-text slot="size">XS</v-card-text>
+            <v-text-field v-model.number.lazy="xs.shoulders" label="Плечи" slot="shoulders" />
             <v-text-field v-model.number.lazy="xs.breast" label="Грудь" slot="breast" />
             <v-text-field v-model.number.lazy="xs.waist" label="Талия" slot="waist" />
             <v-text-field v-model.number.lazy="xs.hips" label="Бедра" slot="hips" />
-            <v-text-field v-model.number.lazy="xs.arm" label="Рука" slot="arm" />
           </app-create>
 
           <app-create>
             <v-card-text slot="size">S</v-card-text>
+            <v-text-field v-model.number.lazy="s.shoulders" label="Плечи" slot="shoulders" />
             <v-text-field v-model.number.lazy="s.breast" label="Грудь" slot="breast" />
             <v-text-field v-model.number.lazy="s.waist" label="Талия" slot="waist" />
             <v-text-field v-model.number.lazy="s.hips" label="Бедра" slot="hips" />
-            <v-text-field v-model.number.lazy="s.arm" label="Рука" slot="arm" />
           </app-create>
 
           <app-create>
             <v-card-text slot="size">M</v-card-text>
+            <v-text-field v-model.number.lazy="m.shoulders" label="Плечи" slot="shoulders" />
             <v-text-field v-model.number.lazy="m.breast" label="Грудь" slot="breast" />
             <v-text-field v-model.number.lazy="m.waist" label="Талия" slot="waist" />
             <v-text-field v-model.number.lazy="m.hips" label="Бедра" slot="hips" />
-            <v-text-field v-model.number.lazy="m.arm" label="Рука" slot="arm" />
           </app-create>
 
           <app-create>
             <v-card-text slot="size">L</v-card-text>
+            <v-text-field v-model.number.lazy="l.shoulders" label="Плечи" slot="shoulders" />
             <v-text-field v-model.number.lazy="l.breast" label="Грудь" slot="breast" />
             <v-text-field v-model.number.lazy="l.waist" label="Талия" slot="waist" />
             <v-text-field v-model.number.lazy="l.hips" label="Бедра" slot="hips" />
-            <v-text-field v-model.number.lazy="l.arm" label="Рука" slot="arm" />
           </app-create>
 
           <v-btn
@@ -111,7 +111,7 @@ export default {
               breast: size.breast,
               waist: size.waist,
               hips: size.hips,
-              arm: size.arm,
+              shoulders: size.shoulders,
             };
             break;
           case 'S':
@@ -120,7 +120,7 @@ export default {
               breast: size.breast,
               waist: size.waist,
               hips: size.hips,
-              arm: size.arm,
+              shoulders: size.shoulders,
             };
             break;
           case 'M':
@@ -129,7 +129,7 @@ export default {
               breast: size.breast,
               waist: size.waist,
               hips: size.hips,
-              arm: size.arm,
+              shoulders: size.shoulders,
             };
             break;
           case 'L':
@@ -138,7 +138,7 @@ export default {
               breast: size.breast,
               waist: size.waist,
               hips: size.hips,
-              arm: size.arm,
+              shoulders: size.shoulders,
             };
             break;
           default:
