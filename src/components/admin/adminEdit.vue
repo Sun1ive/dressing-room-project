@@ -93,6 +93,7 @@ export default {
   },
   created() {
     const item = this.$store.getters.items.filter(x => x._id === this.id);
+    
     item.forEach(x => {
       x.sizes.forEach(size => {
         this.item = {

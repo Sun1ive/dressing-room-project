@@ -56,6 +56,8 @@
 
 <script>
 import { withAuth } from '../../services/api';
+import { SessionStorage } from '@/utils/storage';
+
 
 import createContainer from '../templates/createContainer';
 
@@ -83,11 +85,11 @@ export default {
   methods: {
     async addToBase() {
       try {
-        const credentials = JSON.parse(window.sessionStorage.getItem('userAdminCredentials'));
+        const c = SessionStorage.get('userAdminCredentials');
 
         this.item.sizes.push(this.xs, this.s, this.m, this.l);
 
-        await withAuth(credentials.username, credentials.password).post('/products', this.item);
+        await withAuth(c.username, c.password).post('/products', this.item);
 
         this.item = {
           title: '',
