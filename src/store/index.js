@@ -16,7 +16,7 @@ export default new Vuex.Store({
     filtered: null,
     selectedItem: null,
     loading: false,
-    error: false,
+    error: '',
     isUserSignIn: false,
   },
   mutations: {
@@ -46,6 +46,9 @@ export default new Vuex.Store({
     },
     setUserSignIn(state, payload) {
       state.isUserSignIn = payload;
+    },
+    setError(state, payload) {
+      state.error = payload;
     },
     runCompare(state, payload) {
       const result = compare(payload, state.breast, state.waist, state.hips);
@@ -78,6 +81,8 @@ export default new Vuex.Store({
             commit('setUserSignIn', true);
           }
         } catch (error) {
+          const err = `Wrong login or password.`;
+          commit('setError', err);
           throw new Error(`Wrong login or password ${error}`);
         }
       }

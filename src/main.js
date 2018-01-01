@@ -23,6 +23,7 @@ import {
   VProgressCircular,
   VMenu,
   VPagination,
+  VAlert,
   transitions,
 } from 'vuetify';
 import '../node_modules/vuetify/src/stylus/app.styl';
@@ -50,6 +51,7 @@ Vue.use(Vuetify, {
     VProgressCircular,
     VMenu,
     VPagination,
+    VAlert,
     transitions,
   },
   theme: {
@@ -62,7 +64,6 @@ Vue.use(Vuetify, {
     warning: '#FFC107',
   },
 });
-
 Vue.component('AppLoader', Loader);
 Vue.component('Wrapper', wrapper);
 Vue.component('app-params', pWrapper);

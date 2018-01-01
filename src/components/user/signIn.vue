@@ -2,6 +2,13 @@
   <v-container fluid>
     <v-layout justify-center align-center>
       <v-flex xs12 sm6 lg4>
+        <v-alert color="error" icon="warning" value="true">
+          {{ isError }}
+        </v-alert>
+      </v-flex>
+    </v-layout>
+    <v-layout justify-center align-center>
+      <v-flex xs12 sm6 lg4>
         <v-form @submit.prevent="onLogIn">
           <v-text-field required v-model="credentials.username" label="Username" />
           <v-text-field required v-model.number="credentials.password" label="Password" type="password" />
@@ -25,13 +32,19 @@ export default {
   methods: {
     onLogIn() {
       this.$store.dispatch('onSignIn', this.credentials);
+      console.log(this.isError);
       setTimeout(() => {
         if (this.$store.getters.isUserSignIn) {
           this.$router.push('/');
         }
-      }, 500);
+      }, 100);
     },
   },
+  computed: {
+    isError() {
+      return this.$store.state.error;
+    }
+  }
 };
 </script>
 
