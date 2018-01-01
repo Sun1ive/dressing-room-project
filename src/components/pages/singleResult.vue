@@ -31,7 +31,7 @@ export default {
   created() {
     setTimeout(() => {
       this.$store.commit('setLoading', false);
-    }, 3000);
+    }, 1000);
   },
 };
 </script>

@@ -13,10 +13,10 @@ import singleResult from '@/components/pages/singleResult';
 import Insert from '@/components/pages/insert';
 import notFound from '@/components/pages/404';
 
-import Shoulders from '@/components/user/shoulders';
-import Breast from '@/components/user/breast';
-import Waist from '@/components/user/waist';
-import Hips from '@/components/user/hips';
+import Shoulders from '@/components/user/Params/shoulders';
+import Breast from '@/components/user/Params/breast';
+import Waist from '@/components/user/Params/waist';
+import Hips from '@/components/user/Params/hips';
 
 
 Vue.use(Router);
