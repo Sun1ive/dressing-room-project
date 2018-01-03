@@ -1,6 +1,7 @@
 <template>
   <v-container fluid>
-    <v-layout>
+    <v-layout justify-center align-center>
+      <v-flex xs12 sm6 lg4>
         <v-alert
           v-if="isError.length > 0"
           color="error" 
@@ -9,7 +10,8 @@
         >
           {{ isError }}
         </v-alert>
-      </v-layout>
+      </v-flex>    
+    </v-layout>
     <v-layout justify-center align-center>
       <v-flex xs12 sm6 lg4>
         <v-form
@@ -147,8 +149,9 @@ export default {
           hips: null,
         };
       } catch (err) {
-        throw new Error('Something bad happened', err)
-        console.log(err);
+        // throw new Error('Something bad happened', err)
+        // console.log(err.response.data.error);
+        this.error = err.response.data.error.message;
       }
     },
   },
