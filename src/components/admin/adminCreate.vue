@@ -2,15 +2,19 @@
   <v-container fluid>
     <v-layout justify-center align-center>
       <v-flex xs12 sm6 lg4>
-        <v-form class="form" @submit.prevent="addToBase">
-
+        <v-form
+          class="form text-xs-center" 
+          @submit.prevent="addToBase"
+        >
+          <h1>Форма добавления вещи в базу</h1>
           <v-text-field v-model.lazy="item.title" label="title" />
           <!-- <v-text-field v-model.number.lazy="item.id" label="id" /> -->
           <v-text-field v-model.lazy="item.src" label="src" />
           <v-text-field v-model.lazy="item.link" label="link" />
           <v-text-field v-model.lazy="item.brand" label="brand" />
-          <v-text-field v-model.number.lazy="item.price" label="price" />
+          <v-text-field v-model.number.lazy="item.price" label="price грн" />
           <v-text-field v-model.lazy="item.color" label="color" />
+          <v-text-field v-model.lazy="item.height" label="height см" />
 
           <app-create>
             <v-card-text slot="size">XS</v-card-text>
@@ -45,8 +49,8 @@
           </app-create>
 
           <v-btn
-          color="primary"
-          type="submit"
+            color="primary"
+            type="submit"
           >Submit</v-btn>
         </v-form>
       </v-flex>
@@ -100,6 +104,7 @@ export default {
           brand: '',
           price: null,
           color: '',
+          height: null,
         };
 
         this.xs = {
