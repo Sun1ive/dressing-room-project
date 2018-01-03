@@ -2,14 +2,14 @@
   <v-container fluid>
     <v-layout justify-center>
       <v-flex xs10 sm6 lg4>
-        <v-text-field v-model="query" @input="searchQuery" />
+        <v-text-field v-model="query"/>
       </v-flex>
     </v-layout>
     <v-layout 
       v-if="query.length > 0"
       class="my-2"
       justify-center
-      v-for="item in filteredArray"
+      v-for="item in searchQuery"
       :key="item.title"
     >
       <v-flex xs6>
@@ -76,15 +76,14 @@ export default {
     deleteItem(id) {
       // if (confirm('Are you sure ?')) alert(id);
     },
-    searchQuery() {
-      this.filteredArray = this.getLoadedItems.filter(x =>
-        x.title.toLowerCase().includes(this.query.toLowerCase()));
-    },
   },
   computed: {
     getLoadedItems() {
       return this.$store.getters.items;
     },
+    searchQuery() {
+      return this.getLoadedItems.filter(item => item.title.toLowerCase().match(this.query))
+    }
   },
 };
 </script>
