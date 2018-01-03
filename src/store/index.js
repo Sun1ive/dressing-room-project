@@ -102,6 +102,16 @@ export default new Vuex.Store({
       }
       sendMeMail();
     },
+    setParams({ commit }, payload) {
+      if (!payload) {
+        return
+      }
+      commit('setHeight', payload.height);
+      commit('setShoulders', payload.shoulders);
+      commit('setBreast', payload.breast);
+      commit('setWaist', payload.waist);
+      commit('setHips', payload.hips);
+    }
   },
   getters: {
     items: state => state.items,
