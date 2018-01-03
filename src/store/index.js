@@ -82,6 +82,7 @@ export default new Vuex.Store({
               password: payload.password,
             };
             SessionStorage.set('userAdminCredentials', credentials);
+            commit('setError', '');
             commit('setUserSignIn', true);
           }
         } catch (error) {
@@ -123,7 +124,6 @@ export default new Vuex.Store({
     filtered: state => state.filtered,
     selectedItem: state => state.selectedItem,
     isLoading: state => state.loading,
-    isError: state => state.error,
     isUserSignIn: state => state.isUserSignIn,
   },
 });

@@ -2,7 +2,12 @@
   <v-container fluid>
     <v-layout justify-center align-center>
       <v-flex xs12 sm6 lg4>
-        <v-alert color="error" icon="warning" value="true">
+        <v-alert
+          v-if="isError.length > 0"
+          color="error" 
+          icon="warning" 
+          value="true"
+        >
           {{ isError }}
         </v-alert>
       </v-flex>
@@ -32,7 +37,6 @@ export default {
   methods: {
     onLogIn() {
       this.$store.dispatch('onSignIn', this.credentials);
-      console.log(this.isError);
       setTimeout(() => {
         if (this.$store.getters.isUserSignIn) {
           this.$router.push('/');
