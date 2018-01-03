@@ -1,7 +1,7 @@
 export default (userBreast, itemBreast, userWaist, itemWaist, userHips, itemHips) =>
     Math.floor((userBreast / itemBreast) * (userWaist / itemWaist) * (userHips / itemHips) * 100);
 
-// export const upper = (
+// export const top = (
 //   userShoulders,
 //   itemShoulders,
 //   userBreast,

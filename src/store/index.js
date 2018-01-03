@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import { withAuth, withOutAuth } from '../services/api';
-import compare from '../utils/compare';
+import { compareTop } from '../utils/compare';
 import { SessionStorage } from '../utils/storage';
 
 Vue.use(Vuex);
@@ -51,7 +51,7 @@ export default new Vuex.Store({
       state.error = payload;
     },
     runCompare(state, payload) {
-      const result = compare(payload, state.breast, state.waist, state.hips);
+      const result = compareTop(payload, state.breast, state.waist, state.hips);
       state.filtered = result;
     },
   },

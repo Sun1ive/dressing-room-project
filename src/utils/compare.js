@@ -1,11 +1,9 @@
-// @ts-check
-
 import each from 'lodash/each';
 import last from 'lodash/last';
 import sortBy from 'lodash/sortBy';
 import coefficient from './coefficient';
 
-export default (array, breast, waist, hips) => {
+export const compareTop = (array, breast, waist, hips) => {
   const newArr = [];
   each(array, (item) => {
     const itemID = item._id;
@@ -37,3 +35,7 @@ export default (array, breast, waist, hips) => {
     .reverse()
     .filter((item) => item.percent >= 70);
 };
+
+export const compareBottom = () => {
+  // hello world
+}
