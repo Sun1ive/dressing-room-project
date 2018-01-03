@@ -60,6 +60,10 @@ export default new Vuex.Store({
     runCompareBottom(state, payload) {
       state.filtered = compareBottom(payload, state.waist, state.hips);
     },
+    removeFromItemList(state, payload) {
+      const index = state.items.map(item => item._id).indexOf(payload);
+      state.items.splice(index, 1);
+    },
   },
   actions: {
     getDresses({ commit }) {
