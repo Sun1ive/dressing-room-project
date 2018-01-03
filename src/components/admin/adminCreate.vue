@@ -1,5 +1,15 @@
 <template>
   <v-container fluid>
+    <v-layout>
+        <v-alert
+          v-if="isError.length > 0"
+          color="error" 
+          icon="warning" 
+          value="true"
+        >
+          {{ isError }}
+        </v-alert>
+      </v-layout>
     <v-layout justify-center align-center>
       <v-flex xs12 sm6 lg4>
         <v-form
@@ -8,7 +18,6 @@
         >
           <h1>Форма добавления вещи в базу</h1>
           <v-text-field v-model.lazy="item.title" label="title" />
-          <!-- <v-text-field v-model.number.lazy="item.id" label="id" /> -->
           <v-text-field v-model.lazy="item.src" label="src" />
           <v-text-field v-model.lazy="item.link" label="link" />
           <v-text-field v-model.lazy="item.brand" label="brand" />
@@ -62,7 +71,6 @@
 import { withAuth } from '../../services/api';
 import { SessionStorage } from '@/utils/storage';
 
-
 import createContainer from '../templates/createContainer';
 
 export default {
@@ -71,18 +79,21 @@ export default {
   },
   data() {
     return {
-      item: {},
+      error: '',
+      item: {
+        sizes: [],
+      },
       xs: {
-        size: 'XS'
+        size: 'XS',
       },
       s: {
-        size: 'S'
+        size: 'S',
       },
       m: {
-        size: 'M'
+        size: 'M',
       },
       l: {
-        size: 'L'
+        size: 'L',
       },
     };
   },
@@ -109,31 +120,41 @@ export default {
 
         this.xs = {
           size: 'XS',
+          shoulders: null,
           breast: null,
           waist: null,
           hips: null,
         };
         this.s = {
           size: 'S',
+          shoulders: null,
           breast: null,
           waist: null,
           hips: null,
         };
         this.m = {
           size: 'M',
+          shoulders: null,
           breast: null,
           waist: null,
           hips: null,
         };
         this.l = {
           size: 'L',
+          shoulders: null,
           breast: null,
           waist: null,
           hips: null,
         };
-      } catch (error) {
-        throw new Error('Something bad happened ', error);
+      } catch (err) {
+        throw new Error('Something bad happened', err)
+        console.log(err);
       }
+    },
+  },
+  computed: {
+    isError() {
+      return this.error;
     },
   },
 };
