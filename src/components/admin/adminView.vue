@@ -49,9 +49,12 @@ export default {
     async deleteItem(id) {
       if (confirm('Are you sure ?')) {
         try {
-          const c = SessionStorage.get('userAdminCredentia
-          ls');
-          await withAuth(c.username, c.password).delete('/products/' + id);
+          const c = SessionStorage.get('userAdminCredentials');
+          const index = this.searchQuery.map(item => item._id).indexOf(id);
+          this.searchQuery.splice(index, 1);
+          
+          
+          // await withAuth(c.username, c.password).delete('/products/' + id);
         } catch (error) {
           console.log(error);
         }
