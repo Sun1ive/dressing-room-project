@@ -1,11 +1,15 @@
 <template>
   <v-container fluid>
     <v-layout justify-center align-center>
+      <v-flex xs10 sm6 lg4 class="text-xs-center">
+        <h1>Форма редактирования вещи</h1>
+      </v-flex>
+    </v-layout>
+    <v-layout justify-center align-center>
       <v-flex xs12 sm6 lg4>
         <v-form class="form" @submit.prevent="onEdit">
 
           <v-text-field v-model.lazy="item.title" label="title" />
-          <!-- <v-text-field v-model.number.lazy="item.id" label="id" /> -->
           <v-text-field v-model.lazy="item.src" label="src" />
           <v-text-field v-model.lazy="item.link" label="link" />
           <v-text-field v-model.lazy="item.brand" label="brand" />

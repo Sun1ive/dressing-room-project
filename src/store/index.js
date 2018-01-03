@@ -92,9 +92,8 @@ export default new Vuex.Store({
             commit('setUserSignIn', true);
           }
         } catch (error) {
-          const err = `Wrong login or password.`;
-          commit('setError', err);
-          throw new Error(`Wrong login or password ${error}`);
+          commit('setError', error.response.data.error);
+          throw new Error(error.response.data.error);
         }
       }
       onLogIn();
