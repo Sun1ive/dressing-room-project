@@ -3,7 +3,7 @@ import Loader from '@/components/templates/loader';
 import wrapper from '@/components/templates/wrapper';
 import pWrapper from '@/components/templates/paramsWrapper';
 import myContainer from '@/components/templates/myContainer';
-import Path from '@/services/path';
+import path from '@/services/path';
 import 'babel-polyfill';
 
 import {
@@ -79,6 +79,7 @@ new Vue({
   created() {
     if (LocalStorage.get('DressingUserData')) {
       const userInfo = LocalStorage.get('DressingUserData');
+      this.$store.commit('setHeight', userInfo.height);
       this.$store.commit('setShoulders', userInfo.shoulders);
       this.$store.commit('setBreast', userInfo.breast);
       this.$store.commit('setWaist', userInfo.waist);
@@ -91,7 +92,7 @@ new Vue({
   },
   mounted() {
     const pathname = window.location.href;
-    this.$store.commit('setSelectedItem', Path(pathname));
+    this.$store.commit('setSelectedItem', path(pathname));
   },
   render: h => h(App),
 });

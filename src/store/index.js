@@ -9,6 +9,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     items: null,
+    height: null,
     shoulders: null,
     breast: null,
     waist: null,
@@ -25,6 +26,9 @@ export default new Vuex.Store({
     },
     setSelectedItem(state, payload) {
       state.selectedItem = payload;
+    },
+    setHeight(state, payload) {
+      state.height = payload;
     },
     setShoulders(state, payload) {
       state.shoulders = payload;
@@ -102,6 +106,7 @@ export default new Vuex.Store({
   getters: {
     items: state => state.items,
     getShoulders: state => state.shoulders,
+    getHeight: state => state.height,
     getBreast: state => state.breast,
     getWaist: state => state.waist,
     getHips: state => state.hips,

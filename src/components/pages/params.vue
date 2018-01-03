@@ -7,6 +7,23 @@
       </v-flex>
     </v-layout>
 
+    <app-params v-if="!isSetHeight">
+      <v-btn
+      slot="button"
+      color="primary"
+      to="/height"
+      >Ваш рост</v-btn>
+    </app-params>
+
+    <app-params v-if="isSetHeight">
+      <v-card-text slot="params">Рост: {{ isSetHeight }} см <v-btn
+      fab
+      to="/height"
+      ><v-icon>mode_edit</v-icon>
+      </v-btn>
+      </v-card-text>
+    </app-params>
+
     <app-params v-if="!isSetShoulders">
       <v-btn
       slot="button"
@@ -95,7 +112,7 @@ import { setLocalData } from '../../utils/storage';
 export default {
   methods: {
     onCheckout() {
-      setLocalData(this.isSetShoulders, this.isSetBreast, this.isSetWaist, this.isSetHips);
+      setLocalData(this.isSetHeight, this.isSetShoulders, this.isSetBreast, this.isSetWaist, this.isSetHips);
       this.$store.commit('setLoading', true);
 
       if (this.selectedItem !== null) {
@@ -117,6 +134,7 @@ export default {
     ...mapGetters({
       items: 'items',
       selectedItem: 'selectedItem',
+      isSetHeight: 'getHeight',
       isSetShoulders: 'getShoulders',
       isSetBreast: 'getBreast',
       isSetWaist: 'getWaist',

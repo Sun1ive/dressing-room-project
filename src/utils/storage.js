@@ -22,9 +22,10 @@ export class SessionStorage {
   }
 }
 
-export const setLocalData = (shoulders, breast, waist, hips) =>  {
+export const setLocalData = (height, shoulders, breast, waist, hips) =>  {
   LocalStorage.remove('DressingUserData');
   const localData = {
+    height,
     shoulders,
     breast,
     waist,

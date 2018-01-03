@@ -13,6 +13,7 @@ import singleResult from '@/components/pages/singleResult';
 import Insert from '@/components/pages/insert';
 import notFound from '@/components/pages/404';
 
+import Height from '@/components/user/Params/height';
 import Shoulders from '@/components/user/Params/shoulders';
 import Breast from '@/components/user/Params/breast';
 import Waist from '@/components/user/Params/waist';
@@ -69,6 +70,11 @@ export default new Router({
       path: '/breast',
       name: 'Breast',
       component: Breast,
+    },
+    {
+      path: '/height',
+      name: 'Height',
+      component: Height,
     },
     {
       path: '/waist',

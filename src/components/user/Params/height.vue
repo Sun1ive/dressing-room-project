@@ -1,8 +1,8 @@
 <template>
   <wrapper>
-    <v-card-text slot="text">Охват бедер {{ Height }} см</v-card-text>
+    <v-card-text slot="text">Ваш рост {{ height }} см</v-card-text>
     <v-card-text slot="slider">
-      <v-slider :min="150" thumb-label :max="200" v-model="Height"></v-slider>
+      <v-slider :min="150" thumb-label :max="200" v-model="height"></v-slider>
     </v-card-text>
     <v-btn slot="button" @click="onSave">Сохранить</v-btn>
   </wrapper>
@@ -17,7 +17,7 @@ export default {
   },
   methods: {
     onSave() {
-      this.$store.commit('setHeight', this.getHeight);
+      this.$store.commit('setHeight', this.height);
       this.$router.push('/params');
     },
   },
