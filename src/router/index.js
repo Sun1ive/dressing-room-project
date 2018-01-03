@@ -41,7 +41,7 @@ export default new Router({
       component: AdminView,
     },
     {
-      path: '/admin/Edit/:id',
+      path: '/admin/edit/:id',
       name: 'adminEdit',
       props: true,
       component: AdminEdit,

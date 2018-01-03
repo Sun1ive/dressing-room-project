@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import { withAuth, withOutAuth } from '../services/api';
-import { compareTop } from '../utils/compare';
+import { compareTop, compareBottom } from '../utils/compare';
 import { SessionStorage } from '../utils/storage';
 
 Vue.use(Vuex);
@@ -14,8 +14,8 @@ export default new Vuex.Store({
     breast: null,
     waist: null,
     hips: null,
-    filtered: null,
-    selectedItem: null,
+    filtered: [],
+    selectedItem: {},
     loading: false,
     error: '',
     isUserSignIn: false,

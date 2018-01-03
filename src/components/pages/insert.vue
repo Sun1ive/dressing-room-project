@@ -35,6 +35,8 @@ export default {
         this.$router.push('/params');
       } else {
         setLocalData(
+          this.$store.getters.getHeight,
+          this.$store.getters.getShoulders,
           this.$store.getters.getBreast,
           this.$store.getters.getWaist,
           this.$store.getters.getHips,

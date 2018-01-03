@@ -121,12 +121,12 @@ export default {
       ],
       categories: [
         {
-          title: 'Верхняя одежда',
+          title: 'Плечевые изделия',
           id: 1,
           path: '/',
         },
         {
-          title: 'Нижняя одежда',
+          title: 'Поясные изделия',
           id: 2,
           path: '/',
         },

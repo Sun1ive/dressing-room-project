@@ -38,6 +38,6 @@ export const compareTop = (array, shoulders, breast, waist, hips) => {
     // .filter(item => item.percent >= 70);
 };
 
-export const compareBottom = () => {
+export const compareBottom = (array, waist, hips) => {
   // hello world
 }
