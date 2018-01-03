@@ -14,7 +14,7 @@
           <v-text-field v-model.lazy="item.brand" label="brand" />
           <v-text-field v-model.number.lazy="item.price" label="price грн" />
           <v-text-field v-model.lazy="item.color" label="color" />
-          <v-text-field v-model.lazy="item.height" label="height см" />
+          <v-text-field v-model.lazy="item.length" label="item length см" />
 
           <app-create>
             <v-card-text slot="size">XS</v-card-text>
@@ -104,7 +104,7 @@ export default {
           brand: '',
           price: null,
           color: '',
-          height: null,
+          length: null,
         };
 
         this.xs = {
