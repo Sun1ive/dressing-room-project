@@ -57,6 +57,9 @@ export default new Vuex.Store({
     runCompare(state, payload) {
       state.filtered = compareTop(payload, state.shoulders, state.breast, state.waist, state.hips);
     },
+    runCompareBottom(state, payload) {
+      state.filtered = compareBottom(payload, state.waist, state.hips);
+    },
   },
   actions: {
     getDresses({ commit }) {
