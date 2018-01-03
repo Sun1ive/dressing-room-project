@@ -1,7 +1,6 @@
 import each from 'lodash/each';
 import last from 'lodash/last';
 import sortBy from 'lodash/sortBy';
-// import coefficient from './coefficient';
 import { top } from './coefficient';
 
 export const compareTop = (array, shoulders, breast, waist, hips) => {
@@ -36,7 +35,7 @@ export const compareTop = (array, shoulders, breast, waist, hips) => {
   });
   return sortBy(newArr, 'percent')
     .reverse()
-    // .filter(item => item.percent >= 70);
+    .filter(item => item.percent >= 70);
 };
 
 export const compareBottom = () => {

@@ -54,7 +54,7 @@ export default {
           this.searchQuery.splice(index, 1);
           
           
-          // await withAuth(c.username, c.password).delete('/products/' + id);
+          await withAuth(c.username, c.password).delete('/products/' + id);
         } catch (error) {
           console.log(error);
         }
