@@ -1,13 +1,15 @@
 import each from 'lodash/each';
 import last from 'lodash/last';
 import sortBy from 'lodash/sortBy';
-import coefficient from './coefficient';
+// import coefficient from './coefficient';
+import { top } from './coefficient';
 
-export const compareTop = (array, breast, waist, hips) => {
+export const compareTop = (array, shoulders, breast, waist, hips) => {
   const newArr = [];
   each(array, (item) => {
     const itemID = item._id;
     each(item.sizes, x => {
+
       const myObj = {
         title: item.title,
         src: item.src,
@@ -15,11 +17,12 @@ export const compareTop = (array, breast, waist, hips) => {
         link: item.link,
         price: item.price,
         size: x.size,
+        length: item.length,
         brand: item.brand,
-        percent: coefficient(breast, x.breast, waist, x.waist, hips, x.hips),
+        percent: top(shoulders, x.shoulders, breast, x.breast, waist, x.waist, hips, x.hips),
       };
 
-      if (breast <= x.breast && waist <= x.waist && hips <= x.hips) {
+      if (shoulders <= x.shoulders && breast <= x.breast && waist <= x.waist && hips <= x.hips) {
         if (newArr.length === 0) {
           newArr.push(myObj);
         } else {
@@ -33,7 +36,7 @@ export const compareTop = (array, breast, waist, hips) => {
   });
   return sortBy(newArr, 'percent')
     .reverse()
-    .filter((item) => item.percent >= 70);
+    // .filter(item => item.percent >= 70);
 };
 
 export const compareBottom = () => {

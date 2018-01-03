@@ -55,8 +55,7 @@ export default new Vuex.Store({
       state.error = payload;
     },
     runCompare(state, payload) {
-      const result = compareTop(payload, state.breast, state.waist, state.hips);
-      state.filtered = result;
+      state.filtered = compareTop(payload, state.shoulders, state.breast, state.waist, state.hips);
     },
   },
   actions: {
@@ -105,14 +104,14 @@ export default new Vuex.Store({
     },
     setParams({ commit }, payload) {
       if (!payload) {
-        return
+        return;
       }
       commit('setHeight', payload.height);
       commit('setShoulders', payload.shoulders);
       commit('setBreast', payload.breast);
       commit('setWaist', payload.waist);
       commit('setHips', payload.hips);
-    }
+    },
   },
   getters: {
     items: state => state.items,
