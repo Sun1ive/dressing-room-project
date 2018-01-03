@@ -23,7 +23,7 @@
           <v-text-field v-model.lazy="item.brand" label="brand" />
           <v-text-field v-model.number.lazy="item.price" label="price грн" />
           <v-text-field v-model.lazy="item.color" label="color" />
-          <v-text-field v-model.lazy="item.length" label="item length см" />
+          <v-text-field v-model.number.lazy="item.length" label="item length см" />
 
           <app-create>
             <v-card-text slot="size">XS</v-card-text>

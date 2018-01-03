@@ -36,6 +36,9 @@
 </template>
 
 <script>
+import { withAuth } from '../../services/api';
+import { SessionStorage } from '@/utils/storage';
+
 export default {
   data() {
     return {
@@ -43,14 +46,24 @@ export default {
     };
   },
   methods: {
-    deleteItem(id) {
-      // if (confirm('Are you sure ?')) alert(id);
+    async deleteItem(id) {
+      if (confirm('Are you sure ?')) {
+        try {
+          const c = SessionStorage.get('userAdminCredentia
+          ls');
+          await withAuth(c.username, c.password).delete('/products/' + id);
+        } catch (error) {
+          console.log(error);
+        }
+      }
     },
   },
   computed: {
     searchQuery() {
-      return this.$store.getters.items.filter(item => item.title.toLowerCase().match(this.query.toLowerCase()))
-    }
+      return this.$store.getters.items.filter(item =>
+        item.title.toLowerCase().match(this.query.toLowerCase()),
+      );
+    },
   },
 };
 </script>
