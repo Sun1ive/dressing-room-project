@@ -35,7 +35,7 @@ export const compareTop = (array, shoulders, breast, waist, hips) => {
   });
   return sortBy(newArr, 'percent')
     .reverse()
-    .filter(item => item.percent >= 70);
+    // .filter(item => item.percent >= 70);
 };
 
 export const compareBottom = () => {
