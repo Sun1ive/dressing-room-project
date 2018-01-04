@@ -12,7 +12,6 @@
         </v-alert>
       </v-flex>    
     </v-layout>
-
     <v-layout class="pt-5" justify-center align-center>
       <v-flex xs10 sm6 lg4>
         <v-form
@@ -29,20 +28,22 @@
             label="select type"
             single-line
             bottom
+            required
           ></v-select>
-          <v-text-field v-model.lazy="item.title" label="title" />
-          <v-text-field v-model.lazy="item.src" label="src" />
-          <v-text-field v-model.lazy="item.link" label="link" />
+          <v-text-field required v-model.lazy="item.title" label="title" />
+          <v-text-field required v-model.lazy="item.src" label="src" />
+          <v-text-field required v-model.lazy="item.link" label="link" />
           <v-select
             :items="brandList"
             v-model="item.brand"
             label="select brand"
             single-line
             bottom
+            required
           ></v-select>
-          <v-text-field v-model.number.lazy="item.price" label="price грн" />
-          <v-text-field v-model.lazy="item.color" label="color" />
-          <v-text-field v-model.number.lazy="item.length" label="item length см" />
+          <v-text-field required v-model.number.lazy="item.price" label="price грн" />
+          <v-text-field required v-model.lazy="item.color" label="color" />
+          <v-text-field required v-model.number.lazy="item.length" label="item length см" />
 
           <app-create>
             <v-card-text slot="size">XS</v-card-text>

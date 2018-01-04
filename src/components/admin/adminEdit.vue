@@ -15,19 +15,21 @@
             label="select type"
             single-line
             bottom
+            required
           ></v-select>
-          <v-text-field v-model.lazy="item.title" label="title" />
-          <v-text-field v-model.lazy="item.src" label="src" />
-          <v-text-field v-model.lazy="item.link" label="link" />
+          <v-text-field required v-model.lazy="item.title" label="title" />
+          <v-text-field required v-model.lazy="item.src" label="src" />
+          <v-text-field required v-model.lazy="item.link" label="link" />
           <v-select
             :items="brandList"
             v-model="item.brand"
             label="select brand"
             single-line
             bottom
+            required
           ></v-select>
-          <v-text-field v-model.number.lazy="item.price" label="price" />
-          <v-text-field v-model.lazy="item.color" label="color" />
+          <v-text-field required v-model.number.lazy="item.price" label="price" />
+          <v-text-field required v-model.lazy="item.color" label="color" />
 
           <app-create>
             <v-card-text slot="size">XS</v-card-text>
@@ -117,6 +119,7 @@ export default {
       x.sizes.forEach(size => {
         this.item = {
           title: x.title,
+          type: x.type,
           link: x.link,
           src: x.src,
           sizes: [],
