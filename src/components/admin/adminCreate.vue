@@ -23,7 +23,6 @@
 
           <p>Параметры которых нет, можно не указывать</p>
 
-          <v-text-field v-model.lazy="item.title" label="title" />
           <v-select
             :items="typeList"
             v-model="item.type"
@@ -31,9 +30,16 @@
             single-line
             bottom
           ></v-select>
+          <v-text-field v-model.lazy="item.title" label="title" />
           <v-text-field v-model.lazy="item.src" label="src" />
           <v-text-field v-model.lazy="item.link" label="link" />
-          <v-text-field v-model.lazy="item.brand" label="brand" />
+          <v-select
+            :items="brandList"
+            v-model="item.brand"
+            label="select brand"
+            single-line
+            bottom
+          ></v-select>
           <v-text-field v-model.number.lazy="item.price" label="price грн" />
           <v-text-field v-model.lazy="item.color" label="color" />
           <v-text-field v-model.number.lazy="item.length" label="item length см" />
@@ -95,6 +101,7 @@ export default {
     return {
       error: '',
       typeList: ['Плечевые', 'Поясные'],
+      brandList: ['inDresser'],
       item: {
         sizes: [],
       },

@@ -9,11 +9,23 @@
       <v-flex xs12 sm6 lg4>
         <v-form class="form" @submit.prevent="onEdit">
 
+          <v-select
+            :items="typeList"
+            v-model="item.type"
+            label="select type"
+            single-line
+            bottom
+          ></v-select>
           <v-text-field v-model.lazy="item.title" label="title" />
-          <v-text-field v-model.lazy="item.type" label="type" />
           <v-text-field v-model.lazy="item.src" label="src" />
           <v-text-field v-model.lazy="item.link" label="link" />
-          <v-text-field v-model.lazy="item.brand" label="brand" />
+          <v-select
+            :items="brandList"
+            v-model="item.brand"
+            label="select brand"
+            single-line
+            bottom
+          ></v-select>
           <v-text-field v-model.number.lazy="item.price" label="price" />
           <v-text-field v-model.lazy="item.color" label="color" />
 
@@ -76,6 +88,8 @@ export default {
   },
   data() {
     return {
+      brandList: ['inDresser'],
+      typeList: ['Плечевые', 'Поясные'],
       item: {},
       xs: {},
       s: {},
