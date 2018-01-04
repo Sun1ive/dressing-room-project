@@ -167,14 +167,12 @@ export default {
       try {
         const c = SessionStorage.get('userAdminCredentials');
         this.item.sizes.push(this.xs, this.s, this.m, this.l);
-        this.item.type = 'humeral';
 
         await withAuth(c.username, c.password).post('/products', this.item);
 
         this.item = {
           title: '',
           link: '',
-          // id: null,
           src: '',
           sizes: [],
           brand: '',
