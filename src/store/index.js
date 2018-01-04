@@ -64,6 +64,9 @@ export default new Vuex.Store({
       const index = state.items.map(item => item._id).indexOf(payload);
       state.items.splice(index, 1);
     },
+    addToItems(state, payload) {
+      state.items.push(payload);
+    },
   },
   actions: {
     getDresses({ commit }) {

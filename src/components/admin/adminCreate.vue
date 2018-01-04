@@ -12,24 +12,25 @@
         </v-alert>
       </v-flex>    
     </v-layout>
+
     <v-layout class="pt-5" justify-center align-center>
-      <v-flex xs10 md6 lg4 class="text-xs-center">
-        <v-btn 
-          @click="select = !select"
-          color="primary"
-        >Change</v-btn>
-      </v-flex>
-    </v-layout>
-    <v-layout justify-center align-center v-if="select">
       <v-flex xs10 sm6 lg4>
         <v-form
           class="form text-xs-center" 
           @submit.prevent="addToBase"
         >
           <h1>Форма добавления вещи в базу</h1>
-          <h2>Плечевые изделия</h2>
+
+          <p>Параметры которых нет, можно не указывать</p>
+
           <v-text-field v-model.lazy="item.title" label="title" />
-          <v-text-field v-model.lazy="item.type" label="type" />
+          <v-select
+            :items="typeList"
+            v-model="item.type"
+            label="select type"
+            single-line
+            bottom
+          ></v-select>
           <v-text-field v-model.lazy="item.src" label="src" />
           <v-text-field v-model.lazy="item.link" label="link" />
           <v-text-field v-model.lazy="item.brand" label="brand" />
@@ -77,57 +78,6 @@
       </v-flex>
     </v-layout>
 
-    <!-- second form -->
-    <v-layout justify-center align-center v-if="!select">
-      <v-flex xs10 sm6 lg4>
-        <v-form
-          class="form text-xs-center" 
-          @submit.prevent="addToBase"
-        >
-          <h1>Форма добавления вещи в базу</h1>
-          <h2>Поясные изделия</h2>
-          <v-text-field v-model.lazy="item.title" label="title" />
-          <v-text-field v-model.lazy="item.type" label="type" />
-          <v-text-field v-model.lazy="item.src" label="src" />
-          <v-text-field v-model.lazy="item.link" label="link" />
-          <v-text-field v-model.lazy="item.brand" label="brand" />
-          <v-text-field v-model.number.lazy="item.price" label="price грн" />
-          <v-text-field v-model.lazy="item.color" label="color" />
-          <v-text-field v-model.number.lazy="item.length" label="item length см" />
-
-          <app-create>
-            <v-card-text slot="bottom-size">XS</v-card-text>
-            <v-text-field v-model.number.lazy="xs.waist" label="Талия" slot="bottom-waist" />
-            <v-text-field v-model.number.lazy="xs.hips" label="Бедра" slot="bottom-hips" />
-          </app-create>
-
-          <app-create>
-            <v-card-text slot="bottom-size">S</v-card-text>
-            <v-text-field v-model.number.lazy="s.waist" label="Талия" slot="bottom-waist" />
-            <v-text-field v-model.number.lazy="s.hips" label="Бедра" slot="bottom-hips" />
-          </app-create>
-
-          <app-create>
-            <v-card-text slot="bottom-size">M</v-card-text>
-            <v-text-field v-model.number.lazy="m.waist" label="Талия" slot="bottom-waist" />
-            <v-text-field v-model.number.lazy="m.hips" label="Бедра" slot="bottom-hips" />
-          </app-create>
-
-          <app-create>
-            <v-card-text slot="bottom-size">L</v-card-text>
-            <v-text-field v-model.number.lazy="l.waist" label="Талия" slot="bottom-waist" />
-            <v-text-field v-model.number.lazy="l.hips" label="Бедра" slot="bottom-hips" />
-          </app-create>
-
-          <v-btn
-            color="primary"
-            type="submit"
-          >Submit</v-btn>
-
-        </v-form>
-      </v-flex>
-    </v-layout>
-
   </v-container>
 </template>
 
@@ -144,7 +94,7 @@ export default {
   data() {
     return {
       error: '',
-      select: false,
+      typeList: ['Плечевые', 'Поясные'],
       item: {
         sizes: [],
       },
@@ -172,6 +122,7 @@ export default {
 
         this.item = {
           title: '',
+          type: '',
           link: '',
           src: '',
           sizes: [],
@@ -181,6 +132,8 @@ export default {
           length: null,
         };
 
+        this.$store.commit('addToItems', this.item);
+/* 
         this.xs = {
           size: 'XS',
           shoulders: null,
@@ -208,24 +161,13 @@ export default {
           breast: null,
           waist: null,
           hips: null,
-        };
+        }; */
       } catch (err) {
+        this.item.sizes = [];
         this.error = err.response.data.error.message;
         throw new Error('Something bad happened', err)
       }
-    },
-    async addToBaseLumbar() {
-      try {
-        const c = SessionStorage.get('userAdminCredentials');
-        this.item.sizes.push(this.xs, this.s, this.m, this.l);
-        this.item.type = 'lumbar';
-
-        await withAuth(c.username, c.password).post('/products', this.item);
-      } catch (err) {
-        this.error = err.response.data.error.message;
-        throw new Error('Something bad happened', err)
-      }
-    },
+    }
   },
   computed: {
     isError() {
