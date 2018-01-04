@@ -22,8 +22,7 @@ export default {
             this.runCompareBottom(arr);
             this.$router.push(`${path}`);
             break;
-          default:
-            break;
+          default: break;
         }
       });
     },

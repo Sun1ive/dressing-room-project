@@ -115,49 +115,9 @@ export default {
   computed: {
     isReadyToCheckout() {
       return !this.height || !this.breast || !this.waist || !this.hips || !this.shoulders;
-    }
-  }
-}
-
-/* import { mapGetters } from 'vuex';
-import { setLocalData } from '../../utils/storage';
-
-export default {
-  methods: {
-    onCheckout() {
-      setLocalData(this.isSetHeight, this.isSetShoulders, this.isSetBreast, this.isSetWaist, this.isSetHips);
-      this.$store.commit('setLoading', true);
-
-      if (this.selectedItem !== null) {
-        const filteredItem = this.items.filter(item => item.link === this.selectedItem);
-        if (filteredItem.length === 0) {
-          this.$store.dispatch('sendMail', this.selectedItem);
-          this.$router.push('/404');
-        } else {
-          this.$store.commit('runCompare', filteredItem);
-          this.$router.push('/single-result');
-        }
-      } else {
-        this.$store.commit('runCompare', this.items);
-        this.$router.push('/result');
-      }
     },
   },
-  computed: {
-    ...mapGetters({
-      items: 'items',
-      selectedItem: 'selectedItem',
-      isSetHeight: 'getHeight',
-      isSetShoulders: 'getShoulders',
-      isSetBreast: 'getBreast',
-      isSetWaist: 'getWaist',
-      isSetHips: 'getHips',
-    }),
-    isReadyToCheckout() {
-      return !this.isSetHeight || !this.isSetBreast || !this.isSetWaist || !this.isSetHips || !this.isSetShoulders;
-    },
-  },
-}; */
+};
 </script>
 
 
