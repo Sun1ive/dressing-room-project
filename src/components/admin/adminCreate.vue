@@ -87,12 +87,37 @@
           <v-text-field v-model.number.lazy="item.price" label="price грн" />
           <v-text-field v-model.lazy="item.color" label="color" />
           <v-text-field v-model.number.lazy="item.length" label="item length см" />
-          
+
+          <app-create>
+            <v-card-text slot="bottom-size">XS</v-card-text>
+            <v-text-field v-model.number.lazy="l.waist" label="Талия" slot="bottom-waist" />
+            <v-text-field v-model.number.lazy="l.hips" label="Бедра" slot="bottom-hips" />
+          </app-create>
+
+          <app-create>
+            <v-card-text slot="bottom-size">S</v-card-text>
+            <v-text-field v-model.number.lazy="l.waist" label="Талия" slot="bottom-waist" />
+            <v-text-field v-model.number.lazy="l.hips" label="Бедра" slot="bottom-hips" />
+          </app-create>
+
+          <app-create>
+            <v-card-text slot="bottom-size">M</v-card-text>
+            <v-text-field v-model.number.lazy="l.waist" label="Талия" slot="bottom-waist" />
+            <v-text-field v-model.number.lazy="l.hips" label="Бедра" slot="bottom-hips" />
+          </app-create>
+
+          <app-create>
+            <v-card-text slot="bottom-size">L</v-card-text>
+            <v-text-field v-model.number.lazy="l.waist" label="Талия" slot="bottom-waist" />
+            <v-text-field v-model.number.lazy="l.hips" label="Бедра" slot="bottom-hips" />
+          </app-create>
+
 
           <v-btn
             color="primary"
             type="submit"
           >Submit</v-btn>
+
         </v-form>
       </v-flex>
     </v-layout>

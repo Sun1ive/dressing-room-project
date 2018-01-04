@@ -21,16 +21,16 @@
         </v-card>
       </v-flex>
     </v-layout>
-    <v-layout justify-center align-center>
+    <v-layout class="my-2" justify-center align-center>
       <v-flex xs10 class="text-xs-center">
         <v-card>
-          <slot name="size-bottom"></slot>
+          <slot name="bottom-size"></slot>
           <v-layout justify-center align-center>
             <v-flex xs5 class="mx-2">
-              <slot name="waist-bottom"></slot>
+              <slot name="bottom-waist"></slot>
             </v-flex>
             <v-flex xs5 class="mx-2">
-              <slot name="hips-bottom"></slot>
+              <slot name="bottom-hips"></slot>
             </v-flex>
           </v-layout>
         </v-card>
