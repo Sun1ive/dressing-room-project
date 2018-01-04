@@ -20,7 +20,7 @@
 
 <script>
 import { LocalStorage, setLocalData } from '@/utils/storage';
-import { mapGetters } from 'vuex';
+import { mapGetters, mapMutations } from 'vuex';
 
 export default {
   data() {
@@ -29,19 +29,22 @@ export default {
     };
   },
   methods: {
+    ...mapMutations([
+      'setSelectedItem', 
+      'setLoading', 
+      'runCompare', 
+      'runCompareBottom'
+      ]),
     onCheckout() {
       const data = LocalStorage.get('DressingUserData');
 
       if (!data || data === undefined || data === {}) {
-        this.$store.commit('setSelectedItem', this.link);
+        this.selectItem(this.link);
         this.$router.push('/params');
       } else {
         setLocalData(this.height, this.shoulders, this.breast, this.waist, this.hips);
-
-        this.$store.commit('setLoading', true);
-
+        this.setLoading(true)
         const filteredItem = this.items.filter(item => item.link === this.link);
-
         if (filteredItem.length === 0) {
           this.$store.dispatch('sendMail', this.link);
           this.$router.push('/404');
@@ -49,11 +52,11 @@ export default {
           filteredItem.forEach(x => {
             switch (x.type) {
               case 'Плечевые':
-                this.$store.commit('runCompare', filteredItem);
+                this.runCompare(filteredItem);
                 this.$router.push('/single-result');
                 break;
               case 'Поясные':
-                this.$store.commit('runCompareBottom', filteredItem);
+                this.runCompareBottom(filteredItem);
                 this.$router.push('/single-result');
                 break;
               default:
