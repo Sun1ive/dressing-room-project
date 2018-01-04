@@ -12,9 +12,12 @@
         </v-alert>
       </v-flex>    
     </v-layout>
-    <v-layout justify-center align-center>
+    <v-layout class="pt-5" justify-center align-center>
       <v-flex xs10 md6 lg4 class="text-xs-center">
-        <v-btn @click="select = !select">Click me</v-btn>
+        <v-btn 
+          @click="select = !select"
+          color="primary"
+        >Change</v-btn>
       </v-flex>
     </v-layout>
     <v-layout justify-center align-center v-if="select">
@@ -72,6 +75,8 @@
         </v-form>
       </v-flex>
     </v-layout>
+
+    <!-- second form -->
     <v-layout justify-center align-center v-if="!select">
       <v-flex xs10 sm6 lg4>
         <v-form
@@ -111,7 +116,6 @@
             <v-text-field v-model.number.lazy="l.waist" label="Талия" slot="bottom-waist" />
             <v-text-field v-model.number.lazy="l.hips" label="Бедра" slot="bottom-hips" />
           </app-create>
-
 
           <v-btn
             color="primary"
