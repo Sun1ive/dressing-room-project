@@ -45,21 +45,6 @@
         @click="drawer = !drawer"
       ></v-toolbar-side-icon>
       <v-toolbar-items class="hidden-sm-and-down">
-        <v-menu offset-y>
-          <v-btn
-          flat
-          slot="activator"
-          >Категории</v-btn>
-          <v-list>
-            <v-list-tile
-              v-for="item in categories"
-              :key="item.title"
-              @click="$router.push(item.path)"
-            >
-              <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-            </v-list-tile>
-          </v-list>
-        </v-menu>
         <v-btn
           flat
           v-for="(item, index) in menuItems"
@@ -118,19 +103,7 @@ export default {
           title: 'Admin Create Page',
           path: '/admin/create',
         },
-      ],
-      categories: [
-        {
-          title: 'Плечевые изделия',
-          id: 1,
-          path: '/',
-        },
-        {
-          title: 'Поясные изделия',
-          id: 2,
-          path: '/',
-        },
-      ],
+      ]
     };
   },
   computed: {
@@ -148,12 +121,6 @@ export default {
           id: 2,
           icon: 'link',
         },
-        // {
-        //   title: 'Посмотреть все',
-        //   path: '/checkAll',
-        //   id: 3,
-        //   icon: 'view_list',
-        // },
         {
           title: 'Указать параметры',
           path: '/params',
@@ -181,12 +148,6 @@ export default {
             id: 2,
             icon: 'link',
           },
-          // {
-          //   title: 'Посмотреть все',
-          //   path: '/checkAll',
-          //   id: 3,
-          //   icon: 'view_list',
-          // },
           {
             title: 'Указать параметры',
             path: '/params',
