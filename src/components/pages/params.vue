@@ -7,7 +7,7 @@
       </v-flex>
     </v-layout>
 
-    <app-params v-if="!isSetHeight">
+    <app-params v-if="!height">
       <v-btn
       slot="button"
       color="primary"
@@ -15,8 +15,8 @@
       >Ваш рост</v-btn>
     </app-params>
 
-    <app-params v-if="isSetHeight">
-      <v-card-text slot="params">Рост: {{ isSetHeight }} см <v-btn
+    <app-params v-if="height">
+      <v-card-text slot="params">Рост: {{ height }} см <v-btn
       fab
       to="/height"
       ><v-icon>mode_edit</v-icon>
@@ -24,7 +24,7 @@
       </v-card-text>
     </app-params>
 
-    <app-params v-if="!isSetShoulders">
+    <app-params v-if="!shoulders">
       <v-btn
       slot="button"
       color="primary"
@@ -32,8 +32,8 @@
       >Ширина плеч</v-btn>
     </app-params>
 
-    <app-params v-if="isSetShoulders">
-      <v-card-text slot="params">Плечи: {{ isSetShoulders }} см <v-btn
+    <app-params v-if="shoulders">
+      <v-card-text slot="params">Плечи: {{ shoulders }} см <v-btn
       fab
       to="/shoulders"
       ><v-icon>mode_edit</v-icon>
@@ -43,7 +43,7 @@
 
     
 
-    <app-params v-if="!isSetBreast">
+    <app-params v-if="!breast">
       <v-btn
       slot="button"
       color="primary"
@@ -51,8 +51,8 @@
       >Обхват груди</v-btn>
     </app-params>
 
-    <app-params v-if="isSetBreast">
-      <v-card-text slot="params">Грудь: {{ isSetBreast }} см <v-btn
+    <app-params v-if="breast">
+      <v-card-text slot="params">Грудь: {{ breast }} см <v-btn
       fab
       to="/breast"
       ><v-icon>mode_edit</v-icon>
@@ -60,7 +60,7 @@
       </v-card-text>
     </app-params>
 
-    <app-params v-if="!isSetWaist">
+    <app-params v-if="!waist">
       <v-btn
       slot="button"
       color="primary"
@@ -68,8 +68,8 @@
       >Обхват талии</v-btn>
     </app-params>
 
-    <app-params v-if="isSetWaist">
-      <v-card-text slot="params">Талия: {{ isSetWaist }} см <v-btn
+    <app-params v-if="waist">
+      <v-card-text slot="params">Талия: {{ waist }} см <v-btn
       fab
       to="/waist"
       ><v-icon>mode_edit</v-icon>
@@ -77,7 +77,7 @@
       </v-card-text>
     </app-params>
 
-    <app-params v-if="!isSetHips">
+    <app-params v-if="!hips">
       <v-btn
       slot="button"
       color="primary"
@@ -85,8 +85,8 @@
       >Обхват бедер</v-btn>
     </app-params>
 
-    <app-params v-if="isSetHips">
-      <v-card-text slot="params">Бедра: {{ isSetHips }} см <v-btn
+    <app-params v-if="hips">
+      <v-card-text slot="params">Бедра: {{ hips }} см <v-btn
       fab
       to="/hips"
       >
@@ -108,7 +108,18 @@
 
 
 <script>
-import { mapGetters } from 'vuex';
+import checkoutMixin from '../../mixins/checkout';
+
+export default {
+  mixins: [checkoutMixin],
+  computed: {
+    isReadyToCheckout() {
+      return !this.height || !this.breast || !this.waist || !this.hips || !this.shoulders;
+    }
+  }
+}
+
+/* import { mapGetters } from 'vuex';
 import { setLocalData } from '../../utils/storage';
 
 export default {
@@ -146,7 +157,7 @@ export default {
       return !this.isSetHeight || !this.isSetBreast || !this.isSetWaist || !this.isSetHips || !this.isSetShoulders;
     },
   },
-};
+}; */
 </script>
 
 
