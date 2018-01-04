@@ -20,6 +20,7 @@
 
 <script>
 import { LocalStorage, setLocalData } from '@/utils/storage';
+import { mapGetters } from 'vuex';
 
 export default {
   data() {
@@ -35,18 +36,11 @@ export default {
         this.$store.commit('setSelectedItem', this.link);
         this.$router.push('/params');
       } else {
-        setLocalData(
-          this.$store.getters.getHeight,
-          this.$store.getters.getShoulders,
-          this.$store.getters.getBreast,
-          this.$store.getters.getWaist,
-          this.$store.getters.getHips,
-          this.$store.getters.getArm,
-        );
+        setLocalData(height, shoulders, breast, waist, hips);
         this.$store.commit('setLoading', true);
 
         const filteredItem = this.items.filter(item => item.link === this.link);
-        
+
         if (filteredItem.length === 0) {
           this.$store.dispatch('sendMail', this.link);
           this.$router.push('/404');
@@ -70,9 +64,17 @@ export default {
     },
   },
   computed: {
-    items() {
-      return this.$store.getters.items;
-    },
+    // items() {
+    //   return this.$store.getters.items;
+    // },
+    ...mapGetters({
+      items: 'items',
+      height: 'getHeight',
+      shoulder: 'getShoulders',
+      breast: 'getBreast',
+      waist: 'getWaist',
+      hips: 'getHips',
+    }),
   },
 };
 </script>
