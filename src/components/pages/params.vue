@@ -7,6 +7,20 @@
       </v-flex>
     </v-layout>
 
+    <v-layout class="my-3" justify-center align-center>
+      <v-flex xs10 sm6 lg2 class="text-xs-center">
+        <h1>Category</h1>
+         <v-select
+            :items="category"
+            v-model="itemCategory"
+            label="select category"
+            single-line
+            bottom
+            required
+          ></v-select>
+      </v-flex>
+    </v-layout>
+
     <app-params v-if="!height">
       <v-btn
       slot="button"
@@ -112,6 +126,12 @@ import checkoutMixin from '../../mixins/checkout';
 
 export default {
   mixins: [checkoutMixin],
+  data() {
+    return {
+      itemCategory: '',
+      category: ['Плечевые', 'Поясные'],
+    };
+  },
   computed: {
     isReadyToCheckout() {
       return !this.height || !this.breast || !this.waist || !this.hips || !this.shoulders;

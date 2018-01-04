@@ -54,12 +54,12 @@ export default new Vuex.Store({
     setError(state, payload) {
       state.error = payload;
     },
+    runCompareBottom(state, payload) {
+      state.filtered = compareBottom(payload, state.waist, state.hips);
+    },
     runCompare(state, payload) {
       state.filtered = compareTop(payload, state.shoulders, state.breast, state.waist, state.hips, state.height);
     },
-    // runCompareBottom(state, payload) {
-    //   state.filtered = compareBottom(payload, state.waist, state.hips);
-    // },
     removeFromItemList(state, payload) {
       const index = state.items.map(item => item._id).indexOf(payload);
       state.items.splice(index, 1);

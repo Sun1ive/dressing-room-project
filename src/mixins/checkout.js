@@ -8,9 +8,9 @@ export default {
     filter(arr) {
       let path;
       if (arr.length > 1) {
-        path = '/result'
+        path = '/result';
       } else {
-        path = '/single-result'
+        path = '/single-result';
       }
       each(arr, x => {
         switch (x.type) {
@@ -22,7 +22,8 @@ export default {
             this.runCompareBottom(arr);
             this.$router.push(`${path}`);
             break;
-          default: break;
+          default:
+            break;
         }
       });
     },
@@ -49,7 +50,8 @@ export default {
             this.filter(filteredItem);
           }
         } else if (filteredItem.length <= 0) {
-          this.filter(this.items);
+          filteredItem = this.items.filter(x => x.type === this.itemCategory);
+          this.filter(filteredItem);
         }
       }
     },
