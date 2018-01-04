@@ -53,46 +53,6 @@ export default {
           this.filter(this.items);
         }
       }
-
-      /*  this.setLoading(true)
-      debugger;
-      const data = LocalStorage.get('DressingUserData');
-      let filteredItem = [];
-
-      if (!data || data === undefined || data === {}) {
-        this.selectItem(this.link);
-        this.$router.push('/params');
-      } else {
-        setLocalData(this.height, this.shoulders, this.breast, this.waist, this.hips);
-
-        if (this.selectedItem) {
-          filteredItem = this.items.filter(item => item.link === this.selectedItem);
-        }
-
-        if (this.link) {
-          filteredItem = this.items.filter(item => item.link === this.link);
-        }
-        if (filteredItem === undefined || filteredItem.length <= 0) {
-          this.runCompare(this.items)
-          this.$store.dispatch('sendMail', this.link);
-          this.$router.push('/404');
-        } else {
-          filteredItem.forEach(x => {
-            switch (x.type) {
-              case 'Плечевые':
-                this.runCompare(filteredItem);
-                this.$router.push('/single-result');
-                break;
-              case 'Поясные':
-                this.runCompareBottom(filteredItem);
-                this.$router.push('/single-result');
-                break;
-              default:
-                break;
-            }
-          });
-        }
-      }  */
     },
   },
   computed: {
