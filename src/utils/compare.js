@@ -1,9 +1,9 @@
 import each from 'lodash/each';
 import last from 'lodash/last';
 import sortBy from 'lodash/sortBy';
-import { top, bottom } from './coefficient';
+import { top, bottom, length } from './functions';
 
-export const compareTop = (array, shoulders, breast, waist, hips) => {
+export const compareTop = (array, shoulders, breast, waist, hips, height) => {
   const newArr = [];
   each(array, (item) => {
     const itemID = item._id;
@@ -16,9 +16,10 @@ export const compareTop = (array, shoulders, breast, waist, hips) => {
         link: item.link,
         price: item.price,
         size: x.size,
-        length: item.length,
+        length: item.itemLength,
         brand: item.brand,
         percent: top(shoulders, x.shoulders, breast, x.breast, waist, x.waist, hips, x.hips),
+        knee: length(height, item.itemLength)
       };
 
       if (shoulders <= x.shoulders && breast <= x.breast && waist <= x.waist && hips <= x.hips) {
