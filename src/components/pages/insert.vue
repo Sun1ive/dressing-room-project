@@ -32,11 +32,12 @@ export default {
     onCheckout() {
       const data = LocalStorage.get('DressingUserData');
 
-      if (data === null || data === undefined || data === {}) {
+      if (!data || data === undefined || data === {}) {
         this.$store.commit('setSelectedItem', this.link);
         this.$router.push('/params');
       } else {
-        setLocalData(height, shoulders, breast, waist, hips);
+        setLocalData(this.height, this.shoulders, this.breast, this.waist, this.hips);
+
         this.$store.commit('setLoading', true);
 
         const filteredItem = this.items.filter(item => item.link === this.link);
@@ -64,13 +65,10 @@ export default {
     },
   },
   computed: {
-    // items() {
-    //   return this.$store.getters.items;
-    // },
     ...mapGetters({
       items: 'items',
       height: 'getHeight',
-      shoulder: 'getShoulders',
+      shoulders: 'getShoulders',
       breast: 'getBreast',
       waist: 'getWaist',
       hips: 'getHips',
