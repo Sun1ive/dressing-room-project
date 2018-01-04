@@ -41,6 +41,8 @@
       </v-card-text>
     </app-params>
 
+    
+
     <app-params v-if="!isSetBreast">
       <v-btn
       slot="button"
@@ -141,7 +143,7 @@ export default {
       isSetHips: 'getHips',
     }),
     isReadyToCheckout() {
-      return !this.isSetBreast || !this.isSetWaist || !this.isSetHips || !this.isSetShoulders;
+      return !this.isSetHeight || !this.isSetBreast || !this.isSetWaist || !this.isSetHips || !this.isSetShoulders;
     },
   },
 };

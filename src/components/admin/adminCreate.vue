@@ -1,7 +1,7 @@
 <template>
   <v-container fluid>
-    <v-layout justify-center align-center>
-      <v-flex xs12 sm6 lg4>
+    <v-layout justify-center align-center >
+      <v-flex xs10 sm6 lg4>
         <v-alert
           v-if="isError.length > 0"
           color="error" 
@@ -13,12 +13,18 @@
       </v-flex>    
     </v-layout>
     <v-layout justify-center align-center>
-      <v-flex xs12 sm6 lg4>
+      <v-flex xs10 md6 lg4 class="text-xs-center">
+        <v-btn @click="select = !select">Click me</v-btn>
+      </v-flex>
+    </v-layout>
+    <v-layout justify-center align-center v-if="select">
+      <v-flex xs10 sm6 lg4>
         <v-form
           class="form text-xs-center" 
           @submit.prevent="addToBase"
         >
           <h1>Форма добавления вещи в базу</h1>
+          <h2>Плечевые изделия</h2>
           <v-text-field v-model.lazy="item.title" label="title" />
           <v-text-field v-model.lazy="item.src" label="src" />
           <v-text-field v-model.lazy="item.link" label="link" />
@@ -66,6 +72,31 @@
         </v-form>
       </v-flex>
     </v-layout>
+    <v-layout justify-center align-center v-if="!select">
+      <v-flex xs10 sm6 lg4>
+        <v-form
+          class="form text-xs-center" 
+          @submit.prevent="addToBase"
+        >
+          <h1>Форма добавления вещи в базу</h1>
+          <h2>Поясные изделия</h2>
+          <v-text-field v-model.lazy="item.title" label="title" />
+          <v-text-field v-model.lazy="item.src" label="src" />
+          <v-text-field v-model.lazy="item.link" label="link" />
+          <v-text-field v-model.lazy="item.brand" label="brand" />
+          <v-text-field v-model.number.lazy="item.price" label="price грн" />
+          <v-text-field v-model.lazy="item.color" label="color" />
+          <v-text-field v-model.number.lazy="item.length" label="item length см" />
+          
+
+          <v-btn
+            color="primary"
+            type="submit"
+          >Submit</v-btn>
+        </v-form>
+      </v-flex>
+    </v-layout>
+
   </v-container>
 </template>
 
@@ -82,6 +113,7 @@ export default {
   data() {
     return {
       error: '',
+      select: false,
       item: {
         sizes: [],
       },

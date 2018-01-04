@@ -1,12 +1,15 @@
 <template>
-  <wrapper>
-    <v-card-text slot="text">Охват груди {{ getBreast }} см</v-card-text>
-    <v-card-text slot="size">Размер: {{ getBreastSize }}</v-card-text>
-    <v-card-text slot="slider">
-      <v-slider :min="82" thumb-label :max="97" v-model="breast"></v-slider>
-    </v-card-text>
-    <v-btn slot="button" @click="onSave">Сохранить</v-btn>
-  </wrapper>
+    <wrapper>
+      <v-card-text slot="text">Охват груди {{ getBreast }} см</v-card-text>
+      <v-card-text slot="size">Размер: {{ getBreastSize }}</v-card-text>
+      <v-card-text slot="slider">
+        <v-slider :min="82" thumb-label :max="97" v-model="breast"></v-slider>
+      </v-card-text>
+      <v-btn 
+        slot="button" 
+        @click="onSave"
+      >Сохранить</v-btn>
+    </wrapper>
 </template>
 
 <script>
