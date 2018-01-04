@@ -24,7 +24,7 @@
       <v-flex xs10 sm6 lg4>
         <v-form
           class="form text-xs-center" 
-          @submit.prevent="addToBase"
+          @submit.prevent="addToBaseHumeral"
         >
           <h1>Форма добавления вещи в базу</h1>
           <h2>Плечевые изделия</h2>
@@ -81,7 +81,7 @@
       <v-flex xs10 sm6 lg4>
         <v-form
           class="form text-xs-center" 
-          @submit.prevent="addToBase"
+          @submit.prevent="addToBaseLumbar"
         >
           <h1>Форма добавления вещи в базу</h1>
           <h2>Поясные изделия</h2>
@@ -161,11 +161,11 @@ export default {
     };
   },
   methods: {
-    async addToBase() {
+    async addToBaseHumeral() {
       try {
         const c = SessionStorage.get('userAdminCredentials');
-
         this.item.sizes.push(this.xs, this.s, this.m, this.l);
+        this.item.type = 'humeral';
 
         await withAuth(c.username, c.password).post('/products', this.item);
 
@@ -210,9 +210,20 @@ export default {
           hips: null,
         };
       } catch (err) {
-        // throw new Error('Something bad happened', err)
-        // console.log(err.response.data.error);
         this.error = err.response.data.error.message;
+        throw new Error('Something bad happened', err)
+      }
+    },
+    async addToBaseLumbar() {
+      try {
+        const c = SessionStorage.get('userAdminCredentials');
+        this.item.sizes.push(this.xs, this.s, this.m, this.l);
+        this.item.type = 'lumbar';
+
+        await withAuth(c.username, c.password).post('/products', this.item);
+      } catch (err) {
+        this.error = err.response.data.error.message;
+        throw new Error('Something bad happened', err)
       }
     },
   },
