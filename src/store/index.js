@@ -76,7 +76,7 @@ export default new Vuex.Store({
           const resolved = response.data;
           commit('setLoadedDresses', resolved);
         } catch (error) {
-          throw new Error(`Could not fetch data ${error}`);
+          throw new Error(`Could not fetch data ${error.response.data}`);
         }
       }
       fetchDresses();

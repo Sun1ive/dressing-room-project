@@ -30,6 +30,7 @@ export default {
   methods: {
     onCheckout() {
       const data = LocalStorage.get('DressingUserData');
+
       if (data === null || data === undefined || data === {}) {
         this.$store.commit('setSelectedItem', this.link);
         this.$router.push('/params');
@@ -43,13 +44,27 @@ export default {
           this.$store.getters.getArm,
         );
         this.$store.commit('setLoading', true);
+
         const filteredItem = this.items.filter(item => item.link === this.link);
+        
         if (filteredItem.length === 0) {
           this.$store.dispatch('sendMail', this.link);
           this.$router.push('/404');
         } else {
-          this.$store.commit('runCompare', filteredItem);
-          this.$router.push('/single-result');
+          filteredItem.forEach(x => {
+            switch (x.type) {
+              case 'Плечевые':
+                this.$store.commit('runCompare', filteredItem);
+                this.$router.push('/single-result');
+                break;
+              case 'Поясные':
+                this.$store.commit('runCompareBottom', filteredItem);
+                this.$router.push('/single-result');
+                break;
+              default:
+                break;
+            }
+          });
         }
       }
     },

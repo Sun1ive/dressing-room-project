@@ -106,6 +106,8 @@ export default {
         this.item.sizes.push(this.xs, this.s, this.m, this.l);
 
         await withAuth(c.username, c.password).patch(`/products/${this.id}`, this.item);
+
+        this.$store.dispatch('getDresses');
         this.$router.push('/admin/view');
       } catch (error) {
         throw new Error('Something bad happened ', error);
