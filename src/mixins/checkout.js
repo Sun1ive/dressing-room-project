@@ -50,7 +50,7 @@ export default {
             this.filter(filteredItem);
           }
         } else if (filteredItem.length <= 0) {
-          filteredItem = this.items.filter(x => x.type === this.itemCategory);
+          filteredItem = this.items.filter(x => x.type === this.category);
           this.filter(filteredItem);
         }
       }

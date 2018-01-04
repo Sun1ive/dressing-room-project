@@ -11,8 +11,8 @@
       <v-flex xs10 sm6 lg2 class="text-xs-center">
         <h1>Category</h1>
          <v-select
-            :items="category"
-            v-model="itemCategory"
+            :items="itemCategories"
+            v-model="category"
             label="select category"
             single-line
             bottom
@@ -128,8 +128,8 @@ export default {
   mixins: [checkoutMixin],
   data() {
     return {
-      itemCategory: '',
-      category: ['Плечевые', 'Поясные'],
+      category: '',
+      itemCategories: ['Плечевые', 'Поясные'],
     };
   },
   computed: {
