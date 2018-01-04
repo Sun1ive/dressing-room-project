@@ -10,6 +10,7 @@
         <v-form class="form" @submit.prevent="onEdit">
 
           <v-text-field v-model.lazy="item.title" label="title" />
+          <v-text-field v-model.lazy="item.type" label="type" />
           <v-text-field v-model.lazy="item.src" label="src" />
           <v-text-field v-model.lazy="item.link" label="link" />
           <v-text-field v-model.lazy="item.brand" label="brand" />

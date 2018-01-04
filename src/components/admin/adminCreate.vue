@@ -24,11 +24,12 @@
       <v-flex xs10 sm6 lg4>
         <v-form
           class="form text-xs-center" 
-          @submit.prevent="addToBaseHumeral"
+          @submit.prevent="addToBase"
         >
           <h1>Форма добавления вещи в базу</h1>
           <h2>Плечевые изделия</h2>
           <v-text-field v-model.lazy="item.title" label="title" />
+          <v-text-field v-model.lazy="item.type" label="type" />
           <v-text-field v-model.lazy="item.src" label="src" />
           <v-text-field v-model.lazy="item.link" label="link" />
           <v-text-field v-model.lazy="item.brand" label="brand" />
@@ -81,11 +82,12 @@
       <v-flex xs10 sm6 lg4>
         <v-form
           class="form text-xs-center" 
-          @submit.prevent="addToBaseLumbar"
+          @submit.prevent="addToBase"
         >
           <h1>Форма добавления вещи в базу</h1>
           <h2>Поясные изделия</h2>
           <v-text-field v-model.lazy="item.title" label="title" />
+          <v-text-field v-model.lazy="item.type" label="type" />
           <v-text-field v-model.lazy="item.src" label="src" />
           <v-text-field v-model.lazy="item.link" label="link" />
           <v-text-field v-model.lazy="item.brand" label="brand" />
@@ -95,20 +97,20 @@
 
           <app-create>
             <v-card-text slot="bottom-size">XS</v-card-text>
-            <v-text-field v-model.number.lazy="l.waist" label="Талия" slot="bottom-waist" />
-            <v-text-field v-model.number.lazy="l.hips" label="Бедра" slot="bottom-hips" />
+            <v-text-field v-model.number.lazy="xs.waist" label="Талия" slot="bottom-waist" />
+            <v-text-field v-model.number.lazy="xs.hips" label="Бедра" slot="bottom-hips" />
           </app-create>
 
           <app-create>
             <v-card-text slot="bottom-size">S</v-card-text>
-            <v-text-field v-model.number.lazy="l.waist" label="Талия" slot="bottom-waist" />
-            <v-text-field v-model.number.lazy="l.hips" label="Бедра" slot="bottom-hips" />
+            <v-text-field v-model.number.lazy="s.waist" label="Талия" slot="bottom-waist" />
+            <v-text-field v-model.number.lazy="s.hips" label="Бедра" slot="bottom-hips" />
           </app-create>
 
           <app-create>
             <v-card-text slot="bottom-size">M</v-card-text>
-            <v-text-field v-model.number.lazy="l.waist" label="Талия" slot="bottom-waist" />
-            <v-text-field v-model.number.lazy="l.hips" label="Бедра" slot="bottom-hips" />
+            <v-text-field v-model.number.lazy="m.waist" label="Талия" slot="bottom-waist" />
+            <v-text-field v-model.number.lazy="m.hips" label="Бедра" slot="bottom-hips" />
           </app-create>
 
           <app-create>
@@ -161,7 +163,7 @@ export default {
     };
   },
   methods: {
-    async addToBaseHumeral() {
+    async addToBase() {
       try {
         const c = SessionStorage.get('userAdminCredentials');
         this.item.sizes.push(this.xs, this.s, this.m, this.l);
