@@ -15,8 +15,17 @@
     <v-layout justify-center align-center>
       <v-flex xs12 sm6 lg4>
         <v-form @submit.prevent="onLogIn">
-          <v-text-field required v-model="credentials.username" label="Username" />
-          <v-text-field required v-model.number="credentials.password" label="Password" type="password" />
+          <v-text-field 
+            required 
+            v-model="credentials.username" 
+            label="Username" 
+          />
+          <v-text-field 
+            required 
+            v-model.number="credentials.password" 
+            label="Password" 
+            type="password" 
+          />
           <v-btn type="submit">Sign in</v-btn>
         </v-form>
       </v-flex>
@@ -25,6 +34,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   data() {
     return {
@@ -38,17 +49,18 @@ export default {
     onLogIn() {
       this.$store.dispatch('onSignIn', this.credentials);
       setTimeout(() => {
-        if (this.$store.getters.isUserSignIn) {
+        if (this.isUserSignIn) {
           this.$router.push('/');
         }
       }, 100);
     },
   },
   computed: {
-    isError() {
-      return this.$store.state.error;
-    }
-  }
+    ...mapGetters({
+      isError: 'isError',
+      isUserSignIn: 'isUserSignIn',
+    }),
+  },
 };
 </script>
 

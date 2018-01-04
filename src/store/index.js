@@ -124,6 +124,7 @@ export default new Vuex.Store({
   },
   getters: {
     items: state => state.items,
+    isError: state => state.error,
     getShoulders: state => state.shoulders,
     getHeight: state => state.height,
     getBreast: state => state.breast,
