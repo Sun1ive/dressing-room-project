@@ -1,6 +1,6 @@
 <template>
   <v-container fluid class="home">
-    <v-layout justify-center align-end>
+    <v-layout justify-center align-center>
       <v-flex xs12 sm6 class="text-xs-center">
         <h1>Добро пожаловать в онлайн примерочную</h1>
         <p>Здесь вы можете примерить на себе конкретную вещь или же все вещи из нашей базы.</p>
@@ -10,20 +10,6 @@
     <v-layout>
       <v-flex class="text-xs-center">
         <h1>Укажите свои параметры</h1>
-      </v-flex>
-    </v-layout>
-
-    <v-layout class="my-3" justify-center align-center>
-      <v-flex xs10 sm6 lg2 class="text-xs-center">
-        <h1>Category</h1>
-         <v-select
-            :items="itemCategories"
-            v-model="category"
-            label="select category"
-            single-line
-            bottom
-            required
-          ></v-select>
       </v-flex>
     </v-layout>
 
