@@ -2,7 +2,7 @@
   <v-container fluid>
     
     <v-layout row>
-      <v-layout class="mt-5" id="one">
+      <v-layout justify-center class="mt-5" id="one">
         <v-flex xs10>
           <app-switch></app-switch>
         </v-flex>
@@ -101,6 +101,7 @@ export default {
 
 
 #one
-  min-width 25%
+  min-width 20%
+  margin 0 auto
 </style>
 

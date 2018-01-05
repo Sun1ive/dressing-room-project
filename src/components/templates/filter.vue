@@ -31,8 +31,7 @@ export default {
     onSwitch() {
       switch (this.itemType) {
         case 'Плечевые':
-          this.$store.commit('runCompareBottom', this.$store.getters.items);
-          // this.$store.commit('runCompareBottom', this.$store.getters.items.filter(item => item.type === 'Поясные'));
+          this.$store.commit('runCompareBottom', this.$store.getters.items.filter(item => item.type === 'Поясные'));
           break;
         case 'Поясные':
           this.$store.commit('runCompare', this.$store.getters.items.filter(item => item.type === 'Плечевые'));
