@@ -1,11 +1,15 @@
 <template>
-  <v-container grid-list-xl fluid>
+  <v-container fluid>
     
-    <v-layout>
-      <v-flex xs4>
-        <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum deleniti reiciendis mollitia cupiditate dolore officia tempora, magni ea. Aut, possimus blanditiis! Unde consectetur esse aut perferendis cum et a enim praesentium eos, incidunt modi ex laborum dolorum iusto. Autem at, corrupti repellat accusamus dicta beatae voluptates commodi nam temporibus distinctio.</h1>
-      </v-flex>
-      <v-flex xs10 lg3 v-for="(item, i) in filtered" :key="i">
+    <v-layout row>
+      <v-layout justify-center class="mt-5" id="one">
+        <v-flex xs10>
+          <app-switch></app-switch>
+        </v-flex>
+      </v-layout>
+      <v-container grid-list-xl>
+        <v-layout wrap>
+        <v-flex xs10 lg4 v-for="(item, i) in filtered" :key="i">
           <v-card>
             <v-card-media :height="picHeight" :src="item.src"></v-card-media>
             <v-card-text>
@@ -19,6 +23,8 @@
             </v-card-actions>
           </v-card>
         </v-flex>
+      </v-layout>
+      </v-container>
     </v-layout>
 
 
@@ -43,7 +49,12 @@
 </template>
 
 <script>
+import mySwitch from '../templates/filter';
+
 export default {
+  components: {
+    'app-switch': mySwitch
+  },
   data() {
     return {
       currentPage: 1,
@@ -75,12 +86,12 @@ export default {
       this.visibleResult = this.filtered.slice(this.sliceFrom, this.sliceFrom + this.perPage);
     },
   },
-  created() {
+/*   created() {
     setTimeout(() => {
       this.$store.commit('setLoading', false);
     }, 1000);
     this.updateVisibleItems();
-  },
+  }, */
 };
 </script>
 
@@ -88,5 +99,9 @@ export default {
 .card__text
   min-height: 200px !important;
 
+
+#one
+  min-width 20%
+  margin 0 auto
 </style>
 
