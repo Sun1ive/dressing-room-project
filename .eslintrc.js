@@ -12,7 +12,7 @@ module.exports = {
   },
   extends: ['airbnb-base', 'prettier', 'plugin:vue/recommended'],
   // required to lint *.vue files
-  plugins: ['html'],
+  plugins: ['html', 'vue', 'import'],
   // check if imports actually resolve
   settings: {
     'import/resolver': {
