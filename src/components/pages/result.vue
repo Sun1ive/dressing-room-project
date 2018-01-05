@@ -11,7 +11,7 @@
             <div>Длинна: <strong>{{ item.knee }}</strong></div>
           </v-card-text>
           <v-card-actions>
-            <v-btn :href="`${item.link}?attribute_pa_size=${item.size}`" target="_blank">Посмотреть</v-btn>
+            <v-btn :href="`${item.link}`" target="_blank">Посмотреть</v-btn>
           </v-card-actions>
         </v-card>
       </v-flex>
