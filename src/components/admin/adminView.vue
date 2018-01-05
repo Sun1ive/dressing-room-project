@@ -53,10 +53,10 @@ export default {
 
           this.$store.commit('removeFromItemList', id);
 
-          await withHeaders(`Beared ${token}`).delete(`/product/${id}`);
-          
+          await withHeaders(`Bearer ${token}`).delete(`/products/${id}`);
+
         } catch (error) {
-          throw new Error(`Something wrong ${error.response.data.message}`);
+          throw new Error(`Something wrong ${error.response}`);
         }
       }
     },
