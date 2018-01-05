@@ -18,21 +18,18 @@ export default {
   },
   methods: {
     onSave() {
-      this.$store.commit('setHips', this.getHips);
+      this.$store.commit('setHips', this.hips);
       this.$router.push('/');
     },
   },
   computed: {
-    getHips() {
-      return this.hips;
-    },
     getHipsSize() {
       const params = {
         size: null,
         number: null,
       };
 
-      const y = this.getHips;
+      const y = this.hips;
       if (y >= 90 && y <= 93) {
         params.size = 'XS';
         params.number = y;
@@ -49,9 +46,13 @@ export default {
         params.size = 'L';
         params.number = y;
       }
-
       return params.size;
     },
   },
+  created() {
+    if (this.$store.getters.getHips) {
+      this.hips = this.$store.getters.getHips;
+    }
+  }
 };
 </script>

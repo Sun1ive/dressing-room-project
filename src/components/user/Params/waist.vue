@@ -18,14 +18,11 @@ export default {
   },
   methods: {
     onSave() {
-      this.$store.commit('setWaist', this.getWaist);
+      this.$store.commit('setWaist', this.waist);
       this.$router.push('/');
     },
   },
   computed: {
-    getWaist() {
-      return this.waist;
-    },
     getWaistSize() {
       const params = {
         size: null,
@@ -53,5 +50,10 @@ export default {
       return params.size;
     },
   },
+    created() {
+    if (this.$store.getters.getWaist) {
+      this.waist = this.$store.getters.getWaist;
+    }
+  }
 };
 </script>

@@ -18,20 +18,17 @@ export default {
   },
   methods: {
     onSave() {
-      this.$store.commit('setShoulders', this.getShoulders);
+      this.$store.commit('setShoulders', this.shoulders);
       this.$router.push('/');
     },
   },
   computed: {
-    getShoulders() {
-      return this.shoulders;
-    },
     getShouldersSize() {
       const params = {
         size: null,
         number: null,
       };
-      const z = this.getShoulders;
+      const z = this.shoulders;
 
       if (z >= 30 && z <= 34) {
         params.size = 'XS';
@@ -52,6 +49,11 @@ export default {
 
       return params.size;
     },
+  },
+  created() {
+    if (this.$store.getters.getShoulders) {
+      this.shoulders = this.$store.getters.getShoulders;
+    }
   },
 };
 </script>
