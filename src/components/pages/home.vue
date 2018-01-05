@@ -47,8 +47,6 @@
       </v-card-text>
     </app-params>
 
-    
-
     <app-params v-if="!breast">
       <v-btn
       slot="button"
@@ -110,6 +108,32 @@
     </app-params>
   </v-container>
 </template>
+
+
+<script>
+import { mapMutations, mapGetters } from 'vuex';
+
+export default {
+  methods: {
+    ...mapMutations(['setSelectedItem', 'setLoading', 'runCompare', 'runCompareBottom']),
+  },
+  computed: {
+    ...mapGetters({
+      items: 'items',
+      selectedItem: 'selectedItem',
+      height: 'getHeight',
+      shoulders: 'getShoulders',
+      breast: 'getBreast',
+      waist: 'getWaist',
+      hips: 'getHips',
+    }),
+  },
+};
+</script>
+
+
+
+
 
 <style lang="stylus" scoped>
 </style>
