@@ -3,7 +3,7 @@
     
     <v-layout>
       <v-flex xs4>
-        <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum deleniti reiciendis mollitia cupiditate dolore officia tempora, magni ea. Aut, possimus blanditiis! Unde consectetur esse aut perferendis cum et a enim praesentium eos, incidunt modi ex laborum dolorum iusto. Autem at, corrupti repellat accusamus dicta beatae voluptates commodi nam temporibus distinctio.</h1>
+        <app-switch></app-switch>
       </v-flex>
       <v-flex xs10 lg3 v-for="(item, i) in filtered" :key="i">
           <v-card>
@@ -43,7 +43,12 @@
 </template>
 
 <script>
+import mySwitch from '../templates/filter';
+
 export default {
+  components: {
+    'app-switch': mySwitch
+  },
   data() {
     return {
       currentPage: 1,
