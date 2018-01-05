@@ -25,6 +25,7 @@ import {
   VPagination,
   VAlert,
   VSelect,
+  VSwitch,
   transitions,
 } from 'vuetify';
 import '../node_modules/vuetify/src/stylus/app.styl';
@@ -54,6 +55,7 @@ Vue.use(Vuetify, {
     VPagination,
     VAlert,
     VSelect,
+    VSwitch,
     transitions,
   },
   theme: {

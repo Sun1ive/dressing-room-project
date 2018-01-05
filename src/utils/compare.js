@@ -11,6 +11,7 @@ export const compareTop = (array, shoulders, breast, waist, hips, height) => {
 
       const myObj = {
         title: item.title,
+        type: item.type,
         src: item.src,
         id: item._id,
         link: item.link,
@@ -47,6 +48,7 @@ export const compareBottom = (array, waist, hips) => {
 
       const myObj = {
         title: item.title,
+        type: item.type,
         src: item.src,
         id: item._id,
         link: item.link,
