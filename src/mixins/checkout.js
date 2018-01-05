@@ -37,7 +37,12 @@ export default {
         case '/insert':
           if (data) {
             filteredItem = this.items.filter(item => item.link === this.link);
-            this.filter(filteredItem);
+            if (filteredItem.length <= 0) {
+              this.$store.dispatch('sendMail', this.link);
+              this.$router.push('/404');
+            } else {
+              this.filter(filteredItem);
+            }
           } else if (!data) {
             this.setSelectedItem(this.link);
             this.$router.push('/params');
@@ -47,40 +52,15 @@ export default {
           setLocalData(this.height, this.shoulders, this.breast, this.waist, this.hips);
           if (this.selectedItem) {
             filteredItem = this.items.filter(item => item.link === this.selectedItem);
-            this.filter(filteredItem)
+            this.filter(filteredItem);
           } else {
             filteredItem = this.items.filter(item => item.type === this.category);
             this.filter(filteredItem);
           }
           break;
-
-        default:
-          break;
+          
+        default:      break;
       }
-
-      /*   
-      if (!data && !this.height && !this.shoulders && !this.breast && !this.waist && !this.hips) {
-        this.selectItem(this.link);
-        this.$router.push('/params');
-      }
-      if (!data && this.height && this.shoulders && this.breast && this.waist && this.hips) {
-        setLocalData(this.height, this.shoulders, this.breast, this.waist, this.hips);
-        if (this.selectedItem) {
-          filteredItem = this.items.filter(item => item.link === this.selectedItem);
-          this.filter(filteredItem);
-        } else if (this.link) {
-          filteredItem = this.items.filter(item => item.link === this.link);
-          if (filteredItem.length <= 0) {
-            this.$store.dispatch('sendMail', this.link);
-            this.$router.push('/404');
-          } else {
-            this.filter(filteredItem);
-          }
-        } else if (filteredItem.length <= 0) {
-          filteredItem = this.items.filter(x => x.type === this.category);
-          this.filter(filteredItem);
-        }
-      } */
     },
   },
   computed: {
