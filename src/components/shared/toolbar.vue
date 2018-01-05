@@ -1,44 +1,6 @@
 <template>
   <nav>
-    <v-navigation-drawer
-      app
-      light
-      v-model="drawer"
-      absolute
-      temporary
-      clipped
-    >
-      <v-list>
-        <v-list-tile
-          v-for="item in filter"
-          :key="item.title"
-          @click=""
-        >
-          <v-list-tile-action>
-            <v-icon dark>{{ item.icon }}</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-        <v-list-tile 
-          @click="drawer = !drawer"
-        >
-          <v-list-tile-action>
-            <v-icon dark>close</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            Свернуть
-          </v-list-tile-content>
-        </v-list-tile>
-      </v-list>
-    </v-navigation-drawer>
     <v-toolbar dark color="primary">
-      <v-toolbar-items class="hidden-sm-and-down">
-        <v-btn
-        flat
-        @click="drawer = !drawer">НЕ ФИЛЬТР</v-btn>
-      </v-toolbar-items>
       <v-spacer />
       <v-toolbar-side-icon
         class="hidden-md-and-up"
@@ -79,21 +41,6 @@
 export default {
   data() {
     return {
-      drawer: false,
-      filter: [
-        {
-          title: 'Цвет',
-          icon: 'color_lens',
-        },
-        {
-          title: 'Бренд',
-          icon: 'star',
-        },
-        {
-          title: 'Цена',
-          icon: 'attach_money',
-        },
-      ],
       adminMenu: [
         {
           title: 'Admin View Page',
@@ -110,7 +57,7 @@ export default {
     menuItems() {
       let menuItems = [
         {
-          title: 'Главная',
+          title: 'Мои параметры',
           path: '/',
           id: 1,
           icon: 'home',
@@ -122,13 +69,7 @@ export default {
           icon: 'link',
         },
         {
-          title: 'Указать параметры',
-          path: '/params',
-          id: 4,
-          icon: 'settings',
-        },
-        {
-          title: 'Sign in',
+          title: 'Войти',
           path: '/signin',
           id: 5,
           icon: 'account_circle',
@@ -137,7 +78,7 @@ export default {
       if (this.userIsAuth) {
         menuItems = [
           {
-            title: 'Главная',
+            title: 'Мои параметры',
             path: '/',
             id: 1,
             icon: 'home',
@@ -147,12 +88,6 @@ export default {
             path: '/insert',
             id: 2,
             icon: 'link',
-          },
-          {
-            title: 'Указать параметры',
-            path: '/params',
-            id: 4,
-            icon: 'settings',
           },
         ];
       }

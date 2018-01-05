@@ -41,29 +41,34 @@ export default {
               this.$store.dispatch('sendMail', this.link);
               this.$router.push('/404');
             } else {
+              this.setSelectedItem(this.link);
               this.filter(filteredItem);
             }
           } else if (!data) {
             this.setSelectedItem(this.link);
-            this.$router.push('/params');
+            this.$router.push('/');
           }
           break;
-        case '/params':
+        case '/':
           setLocalData(this.height, this.shoulders, this.breast, this.waist, this.hips);
           if (this.selectedItem) {
             filteredItem = this.items.filter(item => item.link === this.selectedItem);
             this.filter(filteredItem);
           } else {
-            filteredItem = this.items.filter(item => item.type === this.category);
+            filteredItem = this.items.filter(item => item.type === this.type);
             this.filter(filteredItem);
           }
           break;
 
-        default: break;
+        default:
+          break;
       }
     },
   },
   computed: {
+    isReadyToCheckout() {
+      return !this.height || !this.breast || !this.waist || !this.hips || !this.shoulders;
+    },
     ...mapGetters({
       items: 'items',
       selectedItem: 'selectedItem',
@@ -72,6 +77,7 @@ export default {
       breast: 'getBreast',
       waist: 'getWaist',
       hips: 'getHips',
+      type: 'getType',
     }),
   },
 };

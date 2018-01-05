@@ -18,7 +18,7 @@ export default {
   methods: {
     onSave() {
       this.$store.commit('setHeight', this.height);
-      this.$router.push('/params');
+      this.$router.push('/');
     },
   },
 };
