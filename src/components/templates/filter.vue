@@ -11,7 +11,7 @@
           <v-card-text>
             <v-switch
             @change="onSwitch"
-            v-model="test"
+            v-model="switchState"
             :label="itemType"></v-switch>
           </v-card-text>
         </v-card>
@@ -24,12 +24,20 @@
 export default {
   data() {
     return {
-      test: null,
+      switchState: null,
     }
   },
   methods: {
     onSwitch() {
-      
+      switch (this.itemType) {
+        case 'Плечевые':
+          this.$store.commit('runCompareBottom', this.$store.getters.items);
+          // this.$store.commit('runCompareBottom', this.$store.getters.items.filter(item => item.type === 'Поясные'));
+          break;
+        case 'Поясные':
+          this.$store.commit('runCompare', this.$store.getters.items.filter(item => item.type === 'Плечевые'));
+        default: break;
+      }
     }
   },
   computed: {
