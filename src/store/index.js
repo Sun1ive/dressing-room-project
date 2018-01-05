@@ -108,6 +108,7 @@ export default new Vuex.Store({
           });
           const { token } = response.data;
           SessionStorage.set('AuthToken', token);
+          commit('setUserSignIn', true);
         } catch (error) {
           commit('setError', error.response.data.message);
           throw new Error(error);

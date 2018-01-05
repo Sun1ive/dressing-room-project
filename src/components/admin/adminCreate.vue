@@ -89,7 +89,7 @@
 </template>
 
 <script>
-import { withAuth, withHeaders } from '../../services/api';
+import { withHeaders } from '../../services/api';
 import { SessionStorage } from '@/utils/storage';
 
 import createContainer from '../templates/createContainer';
@@ -123,12 +123,11 @@ export default {
   methods: {
     async addToBase() {
       try {
-        // const c = SessionStorage.get('userAdminCredentials');
+        const token = SessionStorage.get('AuthToken');
+
         this.item.sizes.push(this.xs, this.s, this.m, this.l);
 
-        await withHeaders(SessionStorage.get('AuthToken')).post('/products', this.item)
-
-        // await withAuth(c.username, c.password).post('/products', this.item);
+        await withHeaders(`Bearer ${token}`).post('/products', this.item)
 
         this.item = {
           title: '',
