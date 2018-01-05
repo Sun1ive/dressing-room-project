@@ -45,23 +45,20 @@ export default {
           break;
         case '/params':
           setLocalData(this.height, this.shoulders, this.breast, this.waist, this.hips);
+          if (this.selectedItem) {
+            filteredItem = this.items.filter(item => item.link === this.selectedItem);
+            this.filter(filteredItem)
+          } else {
+            filteredItem = this.items.filter(item => item.type === this.category);
+            this.filter(filteredItem);
+          }
           break;
-      
-        default: break;
+
+        default:
+          break;
       }
 
-
-
-
-
-
-
-
-
-
-
-
-    /*   
+      /*   
       if (!data && !this.height && !this.shoulders && !this.breast && !this.waist && !this.hips) {
         this.selectItem(this.link);
         this.$router.push('/params');
