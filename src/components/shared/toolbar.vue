@@ -37,7 +37,7 @@
       <v-toolbar-items class="hidden-sm-and-down">
         <v-btn
         flat
-        @click="drawer = !drawer">Фильтр</v-btn>
+        @click="drawer = !drawer">НЕ ФИЛЬТР</v-btn>
       </v-toolbar-items>
       <v-spacer />
       <v-toolbar-side-icon
