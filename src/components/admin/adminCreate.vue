@@ -123,11 +123,11 @@ export default {
   methods: {
     async addToBase() {
       try {
-        const token = SessionStorage.get('AuthToken');
+        const token = `Bearer ${SessionStorage.get('AuthToken')}`
 
         this.item.sizes.push(this.xs, this.s, this.m, this.l);
 
-        await withHeaders(`Bearer ${token}`).post('/products', this.item)
+        await withHeaders(token).post('/products', this.item)
 
         this.item = {
           title: '',

@@ -75,7 +75,7 @@
 
 <script>
 import createContainer from '../templates/createContainer';
-import { withAuth } from '../../services/api';
+import { withHeaders } from '../../services/api';
 import { SessionStorage } from '../../utils/storage';
 
 export default {
@@ -102,10 +102,10 @@ export default {
   methods: {
     async onEdit() {
       try {
-        const c = SessionStorage.get('userAdminCredentials');
+        const token = `Bearer ${SessionStorage.get('AuthToken')}`
         this.item.sizes.push(this.xs, this.s, this.m, this.l);
 
-        await withAuth(c.username, c.password).patch(`/products/${this.id}`, this.item);
+        await withHeaders(token).patch(`/products/${this.id}`, this.item);
 
         this.$store.dispatch('getDresses');
         this.$router.push('/admin/view');

@@ -1,5 +1,10 @@
 <template>
   <v-container fluid>
+    <v-layout class="pt-4" justify-center align-center>
+      <v-flex xs10 sm6 class="text-xs-center">
+        <h2>Строка поиска по названию товара</h2>
+      </v-flex>
+    </v-layout>
     <v-layout justify-center>
       <v-flex xs10 sm6 lg4>
         <v-text-field v-model="query"/>
@@ -49,12 +54,9 @@ export default {
     async deleteItem(id) {
       if (confirm('Are you sure ?')) {
         try {
-          const token = SessionStorage.get('AuthToken');
-
+          const token = `Bearer ${SessionStorage.get('AuthToken')}`
           this.$store.commit('removeFromItemList', id);
-
-          await withHeaders(`Bearer ${token}`).delete(`/products/${id}`);
-
+          await withHeaders(token).delete(`/products/${id}`);
         } catch (error) {
           throw new Error(`Something wrong ${error.response}`);
         }
