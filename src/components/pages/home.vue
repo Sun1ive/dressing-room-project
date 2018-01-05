@@ -111,32 +111,10 @@
 
 
 <script>
-import { mapMutations, mapGetters } from 'vuex';
-import { LocalStorage, setLocalData } from '@/utils/storage';
+import checkoutMixin from '@/mixins/checkout';
 
 export default {
-  methods: {
-    ...mapMutations(['setSelectedItem', 'setLoading', 'runCompare', 'runCompareBottom']),
-    onCheckout() {
-      this.setLoading(true);
-      let filteredItem = [];
-      setLocalData(this.height, this.shoulders, this.breast, this.waist, this.hips);
-    },
-  },
-  computed: {
-    ...mapGetters({
-      items: 'items',
-      selectedItem: 'selectedItem',
-      height: 'getHeight',
-      shoulders: 'getShoulders',
-      breast: 'getBreast',
-      waist: 'getWaist',
-      hips: 'getHips',
-    }),
-    isReadyToCheckout() {
-      return !this.height || !this.breast || !this.waist || !this.hips || !this.shoulders;
-    },
-  },
+  mixins: [checkoutMixin],
 };
 </script>
 

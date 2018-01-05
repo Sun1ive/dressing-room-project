@@ -6,7 +6,6 @@ import AdminEdit from '@/components/admin/adminEdit';
 import AdminView from '@/components/admin/adminView';
 
 import SignIn from '@/components/user/signIn';
-import Params from '@/components/pages/params';
 import Home from '@/components/pages/home';
 import Result from '@/components/pages/result';
 import singleResult from '@/components/pages/singleResult';
@@ -55,11 +54,6 @@ export default new Router({
       path: '/',
       name: 'Home',
       component: Home,
-    },
-    {
-      path: '/params',
-      name: 'Params',
-      component: Params,
     },
     {
       path: '/shoulders',
