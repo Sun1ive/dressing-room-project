@@ -45,7 +45,7 @@ export default {
             }
           } else if (!data) {
             this.setSelectedItem(this.link);
-            this.$router.push('/params');
+            this.$router.push('/');
           }
           break;
         case '/params':
@@ -64,6 +64,9 @@ export default {
     },
   },
   computed: {
+    isReadyToCheckout() {
+      return !this.height || !this.breast || !this.waist || !this.hips || !this.shoulders || !this.category;
+    },
     ...mapGetters({
       items: 'items',
       selectedItem: 'selectedItem',

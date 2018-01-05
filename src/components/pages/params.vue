@@ -19,7 +19,7 @@ export default {
   },
   computed: {
     isReadyToCheckout() {
-      return !this.height || !this.breast || !this.waist || !this.hips || !this.shoulders || !this.category;
+      return !this.height || !this.breast || !this.waist || !this.hips || !this.shoulders
     },
   },
 };

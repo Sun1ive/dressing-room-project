@@ -116,6 +116,9 @@ import { mapMutations, mapGetters } from 'vuex';
 export default {
   methods: {
     ...mapMutations(['setSelectedItem', 'setLoading', 'runCompare', 'runCompareBottom']),
+    onCheckout() {
+      console.log(123);
+    },
   },
   computed: {
     ...mapGetters({
@@ -127,6 +130,9 @@ export default {
       waist: 'getWaist',
       hips: 'getHips',
     }),
+    isReadyToCheckout() {
+      return !this.height || !this.breast || !this.waist || !this.hips || !this.shoulders;
+    },
   },
 };
 </script>

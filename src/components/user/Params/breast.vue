@@ -22,7 +22,7 @@ export default {
   methods: {
     onSave() {
       this.$store.commit('setBreast', this.breast);
-      this.$router.push('/params');
+      this.$router.push('/');
     },
   },
   computed: {

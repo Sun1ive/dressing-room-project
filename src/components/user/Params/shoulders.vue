@@ -19,7 +19,7 @@ export default {
   methods: {
     onSave() {
       this.$store.commit('setShoulders', this.getShoulders);
-      this.$router.push('/params');
+      this.$router.push('/');
     },
   },
   computed: {
