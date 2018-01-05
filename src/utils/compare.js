@@ -19,7 +19,7 @@ export const compareTop = (array, shoulders, breast, waist, hips, height) => {
         length: item.itemLength,
         brand: item.brand,
         percent: top(shoulders, x.shoulders, breast, x.breast, waist, x.waist, hips, x.hips),
-        knee: length(height, item.itemLength)
+        difference: length(height, item.itemLength)
       };
 
       if (shoulders <= x.shoulders && breast <= x.breast && waist <= x.waist && hips <= x.hips) {

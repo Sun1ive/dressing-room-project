@@ -8,7 +8,7 @@
             <div>Коэффициент {{ item.percent }} %</div>
             <div class="mb-2">{{ item.title }}</div>
             <div>Ваш предпочитаемый размер: <strong>{{ item.size }}</strong></div>
-            <div>Длинна: <strong>{{ item.knee }}</strong></div>
+            <div>Длинна: <strong>{{ item.difference }}</strong></div>
           </v-card-text>
           <v-card-actions>
             <v-btn :href="`${item.link}`" target="_blank">Посмотреть</v-btn>

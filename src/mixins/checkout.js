@@ -58,8 +58,8 @@ export default {
             this.filter(filteredItem);
           }
           break;
-          
-        default:      break;
+
+        default: break;
       }
     },
   },
