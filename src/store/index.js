@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import { withAuth, withOutAuth } from '../services/api';
+import { withOutAuth } from '../services/api';
 import { compareTop, compareBottom } from '../utils/compare';
 import { SessionStorage } from '../utils/storage';
 
@@ -84,19 +84,26 @@ export default new Vuex.Store({
     onSignIn({ commit }, payload) {
       async function onLogIn() {
         try {
-          const response = await withAuth(payload.username, payload.password).get('/login');
-          if (response.status === 200) {
-            const credentials = {
-              username: payload.username,
-              password: payload.password,
-            };
-            SessionStorage.set('userAdminCredentials', credentials);
-            commit('setError', '');
-            commit('setUserSignIn', true);
-          }
+          // const response = await withAuth(payload.username, payload.password).get('/login');
+          // if (response.status === 200) {
+          //   const credentials = {
+          //     username: payload.username,
+          //     password: payload.password,
+          //   };
+          //   SessionStorage.set('userAdminCredentials', credentials);
+          //   commit('setError', '');
+          //   commit('setUserSignIn', true);
+          // }
+
+          const response = await withOutAuth().post('/user/login', {
+            email: payload.email,
+            password: payload.password
+          })
+          const { token } = response.data
+          SessionStorage.set('AuthToken', token);
         } catch (error) {
-          commit('setError', error.response.data.error);
-          throw new Error(error.response.data.error);
+          // commit('setError', error.response.data.error);
+          // throw new Error(error.response.data.error);
         }
       }
       onLogIn();

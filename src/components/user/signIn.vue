@@ -17,8 +17,8 @@
         <v-form @submit.prevent="onLogIn">
           <v-text-field 
             required 
-            v-model="credentials.username" 
-            label="Username" 
+            v-model="credentials.email" 
+            label="email" 
           />
           <v-text-field 
             required 
@@ -40,7 +40,7 @@ export default {
   data() {
     return {
       credentials: {
-        username: '',
+        email: '',
         password: null,
       },
     };
