@@ -91,23 +91,14 @@ export default new Vuex.Store({
     onSignIn({ commit }, payload) {
       async function onLogIn() {
         try {
-          // const response = await withAuth(payload.username, payload.password).get('/login');
-          // if (response.status === 200) {
-          //   const credentials = {
-          //     username: payload.username,
-          //     password: payload.password,
-          //   };
-          //   SessionStorage.set('userAdminCredentials', credentials);
-          //   commit('setError', '');
-          //   commit('setUserSignIn', true);
-          // }
-
           const response = await withOutAuth().post('/user/login', {
             email: payload.email,
             password: payload.password,
           });
           const { token } = response.data;
           SessionStorage.set('AuthToken', token);
+
+          commit('setError', '');
           commit('setUserSignIn', true);
         } catch (error) {
           commit('setError', error.response.data.message);

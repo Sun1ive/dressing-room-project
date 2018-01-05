@@ -84,7 +84,7 @@ new Vue({
       this.$store.dispatch('setParams', userInfo);
     }
     this.$store.dispatch('getDresses');
-    if (SessionStorage.get('userAdminCredentials')) {
+    if (SessionStorage.get('AuthToken')) {
       this.$store.commit('setUserSignIn', true);
     }
   },

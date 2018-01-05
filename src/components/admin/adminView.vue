@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import { withAuth } from '../../services/api';
+import { withHeaders } from '../../services/api';
 import { SessionStorage } from '@/utils/storage';
 
 export default {
@@ -49,11 +49,14 @@ export default {
     async deleteItem(id) {
       if (confirm('Are you sure ?')) {
         try {
-          const c = SessionStorage.get('userAdminCredentials');
+          const token = SessionStorage.get('AuthToken');
+
           this.$store.commit('removeFromItemList', id);
-          await withAuth(c.username, c.password).delete('/products/' + id);
+
+          await withHeaders(`Beared ${token}`).delete(`/product/${id}`);
+          
         } catch (error) {
-          console.log(error);
+          throw new Error(`Something wrong ${error.response.data.message}`);
         }
       }
     },

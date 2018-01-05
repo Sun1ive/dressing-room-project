@@ -52,7 +52,7 @@ export default {
         if (this.isUserSignIn) {
           this.$router.push('/');
         }
-      }, 100);
+      }, 500);
     },
   },
   computed: {
