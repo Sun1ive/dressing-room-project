@@ -112,12 +112,15 @@
 
 <script>
 import { mapMutations, mapGetters } from 'vuex';
+import { LocalStorage, setLocalData } from '@/utils/storage';
 
 export default {
   methods: {
     ...mapMutations(['setSelectedItem', 'setLoading', 'runCompare', 'runCompareBottom']),
     onCheckout() {
-      console.log(123);
+      this.setLoading(true);
+      let filteredItem = [];
+      setLocalData(this.height, this.shoulders, this.breast, this.waist, this.hips);
     },
   },
   computed: {

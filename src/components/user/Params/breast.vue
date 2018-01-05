@@ -1,9 +1,14 @@
 <template>
     <wrapper>
-      <v-card-text slot="text">Охват груди {{ getBreast }} см</v-card-text>
+      <v-card-text slot="text">Охват груди {{ breast }} см</v-card-text>
       <v-card-text slot="size">Размер: {{ getBreastSize }}</v-card-text>
       <v-card-text slot="slider">
-        <v-slider :min="82" thumb-label :max="97" v-model="breast"></v-slider>
+        <v-slider 
+          :min="82"
+          thumb-label
+          :max="97"
+          v-model="breast"
+        ></v-slider>
       </v-card-text>
       <v-btn 
         slot="button" 
@@ -26,16 +31,12 @@ export default {
     },
   },
   computed: {
-    getBreast() {
-      return this.breast;
-    },
     getBreastSize() {
       const params = {
         number: null,
         size: null,
       };
-
-      const x = this.getBreast;
+      const x = this.breast;
 
       if (x >= 82 && x < 86) {
         params.number = x;
@@ -53,14 +54,19 @@ export default {
         params.number = x;
         params.size = 'L';
       }
-
       return params.size;
     },
+  },
+  mounted() {
+    if (this.$store.getters.getBreast) {
+      this.breast = this.$store.getters.getBreast;
+    }
   },
 };
 </script>
 
 <style lang="stylus" scoped>
-.card__media
-  margin 0 auto
+.card__media {
+  margin: 0 auto;
+}
 </style>
