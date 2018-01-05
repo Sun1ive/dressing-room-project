@@ -58,7 +58,14 @@ export default new Vuex.Store({
       state.filtered = compareBottom(payload, state.waist, state.hips);
     },
     runCompare(state, payload) {
-      state.filtered = compareTop(payload, state.shoulders, state.breast, state.waist, state.hips, state.height);
+      state.filtered = compareTop(
+        payload,
+        state.shoulders,
+        state.breast,
+        state.waist,
+        state.hips,
+        state.height,
+      );
     },
     removeFromItemList(state, payload) {
       const index = state.items.map(item => item._id).indexOf(payload);
@@ -97,13 +104,13 @@ export default new Vuex.Store({
 
           const response = await withOutAuth().post('/user/login', {
             email: payload.email,
-            password: payload.password
-          })
-          const { token } = response.data
+            password: payload.password,
+          });
+          const { token } = response.data;
           SessionStorage.set('AuthToken', token);
         } catch (error) {
-          // commit('setError', error.response.data.error);
-          // throw new Error(error.response.data.error);
+          commit('setError', error.response.data.message);
+          throw new Error(error);
         }
       }
       onLogIn();

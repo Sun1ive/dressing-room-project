@@ -89,7 +89,7 @@
 </template>
 
 <script>
-import { withAuth } from '../../services/api';
+import { withAuth, withHeaders } from '../../services/api';
 import { SessionStorage } from '@/utils/storage';
 
 import createContainer from '../templates/createContainer';
@@ -123,10 +123,12 @@ export default {
   methods: {
     async addToBase() {
       try {
-        const c = SessionStorage.get('userAdminCredentials');
+        // const c = SessionStorage.get('userAdminCredentials');
         this.item.sizes.push(this.xs, this.s, this.m, this.l);
 
-        await withAuth(c.username, c.password).post('/products', this.item);
+        await withHeaders(SessionStorage.get('AuthToken')).post('/products', this.item)
+
+        // await withAuth(c.username, c.password).post('/products', this.item);
 
         this.item = {
           title: '',
@@ -141,35 +143,7 @@ export default {
         };
 
         this.$store.commit('addToItems', this.item);
-/* 
-        this.xs = {
-          size: 'XS',
-          shoulders: null,
-          breast: null,
-          waist: null,
-          hips: null,
-        };
-        this.s = {
-          size: 'S',
-          shoulders: null,
-          breast: null,
-          waist: null,
-          hips: null,
-        };
-        this.m = {
-          size: 'M',
-          shoulders: null,
-          breast: null,
-          waist: null,
-          hips: null,
-        };
-        this.l = {
-          size: 'L',
-          shoulders: null,
-          breast: null,
-          waist: null,
-          hips: null,
-        }; */
+
       } catch (err) {
         this.item.sizes = [];
         this.error = err.response.data.error.message;
