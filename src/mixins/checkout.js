@@ -30,13 +30,43 @@ export default {
     onCheckout() {
       this.setLoading(true);
       let filteredItem = [];
-
+      const path = window.location.pathname;
       const data = LocalStorage.get('DressingUserData');
-      if (!data || data === undefined || data === {}) {
+
+      switch (path) {
+        case '/insert':
+          if (data) {
+            filteredItem = this.items.filter(item => item.link === this.link);
+            this.filter(filteredItem);
+          } else if (!data) {
+            this.setSelectedItem(this.link);
+            this.$router.push('/params');
+          }
+          break;
+        case '/params':
+          setLocalData(this.height, this.shoulders, this.breast, this.waist, this.hips);
+          break;
+      
+        default: break;
+      }
+
+
+
+
+
+
+
+
+
+
+
+
+    /*   
+      if (!data && !this.height && !this.shoulders && !this.breast && !this.waist && !this.hips) {
         this.selectItem(this.link);
         this.$router.push('/params');
       }
-      if (data) {
+      if (!data && this.height && this.shoulders && this.breast && this.waist && this.hips) {
         setLocalData(this.height, this.shoulders, this.breast, this.waist, this.hips);
         if (this.selectedItem) {
           filteredItem = this.items.filter(item => item.link === this.selectedItem);
@@ -53,7 +83,7 @@ export default {
           filteredItem = this.items.filter(x => x.type === this.category);
           this.filter(filteredItem);
         }
-      }
+      } */
     },
   },
   computed: {
