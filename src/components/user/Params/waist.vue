@@ -28,7 +28,7 @@ export default {
         size: null,
         number: null,
       };
-      const z = this.getWaist;
+      const z = this.waist;
 
       if (z >= 63 && z < 67) {
         params.size = 'XS';
