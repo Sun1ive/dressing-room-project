@@ -17,12 +17,12 @@
         <v-form @submit.prevent="onLogIn">
           <v-text-field 
             required 
-            v-model="credentials.email" 
+            v-model.lazy="credentials.email" 
             label="email" 
           />
           <v-text-field 
             required 
-            v-model.number="credentials.password" 
+            v-model.number.lazy="credentials.password" 
             label="Password" 
             type="password" 
           />
