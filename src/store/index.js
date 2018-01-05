@@ -92,7 +92,7 @@ export default new Vuex.Store({
       }
       fetchDresses();
     },
-    onSignIn({ commit }, payload) {
+    onSignIn({ commit, state }, payload) {
       async function onLogIn() {
         try {
           const response = await withOutAuth().post('/user/login', {
@@ -102,7 +102,9 @@ export default new Vuex.Store({
           const { token } = response.data;
           SessionStorage.set('AuthToken', token);
 
-          commit('setError', '');
+          if (state.error) {
+            commit('setError', '');
+          }
           commit('setUserSignIn', true);
         } catch (error) {
           commit('setError', error.response.data.message);
