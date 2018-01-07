@@ -20,7 +20,7 @@ export const top = (
 export const bottom = (userWaist, itemWaist, userHips, itemHips) =>
   Math.floor(userWaist / itemWaist * (userHips / itemHips) * 100);
 
-export const length = (userHeight, itemLength) => {
+export const upperLength = (userHeight, itemLength) => {
 
   const x = userHeight;
   const y = x / 8 ;
@@ -35,9 +35,5 @@ export const length = (userHeight, itemLength) => {
   } else if (x - (y + g) === z) {
     text = 'На уровне колена'
   }
-  
-
-
-
   return text;
 };

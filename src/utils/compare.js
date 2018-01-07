@@ -1,14 +1,14 @@
 import each from 'lodash/each';
 import last from 'lodash/last';
 import sortBy from 'lodash/sortBy';
-import { top, bottom, length } from './functions';
+import { top, bottom, upperLength } from './functions';
+
 
 export const compareTop = (array, shoulders, breast, waist, hips, height) => {
   const newArr = [];
-  each(array, (item) => {
+  each(array, item => {
     const itemID = item._id;
     each(item.sizes, x => {
-
       const myObj = {
         title: item.title,
         type: item.type,
@@ -20,7 +20,7 @@ export const compareTop = (array, shoulders, breast, waist, hips, height) => {
         length: item.itemLength,
         brand: item.brand,
         percent: top(shoulders, x.shoulders, breast, x.breast, waist, x.waist, hips, x.hips),
-        difference: length(height, item.itemLength)
+        difference: upperLength(height, item.itemLength),
       };
 
       if (shoulders <= x.shoulders && breast <= x.breast && waist <= x.waist && hips <= x.hips) {
@@ -35,17 +35,15 @@ export const compareTop = (array, shoulders, breast, waist, hips, height) => {
       }
     });
   });
-  return sortBy(newArr, 'percent')
-    .reverse()
-    // .filter(item => item.percent >= 70);
+  return sortBy(newArr, 'percent').reverse();
+  // .filter(item => item.percent >= 70);
 };
 
 export const compareBottom = (array, waist, hips) => {
   const newArr = [];
-  each(array, (item) => {
+  each(array, item => {
     const itemID = item._id;
     each(item.sizes, x => {
-
       const myObj = {
         title: item.title,
         type: item.type,
@@ -71,7 +69,6 @@ export const compareBottom = (array, waist, hips) => {
       }
     });
   });
-  return sortBy(newArr, 'percent')
-    .reverse()
-    // .filter(item => item.percent >= 70);
-}
+  return sortBy(newArr, 'percent').reverse();
+  // .filter(item => item.percent >= 70);
+};

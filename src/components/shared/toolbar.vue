@@ -43,6 +43,7 @@ import { mapGetters } from 'vuex';
 export default {
   data() {
     return {
+      drawer: false,
       adminMenu: [
         {
           title: 'Admin View Page',
