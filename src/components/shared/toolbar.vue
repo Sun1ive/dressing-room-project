@@ -13,7 +13,7 @@
           :key="index"
           :to="item.path"
           exact
-        >{{ item.title }}</v-btn>
+        >{{ item.title }} {{ item.visible }}</v-btn>
       </v-toolbar-items>
       <v-spacer />
       <v-toolbar-items v-if="userIsAuth">
@@ -24,9 +24,9 @@
           >Admin Menu</v-btn>
           <v-list>
             <v-list-tile
-            v-for="item in adminMenu"
-            :key="item.title"
-            @click="$router.push(item.path)"
+              v-for="item in adminMenu"
+              :key="item.title"
+              @click="$router.push(item.path)"
             >
               <v-list-tile-title>{{ item.title }}</v-list-tile-title>
             </v-list-tile>
@@ -38,6 +38,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   data() {
     return {
@@ -50,7 +52,7 @@ export default {
           title: 'Admin Create Page',
           path: '/admin/create',
         },
-      ]
+      ],
     };
   },
   computed: {
@@ -69,9 +71,15 @@ export default {
           icon: 'link',
         },
         {
+          title: 'Результат',
+          path: '/result',
+          id: 5,
+          icon: 'account_circle',
+        },
+        {
           title: 'Войти',
           path: '/signin',
-          id: 5,
+          id: 6,
           icon: 'account_circle',
         },
       ];
@@ -91,11 +99,18 @@ export default {
           },
         ];
       }
+      this.filtered.length > 0
+        ? menuItems.push({
+            title: 'Результат',
+            path: '/result',
+          })
+        : 0;
       return menuItems;
     },
-    userIsAuth() {
-      return this.$store.getters.isUserSignIn;
-    },
+    ...mapGetters({
+      userIsAuth: 'isUserSignIn',
+      filtered: 'filtered',
+    }),
   },
 };
 </script>
