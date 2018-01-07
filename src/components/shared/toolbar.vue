@@ -61,25 +61,16 @@ export default {
         {
           title: 'Мои параметры',
           path: '/',
-          id: 1,
           icon: 'home',
         },
         {
           title: 'Ссылка',
           path: '/insert',
-          id: 2,
           icon: 'link',
-        },
-        {
-          title: 'Результат',
-          path: '/result',
-          id: 5,
-          icon: 'account_circle',
         },
         {
           title: 'Войти',
           path: '/signin',
-          id: 6,
           icon: 'account_circle',
         },
       ];
@@ -88,13 +79,11 @@ export default {
           {
             title: 'Мои параметры',
             path: '/',
-            id: 1,
             icon: 'home',
           },
           {
             title: 'Ссылка',
             path: '/insert',
-            id: 2,
             icon: 'link',
           },
         ];
