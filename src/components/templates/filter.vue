@@ -75,7 +75,13 @@ export default {
   },
   watch: {
     selectedColors(val) {
-      this.filteredByColor = this.filtered.filter(item => item.color === val.toString())
+      const type = this.itemType;
+      if (val.length > 0) {
+        const payload = this.filtered.filter(item => item.color === val.toString());
+        this.$store.commit('setFilteredDresses', payload);
+      } else {
+        this.$store.commit('runCompareBottom', this.items.filter(item => item.type === type));
+      }
     },
   },
 };
