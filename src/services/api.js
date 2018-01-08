@@ -5,7 +5,7 @@ export const withHeaders = token =>
     // baseURL: `https://node-room.herokuapp.com/`,
     baseURL: `http://localhost:8081/`,
     responseType: 'json',
-    headers: { 'Authorization' : token }
+    headers: { Authorization: token },
   });
 
 export const withOutAuth = () =>
