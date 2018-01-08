@@ -3,6 +3,7 @@
     <v-layout justify-center align-center>
       <v-flex xs12 sm6 class="text-xs-center">
         <h1>This is a Admin page!</h1>
+        <p>это надо все переписать</p>
       </v-flex>
     </v-layout>
     <v-layout>
