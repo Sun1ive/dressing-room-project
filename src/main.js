@@ -26,6 +26,7 @@ import {
   VAlert,
   VSelect,
   VSwitch,
+  VCheckbox,
   transitions,
 } from 'vuetify';
 import '../node_modules/vuetify/src/stylus/app.styl';
@@ -56,6 +57,7 @@ Vue.use(Vuetify, {
     VAlert,
     VSelect,
     VSwitch,
+    VCheckbox,
     transitions,
   },
   theme: {

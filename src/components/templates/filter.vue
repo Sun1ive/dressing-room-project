@@ -10,9 +10,26 @@
           </v-card-title>
           <v-card-text>
             <v-switch
-            @change="onSwitch"
-            v-model="switchState"
-            :label="itemType"></v-switch>
+              @change="onSwitch"
+              v-model="switchState"
+              :label="itemType"
+            ></v-switch>
+          </v-card-text>
+        </v-card>
+      </v-flex>
+    </v-layout>
+    <v-layout class="mt-3" justify-center align-center>
+      <v-flex class="text-xs-center">
+        <v-card>
+        <h1>Цвета</h1>
+          <v-card-text>
+            <v-checkbox
+              v-for="color in itemsColors"
+              :key="color"
+              :label="color"
+              v-model="selectedColors"
+              :value="color"
+            ></v-checkbox>
           </v-card-text>
         </v-card>
       </v-flex>
@@ -25,25 +42,36 @@ export default {
   data() {
     return {
       switchState: null,
-    }
+      selectedColors: [],
+    };
   },
   methods: {
     onSwitch() {
       switch (this.itemType) {
         case 'Плечевые':
-          this.$store.commit('runCompareBottom', this.$store.getters.items.filter(item => item.type === 'Поясные'));
+          this.$store.commit(
+            'runCompareBottom',
+            this.$store.getters.items.filter(item => item.type === 'Поясные'),
+          );
           break;
         case 'Поясные':
-          this.$store.commit('runCompare', this.$store.getters.items.filter(item => item.type === 'Плечевые'));
-        default: break;
+          this.$store.commit(
+            'runCompare',
+            this.$store.getters.items.filter(item => item.type === 'Плечевые'),
+          );
+        default:
+          break;
       }
-    }
+    },
   },
   computed: {
     itemType() {
-      return this.$store.getters.filtered.map(item => item.type)[0]
-    }
-  }
+      return this.$store.getters.filtered.map(item => item.type)[0];
+    },
+    itemsColors() {
+      return this.$store.getters.filtered.map(item => item.color);
+    },
+  },
 };
 </script>
 

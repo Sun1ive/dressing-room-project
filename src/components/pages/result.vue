@@ -3,7 +3,7 @@
     
       <v-layout row wrap>
 
-      <v-flex xs10 sm3>
+      <v-flex class="mt-4" xs10 sm3>
         <app-switch></app-switch>
       </v-flex>
       <v-flex xs10 sm9>
