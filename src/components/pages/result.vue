@@ -1,32 +1,32 @@
 <template>
   <v-container fluid>
     
-    <v-layout row>
-      <v-layout justify-center class="mt-5" id="one">
-        <v-flex xs10>
-          <app-switch></app-switch>
-        </v-flex>
-      </v-layout>
-      <v-container grid-list-xl>
-        <v-layout wrap>
-        <v-flex xs10 lg4 v-for="(item, i) in filtered" :key="i">
-          <v-card>
-            <v-card-media :height="picHeight" :src="item.src"></v-card-media>
-            <v-card-text>
-              <div>Коэффициент {{ item.percent }} %</div>
-              <div class="mb-2">{{ item.title }}</div>
-              <div>Ваш предпочитаемый размер: <strong>{{ item.size }}</strong></div>
-              <div>Длинна: <strong>{{ item.difference }}</strong></div>
-            </v-card-text>
-            <v-card-actions>
-              <v-btn :href="`${item.link}`" target="_blank">Посмотреть</v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-flex>
-      </v-layout>
-      </v-container>
-    </v-layout>
+      <v-layout row wrap>
 
+      <v-flex xs10 sm3>
+        <app-switch></app-switch>
+      </v-flex>
+      <v-flex xs10 sm9>
+        <v-container fluid grid-list-xl>
+          <v-layout row wrap>
+            <v-flex xs10 lg4 v-for="(item, i) in filtered" :key="i">
+              <v-card>
+                <v-card-media :height="picHeight" :src="item.src"></v-card-media>
+                <v-card-text>
+                  <div>Коэффициент {{ item.percent }} %</div>
+                  <div class="mb-2">{{ item.title }}</div>
+                  <div>Ваш предпочитаемый размер: <strong>{{ item.size }}</strong></div>
+                  <div>Длинна: <strong>{{ item.difference }}</strong></div>
+                </v-card-text>
+                <v-card-actions>
+                  <v-btn :href="`${item.link}`" target="_blank">Посмотреть</v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-flex>
+          </v-layout>
+        </v-container>
+      </v-flex>
+      </v-layout>
 
 
 
