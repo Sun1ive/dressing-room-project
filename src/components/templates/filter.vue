@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapMutations } from 'vuex';
 
 export default {
   data() {
@@ -49,16 +49,14 @@ export default {
     };
   },
   methods: {
+    ...mapMutations(['runCompareBottom', 'runCompare', 'setFilteredDresses']),
     onSwitch() {
       switch (this.itemType) {
         case 'Плечевые':
-          this.$store.commit(
-            'runCompareBottom',
-            this.items.filter(item => item.type === 'Поясные'),
-          );
+          this.runCompareBottom(this.items.filter(item => item.type === 'Поясные'));
           break;
         case 'Поясные':
-          this.$store.commit('runCompare', this.items.filter(item => item.type === 'Плечевые'));
+          this.runCompare(this.items.filter(item => item.type === 'Плечевые'));
         default:
           break;
       }
@@ -78,9 +76,16 @@ export default {
       const type = this.itemType;
       if (val.length > 0) {
         const payload = this.filtered.filter(item => item.color === val.toString());
-        this.$store.commit('setFilteredDresses', payload);
+        this.setFilteredDresses(payload);
       } else {
-        this.$store.commit('runCompareBottom', this.items.filter(item => item.type === type));
+        switch (type) {
+          case 'Плечевые':
+            this.runCompare(this.items.filter(item => item.type === type));
+            break;
+          case 'Поясные':
+            this.runCompareBottom(this.items.filter(item => item.type === type));
+          default: break;
+        }
       }
     },
   },
