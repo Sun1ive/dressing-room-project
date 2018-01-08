@@ -9,11 +9,16 @@
             <div class="mb-2">{{ item.title }}</div>
             <div class="my-1">{{ item.brand }}</div>
             <div>Ваш предпочитаемый размер: <strong>{{ item.size }}</strong></div>
-            <div>Длинна: {{ item.difference }}</div>
+            <div>Длинна: <strong>{{ item.difference }}</strong></div>
           </v-card-text>
           <v-card-actions>
-            <v-btn :href="`${item.link}`" target="_blank">Посмотреть</v-btn>
-            <v-btn>Посмотреть все</v-btn>
+            <v-btn 
+              :href="`${item.link}`"
+              target="_blank"
+            >Посмотреть</v-btn>
+            <v-btn
+              @click="showAll"
+            >Посмотреть все</v-btn>
           </v-card-actions>
         </v-card>
       </v-flex>
@@ -26,8 +31,14 @@
 import { mapGetters } from 'vuex';
 
 export default {
+  methods: {
+    showAll() {
+      this.$store.commit('runCompare', this.items);
+      this.$router.push('/result');
+    },
+  },
   computed: {
-    ...mapGetters(['filtered', 'isLoading']),
+    ...mapGetters(['filtered', 'isLoading', 'items']),
   },
   created() {
     setTimeout(() => {
