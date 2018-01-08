@@ -38,11 +38,14 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   data() {
     return {
       switchState: null,
       selectedColors: [],
+      filteredByColor: [],
     };
   },
   methods: {
@@ -51,25 +54,28 @@ export default {
         case 'Плечевые':
           this.$store.commit(
             'runCompareBottom',
-            this.$store.getters.items.filter(item => item.type === 'Поясные'),
+            this.items.filter(item => item.type === 'Поясные'),
           );
           break;
         case 'Поясные':
-          this.$store.commit(
-            'runCompare',
-            this.$store.getters.items.filter(item => item.type === 'Плечевые'),
-          );
+          this.$store.commit('runCompare', this.items.filter(item => item.type === 'Плечевые'));
         default:
           break;
       }
     },
   },
   computed: {
+    ...mapGetters(['items', 'filtered']),
     itemType() {
-      return this.$store.getters.filtered.map(item => item.type)[0];
+      return this.filtered.map(item => item.type)[0];
     },
     itemsColors() {
-      return this.$store.getters.filtered.map(item => item.color);
+      return this.filtered.map(item => item.color);
+    },
+  },
+  watch: {
+    selectedColors(val) {
+      this.filteredByColor = this.filtered.filter(item => item.color === val.toString())
     },
   },
 };

@@ -51,6 +51,8 @@
 <script>
 import mySwitch from '../templates/filter';
 
+import { mapGetters } from 'vuex';
+
 export default {
   components: {
     'app-switch': mySwitch
@@ -64,12 +66,7 @@ export default {
     };
   },
   computed: {
-    filtered() {
-      return this.$store.getters.filtered;
-    },
-    isLoading() {
-      return this.$store.getters.isLoading;
-    },
+    ...mapGetters(['filtered', 'isLoading']),
     totalPages() {
       return Math.ceil(this.filtered.length / this.perPage - 1);
     },
