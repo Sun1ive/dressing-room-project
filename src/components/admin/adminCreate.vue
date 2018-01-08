@@ -123,13 +123,13 @@ export default {
   methods: {
     async addToBase() {
       try {
-        const token = `Bearer ${SessionStorage.get('AuthToken')}`
+        const token = `Bearer ${SessionStorage.get('AuthToken')}`;
 
-        this.item.sizes.push(this.xs, this.s, this.m, this.l);
-
-        await withHeaders(token).post('/products', this.item)
-
-        this.item = {
+        if (this.item.sizes.length === 0) {
+          this.item.sizes.push(this.xs, this.s, this.m, this.l);
+        }
+        await withHeaders(token).post('/products', this.item);
+        /*    this.item = {
           title: '',
           type: '',
           link: '',
@@ -139,16 +139,15 @@ export default {
           price: null,
           color: '',
           length: null,
-        };
+        }; */
 
         this.$store.commit('addToItems', this.item);
-
       } catch (err) {
         this.item.sizes = [];
         this.error = err.response.data.error.message;
-        throw new Error('Something bad happened', err)
+        throw new Error('Something bad happened', err);
       }
-    }
+    },
   },
   computed: {
     isError() {

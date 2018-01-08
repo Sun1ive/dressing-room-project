@@ -24,8 +24,8 @@
         <h1>Цвета</h1>
           <v-card-text>
             <v-checkbox
-              v-for="color in itemsColors"
-              :key="color"
+              v-for="(color, i) in itemsColors"
+              :key="i"
               :label="color"
               v-model="selectedColors"
               :value="color"
@@ -39,6 +39,7 @@
 
 <script>
 import { mapGetters, mapMutations } from 'vuex';
+import uniq from 'lodash/uniq';
 
 export default {
   data() {
@@ -68,7 +69,7 @@ export default {
       return this.filtered.map(item => item.type)[0];
     },
     itemsColors() {
-      return this.filtered.map(item => item.color);
+      return uniq(this.filtered.map(item => item.color));
     },
   },
   watch: {
@@ -84,7 +85,8 @@ export default {
             break;
           case 'Поясные':
             this.runCompareBottom(this.items.filter(item => item.type === type));
-          default: break;
+          default:
+            break;
         }
       }
     },
