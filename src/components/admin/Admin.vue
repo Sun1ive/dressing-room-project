@@ -6,7 +6,9 @@
       </v-flex>
     </v-layout>
     <v-layout>
-      <router-view />
+      <transition name="fade" mode="out-in">
+        <router-view />
+      </transition>
     </v-layout>
   </v-container>
 </template>
@@ -15,6 +17,5 @@
 export default {};
 </script>
 
-<style scoped>
-
+<style scoped lang="stylus">
 </style>
