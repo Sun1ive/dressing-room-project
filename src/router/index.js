@@ -19,6 +19,8 @@ import Breast from '@/components/user/Params/breast';
 import Waist from '@/components/user/Params/waist';
 import Hips from '@/components/user/Params/hips';
 
+import AuthGuard from './auth-guard';
+
 Vue.use(Router);
 
 export default new Router({
@@ -32,6 +34,7 @@ export default new Router({
     {
       path: '/admin',
       component: Admin,
+      beforeEnter: AuthGuard,
       children: [
         {
           path: 'view',
