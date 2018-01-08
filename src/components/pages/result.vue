@@ -9,7 +9,7 @@
       <v-flex xs10 sm9>
         <v-container fluid grid-list-xl>
           <v-layout row wrap>
-            <v-flex xs10 lg4 v-for="(item, i) in filtered" :key="i">
+            <v-flex xs10 lg4 v-for="(item, i) in visibleItems" :key="i">
               <v-card>
                 <v-card-media :height="picHeight" :src="item.src"></v-card-media>
                 <v-card-text>
@@ -28,9 +28,7 @@
       </v-flex>
       </v-layout>
 
-
-
-  <!--   <v-layout justify-center align-center v-if="!isLoading">
+     <v-layout justify-center align-center>
       <v-flex class="text-xs-center">
         <v-pagination
           v-model="currentPage"
@@ -42,7 +40,7 @@
     </v-layout>
 
 
-    <AppLoader v-if="isLoading" /> -->
+   <!-- <AppLoader v-if="isLoading" /> -->
 
 
   </v-container>
@@ -55,14 +53,14 @@ import { mapGetters } from 'vuex';
 
 export default {
   components: {
-    'app-switch': mySwitch
+    'app-switch': mySwitch,
   },
   data() {
     return {
       currentPage: 1,
       perPage: 2,
-      visibleResult: [],
       picHeight: 500,
+      visibleItems: [],
     };
   },
   computed: {
@@ -80,10 +78,20 @@ export default {
       this.updateVisibleItems();
     },
     updateVisibleItems() {
-      this.visibleResult = this.filtered.slice(this.sliceFrom, this.sliceFrom + this.perPage);
+      this.visibleItems = this.filtered.slice(this.sliceFrom, this.sliceFrom + this.perPage);
     },
   },
-/*   created() {
+  mounted() {
+    this.visibleItems = this.filtered;
+    this.updateVisibleItems();
+  },
+  watch: {
+    filtered() {
+      this.visibleItems = this.filtered;
+      // this.updateVisibleItems();
+    },
+  },
+  /*   created() {
     setTimeout(() => {
       this.$store.commit('setLoading', false);
     }, 1000);
@@ -93,12 +101,13 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.card__text
+.card__text {
   min-height: 200px !important;
+}
 
-
-#one
-  min-width 20%
-  margin 0 auto
+#one {
+  min-width: 20%;
+  margin: 0 auto;
+}
 </style>
 
