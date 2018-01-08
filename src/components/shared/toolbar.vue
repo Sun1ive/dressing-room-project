@@ -88,6 +88,10 @@ export default {
       ],
       adminMenu: [
         {
+          title: 'Admin',
+          path: '/admin'
+        },
+        {
           title: 'Admin View Page',
           path: '/admin/view',
         },

@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
+import Admin from '@/components/admin/Admin';
 import AdminCreate from '@/components/admin/adminCreate';
 import AdminEdit from '@/components/admin/adminEdit';
 import AdminView from '@/components/admin/adminView';
@@ -18,7 +19,6 @@ import Breast from '@/components/user/Params/breast';
 import Waist from '@/components/user/Params/waist';
 import Hips from '@/components/user/Params/hips';
 
-
 Vue.use(Router);
 
 export default new Router({
@@ -30,20 +30,23 @@ export default new Router({
       component: SignIn,
     },
     {
-      path: '/admin/create',
-      name: 'adminCreate',
-      component: AdminCreate,
-    },
-    {
-      path: '/admin/view',
-      name: 'adminView',
-      component: AdminView,
-    },
-    {
-      path: '/admin/edit/:id',
-      name: 'adminEdit',
-      props: true,
-      component: AdminEdit,
+      path: '/admin',
+      component: Admin,
+      children: [
+        {
+          path: 'view',
+          component: AdminView,
+        },
+        {
+          path: 'create',
+          component: AdminCreate,
+        },
+        {
+          path: 'edit/:id',
+          component: AdminEdit,
+          props: true,
+        },
+      ],
     },
     {
       path: '/insert',
