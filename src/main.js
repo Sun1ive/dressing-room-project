@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import 'babel-polyfill';
 
 import {
   Vuetify,
@@ -16,6 +17,8 @@ import '../node_modules/vuetify/src/stylus/app.styl'
 
 import App from './App';
 import router from './router';
+import store from './store';
+import { LocalStorage, SessionStorage } from './utils/storage';
 
 Vue.use(Vuetify, {
   components: {
@@ -45,6 +48,7 @@ Vue.config.productionTip = false;
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
+  store,
   router,
   render: h => h(App),
 });
