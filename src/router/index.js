@@ -1,11 +1,11 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
+
 import Home from '@/components/Pages/Home';
 import Insert from '@/components/Pages/Insert';
 import Result from '@/components/Pages/Result';
 import SignIn from '@/components/User/State/SignIn';
-
 
 import Height from '@/components/User/Params/Height';
 import Shoulders from '@/components/User/Params/Shoulders';
@@ -13,10 +13,12 @@ import Breast from '@/components/User/Params/Breast';
 import Waist from '@/components/User/Params/Waist';
 import Hips from '@/components/User/Params/Hips';
 
-import Admin from '@/components/Admin/Admin'
-import AdminCreate from '@/components/Admin/AdminCreate'
-import AdminView from '@/components/Admin/AdminView'
-import AdminEdit from '@/components/Admin/AdminEdit'
+import Admin from '@/components/Admin/Admin';
+import AdminCreate from '@/components/Admin/AdminCreate';
+import AdminView from '@/components/Admin/AdminView';
+import AdminEdit from '@/components/Admin/AdminEdit';
+
+import beforeAdmin from './adminGuard'
 
 Vue.use(Router);
 
@@ -25,7 +27,7 @@ export default new Router({
   routes: [
     {
       path: '/',
-      component: Home
+      component: Home,
     },
     {
       path: '/signin',
@@ -62,7 +64,7 @@ export default new Router({
     {
       path: '/admin',
       component: Admin,
-      // beforeEnter: AuthGuard,
+      beforeEnter: beforeAdmin,
       children: [
         {
           path: 'view',

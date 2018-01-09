@@ -57,6 +57,18 @@ export default new Vuex.Store({
     },
   },
   actions: {
+    getItems({ commit }) {
+      async function fetchData() {
+        try {
+          const response = await withOutAuth().get('/products');
+          const resolved = response.data;
+          commit('setItems', resolved);
+        } catch (error) {
+          throw new Error(`Could not fetch data ${error.response.data}`);
+        }
+      }
+      fetchData();
+    },
     setUserParams({ commit }, payload) {
       commit('setLoading', true);
       Object.keys(payload).forEach(key => {
