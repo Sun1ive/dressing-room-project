@@ -1,10 +1,4 @@
 import Vue from 'vue';
-import Loader from '@/components/templates/Loader';
-import wrapper from '@/components/templates/Wrapper';
-import pWrapper from '@/components/templates/ParamsWrapper';
-
-import path from '@/services/path';
-import 'babel-polyfill';
 
 import {
   Vuetify,
@@ -16,29 +10,12 @@ import {
   VIcon,
   VGrid,
   VToolbar,
-  VCard,
-  VSlider,
-  VForm,
-  VTextField,
-  VProgressCircular,
-  VMenu,
-  VPagination,
-  VAlert,
-  VSelect,
-  VSwitch,
-  VCheckbox,
-  VTooltip,
-  VDialog,
-  VDivider,
-  transitions,
+  transitions
 } from 'vuetify';
-import '../node_modules/vuetify/src/stylus/app.styl';
-import './style/main.styl';
+import '../node_modules/vuetify/src/stylus/app.styl'
 
 import App from './App';
-import { LocalStorage, SessionStorage } from './utils/storage';
 import router from './router';
-import store from './store';
 
 Vue.use(Vuetify, {
   components: {
@@ -50,36 +27,18 @@ Vue.use(Vuetify, {
     VIcon,
     VGrid,
     VToolbar,
-    VCard,
-    VSlider,
-    VForm,
-    VTextField,
-    VProgressCircular,
-    VMenu,
-    VPagination,
-    VAlert,
-    VSelect,
-    VSwitch,
-    VCheckbox,
-    VTooltip,
-    VDialog,
-    VDivider,
-    transitions,
+    transitions
   },
   theme: {
-    primary: '#1976D2',
+    primary: '#ee44aa',
     secondary: '#424242',
     accent: '#82B1FF',
     error: '#FF5252',
     info: '#2196F3',
     success: '#4CAF50',
-    warning: '#FFC107',
-  },
+    warning: '#FFC107'
+  }
 });
-Vue.component('AppLoader', Loader);
-Vue.component('Wrapper', wrapper);
-Vue.component('app-params', pWrapper);
-
 
 Vue.config.productionTip = false;
 
@@ -87,20 +46,5 @@ Vue.config.productionTip = false;
 new Vue({
   el: '#app',
   router,
-  store,
-  created() {
-    if (LocalStorage.get('DressingUserData')) {
-      const userInfo = LocalStorage.get('DressingUserData');
-      this.$store.dispatch('setParams', userInfo);
-    }
-    this.$store.dispatch('getDresses');
-    if (SessionStorage.get('AuthToken')) {
-      this.$store.commit('setUserSignIn', true);
-    }
-  },
-  mounted() {
-    const pathname = window.location.href;
-    this.$store.commit('setSelectedItem', path(pathname));
-  },
   render: h => h(App),
 });
