@@ -1,8 +1,21 @@
 <template>
-  <div>
-
-  </div>
+  <v-container fluid>
+    <v-layout justify-center>
+      <v-flex xs12 sm6 lg3 class="my-1">
+        <v-card class="text-xs-center">
+          <v-card-text>Охват талии {{ waist }} см</v-card-text>
+          <v-card-text>Размер: {{ getWaistSize }}</v-card-text>
+          <v-card-text>
+            <v-slider :min="63" thumb-label :max="77" v-model="waist"
+            ></v-slider>
+            <v-btn @click="onSave">Сохранить</v-btn>
+          </v-card-text>
+        </v-card>
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
+
 
 <script>
 export default {
@@ -13,7 +26,10 @@ export default {
   },
   methods: {
     onSave() {
-      this.$store.commit('setWaist', this.waist);
+      this.$store.commit('setUserParams', {
+        name: 'Waist',
+        value: this.waist,
+      });
       this.$router.push('/');
     },
   },
@@ -45,11 +61,11 @@ export default {
       return params.size;
     },
   },
-    created() {
+  created() {
     if (this.$store.getters.userWaist) {
       this.waist = this.$store.getters.userWaist;
     }
-  }
+  },
 };
 </script>
 

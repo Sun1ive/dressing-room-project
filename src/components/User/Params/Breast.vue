@@ -1,7 +1,23 @@
 <template>
-  <div>
-
-  </div>
+  <v-container fluid>
+    <v-layout justify-center>
+      <v-flex xs12 sm6 lg3 class="my-1">
+        <v-card class="text-xs-center">
+          <v-card-text>Охват груди {{ breast }} см</v-card-text>
+          <v-card-text >Размер: {{ getBreastSize }}</v-card-text>
+          <v-card-text>
+            <v-slider 
+              :min="82"
+              thumb-label
+              :max="97"
+              v-model="breast"
+            ></v-slider>
+            <v-btn @click="onSave">Сохранить</v-btn>
+          </v-card-text>
+        </v-card>
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
@@ -13,7 +29,10 @@ export default {
   },
   methods: {
     onSave() {
-      this.$store.commit('setBreast', this.breast);
+      this.$store.commit('setUserParams', {
+        name: 'Breast',
+        value: this.breast,
+      });
       this.$router.push('/');
     },
   },
@@ -44,7 +63,7 @@ export default {
       return params.size;
     },
   },
-  created() {
+  mounted() {
     if (this.$store.getters.userBreast) {
       this.breast = this.$store.getters.userBreast;
     }

@@ -13,9 +13,10 @@ import {
   VGrid,
   VToolbar,
   VCard,
-  transitions
+  VSlider,
+  transitions,
 } from 'vuetify';
-import '../node_modules/vuetify/src/stylus/app.styl'
+import '../node_modules/vuetify/src/stylus/app.styl';
 
 import App from './App';
 import router from './router';
@@ -35,7 +36,8 @@ Vue.use(Vuetify, {
     VGrid,
     VToolbar,
     VCard,
-    transitions
+    VSlider,
+    transitions,
   },
   theme: {
     primary: '#1976D2',
@@ -44,8 +46,8 @@ Vue.use(Vuetify, {
     error: '#FF5252',
     info: '#2196F3',
     success: '#4CAF50',
-    warning: '#FFC107'
-  }
+    warning: '#FFC107',
+  },
 });
 
 Vue.config.productionTip = false;
@@ -60,7 +62,6 @@ new Vue({
       this.$store.commit('setUserLoginState', true);
     }
   },
-  mounted() {
-  },
+  mounted() {},
   render: h => h(App),
 });

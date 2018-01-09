@@ -1,7 +1,19 @@
 <template>
-  <div>
-
-  </div>
+  <v-container fluid>
+    <v-layout justify-center>
+      <v-flex xs12 sm6 lg3 class="my-1">
+        <v-card class="text-xs-center">
+          <v-card-text>Охват бедер {{ hips }} см</v-card-text>
+          <v-card-text>Размер: {{ getHipsSize }}</v-card-text>
+          <v-card-text>
+            <v-slider :min="90" thumb-label :max="105" v-model="hips"
+            ></v-slider>
+            <v-btn @click="onSave">Сохранить</v-btn>
+          </v-card-text>
+        </v-card>
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 
@@ -14,7 +26,10 @@ export default {
   },
   methods: {
     onSave() {
-      this.$store.commit('setHips', this.hips);
+      this.$store.commit('setUserParams', {
+        name: 'Hips',
+        value: this.hips,
+      });
       this.$router.push('/');
     },
   },
@@ -45,11 +60,11 @@ export default {
       return params.size;
     },
   },
-  created() {
+  mounted() {
     if (this.$store.getters.userHips) {
       this.hips = this.$store.getters.userHips;
     }
-  }
+  },
 };
 </script>
 

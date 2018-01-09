@@ -1,7 +1,19 @@
 <template>
-  <div>
-
-  </div>
+  <v-container fluid>
+    <v-layout justify-center>
+      <v-flex xs12 sm6 lg3 class="my-1">
+        <v-card class="text-xs-center">
+          <v-card-text>Плечи {{ shoulders }} см</v-card-text>
+          <v-card-text >Размер: {{ getShouldersSize }}</v-card-text>
+          <v-card-text>
+            <v-slider :min="34" thumb-label :max="45" v-model="shoulders"
+            ></v-slider>
+            <v-btn @click="onSave">Сохранить</v-btn>
+          </v-card-text>
+        </v-card>
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 
@@ -14,7 +26,10 @@ export default {
   },
   methods: {
     onSave() {
-      this.$store.commit('setShoulders', this.shoulders);
+      this.$store.commit('setUserParams', {
+        name: 'Shoulders',
+        value: this.shoulders,
+      });
       this.$router.push('/');
     },
   },
