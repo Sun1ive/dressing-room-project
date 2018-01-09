@@ -7,8 +7,8 @@
           align-center
         >
           <transition 
-            name="fade" 
-            mode="out-in">
+          name="fade" 
+          mode="out-in">
             <router-view />
           </transition>
         </v-layout>
