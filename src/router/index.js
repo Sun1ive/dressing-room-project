@@ -19,7 +19,7 @@ import Breast from '@/components/user/Params/Breast';
 import Waist from '@/components/user/Params/Waist';
 import Hips from '@/components/user/Params/Hips';
 
-import AuthGuard from './authGuard';
+/* import AuthGuard from './authGuard'; */
 
 Vue.use(Router);
 
