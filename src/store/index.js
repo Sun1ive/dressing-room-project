@@ -9,6 +9,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     items: null,
+    itemType: 'Плечевые',
     userParams: {
       height: null,
       shoulders: null,
@@ -72,9 +73,9 @@ export default new Vuex.Store({
         try {
           const response = await withOutAuth().post('/products/item', {
             link: payload,
-            params: state.userParams
-          })
-          commit('setItems', response.data)
+            params: state.userParams,
+          });
+          commit('setItems', response.data);
           commit('setLoading', false);
         } catch (error) {
           commit('setError', error.response.data.message);
@@ -83,6 +84,24 @@ export default new Vuex.Store({
         }
       }
       getItem();
+    },
+    compareAll({ commit, state }) {
+      commit('setLoading', true);
+      async function compareAll() {
+        try {
+          const response = await withOutAuth().post('/products/all', {
+            type: state.itemType,
+            params: state.userParams,
+          });
+          commit('setItems', response.data);
+          commit('setLoading', false);
+        } catch (error) {
+          commit('setError', error.response.data.message);
+          commit('setLoading', false);
+          throw new Error(error);
+        }
+      }
+      compareAll();
     },
     onSignIn({ commit, state }, payload) {
       async function onLogIn() {
@@ -115,6 +134,6 @@ export default new Vuex.Store({
     userHips: state => state.userParams.hips,
     userLoginState: state => state.isUserLoginState,
     isError: state => state.isError,
-    isLoading: state => state.isLoading
+    isLoading: state => state.isLoading,
   },
 });

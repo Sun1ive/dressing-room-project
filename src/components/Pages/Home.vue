@@ -118,7 +118,8 @@ export default {
   methods: {
     onCheckout() {
       setLocalData(this.height, this.shoulders, this.breast, this.waist, this.hips);
-      this.$store.commit('getItems');
+      this.$store.dispatch('compareAll');
+      this.$router.push('/result');
     },
   },
   computed: {
