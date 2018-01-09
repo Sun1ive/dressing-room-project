@@ -4,8 +4,26 @@ import Vuex from 'vuex';
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {},
-  mutations: {},
+  state: {
+    items: null,
+    userParams: {
+      height: null,
+      shoulders: null,
+      breast: null,
+      waist: null,
+      hips: null,
+    },
+    isLoading: false,
+    isError: '',
+    isUserLoginState: false,
+  },
+  mutations: {
+    setUserLoginState(state, payload) {
+      state.userLoginState = payload;
+    },
+  },
   actions: {},
-  getters: {},
+  getters: {
+    userHeight: state => state.userParams.height,
+  },
 });

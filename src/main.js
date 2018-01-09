@@ -50,5 +50,12 @@ new Vue({
   el: '#app',
   store,
   router,
+  created() {
+    if (SessionStorage.get('AuthToken')) {
+      this.$store.commit('setUserLoginState', true);
+    }
+  },
+  mounted() {
+  },
   render: h => h(App),
 });
