@@ -13,7 +13,7 @@
       </v-flex>    
     </v-layout>
     <v-layout class="pt-5" justify-center align-center>
-      <v-flex xs10 sm6 lg4>
+      <v-flex xs10 sm8 lg6>
         <v-form
           class="form text-xs-center" 
           @submit.prevent="addToBase"

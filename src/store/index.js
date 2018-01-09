@@ -10,6 +10,7 @@ export default new Vuex.Store({
   state: {
     items: null,
     itemType: 'Плечевые',
+    selectedItem: {},
     userParams: {
       height: null,
       shoulders: null,
@@ -58,6 +59,7 @@ export default new Vuex.Store({
   },
   actions: {
     getItems({ commit }) {
+      commit('setLoading', true);
       const promise = new Promise((resolve, reject) => {
         async function fetchData() {
           try {
@@ -65,8 +67,10 @@ export default new Vuex.Store({
             const { data } = response;
             commit('setItems', data);
             resolve();
+            commit('setLoading', false);
           } catch (error) {
             reject(Error('Its failed'));
+            commit('setLoading', false);
             throw new Error(`Could not fetch data ${error.response.data}`);
           }
         }
@@ -121,6 +125,7 @@ export default new Vuex.Store({
       compareAll();
     },
     onSignIn({ commit, state }, payload) {
+      commit('setLoading', true);
       const promise = new Promise((resolve, reject) => {
         async function onLogIn() {
           try {
@@ -132,13 +137,15 @@ export default new Vuex.Store({
             SessionStorage.set('AuthToken', token);
 
             if (state.error) {
-              commit('setError', '');
+              commit('setError', null);
             }
             commit('setUserLoginState', true);
             resolve();
+            commit('setLoading', false);
           } catch (error) {
             commit('setError', error.response.data.message);
             reject(Error('Something went wrong'));
+            commit('setLoading', false);
             throw new Error(error);
           }
         }

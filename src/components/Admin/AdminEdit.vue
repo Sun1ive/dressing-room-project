@@ -6,7 +6,7 @@
       </v-flex>
     </v-layout>
     <v-layout justify-center align-center>
-      <v-flex xs12 sm6 lg4>
+      <v-flex xs12 sm10 md9 lg7>
         <v-form class="form" @submit.prevent="onEdit">
 
           <v-select
