@@ -1,6 +1,6 @@
 # dressing-room-project
 
-> Dressing room project
+> A Vue.js project
 
 ## Build Setup
 
