@@ -4,12 +4,17 @@
       v-model="drawer"
       app
       clipped
-      fixed
-      permanent
+      absolute
     >
       <v-list>
+        <v-list-tile-content class="hello">
+          <h1>Admin page</h1>
+        </v-list-tile-content>
+      </v-list>
+      <v-divider />
+      <v-list>
         <v-list-tile
-          @click="$router.push(item.path)"
+          :to="item.path"
           v-for="item in adminMenu"
           :key="item.title"
         >
@@ -39,7 +44,7 @@
 export default {
   data() {
     return {
-      drawer: null,
+      drawer: true,
       adminMenu: [
         {
           title: 'Добавить',
@@ -57,6 +62,10 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="stylus">
+.hello
+  justify-content center 
+  text-align center
+  align-items center 
 
 </style>

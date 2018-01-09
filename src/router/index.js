@@ -33,7 +33,7 @@ export default new Router({
     {
       path: '/admin',
       component: Admin,
-      beforeEnter: AuthGuard,
+      // beforeEnter: AuthGuard,
       children: [
         {
           path: 'view',
