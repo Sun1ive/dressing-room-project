@@ -2,22 +2,22 @@ import Vue from 'vue';
 import Router from 'vue-router';
 
 import Admin from '@/components/admin/Admin';
-import AdminCreate from '@/components/admin/adminCreate';
-import AdminEdit from '@/components/admin/adminEdit';
-import AdminView from '@/components/admin/adminView';
+import AdminCreate from '@/components/admin/AdminCreate';
+import AdminEdit from '@/components/admin/AdminEdit';
+import AdminView from '@/components/admin/AdminView';
 
-import SignIn from '@/components/user/signIn';
-import Home from '@/components/pages/home';
-import Result from '@/components/pages/result';
-import singleResult from '@/components/pages/singleResult';
-import Insert from '@/components/pages/insert';
+import SignIn from '@/components/user/SignIn';
+import Home from '@/components/pages/Home';
+import Result from '@/components/pages/Result';
+import singleResult from '@/components/pages/SingleResult';
+import Insert from '@/components/pages/Insert';
 import notFound from '@/components/pages/404';
 
-import Height from '@/components/user/Params/height';
-import Shoulders from '@/components/user/Params/shoulders';
-import Breast from '@/components/user/Params/breast';
-import Waist from '@/components/user/Params/waist';
-import Hips from '@/components/user/Params/hips';
+import Height from '@/components/user/Params/Height';
+import Shoulders from '@/components/user/Params/Shoulders';
+import Breast from '@/components/user/Params/Breast';
+import Waist from '@/components/user/Params/Waist';
+import Hips from '@/components/user/Params/Hips';
 
 import AuthGuard from './authGuard';
 
@@ -28,7 +28,6 @@ export default new Router({
   routes: [
     {
       path: '/signin',
-      name: 'SignIn',
       component: SignIn,
     },
     {
@@ -53,52 +52,42 @@ export default new Router({
     },
     {
       path: '/insert',
-      name: 'Insert',
       component: Insert,
     },
     {
       path: '/',
-      name: 'Home',
       component: Home,
     },
     {
       path: '/shoulders',
-      name: 'Shoulders',
       component: Shoulders,
     },
     {
       path: '/breast',
-      name: 'Breast',
       component: Breast,
     },
     {
       path: '/height',
-      name: 'Height',
       component: Height,
     },
     {
       path: '/waist',
-      name: 'Waist',
       component: Waist,
     },
     {
       path: '/hips',
-      name: 'Hips',
       component: Hips,
     },
     {
       path: '/result',
-      name: 'Result',
       component: Result,
     },
     {
       path: '/single-result',
-      name: 'SingleResult',
       component: singleResult,
     },
     {
       path: '/404',
-      name: 'Not Found',
       component: notFound,
     },
   ],

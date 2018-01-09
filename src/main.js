@@ -1,7 +1,7 @@
 import Vue from 'vue';
-import Loader from '@/components/templates/loader';
-import wrapper from '@/components/templates/wrapper';
-import pWrapper from '@/components/templates/paramsWrapper';
+import Loader from '@/components/templates/Loader';
+import wrapper from '@/components/templates/Wrapper';
+import pWrapper from '@/components/templates/ParamsWrapper';
 
 import path from '@/services/path';
 import 'babel-polyfill';
