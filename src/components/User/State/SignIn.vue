@@ -46,15 +46,19 @@ export default {
     };
   },
   methods: {
-    onLogIn() {
-      this.$store.dispatch('onSignIn', this.credentials);
+    async onLogIn() {
+      try {
+        await this.$store.dispatch('onSignIn', this.credentials);
+        this.$router.push('/');
+      } catch (error) {}
+
       /* Надо переписать это. вместо таймаута сделать лоадер мб */
-      setTimeout(() => {
+      /* setTimeout(() => {
         if (this.isUserLoginState) {
           this.$router.push('/');
         }
       }, 500);
-      /*  */
+       */
     },
   },
   computed: {

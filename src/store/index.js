@@ -121,25 +121,30 @@ export default new Vuex.Store({
       compareAll();
     },
     onSignIn({ commit, state }, payload) {
-      async function onLogIn() {
-        try {
-          const response = await withOutAuth().post('/user/login', {
-            email: payload.email,
-            password: payload.password,
-          });
-          const { token } = response.data;
-          SessionStorage.set('AuthToken', token);
+      const promise = new Promise((resolve, reject) => {
+        async function onLogIn() {
+          try {
+            const response = await withOutAuth().post('/user/login', {
+              email: payload.email,
+              password: payload.password,
+            });
+            const { token } = response.data;
+            SessionStorage.set('AuthToken', token);
 
-          if (state.error) {
-            commit('setError', '');
+            if (state.error) {
+              commit('setError', '');
+            }
+            commit('setUserLoginState', true);
+            resolve();
+          } catch (error) {
+            commit('setError', error.response.data.message);
+            reject(Error('Something went wrong'));
+            throw new Error(error);
           }
-          commit('setUserLoginState', true);
-        } catch (error) {
-          commit('setError', error.response.data.message);
-          throw new Error(error);
         }
-      }
-      onLogIn();
+        onLogIn();
+        return promise;
+      });
     },
   },
   getters: {
