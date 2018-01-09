@@ -25,7 +25,7 @@
     <v-toolbar dark color="primary">
       <v-toolbar-side-icon
         @click="drawer = !drawer"
-        v-if="items"
+        v-if="isItems"
       ></v-toolbar-side-icon>
       <v-spacer />
       <!-- <v-toolbar-side-icon
@@ -61,7 +61,8 @@
 </template>
 
 <script>
-import uniq from 'lodash/uniq'
+import uniq from 'lodash/uniq';
+import { mapGetters } from 'vuex';
 
 export default {
   data() {
@@ -74,22 +75,27 @@ export default {
         },
         {
           title: 'Ссылка',
-          path: '/insert'
-        }
+          path: '/insert',
+        },
       ],
-    }
+    };
   },
   computed: {
-    isUserAuth() {
-      return this.$store.getters.userLoginState
-    },
+    ...mapGetters({
+      isUserAuth: 'userLoginState',
+      items: 'items',
+    }),
     filterItems() {
-      return uniq(this.$store.getters.items.map(item => item.color));
+      if (this.items) {
+        return uniq(this.items.map(item => item.color));
+      }
     },
-    items() {
-      return this.$store.getters.items.length > 0
-    }
-  }
+    isItems() {
+      if (this.items) {
+        return this.items.length > 0
+      }
+    },
+  },
 };
 </script>
 
