@@ -66,11 +66,14 @@ export default new Vuex.Store({
       });
       commit('setLoading', false);
     },
-    getSingleItem({ commit }, payload) {
+    getSingleItem({ commit, state }, payload) {
       commit('setLoading', true);
       async function getItem() {
         try {
-          const response = await withOutAuth().post('/products/item', payload)
+          const response = await withOutAuth().post('/products/item', {
+            link: payload,
+            params: state.userParams
+          })
           commit('setItems', response.data)
           commit('setLoading', false);
         } catch (error) {
