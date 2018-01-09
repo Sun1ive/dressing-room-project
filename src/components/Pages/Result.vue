@@ -6,7 +6,7 @@
           <v-card-media height="600" :src="item.src" />
           <v-card-text>
             <div><strong>{{ item.title }}</strong></div>
-            <div>Коэффициент совместимости {{ item.percent }}</div>
+            <div>Коэффициент совместимости: <strong>{{ item.percent }} %</strong></div>
             <div>Ваш предпочитаемый размер: <strong>{{ item.size }}</strong></div>
             <div>Длинна <strong>{{ item.difference }}</strong></div>
           </v-card-text>
@@ -16,15 +16,16 @@
         </v-card>
       </v-flex>
     </v-layout>
+    <app-loader v-if="isLoading" />
   </v-container>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   computed: {
-    items() {
-      return this.$store.getters.items;
-    }
+    ...mapGetters(['items', 'isLoading'])
   }
 };
 </script>

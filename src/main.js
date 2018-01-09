@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import 'babel-polyfill';
 import pWrapper from '@/components/Templates/ParamsWrapper';
+import preLoader from '@/components/Shared/Loader';
 
 import {
   Vuetify,
@@ -18,6 +19,7 @@ import {
   VSelect,
   VForm,
   VAlert,
+  VProgressCircular,
   transitions,
 } from 'vuetify';
 import '../node_modules/vuetify/src/stylus/app.styl';
@@ -28,6 +30,7 @@ import store from './store';
 import { LocalStorage, SessionStorage } from './utils/storage';
 
 Vue.component('app-params', pWrapper);
+Vue.component('app-loader', preLoader);
 
 Vue.use(Vuetify, {
   components: {
@@ -45,6 +48,7 @@ Vue.use(Vuetify, {
     VSelect,
     VForm,
     VAlert,
+    VProgressCircular,
     transitions,
   },
   theme: {

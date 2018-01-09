@@ -117,7 +117,8 @@ import { setLocalData } from '../../utils/storage';
 export default {
   methods: {
     onCheckout() {
-      setLocalData(this.height, this.breast, this.waist, this.hips, this.shoulders);
+      setLocalData(this.height, this.shoulders, this.breast, this.waist, this.hips);
+      this.$store.commit('getItems');
     },
   },
   computed: {

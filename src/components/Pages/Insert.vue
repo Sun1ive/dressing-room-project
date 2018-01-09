@@ -28,7 +28,7 @@ export default {
   methods: {
     onCheckout() {
       this.$store.dispatch('getSingleItem', this.link);
-      // this.$router.push('/result');
+      this.$router.push('/result');
     },
   },
 };

@@ -115,5 +115,6 @@ export default new Vuex.Store({
     userHips: state => state.userParams.hips,
     userLoginState: state => state.isUserLoginState,
     isError: state => state.isError,
+    isLoading: state => state.isLoading
   },
 });
