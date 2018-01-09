@@ -26,7 +26,7 @@
             label="Password" 
             type="password" 
           />
-          <v-btn type="submit">Sign in</v-btn>
+          <v-btn left type="submit">Sign in</v-btn>
         </v-form>
       </v-flex>
     </v-layout>
@@ -60,7 +60,7 @@ export default {
   computed: {
     ...mapGetters({
       isError: 'isError',
-      isUserLoginState: 'isUserLoginState',
+      isUserLoginState: 'userLoginState',
     }),
   },
 };

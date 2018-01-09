@@ -1,6 +1,9 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
+import { withOutAuth } from '../services/api';
+import { SessionStorage } from '../utils/storage';
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -18,8 +21,17 @@ export default new Vuex.Store({
     isUserLoginState: false,
   },
   mutations: {
+    setError(state, payload) {
+      state.isError = payload;
+    },
+    setLoading(state, payload) {
+      state.isLoading = payload;
+    },
     setUserLoginState(state, payload) {
-      state.userLoginState = payload;
+      state.isUserLoginState = payload;
+    },
+    setItems(state, payload) {
+      state.items = payload;
     },
     setUserParams(state, payload) {
       switch (payload.name) {
@@ -45,12 +57,50 @@ export default new Vuex.Store({
   },
   actions: {
     setUserParams({ commit }, payload) {
+      commit('setLoading', true);
       Object.keys(payload).forEach(key => {
         commit('setUserParams', {
           name: key,
           value: payload[key],
         });
       });
+      commit('setLoading', false);
+    },
+    getItem({ commit }, payload) {
+      commit('setLoading', true);
+      async function getItem() {
+        try {
+          const response = await withOutAuth().post('/products/item', payload)
+          commit('setItems', response.data)
+          commit('setLoading', false);
+        } catch (error) {
+          commit('setError', error.response.data.message);
+          commit('setLoading', false);
+          throw new Error(error);
+        }
+      }
+      getItem();
+    },
+    onSignIn({ commit, state }, payload) {
+      async function onLogIn() {
+        try {
+          const response = await withOutAuth().post('/user/login', {
+            email: payload.email,
+            password: payload.password,
+          });
+          const { token } = response.data;
+          SessionStorage.set('AuthToken', token);
+
+          if (state.error) {
+            commit('setError', '');
+          }
+          commit('setUserLoginState', true);
+        } catch (error) {
+          commit('setError', error.response.data.message);
+          throw new Error(error);
+        }
+      }
+      onLogIn();
     },
   },
   getters: {
@@ -60,5 +110,6 @@ export default new Vuex.Store({
     userWaist: state => state.userParams.waist,
     userHips: state => state.userParams.hips,
     userLoginState: state => state.isUserLoginState,
+    isError: state => state.isError,
   },
 });

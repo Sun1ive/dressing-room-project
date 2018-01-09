@@ -17,6 +17,7 @@ import {
   VTextField,
   VSelect,
   VForm,
+  VAlert,
   transitions,
 } from 'vuetify';
 import '../node_modules/vuetify/src/stylus/app.styl';
@@ -43,6 +44,7 @@ Vue.use(Vuetify, {
     VTextField,
     VSelect,
     VForm,
+    VAlert,
     transitions,
   },
   theme: {

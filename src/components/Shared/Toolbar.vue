@@ -18,7 +18,13 @@
         </v-btn>
       </v-toolbar-items>
       <v-spacer />
-      <v-toolbar-items v-if="isUserAuth">
+      <v-toolbar-items v-if="!isUserAuth">
+        <v-btn 
+          flat 
+          to="/signin"
+        >SignIn</v-btn>
+      </v-toolbar-items>
+      <v-toolbar-items v-else>
         <v-btn 
           flat 
           to="/admin"

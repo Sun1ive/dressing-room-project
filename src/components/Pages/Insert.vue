@@ -5,12 +5,12 @@
         <v-form @submit.prevent="onCheckout">
           <h1>Вставьте ссылку на товар</h1>
           <v-text-field
-          label="Вставьте ссылку"
-          v-model.lazy="link"
+            label="Вставьте ссылку"
+            v-model.lazy="link"
           ></v-text-field>
           <v-btn
-          color="primary"
-          type="submit"
+            color="primary"
+            type="submit"
           >Посмотреть</v-btn>
         </v-form>
       </v-flex>
@@ -19,17 +19,18 @@
 </template>
 
 <script>
-
 export default {
   data() {
     return {
-      link: ''
-    }
+      link: '',
+    };
   },
   methods: {
     onCheckout() {
-      console.log(123);
-    }
-  }
-}
+      this.$store.dispatch('getItem', {
+        link: this.link,
+      });
+    },
+  },
+};
 </script>
