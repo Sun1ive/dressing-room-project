@@ -35,13 +35,14 @@
               v-for="subItem in item.items"
               :key="subItem.title"
               :to="subItem.path"
+              class="adminListItems"
              >
+              <v-list-tile-action>
+                <v-icon>{{ subItem.icon }}</v-icon>
+              </v-list-tile-action>
               <v-list-tile-content>
                 <v-list-tile-title>{{ subItem.title }}</v-list-tile-title>
               </v-list-tile-content>
-              <v-list-tile-action>
-                <v-icon>{{ subItem.action }}</v-icon>
-              </v-list-tile-action>
             </v-list-tile>
           </v-list-group>
         </v-list>
@@ -73,8 +74,8 @@ export default {
           action: 'local_offer',
           title: 'Товары',
           items: [
-            { title: 'Список', path: '/admin/view' },
-            { title: 'Добавить', path: '/admin/create' },
+            { title: 'Список', path: '/admin/view', icon: 'list' },
+            { title: 'Добавить', path: '/admin/create', icon: 'add' },
           ],
         },
       ],
@@ -84,9 +85,5 @@ export default {
 </script>
 
 <style scoped lang="stylus">
-.hello {
-  justify-content: center;
-  text-align: center;
-  align-items: center;
-}
+
 </style>

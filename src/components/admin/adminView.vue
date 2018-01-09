@@ -2,12 +2,19 @@
   <v-container fluid>
     <v-layout class="pt-4" justify-center align-center>
       <v-flex xs10 sm6 class="text-xs-center">
-        <h2>Строка поиска по названию товара</h2>
+        <h2>Поиск по названию товара</h2>
       </v-flex>
     </v-layout>
+    
     <v-layout justify-center>
-      <v-flex xs10 sm6 lg4>
-        <v-text-field v-model="query"/>
+      <v-flex xs10>
+        <v-text-field
+          light
+          solo
+          prepend-icon="search"
+          placeholder="Поиск"
+          v-model="query"
+          />
       </v-flex>
     </v-layout>
     <v-layout 
@@ -16,23 +23,14 @@
       v-for="item in searchQuery"
       :key="item._id"
     >
-      <v-flex xs6>
+      <v-flex xs10>
         <v-card>
           <v-card-text>
-            <span>{{ item.title }}</span>
-            <v-spacer></v-spacer>
-            <v-btn
-              flat
-              :to="`/admin/edit/${item._id}`"
-            >
-              <v-icon>edit</v-icon>
-            </v-btn>
-            <v-btn
-              flat
-              @click="deleteItem(item._id)"
-            >
-              <v-icon>delete</v-icon>
-            </v-btn>
+            <span>
+              <strong>
+                {{ item.title }}
+              </strong>
+            </span>
           </v-card-text>
         </v-card>
       </v-flex>
