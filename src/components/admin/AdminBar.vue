@@ -1,9 +1,11 @@
 <template>
- <v-app id="inspire">
+  <v-container>
     <v-navigation-drawer
-      fixed
       v-model="drawer"
       app
+      clipped
+      fixed
+      permanent
     >
       <v-list>
         <v-list-tile
@@ -25,10 +27,12 @@
           justify-center
           align-center
         >
-        <router-view />
+          <transition name="fade" mode="out-in">
+            <router-view />
+          </transition>
         </v-layout>
       </v-container>
-  </v-app>
+  </v-container>
 </template>
 
 <script>
