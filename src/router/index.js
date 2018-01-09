@@ -10,6 +10,11 @@ import Breast from '@/components/User/Params/Breast';
 import Waist from '@/components/User/Params/Waist';
 import Hips from '@/components/User/Params/Hips';
 
+import Admin from '@/components/Admin/Admin'
+import AdminCreate from '@/components/Admin/AdminCreate'
+import AdminView from '@/components/Admin/AdminView'
+import AdminEdit from '@/components/Admin/AdminEdit'
+
 Vue.use(Router);
 
 export default new Router({
@@ -42,6 +47,26 @@ export default new Router({
     {
       path: '/hips',
       component: Hips,
+    },
+    {
+      path: '/admin',
+      component: Admin,
+      // beforeEnter: AuthGuard,
+      children: [
+        {
+          path: 'view',
+          component: AdminView,
+        },
+        {
+          path: 'create',
+          component: AdminCreate,
+        },
+        {
+          path: 'edit/:id',
+          component: AdminEdit,
+          props: true,
+        },
+      ],
     },
   ],
 });

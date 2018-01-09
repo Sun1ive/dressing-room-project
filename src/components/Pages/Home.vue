@@ -103,6 +103,7 @@
       <v-btn
       slot="button"
       :disabled="isReadyToCheckout"
+      @click="onCheckout"
       >Примерить</v-btn>
     </app-params>
   </v-container>
@@ -111,7 +112,14 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import { setLocalData } from '../../utils/storage';
+
 export default {
+  methods: {
+    onCheckout() {
+      setLocalData(this.height, this.breast, this.waist, this.hips, this.shoulders);
+    },
+  },
   computed: {
     isReadyToCheckout() {
       return !this.height || !this.breast || !this.waist || !this.hips || !this.shoulders;

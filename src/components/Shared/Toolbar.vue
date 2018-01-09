@@ -18,8 +18,11 @@
         </v-btn>
       </v-toolbar-items>
       <v-spacer />
-      <v-toolbar-items>
-        <v-btn flat>Admin</v-btn>
+      <v-toolbar-items v-if="isUserAuth">
+        <v-btn 
+          flat 
+          to="/admin"
+        >Admin</v-btn>
       </v-toolbar-items>
     </v-toolbar>
   </nav>
@@ -39,6 +42,11 @@ export default {
           path: '/insert'
         }
       ]
+    }
+  },
+  computed: {
+    isUserAuth() {
+      return this.$store.getters.userLoginState
     }
   }
 };

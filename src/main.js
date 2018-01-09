@@ -14,6 +14,9 @@ import {
   VToolbar,
   VCard,
   VSlider,
+  VTextField,
+  VSelect,
+  VForm,
   transitions,
 } from 'vuetify';
 import '../node_modules/vuetify/src/stylus/app.styl';
@@ -37,6 +40,9 @@ Vue.use(Vuetify, {
     VToolbar,
     VCard,
     VSlider,
+    VTextField,
+    VSelect,
+    VForm,
     transitions,
   },
   theme: {
@@ -58,6 +64,10 @@ new Vue({
   store,
   router,
   created() {
+    if (LocalStorage.get('DressingUserData')) {
+      const userInfo = LocalStorage.get('DressingUserData');
+      this.$store.dispatch('setUserParams', userInfo);
+    }
     if (SessionStorage.get('AuthToken')) {
       this.$store.commit('setUserLoginState', true);
     }

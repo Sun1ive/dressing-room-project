@@ -38,12 +38,20 @@ export default new Vuex.Store({
         case 'Hips':
           state.userParams.hips = payload.value;
           break;
-        default: console.log(123);
+        default:
           break;
       }
     },
   },
   actions: {
+    setUserParams({ commit }, payload) {
+      Object.keys(payload).forEach(key => {
+        commit('setUserParams', {
+          name: key,
+          value: payload[key],
+        });
+      });
+    },
   },
   getters: {
     userHeight: state => state.userParams.height,
@@ -51,5 +59,6 @@ export default new Vuex.Store({
     userBreast: state => state.userParams.breast,
     userWaist: state => state.userParams.waist,
     userHips: state => state.userParams.hips,
+    userLoginState: state => state.isUserLoginState,
   },
 });
