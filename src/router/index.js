@@ -3,7 +3,9 @@ import Router from 'vue-router';
 
 import Home from '@/components/Pages/Home';
 import Insert from '@/components/Pages/Insert';
+import Result from '@/components/Pages/Result';
 import SignIn from '@/components/User/State/SignIn';
+
 
 import Height from '@/components/User/Params/Height';
 import Shoulders from '@/components/User/Params/Shoulders';
@@ -52,6 +54,10 @@ export default new Router({
     {
       path: '/hips',
       component: Hips,
+    },
+    {
+      path: '/result',
+      component: Result,
     },
     {
       path: '/admin',

@@ -66,7 +66,7 @@ export default new Vuex.Store({
       });
       commit('setLoading', false);
     },
-    getItem({ commit }, payload) {
+    getSingleItem({ commit }, payload) {
       commit('setLoading', true);
       async function getItem() {
         try {
@@ -104,6 +104,7 @@ export default new Vuex.Store({
     },
   },
   getters: {
+    items: state => state.items,
     userHeight: state => state.userParams.height,
     userShoulders: state => state.userParams.shoulders,
     userBreast: state => state.userParams.breast,
