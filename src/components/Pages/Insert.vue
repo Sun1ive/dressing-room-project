@@ -11,6 +11,7 @@
           <v-btn
             color="primary"
             type="submit"
+            :disabled="isFilled"
           >Посмотреть</v-btn>
         </v-form>
       </v-flex>
@@ -31,5 +32,10 @@ export default {
       this.$router.push('/result');
     },
   },
+  computed: {
+    isFilled() {
+      return this.link.length <= 0
+    }
+  }
 };
 </script>

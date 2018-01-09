@@ -1,11 +1,37 @@
 <template>
 <nav>
+  <v-navigation-drawer
+    v-model="drawer"
+    clipped
+    absolute
+    temporary
+  >
+    <v-toolbar flat>
+      <v-list>
+        <v-list-tile>
+          <v-list-tile-title class="title">Фильтр</v-list-tile-title>
+        </v-list-tile>
+      </v-list>
+    </v-toolbar>
+    <v-divider></v-divider>
+    <v-list dense class="pt-0">
+      <v-list-tile v-for="item in filterItems" :key="item" @click="">
+        <v-list-tile-content>
+          <v-list-tile-title>{{ item }}</v-list-tile-title>
+        </v-list-tile-content>
+      </v-list-tile>
+    </v-list>
+  </v-navigation-drawer>
     <v-toolbar dark color="primary">
-      <v-spacer />
       <v-toolbar-side-icon
+        @click="drawer = !drawer"
+        v-if="items"
+      ></v-toolbar-side-icon>
+      <v-spacer />
+      <!-- <v-toolbar-side-icon
         class="hidden-md-and-up"
         @click="drawer = !drawer"
-      ></v-toolbar-side-icon>
+      ></v-toolbar-side-icon> -->
       <v-toolbar-items class="hidden-sm-and-down">
         <v-btn
           flat
@@ -35,9 +61,12 @@
 </template>
 
 <script>
+import uniq from 'lodash/uniq'
+
 export default {
   data() {
     return {
+      drawer: false,
       menuItems: [
         {
           title: 'Мои параметры',
@@ -47,12 +76,18 @@ export default {
           title: 'Ссылка',
           path: '/insert'
         }
-      ]
+      ],
     }
   },
   computed: {
     isUserAuth() {
       return this.$store.getters.userLoginState
+    },
+    filterItems() {
+      return uniq(this.$store.getters.items.map(item => item.color));
+    },
+    items() {
+      return this.$store.getters.items.length > 0
     }
   }
 };
