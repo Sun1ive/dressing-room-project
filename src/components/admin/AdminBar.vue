@@ -57,18 +57,6 @@ export default {
   data() {
     return {
       drawer: true,
-      adminMenu: [
-        {
-          title: 'Добавить',
-          icon: 'star',
-          path: '/admin/create',
-        },
-        {
-          title: 'Список',
-          icon: 'star',
-          path: '/admin/view',
-        },
-      ],
       items: [
         {
           action: 'local_offer',
