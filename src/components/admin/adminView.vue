@@ -25,13 +25,31 @@
     >
       <v-flex xs10>
         <v-card>
-          <v-card-text>
-            <span>
-              <strong>
-                {{ item.title }}
-              </strong>
-            </span>
-          </v-card-text>
+          <v-layout align-center justify-space-between row wrap>
+            <v-flex xs10 class="ml-2">
+              <v-card-text>
+                <div class="headline">{{ item.title }}</div>
+              </v-card-text>
+            </v-flex>
+            <v-flex>
+              <v-btn
+              color="primary"
+              fab
+              :to="`/admin/edit/${item._id}`"
+              >
+                <v-icon>edit</v-icon>
+              </v-btn>
+              <v-btn
+                fab
+                color="red darken-1"
+                dark
+                @click="deleteItem(item._id)"
+              >
+                <v-icon>delete</v-icon>
+              </v-btn>
+            </v-flex>
+          </v-layout>
+            
         </v-card>
       </v-flex>
     </v-layout>
