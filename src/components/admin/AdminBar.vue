@@ -5,27 +5,22 @@
       v-model="drawer"
       app
     >
-      <v-list dense>
-        <v-list-tile @click="">
+      <v-list>
+        <v-list-tile
+          @click="$router.push(item.path)"
+          v-for="item in adminMenu"
+          :key="item.title"
+        >
           <v-list-tile-action>
-            <v-icon>home</v-icon>
+            <v-icon>{{ item.icon }}</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title>Home</v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-        <v-list-tile @click="">
-          <v-list-tile-action>
-            <v-icon>contact_mail</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title>Contact</v-list-tile-title>
+            <v-list-tile-title>{{ item.title }}</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
-    <v-content>
-      <v-container fluid fill-height>
+      <v-container fluid>
         <v-layout
           justify-center
           align-center
@@ -33,19 +28,29 @@
         <router-view />
         </v-layout>
       </v-container>
-    </v-content>
   </v-app>
 </template>
 
 <script>
-  export default {
-    data() {
-      return {
-        drawer: null,
-        source: 'Hello World'
-      }
-    }
-  }
+export default {
+  data() {
+    return {
+      drawer: null,
+      adminMenu: [
+        {
+          title: 'Добавить',
+          icon: 'star',
+          path: '/admin/create',
+        },
+        {
+          title: 'Список',
+          icon: 'star',
+          path: '/admin/view',
+        },
+      ],
+    };
+  },
+};
 </script>
 
 <style scoped>
