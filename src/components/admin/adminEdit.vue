@@ -175,6 +175,10 @@ export default {
 };
 </script>
 
-<style scoped>
-
+<style scoped lang="stylus">
+  .form
+    background-color #fff
+    padding 1rem
+    box-shadow 1px 1px 1px #333
+    margin-bottom 2rem
 </style>

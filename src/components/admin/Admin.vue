@@ -1,22 +1,31 @@
 <template>
-  <v-container fluid>
-    <v-layout justify-center align-center>
-      <v-flex xs12 sm6 class="text-xs-center">
-        <h1>This is a Admin page!</h1>
-        <p>это надо все переписать</p>
-      </v-flex>
-    </v-layout>
-    <v-layout>
-      <transition name="fade" mode="out-in">
-        <router-view />
-      </transition>
-    </v-layout>
+  <v-container>
+    <app-bar />
+      <v-container fluid>
+        <v-layout
+          justify-center
+          align-center
+        >
+          <transition 
+            name="fade" 
+            mode="out-in">
+            <router-view />
+          </transition>
+        </v-layout>
+      </v-container>
   </v-container>
 </template>
 
 <script>
-export default {};
+import Bar from './AdminBar'
+
+export default {
+  components: {
+    appBar: Bar
+  }
+};
 </script>
 
-<style scoped lang="stylus">
+<style scoped>
+
 </style>
