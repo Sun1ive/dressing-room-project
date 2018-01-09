@@ -1,35 +1,6 @@
 <template>
 <nav>
-  <v-navigation-drawer
-    v-model="drawer"
-    clipped
-    absolute
-    temporary
-  >
-    <v-toolbar flat>
-      <v-list>
-        <v-list-tile>
-          <v-list-tile-title class="title">Фильтр</v-list-tile-title>
-        </v-list-tile>
-      </v-list>
-    </v-toolbar>
-    <v-divider></v-divider>
-    <v-list dense class="pt-0">
-      <v-list-tile
-        v-for="item in filterItems"
-        :key="item"
-        @click="">
-        <v-list-tile-content>
-          <v-list-tile-title>{{ item }}</v-list-tile-title>
-        </v-list-tile-content>
-      </v-list-tile>
-    </v-list>
-  </v-navigation-drawer>
-    <v-toolbar dark color="primary">
-      <v-toolbar-side-icon
-        @click="drawer = !drawer"
-        v-if="isItems"
-      ></v-toolbar-side-icon>
+  <v-toolbar dark color="primary">
       <v-spacer />
       <!-- <v-toolbar-side-icon
         class="hidden-md-and-up"
@@ -70,7 +41,6 @@ import { mapGetters } from 'vuex';
 export default {
   data() {
     return {
-      drawer: false,
       menuItems: [
         {
           title: 'Мои параметры',
@@ -91,11 +61,6 @@ export default {
     filterItems() {
       if (this.items) {
         return uniq(this.items.map(item => item.color));
-      }
-    },
-    isItems() {
-      if (this.items) {
-        return this.items.length > 0
       }
     },
   },
