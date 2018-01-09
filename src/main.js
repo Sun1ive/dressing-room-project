@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import 'babel-polyfill';
+import pWrapper from '@/components/Templates/ParamsWrapper';
 
 import {
   Vuetify,
@@ -11,6 +12,7 @@ import {
   VIcon,
   VGrid,
   VToolbar,
+  VCard,
   transitions
 } from 'vuetify';
 import '../node_modules/vuetify/src/stylus/app.styl'
@@ -19,6 +21,8 @@ import App from './App';
 import router from './router';
 import store from './store';
 import { LocalStorage, SessionStorage } from './utils/storage';
+
+Vue.component('app-params', pWrapper);
 
 Vue.use(Vuetify, {
   components: {
@@ -30,6 +34,7 @@ Vue.use(Vuetify, {
     VIcon,
     VGrid,
     VToolbar,
+    VCard,
     transitions
   },
   theme: {

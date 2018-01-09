@@ -18,7 +18,7 @@
           <v-text-field 
             required 
             v-model.lazy="credentials.email" 
-            label="email" 
+            label="Email" 
           />
           <v-text-field 
             required 
@@ -54,6 +54,7 @@ export default {
           this.$router.push('/');
         }
       }, 500);
+      /*  */
     },
   },
   computed: {
