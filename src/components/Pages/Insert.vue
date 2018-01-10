@@ -27,9 +27,9 @@ export default {
     };
   },
   methods: {
-    onCheckout() {
+    async onCheckout() {
       this.$store.commit('setSelectedItem', this.link);
-      this.$store.dispatch('compareSingle', this.$store.getters.isSelectedItem);
+      await this.$store.dispatch('compareSingle', this.$store.getters.isSelectedItem);
       this.$router.push('/result');
     },
   },
