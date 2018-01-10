@@ -12,19 +12,20 @@
               <v-select
               :items="itemTypes"
               v-model="selectedType"
+              label="Классификация"
               >
               </v-select>
             </v-flex>
           </v-list> 
           <v-divider></v-divider>
-          <v-list two-line subheader>
+         <!--  <v-list two-line subheader>
             <v-subheader>Цвета</v-subheader>
             <v-list-tile avatar v-for="color in colorsByType" :key="color">
               <v-radio-group v-model="selectedColor" :mandatory="false">
                 <v-radio :label="color" :value="color"></v-radio>
               </v-radio-group>
             </v-list-tile>
-          </v-list>
+          </v-list> -->
           <v-btn @click="sendRequest">Click me</v-btn>
         </v-card>
       </v-flex>
@@ -46,7 +47,8 @@ export default {
     async sendRequest() {
       this.$store.commit('setLoading', true);
       this.$store.commit('setItemType', this.selectedType);
-      await this.$store.dispatch('compareProductsWithTypeAndColor', this.selectedColor);
+      // await this.$store.dispatch('compareProductsWithTypeAndColor', this.selectedColor);
+      await this.$store.dispatch('compareProductsWithType');
       this.$store.commit('setLoading', false);
     },
   },
