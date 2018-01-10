@@ -85,17 +85,14 @@ export default new Vuex.Store({
       });
     },
     setUserParams({ commit }, payload) {
-      commit('setLoading', true);
       Object.keys(payload).forEach(key => {
         commit('setUserParams', {
           name: key,
           value: payload[key],
         });
       });
-      commit('setLoading', false);
     },
     compareSingle({ commit, state }, payload) {
-      commit('setLoading', true);
       commit('setError', '');
       return new Promise(resolve => {
         async function getItem() {
@@ -105,11 +102,9 @@ export default new Vuex.Store({
               params: state.userParams,
             });
             commit('setItems', response.data);
-            commit('setLoading', false);
             resolve();
           } catch (error) {
             commit('setError', error.response.data.message);
-            commit('setLoading', false);
             throw new Error(error);
           }
         }
@@ -137,8 +132,10 @@ export default new Vuex.Store({
         compareAll();
       });
     },
+    compareProductsWithTypeAndColor({ commit, state }) {
+
+    },
     onSignIn({ commit, state }, payload) {
-      commit('setLoading', true);
       return new Promise((resolve, reject) => {
         async function onLogIn() {
           try {
@@ -154,11 +151,9 @@ export default new Vuex.Store({
             }
             commit('setUserLoginState', true);
             resolve();
-            commit('setLoading', false);
           } catch (error) {
             commit('setError', error.response.data.message);
             reject(Error('Something went wrong'));
-            commit('setLoading', false);
             throw new Error(error);
           }
         }

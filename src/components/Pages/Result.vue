@@ -2,11 +2,7 @@
   <v-container fluid>
     <v-layout>
       <v-flex xs6 sm3>
-        <transition enter-active-class="animated bounceInDown">
-          <component 
-            :is="filterState"
-          ></component>
-        </transition>
+        <app-filter></app-filter>
       </v-flex>
       <v-flex xs10 sm9>
         <v-container fluid grid-list-xl>
@@ -41,18 +37,15 @@
 import { mapGetters } from 'vuex';
 import Filter from '../Templates/Filter';
 
-
 export default {
   components: {
     appFilter: Filter,
   },
   data() {
-    return {
-      filterState: 'app-filter',
-    }
+    return {};
   },
   computed: {
-    ...mapGetters(['items', 'isLoading']),
+    ...mapGetters(['items','isLoading']),
   },
   methods: {
     checkAll() {

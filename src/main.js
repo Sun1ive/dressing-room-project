@@ -21,8 +21,8 @@ import {
   VAlert,
   VProgressCircular,
   VDivider,
-  VCheckbox,
   VSubHeader,
+  VRadioGroup,
   transitions,
 } from 'vuetify';
 import '../node_modules/vuetify/src/stylus/app.styl';
@@ -54,8 +54,8 @@ Vue.use(Vuetify, {
     VAlert,
     VProgressCircular,
     VDivider,
-    VCheckbox,
     VSubHeader,
+    VRadioGroup,
     transitions,
   },
   theme: {
