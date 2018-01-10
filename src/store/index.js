@@ -90,7 +90,7 @@ export default new Vuex.Store({
       });
       commit('setLoading', false);
     },
-    getSingleItem({ commit, state }, payload) {
+    compareSingle({ commit, state }, payload) {
       commit('setLoading', true);
       async function getItem() {
         try {

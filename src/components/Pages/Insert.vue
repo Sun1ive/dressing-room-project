@@ -28,14 +28,15 @@ export default {
   },
   methods: {
     onCheckout() {
-      this.$store.dispatch('getSingleItem', this.link);
+      this.$store.commit('setSelectedItem', this.link);
+      this.$store.dispatch('compareSingle', this.$store.getters.isSelectedItem);
       this.$router.push('/result');
     },
   },
   computed: {
     isFilled() {
-      return this.link.length <= 0
-    }
-  }
+      return this.link.length <= 0;
+    },
+  },
 };
 </script>

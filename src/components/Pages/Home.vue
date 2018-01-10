@@ -118,13 +118,12 @@ export default {
   methods: {
     onCheckout() {
       setLocalData(this.height, this.shoulders, this.breast, this.waist, this.hips);
-      /* this.$store.dispatch('compareAll');
-      this.$router.push('/result'); */
       if (this.isSelected) {
-        console.log(true);
+        this.$store.dispatch('compareSingle', this.isSelected);
+        this.$router.push('/result');
       } else {
         this.$store.dispatch('compareAll');
-        this.$router.push('/result')
+        this.$router.push('/result');
       }
     },
   },

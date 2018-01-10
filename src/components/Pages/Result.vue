@@ -12,6 +12,8 @@
           </v-card-text>
           <v-card-actions>
             <v-btn :href="`${item.link}`" target="_blank">Купить</v-btn>
+            <v-spacer />
+            <v-btn @click="checkAll">Посмотреть все</v-btn>
           </v-card-actions>
         </v-card>
       </v-flex>
@@ -26,6 +28,11 @@ import { mapGetters } from 'vuex';
 export default {
   computed: {
     ...mapGetters(['items', 'isLoading']),
+  },
+  methods: {
+    checkAll() {
+      alert(1);
+    },
   },
 };
 </script>
