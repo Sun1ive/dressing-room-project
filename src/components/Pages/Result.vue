@@ -36,7 +36,7 @@
         </v-container>
       </v-flex>
       <v-flex xs10 sm9>
-        <v-container fluid grid-list-xl>
+        <v-container fluid grid-list-xl v-if="!isSelectedColor">
           <v-layout row wrap justify-center>
             <v-flex xs12 sm6 md4 lg3 v-for="item in items" :key="item._id">
               <v-card>
@@ -59,9 +59,9 @@
             </v-flex>
           </v-layout>
         </v-container>
-        <v-container fluid grid-list-xl>
+        <v-container fluid grid-list-xl v-else>
           <v-layout row wrap justify-center>
-            <v-flex xs12 sm6 md4 lg3 v-for="item in items" :key="item._id">
+            <v-flex xs12 sm6 md4 lg3 v-for="item in filteredItemsByColor" :key="item._id">
               <v-card>
                 <v-card-media height="600" :src="item.src" />
                 <v-card-text>
@@ -107,6 +107,14 @@ export default {
     itemsByColor() {
       return uniq(this.$store.getters.items.map(item => item.color));
     },
+    isSelectedColor() {
+      if (this.selectedColor && this.selectedType) {
+        return this.selectedColor
+      }
+    },
+    filteredItemsByColor() {
+      return this.items.filter(item => item.color === this.selectedColor);
+    }
   },
   methods: {
     async checkAll() {
@@ -123,6 +131,5 @@ export default {
 };
 </script>
 
-<style scoped>
-
+<style scoped lang="stylus">
 </style>
