@@ -118,8 +118,14 @@ export default {
   methods: {
     onCheckout() {
       setLocalData(this.height, this.shoulders, this.breast, this.waist, this.hips);
-      this.$store.dispatch('compareAll');
-      this.$router.push('/result');
+      /* this.$store.dispatch('compareAll');
+      this.$router.push('/result'); */
+      if (this.isSelected) {
+        console.log(true);
+      } else {
+        this.$store.dispatch('compareAll');
+        this.$router.push('/result')
+      }
     },
   },
   computed: {
@@ -132,6 +138,7 @@ export default {
       breast: 'userBreast',
       waist: 'userWaist',
       hips: 'userHips',
+      isSelected: 'isSelectedItem',
     }),
   },
 };

@@ -10,7 +10,7 @@ export default new Vuex.Store({
   state: {
     items: null,
     itemType: 'Плечевые',
-    selectedItem: {},
+    selectedItem: null,
     userParams: {
       height: null,
       shoulders: null,
@@ -34,6 +34,9 @@ export default new Vuex.Store({
     },
     setItems(state, payload) {
       state.items = payload;
+    },
+    setSelectedItem(state, payload) {
+      state.selectedItem = payload;
     },
     setUserParams(state, payload) {
       switch (payload.name) {
@@ -60,7 +63,7 @@ export default new Vuex.Store({
   actions: {
     getItems({ commit }) {
       commit('setLoading', true);
-      const promise = new Promise((resolve, reject) => {
+      return new Promise((resolve, reject) => {
         async function fetchData() {
           try {
             const response = await withOutAuth().get('/products');
@@ -76,7 +79,6 @@ export default new Vuex.Store({
         }
         fetchData();
       });
-      return promise;
     },
     setUserParams({ commit }, payload) {
       commit('setLoading', true);
@@ -126,7 +128,7 @@ export default new Vuex.Store({
     },
     onSignIn({ commit, state }, payload) {
       commit('setLoading', true);
-      const promise = new Promise((resolve, reject) => {
+      return new Promise((resolve, reject) => {
         async function onLogIn() {
           try {
             const response = await withOutAuth().post('/user/login', {
@@ -150,12 +152,12 @@ export default new Vuex.Store({
           }
         }
         onLogIn();
-        return promise;
       });
     },
   },
   getters: {
     items: state => state.items,
+    isSelectedItem: state => state.selectedItem,
     userHeight: state => state.userParams.height,
     userShoulders: state => state.userParams.shoulders,
     userBreast: state => state.userParams.breast,

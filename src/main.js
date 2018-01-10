@@ -29,6 +29,7 @@ import App from './App';
 import router from './router';
 import store from './store';
 import { LocalStorage, SessionStorage } from './utils/storage';
+import path from './utils/path';
 
 Vue.component('app-params', pWrapper);
 Vue.component('app-loader', preLoader);
@@ -80,6 +81,9 @@ new Vue({
       this.$store.commit('setUserLoginState', true);
     }
   },
-  mounted() {},
+  mounted() {
+    const pathname = window.location.href;
+    this.$store.commit('setSelectedItem', path(pathname));
+  },
   render: h => h(App),
 });
