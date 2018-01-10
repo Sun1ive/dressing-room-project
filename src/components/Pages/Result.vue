@@ -1,7 +1,7 @@
 <template>
   <v-container fluid>
     <v-layout>
-      <v-flex xs10 sm3>
+      <v-flex xs6 sm3>
         <transition enter-active-class="animated bounceInDown">
           <component 
             @changeState="changeState"
@@ -12,7 +12,7 @@
       <v-flex xs10 sm9>
         <v-container fluid grid-list-xl>
           <v-layout row wrap justify-center v-if="!isLoading">
-            <v-flex xs10 sm6 md4 lg3 v-for="item in items" :key="item._id">
+            <v-flex xs12 sm6 md4 lg3 v-for="item in items" :key="item._id">
               <v-card>
                 <v-card-media height="600" :src="item.src" />
                 <v-card-text>
@@ -35,8 +35,6 @@
         </v-container>
       </v-flex>
     </v-layout>
-    
-    <app-loader v-if="isLoading" />
   </v-container>
 </template>
 

@@ -50,9 +50,11 @@ export default {
     };
   },
   methods: {
-    filterByType() {
+    async filterByType() {
+      this.$store.commit('setLoading', true);
       this.$store.commit('setItemType', this.selectedType);
-      this.$store.dispatch('compareAll');
+      await this.$store.dispatch('compareAll');
+      this.$store.commit('setLoading', false);
     },
   },
   computed: {
