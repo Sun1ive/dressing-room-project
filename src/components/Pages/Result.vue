@@ -4,7 +4,6 @@
       <v-flex xs6 sm3>
         <transition enter-active-class="animated bounceInDown">
           <component 
-            @changeState="changeState"
             :is="filterState"
           ></component>
         </transition>
@@ -41,16 +40,15 @@
 <script>
 import { mapGetters } from 'vuex';
 import Filter from '../Templates/Filter';
-import FilterWrapper from '../Templates/FilterWrapper';
+
 
 export default {
   components: {
     appFilter: Filter,
-    appFilterWrapper: FilterWrapper,
   },
   data() {
     return {
-      filterState: 'app-filterWrapper'
+      filterState: 'app-filter',
     }
   },
   computed: {
@@ -60,9 +58,6 @@ export default {
     checkAll() {
       this.$store.dispatch('compareAll');
     },
-    changeState() {
-      this.filterState = 'app-filter'
-    }
   },
 };
 </script>

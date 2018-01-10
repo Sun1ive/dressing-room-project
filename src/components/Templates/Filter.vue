@@ -1,42 +1,31 @@
 <template>
   <v-container fluid>
-    <v-layout class="mt-4" justify-center align-center>
-      <v-flex class="text-xs-center">
-        <v-card>
-          <v-card-title>
-            <v-flex class="text-xs-center">
-              <h1>Классификация</h1>
-            </v-flex>
-          </v-card-title>
-          <v-card-text>
-            <v-select
-              :items="itemTypes"
-              v-model="selectedType"
-              :label="itemTypes[0]"
-            ></v-select>
-          </v-card-text>
-          <v-card-actions class="filterActions">
-            <v-btn @click="filterByType">Применить</v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-flex>
-    </v-layout>
-    <v-layout class="mt-3" justify-center align-center>
-      <v-flex class="text-xs-center">
-        <v-card>
-        <h1>Цвета</h1>
-          <v-card-text>
-            <!-- <v-checkbox
-              v-for="(color, i) in itemsColors"
-              :key="i"
-              :label="color"
-              v-model="selectedColors"
-              :value="color"
-            ></v-checkbox> -->
-          </v-card-text>
-        </v-card>
-      </v-flex>
-    </v-layout>
+    <v-layout justify-center class="mt-4" row>
+    <v-flex xs10>
+      <v-card>
+        <v-toolbar color="teal" dark>
+          <v-toolbar-title>Фильтр</v-toolbar-title>
+        </v-toolbar>
+        <v-list two-line subheader>
+          <v-subheader>Классификация</v-subheader>
+          <v-list-tile @click="filterByType(item)" v-for="item in itemTypes" :key="item">
+            <v-list-tile-content>
+              <v-list-tile-title>{{ item }}</v-list-tile-title>
+            </v-list-tile-content>
+          </v-list-tile>
+        </v-list>
+        <v-divider></v-divider>
+        <v-list two-line subheader>
+          <v-subheader>Цвета</v-subheader>
+          <v-list-tile avatar>
+            <v-list-tile-action>
+              <v-checkbox label="1234" v-model="video"></v-checkbox>
+            </v-list-tile-action>
+          </v-list-tile>
+        </v-list>
+      </v-card>
+    </v-flex>
+  </v-layout>
   </v-container>
 </template>
 
@@ -46,13 +35,13 @@ import uniq from 'lodash/uniq'
 export default {
   data() {
     return {
-      selectedType: null,
+      selectedColor: [],
     };
   },
   methods: {
-    async filterByType() {
+    async filterByType(item) {
       this.$store.commit('setLoading', true);
-      this.$store.commit('setItemType', this.selectedType);
+      this.$store.commit('setItemType', item);
       await this.$store.dispatch('compareAll');
       this.$store.commit('setLoading', false);
     },

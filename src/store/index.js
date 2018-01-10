@@ -10,7 +10,7 @@ export default new Vuex.Store({
   state: {
     items: [],
     itemType: 'Плечевые',
-    availableItemTypes: [],
+    availableItemTypes: ['Плечевые', 'Поясные'],
     selectedItem: null,
     userParams: {
       height: null,
@@ -38,9 +38,6 @@ export default new Vuex.Store({
     },
     setItemType(state, payload) {
       state.itemType = payload;
-    },
-    setAvailableItemTypes(state, payload) {
-      state.availableItemTypes = payload;
     },
     setSelectedItem(state, payload) {
       state.selectedItem = payload;
