@@ -2,32 +2,32 @@
   <v-container>
     <v-layout justify-center align-center>
       <v-flex xs12 sm6 class="text-xs-center">
-        <h1>404</h1>
+        <h1>¯\_(ツ)_/¯</h1>
         <p>{{ errorMessage }}</p>
-        <img src="http://memesmix.net/media/created/c04bqw.jpg" alt="">
+        <p>Попробуйте изменить Ваши значения</p>
       </v-flex>
     </v-layout>
   </v-container>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   computed: {
-    items() {
-      return this.$store.getters.items;
-    },
+    ...mapGetters({
+      items: 'items',
+    }),
     errorMessage() {
-      let message;
       if (this.items.length < 1) {
-        message = 'К сожалению на Вас не нашли вещей, очень сложно'
+        return 'К сожалению под Ваши параметры не подходит ни один товар'
       }
-      message = 'К сожалению у нас в базе нет такой вещи'
-      return message;
     }
-  }
-}
+  },
+};
 </script>
 
 
 <style scoped>
+
 </style>

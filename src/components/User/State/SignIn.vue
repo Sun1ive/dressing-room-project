@@ -2,14 +2,16 @@
   <v-container fluid>
     <v-layout justify-center align-center>
       <v-flex xs12 sm6 lg4>
-        <v-alert
-          v-if="isError.length > 0"
-          color="error" 
-          icon="warning" 
-          value="true"
-        >
-          {{ isError }}
-        </v-alert>
+        <transition enter-active-class="animated tada">
+          <v-alert
+            v-if="isError.length > 0"
+            color="error" 
+            icon="warning" 
+            value="true"
+          >
+            {{ isError }}
+          </v-alert>
+        </transition>
       </v-flex>
     </v-layout>
     <v-layout justify-center align-center>

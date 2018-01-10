@@ -92,7 +92,8 @@ export default new Vuex.Store({
     },
     compareSingle({ commit, state }, payload) {
       commit('setLoading', true);
-      return new Promise((resolve, reject) => {
+      commit('setError', '');
+      return new Promise((resolve) => {
         async function getItem() {
           try {
             const response = await withOutAuth().post('/products/item', {
@@ -105,7 +106,6 @@ export default new Vuex.Store({
           } catch (error) {
             commit('setError', error.response.data.message);
             commit('setLoading', false);
-            reject(Error('Promise failed'));
             throw new Error(error);
           }
         }
@@ -114,7 +114,7 @@ export default new Vuex.Store({
     },
     compareAll({ commit, state }) {
       commit('setLoading', true);
-      return new Promise((resolve, reject) => {
+      return new Promise((resolve) => {
         async function compareAll() {
           try {
             const response = await withOutAuth().post('/products/all', {
@@ -127,7 +127,6 @@ export default new Vuex.Store({
           } catch (error) {
             commit('setError', error.response.data.message);
             commit('setLoading', false);
-            reject(Error('Promise rejected'));
             throw new Error(error);
           }
         }

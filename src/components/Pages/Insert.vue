@@ -1,5 +1,17 @@
 <template>
   <v-container>
+    <v-layout class="my-3" justify-center align-center>
+      <v-flex xs10 sm8 md6 lg4 class="text-xs-center">
+        <transition enter-active-class="animated bounceIn">
+          <v-alert
+            color="error" 
+            icon="warning" 
+            value="true"
+            v-if="error.length > 0"
+          >{{ error }}</v-alert>
+        </transition>
+      </v-flex>
+    </v-layout>
     <v-layout align-center justify-center>
       <v-flex xs10 sm8 md6 lg4 class="text-xs-center">
         <v-form @submit.prevent="onCheckout">
@@ -37,6 +49,13 @@ export default {
     isFilled() {
       return this.link.length <= 0;
     },
+    error() {
+      return this.$store.getters.isError;
+    }
   },
 };
 </script>
+
+<style lang="stylus" scoped>
+
+</style>

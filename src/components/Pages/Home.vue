@@ -119,7 +119,7 @@ export default {
     async onCheckout() {
       setLocalData(this.height, this.shoulders, this.breast, this.waist, this.hips);
       if (this.isSelected) {
-        this.$store.dispatch('compareSingle', this.isSelected);
+        await this.$store.dispatch('compareSingle', this.isSelected);
         this.$router.push('/result');
       } else {
         await this.$store.dispatch('compareAll');
