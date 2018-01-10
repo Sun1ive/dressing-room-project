@@ -1,7 +1,7 @@
 <template>
   <v-container fluid>
     <v-layout>
-      <v-flex xs6 sm3>
+      <v-flex xs6 sm3 v-if="items.length > 1">
         <v-container fluid>
           <v-layout justify-center class="mt-4" row>
             <v-flex xs10>
@@ -10,7 +10,6 @@
                   <v-toolbar-title>Фильтр</v-toolbar-title>
                 </v-toolbar>
                 <v-list two-line subheader>
-                  <v-subheader>Классификация</v-subheader>
                   <v-flex xs10 offset-xs1>
                     <v-select
                       :items="availableItemTypes"
@@ -30,7 +29,6 @@
                     </v-radio-group>
                   </v-list-tile>
                   <v-divider></v-divider>
-                  <v-btn @click="sendRequest">Применить</v-btn>
                   <v-btn @click="checkAll">Сбросить</v-btn>
                 </v-list>
               </v-card>
@@ -38,7 +36,7 @@
           </v-layout>
         </v-container>
       </v-flex>
-      <v-flex xs10 sm9>
+      <v-flex xs12>
         <v-container fluid grid-list-xl v-if="filteredItemsByColor.length < 1">
           <v-layout row wrap justify-center>
             <v-flex xs12 sm6 md4 lg3 v-for="item in items" :key="item._id">
@@ -92,13 +90,9 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import Filter from '../Templates/Filter';
 import uniq from 'lodash/uniq';
 
 export default {
-  components: {
-    appFilter: Filter,
-  },
   data() {
     return {
       selectedColor: null,
@@ -110,11 +104,6 @@ export default {
     itemsByColor() {
       return uniq(this.$store.getters.items.map(item => item.color));
     },
-    isSelectedColor() {
-      if (this.selectedColor && this.selectedType) {
-        return this.selectedColor
-      }
-    },
     filteredItemsByColor() {
       return this.items.filter(item => item.color === this.selectedColor);
     }
@@ -125,16 +114,9 @@ export default {
       this.selectedType = null;
       await this.$store.dispatch('compareProductsWithType');
     },
-    async sendRequest() {
-      this.$store.commit('setLoading', true);
-      this.$store.commit('setItemType', this.selectedType);
-      await this.$store.dispatch('compareProductsWithTypeAndColor', this.selectedColor);
-      // await this.$store.dispatch('compareProductsWithType');
-      this.$store.commit('setLoading', false);
-    },
     async findByType() {
       this.$store.commit('setItemType', this.selectedType);
-      this.$store.dispatch('compareProductsWithType');
+      await this.$store.dispatch('compareProductsWithType');
     }
   },
 };
