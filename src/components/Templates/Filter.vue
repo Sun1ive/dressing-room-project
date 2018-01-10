@@ -9,8 +9,15 @@
             </v-flex>
           </v-card-title>
           <v-card-text>
-            <v-select></v-select>
+            <v-select
+              :items="itemTypes"
+              v-model="selectedType"
+              :label="itemTypes[0]"
+            ></v-select>
           </v-card-text>
+          <v-card-actions class="filterActions">
+            <v-btn @click="filterByType">Применить</v-btn>
+          </v-card-actions>
         </v-card>
       </v-flex>
     </v-layout>
@@ -34,9 +41,35 @@
 </template>
 
 <script>
-export default {};
+import uniq from 'lodash/uniq'
+
+export default {
+  data() {
+    return {
+      selectedType: null,
+    };
+  },
+  methods: {
+    filterByType() {
+      this.$store.commit('setItemType', this.selectedType);
+      this.$store.dispatch('compareAll');
+    },
+  },
+  computed: {
+    itemTypes() {
+      return this.$store.getters.availableItemTypes;
+    },
+  },
+  mounted() {
+    if (this.$store.getters.availableItemTypes.length < 1) {
+      this.$store.commit('setAvailableItemTypes', uniq(this.$store.getters.items.map(item => item.type)));
+    }
+  },
+};
 </script>
 
-<style scoped>
-
+<style scoped lang="stylus">
+.filterActions {
+  justify-content: center;
+}
 </style>

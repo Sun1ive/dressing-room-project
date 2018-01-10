@@ -10,6 +10,7 @@ export default new Vuex.Store({
   state: {
     items: [],
     itemType: 'Плечевые',
+    availableItemTypes: [],
     selectedItem: null,
     userParams: {
       height: null,
@@ -34,6 +35,12 @@ export default new Vuex.Store({
     },
     setItems(state, payload) {
       state.items = payload;
+    },
+    setItemType(state, payload) {
+      state.itemType = payload;
+    },
+    setAvailableItemTypes(state, payload) {
+      state.availableItemTypes = payload;
     },
     setSelectedItem(state, payload) {
       state.selectedItem = payload;
@@ -93,7 +100,7 @@ export default new Vuex.Store({
     compareSingle({ commit, state }, payload) {
       commit('setLoading', true);
       commit('setError', '');
-      return new Promise((resolve) => {
+      return new Promise(resolve => {
         async function getItem() {
           try {
             const response = await withOutAuth().post('/products/item', {
@@ -114,7 +121,7 @@ export default new Vuex.Store({
     },
     compareAll({ commit, state }) {
       commit('setLoading', true);
-      return new Promise((resolve) => {
+      return new Promise(resolve => {
         async function compareAll() {
           try {
             const response = await withOutAuth().post('/products/all', {
@@ -164,6 +171,8 @@ export default new Vuex.Store({
   },
   getters: {
     items: state => state.items,
+    itemType: state => state.itemType,
+    availableItemTypes: state => state.availableItemTypes,
     isSelectedItem: state => state.selectedItem,
     userHeight: state => state.userParams.height,
     userShoulders: state => state.userParams.shoulders,

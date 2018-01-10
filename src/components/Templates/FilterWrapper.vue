@@ -16,7 +16,8 @@
 <script>
 export default {
   methods: {
-    changeState() {
+    async changeState() {
+      await this.$store.dispatch('getItems');
       this.$emit('changeState');
     },
   },
