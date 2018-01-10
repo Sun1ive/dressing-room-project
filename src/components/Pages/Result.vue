@@ -16,9 +16,9 @@
                       :items="availableItemTypes"
                       v-model="selectedType"
                       label="Классификация"
+                      @input="findByType"
                     >
                     </v-select>
-                    <v-btn @click="sendRequest">Click me</v-btn>
                   </v-flex>
                 </v-list> 
                 <v-divider></v-divider>
@@ -29,6 +29,9 @@
                       <v-radio :label="color" :value="color"></v-radio>
                     </v-radio-group>
                   </v-list-tile>
+                  <v-divider></v-divider>
+                  <v-btn @click="sendRequest">Применить</v-btn>
+                  <v-btn @click="checkAll">Сбросить</v-btn>
                 </v-list>
               </v-card>
             </v-flex>
@@ -36,32 +39,9 @@
         </v-container>
       </v-flex>
       <v-flex xs10 sm9>
-        <v-container fluid grid-list-xl v-if="!isSelectedColor">
+        <v-container fluid grid-list-xl>
           <v-layout row wrap justify-center>
             <v-flex xs12 sm6 md4 lg3 v-for="item in items" :key="item._id">
-              <v-card>
-                <v-card-media height="600" :src="item.src" />
-                <v-card-text>
-                  <div><strong>{{ item.title }}</strong></div>
-                  <div>Коэффициент совместимости: <strong>{{ item.percent }} %</strong></div>
-                  <div>Ваш предпочитаемый размер: <strong>{{ item.size }}</strong></div>
-                  <div>Длинна: <strong>{{ item.difference }}</strong></div>
-                </v-card-text>
-                <v-card-actions>
-                  <v-btn :href="`${item.link}`" target="_blank">Купить</v-btn>
-                  <v-spacer />
-                  <v-btn 
-                    @click="checkAll"
-                    v-if="items.length === 1"
-                  >Посмотреть все</v-btn>
-                </v-card-actions>
-              </v-card>
-            </v-flex>
-          </v-layout>
-        </v-container>
-        <v-container fluid grid-list-xl v-else>
-          <v-layout row wrap justify-center>
-            <v-flex xs12 sm6 md4 lg3 v-for="item in filteredItemsByColor" :key="item._id">
               <v-card>
                 <v-card-media height="600" :src="item.src" />
                 <v-card-text>
@@ -118,15 +98,21 @@ export default {
   },
   methods: {
     async checkAll() {
+      this.selectedColor = null;
+      this.selectedType = null;
       await this.$store.dispatch('compareProductsWithType');
     },
     async sendRequest() {
       this.$store.commit('setLoading', true);
       this.$store.commit('setItemType', this.selectedType);
-      // await this.$store.dispatch('compareProductsWithTypeAndColor', this.selectedColor);
-      await this.$store.dispatch('compareProductsWithType');
+      await this.$store.dispatch('compareProductsWithTypeAndColor', this.selectedColor);
+      // await this.$store.dispatch('compareProductsWithType');
       this.$store.commit('setLoading', false);
     },
+    async findByType() {
+      this.$store.commit('setItemType', this.selectedType);
+      this.$store.dispatch('compareProductsWithType');
+    }
   },
 };
 </script>
