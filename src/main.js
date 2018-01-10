@@ -1,10 +1,7 @@
 import Vue from 'vue';
-import Loader from '@/components/templates/Loader';
-import wrapper from '@/components/templates/Wrapper';
-import pWrapper from '@/components/templates/ParamsWrapper';
-
-import path from '@/services/path';
 import 'babel-polyfill';
+import pWrapper from '@/components/Templates/ParamsWrapper';
+import preLoader from '@/components/Shared/Loader';
 
 import {
   Vuetify,
@@ -18,27 +15,24 @@ import {
   VToolbar,
   VCard,
   VSlider,
-  VForm,
   VTextField,
-  VProgressCircular,
-  VMenu,
-  VPagination,
-  VAlert,
   VSelect,
-  VSwitch,
-  VCheckbox,
-  VTooltip,
-  VDialog,
+  VForm,
+  VAlert,
+  VProgressCircular,
   VDivider,
   transitions,
 } from 'vuetify';
 import '../node_modules/vuetify/src/stylus/app.styl';
-import './style/main.styl';
 
 import App from './App';
-import { LocalStorage, SessionStorage } from './utils/storage';
 import router from './router';
 import store from './store';
+import { LocalStorage, SessionStorage } from './utils/storage';
+import path from './utils/path';
+
+Vue.component('app-params', pWrapper);
+Vue.component('app-loader', preLoader);
 
 Vue.use(Vuetify, {
   components: {
@@ -52,17 +46,11 @@ Vue.use(Vuetify, {
     VToolbar,
     VCard,
     VSlider,
-    VForm,
     VTextField,
-    VProgressCircular,
-    VMenu,
-    VPagination,
-    VAlert,
     VSelect,
-    VSwitch,
-    VCheckbox,
-    VTooltip,
-    VDialog,
+    VForm,
+    VAlert,
+    VProgressCircular,
     VDivider,
     transitions,
   },
@@ -76,26 +64,21 @@ Vue.use(Vuetify, {
     warning: '#FFC107',
   },
 });
-Vue.component('AppLoader', Loader);
-Vue.component('Wrapper', wrapper);
-Vue.component('app-params', pWrapper);
-
 
 Vue.config.productionTip = false;
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
-  router,
   store,
+  router,
   created() {
     if (LocalStorage.get('DressingUserData')) {
       const userInfo = LocalStorage.get('DressingUserData');
-      this.$store.dispatch('setParams', userInfo);
+      this.$store.dispatch('setUserParams', userInfo);
     }
-    this.$store.dispatch('getDresses');
     if (SessionStorage.get('AuthToken')) {
-      this.$store.commit('setUserSignIn', true);
+      this.$store.commit('setUserLoginState', true);
     }
   },
   mounted() {

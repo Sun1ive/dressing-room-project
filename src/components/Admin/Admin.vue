@@ -7,8 +7,8 @@
           align-center
         >
           <transition 
-            name="fade" 
-            mode="out-in">
+          name="fade" 
+          mode="out-in">
             <router-view />
           </transition>
         </v-layout>
@@ -17,12 +17,12 @@
 </template>
 
 <script>
-import Bar from './AdminBar'
+import Bar from './AdminBar';
 
 export default {
   components: {
-    appBar: Bar
-  }
+    appBar: Bar,
+  },
 };
 </script>
 

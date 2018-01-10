@@ -14,8 +14,8 @@
 </template>
 
 <script>
-import Header from '@/components/shared/header';
-import Footer from '@/components/shared/footer';
+import Header from '@/components/Shared/Header';
+import Footer from '@/components/Shared/Footer';
 
 export default {
   components: {
@@ -25,22 +25,9 @@ export default {
 };
 </script>
 
-
 <style lang="stylus">
-// html
-  // overflow-y: hidden;
-
-#app
-  // max-width: 700px;
-  // max-width: 950px;
-  margin: 0 auto;
-  outline: none;
-
 .container
-  padding: 0;
-
-.input-group--slider
-  outline-style: none;
+  padding: 0
 
 .content--wrap
   align-items: center;
@@ -50,4 +37,7 @@ export default {
 
 .fade-enter, .fade-leave-to
   opacity: 0
+
+.input-group--slider
+  outline-style: none;
 </style>

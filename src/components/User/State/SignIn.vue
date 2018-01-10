@@ -18,7 +18,7 @@
           <v-text-field 
             required 
             v-model.lazy="credentials.email" 
-            label="email" 
+            label="Email" 
           />
           <v-text-field 
             required 
@@ -26,7 +26,7 @@
             label="Password" 
             type="password" 
           />
-          <v-btn type="submit">Sign in</v-btn>
+          <v-btn left type="submit">Sign in</v-btn>
         </v-form>
       </v-flex>
     </v-layout>
@@ -46,19 +46,25 @@ export default {
     };
   },
   methods: {
-    onLogIn() {
-      this.$store.dispatch('onSignIn', this.credentials);
-      setTimeout(() => {
-        if (this.isUserSignIn) {
+    async onLogIn() {
+      try {
+        await this.$store.dispatch('onSignIn', this.credentials);
+        this.$router.push('/');
+      } catch (error) {}
+
+      /* Надо переписать это. вместо таймаута сделать лоадер мб */
+      /* setTimeout(() => {
+        if (this.isUserLoginState) {
           this.$router.push('/');
         }
       }, 500);
+       */
     },
   },
   computed: {
     ...mapGetters({
       isError: 'isError',
-      isUserSignIn: 'isUserSignIn',
+      isUserLoginState: 'userLoginState',
     }),
   },
 };

@@ -70,7 +70,7 @@ export default {
     async deleteItem(id) {
       if (confirm('Are you sure ?')) {
         try {
-          const token = `Bearer ${SessionStorage.get('AuthToken')}`
+          const token = `Bearer ${SessionStorage.get('AuthToken')}`;
           this.$store.commit('removeFromItemList', id);
           await withHeaders(token).delete(`/products/${id}`);
         } catch (error) {

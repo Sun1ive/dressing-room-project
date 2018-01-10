@@ -102,8 +102,8 @@
     <app-params>
       <v-btn
       slot="button"
-      @click="onCheckout"
       :disabled="isReadyToCheckout"
+      @click="onCheckout"
       >Примерить</v-btn>
     </app-params>
   </v-container>
@@ -111,10 +111,35 @@
 
 
 <script>
-import checkoutMixin from '@/mixins/checkout';
+import { mapGetters } from 'vuex';
+import { setLocalData } from '../../utils/storage';
 
 export default {
-  mixins: [checkoutMixin],
+  methods: {
+    onCheckout() {
+      setLocalData(this.height, this.shoulders, this.breast, this.waist, this.hips);
+      if (this.isSelected) {
+        this.$store.dispatch('compareSingle', this.isSelected);
+        this.$router.push('/result');
+      } else {
+        this.$store.dispatch('compareAll');
+        this.$router.push('/result');
+      }
+    },
+  },
+  computed: {
+    isReadyToCheckout() {
+      return !this.height || !this.breast || !this.waist || !this.hips || !this.shoulders;
+    },
+    ...mapGetters({
+      height: 'userHeight',
+      shoulders: 'userShoulders',
+      breast: 'userBreast',
+      waist: 'userWaist',
+      hips: 'userHips',
+      isSelected: 'isSelectedItem',
+    }),
+  },
 };
 </script>
 

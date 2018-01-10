@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+
 import { withOutAuth } from '../services/api';
-import { compareTop, compareBottom } from '../utils/compare';
 import { SessionStorage } from '../utils/storage';
 
 Vue.use(Vuex);
@@ -9,143 +9,162 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     items: null,
-    height: null,
-    shoulders: null,
-    breast: null,
-    waist: null,
-    hips: null,
-    type: 'Плечевые',
-    filtered: [],
-    selectedItem: {},
-    loading: false,
-    error: '',
-    isUserSignIn: false,
+    itemType: 'Плечевые',
+    selectedItem: null,
+    userParams: {
+      height: null,
+      shoulders: null,
+      breast: null,
+      waist: null,
+      hips: null,
+    },
+    isLoading: false,
+    isError: '',
+    isUserLoginState: false,
   },
   mutations: {
-    setLoadedDresses(state, payload) {
+    setError(state, payload) {
+      state.isError = payload;
+    },
+    setLoading(state, payload) {
+      state.isLoading = payload;
+    },
+    setUserLoginState(state, payload) {
+      state.isUserLoginState = payload;
+    },
+    setItems(state, payload) {
       state.items = payload;
     },
     setSelectedItem(state, payload) {
       state.selectedItem = payload;
     },
-    setHeight(state, payload) {
-      state.height = payload;
-    },
-    setShoulders(state, payload) {
-      state.shoulders = payload;
-    },
-    setBreast(state, payload) {
-      state.breast = payload;
-    },
-    setWaist(state, payload) {
-      state.waist = payload;
-    },
-    setHips(state, payload) {
-      state.hips = payload;
-    },
-    setType(state, payload) {
-      state.type = payload;
-    },
-    setFilteredDresses(state, payload) {
-      state.filtered = payload;
-    },
-    setLoading(state, payload) {
-      state.loading = payload;
-    },
-    setUserSignIn(state, payload) {
-      state.isUserSignIn = payload;
-    },
-    setError(state, payload) {
-      state.error = payload;
-    },
-    runCompareBottom(state, payload) {
-      state.filtered = compareBottom(payload, state.waist, state.hips);
-    },
-    runCompare(state, payload) {
-      state.filtered = compareTop(
-        payload,
-        state.shoulders,
-        state.breast,
-        state.waist,
-        state.hips,
-        state.height,
-      );
-    },
-    removeFromItemList(state, payload) {
-      const index = state.items.map(item => item._id).indexOf(payload);
-      state.items.splice(index, 1);
-    },
-    addToItems(state, payload) {
-      state.items.push(payload);
+    setUserParams(state, payload) {
+      switch (payload.name) {
+        case 'Height':
+          state.userParams.height = payload.value;
+          break;
+        case 'Shoulders':
+          state.userParams.shoulders = payload.value;
+          break;
+        case 'Breast':
+          state.userParams.breast = payload.value;
+          break;
+        case 'Waist':
+          state.userParams.waist = payload.value;
+          break;
+        case 'Hips':
+          state.userParams.hips = payload.value;
+          break;
+        default:
+          break;
+      }
     },
   },
   actions: {
-    getDresses({ commit }) {
-      async function fetchDresses() {
-        try {
-          const response = await withOutAuth().get('/products');
-          const resolved = response.data;
-          commit('setLoadedDresses', resolved);
-        } catch (error) {
-          throw new Error(`Could not fetch data ${error.response.data}`);
-        }
-      }
-      fetchDresses();
-    },
-    onSignIn({ commit, state }, payload) {
-      async function onLogIn() {
-        try {
-          const response = await withOutAuth().post('/user/login', {
-            email: payload.email,
-            password: payload.password,
-          });
-          const { token } = response.data;
-          SessionStorage.set('AuthToken', token);
-
-          if (state.error) {
-            commit('setError', '');
+    getItems({ commit }) {
+      commit('setLoading', true);
+      return new Promise((resolve, reject) => {
+        async function fetchData() {
+          try {
+            const response = await withOutAuth().get('/products');
+            const { data } = response;
+            commit('setItems', data);
+            resolve();
+            commit('setLoading', false);
+          } catch (error) {
+            reject(Error('Its failed'));
+            commit('setLoading', false);
+            throw new Error(`Could not fetch data ${error.response.data}`);
           }
-          commit('setUserSignIn', true);
+        }
+        fetchData();
+      });
+    },
+    setUserParams({ commit }, payload) {
+      commit('setLoading', true);
+      Object.keys(payload).forEach(key => {
+        commit('setUserParams', {
+          name: key,
+          value: payload[key],
+        });
+      });
+      commit('setLoading', false);
+    },
+    compareSingle({ commit, state }, payload) {
+      commit('setLoading', true);
+      async function getItem() {
+        try {
+          const response = await withOutAuth().post('/products/item', {
+            link: payload,
+            params: state.userParams,
+          });
+          commit('setItems', response.data);
+          commit('setLoading', false);
         } catch (error) {
           commit('setError', error.response.data.message);
+          commit('setLoading', false);
           throw new Error(error);
         }
       }
-      onLogIn();
+      getItem();
     },
-    sendMail(store, link) {
-      async function sendMeMail() {
+    compareAll({ commit, state }) {
+      commit('setLoading', true);
+      async function compareAll() {
         try {
-          await withOutAuth().post('/mail', { link });
+          const response = await withOutAuth().post('/products/all', {
+            type: state.itemType,
+            params: state.userParams,
+          });
+          commit('setItems', response.data);
+          commit('setLoading', false);
         } catch (error) {
-          throw new Error(`Couldn't send message ${error}`);
+          commit('setError', error.response.data.message);
+          commit('setLoading', false);
+          throw new Error(error);
         }
       }
-      sendMeMail();
+      compareAll();
     },
-    setParams({ commit }, payload) {
-      if (!payload) {
-        return;
-      }
-      commit('setHeight', payload.height);
-      commit('setShoulders', payload.shoulders);
-      commit('setBreast', payload.breast);
-      commit('setWaist', payload.waist);
-      commit('setHips', payload.hips);
+    onSignIn({ commit, state }, payload) {
+      commit('setLoading', true);
+      return new Promise((resolve, reject) => {
+        async function onLogIn() {
+          try {
+            const response = await withOutAuth().post('/user/login', {
+              email: payload.email,
+              password: payload.password,
+            });
+            const { token } = response.data;
+            SessionStorage.set('AuthToken', token);
+
+            if (state.error) {
+              commit('setError', null);
+            }
+            commit('setUserLoginState', true);
+            resolve();
+            commit('setLoading', false);
+          } catch (error) {
+            commit('setError', error.response.data.message);
+            reject(Error('Something went wrong'));
+            commit('setLoading', false);
+            throw new Error(error);
+          }
+        }
+        onLogIn();
+      });
     },
   },
   getters: {
     items: state => state.items,
-    isError: state => state.error,
-    getShoulders: state => state.shoulders,
-    getHeight: state => state.height,
-    getBreast: state => state.breast,
-    getWaist: state => state.waist,
-    getHips: state => state.hips,
-    getType: state => state.type,
-    filtered: state => state.filtered,
-    selectedItem: state => state.selectedItem,
-    isLoading: state => state.loading,
-    isUserSignIn: state => state.isUserSignIn,
+    isSelectedItem: state => state.selectedItem,
+    userHeight: state => state.userParams.height,
+    userShoulders: state => state.userParams.shoulders,
+    userBreast: state => state.userParams.breast,
+    userWaist: state => state.userParams.waist,
+    userHips: state => state.userParams.hips,
+    userLoginState: state => state.isUserLoginState,
+    isError: state => state.isError,
+    isLoading: state => state.isLoading,
   },
 });

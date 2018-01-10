@@ -1,26 +1,13 @@
 <template>
   <v-container fluid>
-    <v-layout justify-center align-center >
-      <v-flex xs10 sm6 lg4>
-        <v-alert
-          v-if="isError.length > 0"
-          color="error" 
-          icon="warning" 
-          value="true"
-        >
-          {{ isError }}
-        </v-alert>
-      </v-flex>    
+    <v-layout justify-center align-center>
+      <v-flex xs10 sm6 lg4 class="text-xs-center">
+        <h1>Форма редактирования вещи</h1>
+      </v-flex>
     </v-layout>
-    <v-layout class="pt-5" justify-center align-center>
-      <v-flex xs10 sm6 lg4>
-        <v-form
-          class="form text-xs-center" 
-          @submit.prevent="addToBase"
-        >
-          <h1>Форма добавления вещи в базу</h1>
-
-          <p>Параметры которых нет, можно не указывать</p>
+    <v-layout justify-center align-center>
+      <v-flex xs12 sm10 md9 lg7>
+        <v-form class="form" @submit.prevent="onEdit">
 
           <v-select
             :items="typeList"
@@ -41,9 +28,8 @@
             bottom
             required
           ></v-select>
-          <v-text-field required v-model.number.lazy="item.price" label="price грн" />
+          <v-text-field required v-model.number.lazy="item.price" label="price" />
           <v-text-field required v-model.lazy="item.color" label="color" />
-          <v-text-field required v-model.number.lazy="item.length" label="item length см" />
 
           <app-create>
             <v-card-text slot="size">XS</v-card-text>
@@ -78,84 +64,122 @@
           </app-create>
 
           <v-btn
-            color="primary"
-            type="submit"
+          color="primary"
+          type="submit"
           >Submit</v-btn>
         </v-form>
       </v-flex>
     </v-layout>
-
   </v-container>
 </template>
 
 <script>
+import createContainer from '../templates/CreateContainer';
 import { withHeaders } from '../../services/api';
-import { SessionStorage } from '@/utils/storage';
-
-import createContainer from '../templates/createContainer';
+import { SessionStorage } from '../../utils/storage';
 
 export default {
   components: {
     'app-create': createContainer,
   },
+  props: {
+    id: {
+      type: String,
+      required: true,
+    },
+  },
   data() {
     return {
-      error: '',
-      typeList: ['Плечевые', 'Поясные'],
       brandList: ['inDresser'],
-      item: {
-        sizes: [],
-      },
-      xs: {
-        size: 'XS',
-      },
-      s: {
-        size: 'S',
-      },
-      m: {
-        size: 'M',
-      },
-      l: {
-        size: 'L',
-      },
+      typeList: ['Плечевые', 'Поясные'],
+      item: {},
+      xs: {},
+      s: {},
+      m: {},
+      l: {},
     };
   },
   methods: {
-    async addToBase() {
+    async onEdit() {
       try {
         const token = `Bearer ${SessionStorage.get('AuthToken')}`;
+        this.item.sizes.push(this.xs, this.s, this.m, this.l);
 
-        if (this.item.sizes.length === 0) {
-          this.item.sizes.push(this.xs, this.s, this.m, this.l);
-        }
-        await withHeaders(token).post('/products', this.item);
-        /*    this.item = {
-          title: '',
-          type: '',
-          link: '',
-          src: '',
-          sizes: [],
-          brand: '',
-          price: null,
-          color: '',
-          length: null,
-        }; */
+        await withHeaders(token).patch(`/products/${this.id}`, this.item);
 
-        this.$store.commit('addToItems', this.item);
-      } catch (err) {
-        this.item.sizes = [];
-        this.error = err.response.data.error.message;
-        throw new Error('Something bad happened', err);
+        this.$store.dispatch('getDresses');
+        this.$router.push('/admin/view');
+      } catch (error) {
+        throw new Error('Something bad happened ', error);
       }
     },
   },
-  computed: {
-    isError() {
-      return this.error;
-    },
+  created() {
+    const item = this.$store.getters.items.filter(x => x._id === this.id);
+
+    item.forEach(x => {
+      x.sizes.forEach(size => {
+        this.item = {
+          title: x.title,
+          type: x.type,
+          link: x.link,
+          src: x.src,
+          sizes: [],
+          brand: x.brand,
+          price: x.price,
+          color: x.color,
+        };
+        switch (size.size) {
+          case 'XS':
+            this.xs = {
+              size: 'XS',
+              breast: size.breast,
+              waist: size.waist,
+              hips: size.hips,
+              shoulders: size.shoulders,
+            };
+            break;
+          case 'S':
+            this.s = {
+              size: 'S',
+              breast: size.breast,
+              waist: size.waist,
+              hips: size.hips,
+              shoulders: size.shoulders,
+            };
+            break;
+          case 'M':
+            this.m = {
+              size: 'M',
+              breast: size.breast,
+              waist: size.waist,
+              hips: size.hips,
+              shoulders: size.shoulders,
+            };
+            break;
+          case 'L':
+            this.l = {
+              size: 'L',
+              breast: size.breast,
+              waist: size.waist,
+              hips: size.hips,
+              shoulders: size.shoulders,
+            };
+            break;
+          default:
+            break;
+        }
+      });
+    });
   },
 };
 </script>
 
 <style scoped lang="stylus">
+.form {
+  background-color: #fff;
+  padding: 1rem;
+  box-shadow: 1px 1px 1px #333;
+  margin-bottom: 2rem;
+}
 </style>
