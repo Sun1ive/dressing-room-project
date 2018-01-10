@@ -122,7 +122,7 @@ export default {
         await this.$store.dispatch('compareSingle', this.isSelected);
         this.$router.push('/result');
       } else {
-        await this.$store.dispatch('compareAll');
+        await this.$store.dispatch('compareProductsWithType');
         this.$router.push('/result');
       }
     },

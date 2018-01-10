@@ -2,12 +2,65 @@
   <v-container fluid>
     <v-layout>
       <v-flex xs6 sm3>
-        <app-filter></app-filter>
+        <v-container fluid>
+          <v-layout justify-center class="mt-4" row>
+            <v-flex xs10>
+              <v-card>
+                <v-toolbar color="teal" dark>
+                  <v-toolbar-title>Фильтр</v-toolbar-title>
+                </v-toolbar>
+                <v-list two-line subheader>
+                  <v-subheader>Классификация</v-subheader>
+                  <v-flex xs10 offset-xs1>
+                    <v-select
+                    :items="itemTypes"
+                    v-model="selectedType"
+                    >
+                    </v-select>
+                  </v-flex>
+                </v-list> 
+                <v-divider></v-divider>
+                <v-list two-line subheader>
+                  <v-subheader>Цвета</v-subheader>
+                  <v-list-tile avatar v-for="color in colorsByType" :key="color">
+                    <v-radio-group v-model="selectedColor" :mandatory="false">
+                      <v-radio :label="color" :value="color"></v-radio>
+                    </v-radio-group>
+                  </v-list-tile>
+                </v-list>
+                <v-btn @click="sendRequest">Click me</v-btn>
+              </v-card>
+            </v-flex>
+          </v-layout>
+        </v-container>
       </v-flex>
       <v-flex xs10 sm9>
-        <v-container fluid grid-list-xl>
-          <v-layout row wrap justify-center v-if="!isLoading">
+        <v-container fluid grid-list-xl v-if="!filteredItems">
+          <v-layout row wrap justify-center>
             <v-flex xs12 sm6 md4 lg3 v-for="item in items" :key="item._id">
+              <v-card>
+                <v-card-media height="600" :src="item.src" />
+                <v-card-text>
+                  <div><strong>{{ item.title }}</strong></div>
+                  <div>Коэффициент совместимости: <strong>{{ item.percent }} %</strong></div>
+                  <div>Ваш предпочитаемый размер: <strong>{{ item.size }}</strong></div>
+                  <div>Длинна: <strong>{{ item.difference }}</strong></div>
+                </v-card-text>
+                <v-card-actions>
+                  <v-btn :href="`${item.link}`" target="_blank">Купить</v-btn>
+                  <v-spacer />
+                  <v-btn 
+                    @click="checkAll"
+                    v-if="items.length === 1"
+                  >Посмотреть все</v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-flex>
+          </v-layout>
+        </v-container>
+        <v-container fluid grid-list-xl v-else>
+          <v-layout row wrap justify-center>
+            <v-flex xs12 sm6 md4 lg3 v-for="item in filteredItems" :key="item._id">
               <v-card>
                 <v-card-media height="600" :src="item.src" />
                 <v-card-text>
@@ -36,21 +89,52 @@
 <script>
 import { mapGetters } from 'vuex';
 import Filter from '../Templates/Filter';
+import uniq from 'lodash/uniq';
 
 export default {
   components: {
     appFilter: Filter,
   },
   data() {
-    return {};
+    return {
+      selectedColor: null,
+      selectedType: null,
+    };
   },
   computed: {
-    ...mapGetters(['items','isLoading']),
+    ...mapGetters(['items', 'isLoading']),
+    itemTypes() {
+      return this.$store.getters.availableItemTypes;
+    },
+    colorsByType() {
+      return uniq(this.$store.getters.items.map(item => item.color));
+    },
+    filteredItems() {
+      if (this.selectedType && this.selectedColor) {
+        return this.$store.getters.items.filter(item => item.color === this.selectedColor)
+      } else {
+        return false
+      }
+    }
   },
   methods: {
-    checkAll() {
-      this.$store.dispatch('compareAll');
+    async checkAll() {
+      await this.$store.dispatch('compareProductsWithType');
     },
+    async sendRequest() {
+      this.$store.commit('setLoading', true);
+      this.$store.commit('setItemType', this.selectedType);
+      await this.$store.dispatch('compareProductsWithTypeAndColor', this.selectedColor);
+      this.$store.commit('setLoading', false);
+    },
+  },
+  mounted() {
+    if (this.$store.getters.availableItemTypes.length < 1) {
+      this.$store.commit(
+        'setAvailableItemTypes',
+        uniq(this.$store.getters.items.map(item => item.type)),
+      );
+    }
   },
 };
 </script>

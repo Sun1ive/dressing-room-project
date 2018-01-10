@@ -8,12 +8,6 @@
           </v-toolbar>
           <v-list two-line subheader>
             <v-subheader>Классификация</v-subheader>
-            <!-- <v-list-tile @click="filterByType(item)" v-for="item in itemTypes" :key="item">
-              <v-list-tile-content>
-                <v-list-tile-title>{{ item }}</v-list-tile-title>
-              </v-list-tile-content>
-            </v-list-tile>
-            -->
             <v-flex xs10 offset-xs1>
               <v-select
               :items="itemTypes"
@@ -26,11 +20,6 @@
           <v-list two-line subheader>
             <v-subheader>Цвета</v-subheader>
             <v-list-tile avatar v-for="color in colorsByType" :key="color">
-              <!-- <v-checkbox 
-                :label="color" 
-                :value="color" 
-                v-model="selectedColor"
-              ></v-checkbox> -->
               <v-radio-group v-model="selectedColor" :mandatory="false">
                 <v-radio :label="color" :value="color"></v-radio>
               </v-radio-group>
@@ -50,14 +39,14 @@ export default {
   data() {
     return {
       selectedColor: null,
-      selectedType: 'Плечевые',
+      selectedType: null,
     };
   },
   methods: {
     async sendRequest() {
       this.$store.commit('setLoading', true);
       this.$store.commit('setItemType', this.selectedType);
-      await this.$store.dispatch('compareProductsWithTypeAndColor');
+      await this.$store.dispatch('compareProductsWithTypeAndColor', this.selectedColor);
       this.$store.commit('setLoading', false);
     },
   },

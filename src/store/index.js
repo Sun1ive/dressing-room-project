@@ -66,7 +66,6 @@ export default new Vuex.Store({
   },
   actions: {
     getItems({ commit }) {
-      commit('setLoading', true);
       return new Promise((resolve, reject) => {
         async function fetchData() {
           try {
@@ -74,10 +73,8 @@ export default new Vuex.Store({
             const { data } = response;
             commit('setItems', data);
             resolve();
-            commit('setLoading', false);
           } catch (error) {
             reject(Error('Its failed'));
-            commit('setLoading', false);
             throw new Error(`Could not fetch data ${error.response.data}`);
           }
         }
@@ -111,7 +108,7 @@ export default new Vuex.Store({
         getItem();
       });
     },
-    compareAll({ commit, state }) {
+    compareProductsWithType({ commit, state }) {
       commit('setLoading', true);
       return new Promise(resolve => {
         async function compareAll() {
@@ -121,19 +118,29 @@ export default new Vuex.Store({
               params: state.userParams,
             });
             commit('setItems', response.data);
-            commit('setLoading', false);
             resolve();
           } catch (error) {
             commit('setError', error.response.data.message);
-            commit('setLoading', false);
             throw new Error(error);
           }
         }
         compareAll();
       });
     },
-    compareProductsWithTypeAndColor({ commit, state }) {
-
+    compareProductsWithTypeAndColor({ commit, state }, payload) {
+      async function compareByTypeAndColor() {
+        try {
+          const response = await withOutAuth().post('/products/all/color', {
+            type: state.itemType,
+            params: state.userParams,
+            color: payload,
+          });
+          commit('setItems', response.data);
+        } catch (error) {
+          commit('setError', error.response.data);
+        }
+      }
+      compareByTypeAndColor();
     },
     onSignIn({ commit, state }, payload) {
       return new Promise((resolve, reject) => {
