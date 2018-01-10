@@ -116,13 +116,13 @@ import { setLocalData } from '../../utils/storage';
 
 export default {
   methods: {
-    onCheckout() {
+    async onCheckout() {
       setLocalData(this.height, this.shoulders, this.breast, this.waist, this.hips);
       if (this.isSelected) {
         this.$store.dispatch('compareSingle', this.isSelected);
         this.$router.push('/result');
       } else {
-        this.$store.dispatch('compareAll');
+        await this.$store.dispatch('compareAll');
         this.$router.push('/result');
       }
     },

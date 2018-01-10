@@ -110,21 +110,25 @@ export default new Vuex.Store({
     },
     compareAll({ commit, state }) {
       commit('setLoading', true);
-      async function compareAll() {
-        try {
-          const response = await withOutAuth().post('/products/all', {
-            type: state.itemType,
-            params: state.userParams,
-          });
-          commit('setItems', response.data);
-          commit('setLoading', false);
-        } catch (error) {
-          commit('setError', error.response.data.message);
-          commit('setLoading', false);
-          throw new Error(error);
+      return new Promise((resolve, reject) => {
+        async function compareAll() {
+          try {
+            const response = await withOutAuth().post('/products/all', {
+              type: state.itemType,
+              params: state.userParams,
+            });
+            commit('setItems', response.data);
+            commit('setLoading', false);
+            resolve();
+          } catch (error) {
+            commit('setError', error.response.data.message);
+            commit('setLoading', false);
+            reject(Error('Promise rejected'));
+            throw new Error(error);
+          }
         }
-      }
-      compareAll();
+        compareAll();
+      });
     },
     onSignIn({ commit, state }, payload) {
       commit('setLoading', true);

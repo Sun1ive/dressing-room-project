@@ -10,6 +10,16 @@
   </v-container>
 </template>
 
+<script>
+export default {
+  computed: {
+    isItems() {
+      return this.$store.getters.items;
+    }
+  }
+}
+</script>
+
 
 <style scoped>
 </style>
