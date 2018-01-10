@@ -50,6 +50,10 @@ export default {
           title: 'Ссылка',
           path: '/insert',
         },
+        {
+          title: 'Результат',
+          path: '/result'
+        }
       ],
     };
   },

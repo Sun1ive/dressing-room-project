@@ -8,7 +8,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    items: null,
+    items: [],
     itemType: 'Плечевые',
     selectedItem: null,
     userParams: {
