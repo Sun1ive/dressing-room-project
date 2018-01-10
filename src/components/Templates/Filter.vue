@@ -10,23 +10,24 @@
             <v-subheader>Классификация</v-subheader>
             <v-flex xs10 offset-xs1>
               <v-select
-              :items="itemTypes"
-              v-model="selectedType"
-              label="Классификация"
+                :items="itemTypes"
+                v-model="selectedType"
+                label="Классификация"
               >
               </v-select>
+              <v-btn @click="sendRequest">Click me</v-btn>
             </v-flex>
           </v-list> 
           <v-divider></v-divider>
-         <!--  <v-list two-line subheader>
+          <v-list two-line subheader>
             <v-subheader>Цвета</v-subheader>
             <v-list-tile avatar v-for="color in colorsByType" :key="color">
-              <v-radio-group v-model="selectedColor" :mandatory="false">
+              <v-radio-group v-model="selectedColor">
                 <v-radio :label="color" :value="color"></v-radio>
               </v-radio-group>
             </v-list-tile>
-          </v-list> -->
-          <v-btn @click="sendRequest">Click me</v-btn>
+          </v-list>
+          
         </v-card>
       </v-flex>
     </v-layout>
@@ -53,9 +54,6 @@ export default {
     },
   },
   computed: {
-    itemTypes() {
-      return this.$store.getters.availableItemTypes;
-    },
     colorsByType() {
       return uniq(this.$store.getters.items.map(item => item.color));
     },

@@ -127,7 +127,7 @@ export default new Vuex.Store({
         compareAll();
       });
     },
-    compareProductsWithTypeAndColor({ commit, state }, payload) {
+    /* compareProductsWithTypeAndColor({ commit, state }, payload) {
       async function compareByTypeAndColor() {
         try {
           const response = await withOutAuth().post('/products/all/color', {
@@ -141,7 +141,7 @@ export default new Vuex.Store({
         }
       }
       compareByTypeAndColor();
-    },
+    }, */
     onSignIn({ commit, state }, payload) {
       return new Promise((resolve, reject) => {
         async function onLogIn() {
