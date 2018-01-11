@@ -1,17 +1,5 @@
 <template>
   <v-container fluid>
-<!--     <v-layout class="my-3" justify-center align-center>
-      <v-flex xs10 sm8 md6 lg4 class="text-xs-center">
-        <transition enter-active-class="animated bounceIn">
-          <v-alert
-            color="error" 
-            icon="warning" 
-            value="true"
-            v-if="error.length > 0"
-          >{{ error }}</v-alert>
-        </transition>
-      </v-flex>
-    </v-layout> -->
     <v-layout align-center justify-center>
       <v-flex xs10 sm8 md6 lg4 class="text-xs-center">
         <v-form @submit.prevent="onCheckout">
@@ -23,7 +11,7 @@
           <v-btn
             color="primary"
             type="submit"
-            :disabled="isFilled"
+            :disabled="!isFilled"
           >Посмотреть</v-btn>
         </v-form>
       </v-flex>
@@ -43,7 +31,7 @@
         <app-modal>
           <div class="headline" slot="title">{{ errorMessage }}</div>
           <div slot="text">Пока что, по данной ссылке у нашего сервиса нет возможности точно определить на сколько подходит эта вещь по данным параметрам</div>
-          <v-btn @click="changeErrorState" slot="buttonAccept">Ок</v-btn>
+          <v-btn @click="changeErrorState" slot="buttonAccept">Посмотреть все</v-btn>
         </app-modal>
       </v-dialog>
     </v-layout>
@@ -51,10 +39,9 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex';
-import { LocalStorage, setLocalData } from '../../utils/storage';
+import myMixin from '../../mixins/functional';
 
-export default {
+/* export default {
   data() {
     return {
       link: '',
@@ -82,10 +69,13 @@ export default {
     cancel() {
       this.$router.push('/');
     },
-    changeErrorState() {
-      this.setErrorState(false)
+    async changeErrorState() {
+      this.setErrorState(false);
+      this.setSelectedItem(null);
       // this.setErrorMessage('');
-    }
+      await this.$store.dispatch('compareProductsWithType');
+      this.$router.push('/result');
+    },
   },
   computed: {
     isFilled() {
@@ -102,7 +92,31 @@ export default {
       hips: 'userHips',
     }),
   },
+}; */
+export default {
+  mixins: [myMixin],
+   data() {
+    return {
+      link: '',
+      paramDialog: false,
+    };
+  },
+  methods: {
+    accept() {
+      this.setSelectedItem(this.link);
+      this.$router.push('/');
+    },
+    cancel() {
+      this.$router.push('/');
+    },
+  },
+  computed: {
+    isFilled() {
+      return this.link.length > 0;
+    },
+  },
 };
+
 </script>
 
 <style lang="stylus" scoped>

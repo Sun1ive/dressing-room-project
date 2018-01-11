@@ -104,7 +104,7 @@
         <app-modal>
           <div class="headline" slot="title">{{ errorMessage }}</div>
           <div slot="text">Пока что, по данной ссылке у нашего сервиса нет возможности точно определить на сколько подходит эта вещь по данным параметрам</div>
-          <v-btn @click="changeErrorState" slot="buttonAccept">Ок</v-btn>
+          <v-btn @click="changeErrorState" slot="buttonAccept">Посмотреть все</v-btn>
         </app-modal>
       </v-dialog>
     </v-layout>
@@ -129,18 +129,19 @@ export default {
     ...mapMutations(['setErrorMessage', 'setErrorState', 'setSelectedItem']),
     async onCheckout() {
       setLocalData(this.height, this.shoulders, this.breast, this.waist, this.hips);
-      if (this.isSelected) {
-        await this.$store.dispatch('compareSingle', this.isSelected);
+      if (this.isSelectedItem) {
+        await this.$store.dispatch('compareSingle', this.isSelectedItem);
         this.$router.push('/result');
       } else {
         await this.$store.dispatch('compareProductsWithType');
         this.$router.push('/result');
       }
     },
-    changeErrorState() {
+    async changeErrorState() {
       this.setErrorState(false);
       this.setSelectedItem(null)
-      // this.setErrorMessage('');
+      await this.$store.dispatch('compareProductsWithType');
+      this.$router.push('/result');
     },
   },
   computed: {
@@ -155,7 +156,7 @@ export default {
       breast: 'userBreast',
       waist: 'userWaist',
       hips: 'userHips',
-      isSelected: 'isSelectedItem',
+      isSelectedItem: 'isSelectedItem',
     }),
   },
 };
