@@ -41,7 +41,7 @@
     <v-layout>
       <v-dialog max-width="500" v-model="errorState">
         <app-modal>
-          <div class="headline" slot="title">404 Not found</div>
+          <div class="headline" slot="title">{{ errorMessage }}</div>
           <div slot="text">Пока что, по данной ссылке у нашего сервиса нет возможности точно определить на сколько подходит эта вещь по данным параметрам</div>
           <v-btn @click="changeErrorState" slot="buttonAccept">Ок</v-btn>
         </app-modal>
@@ -83,7 +83,7 @@ export default {
       this.$router.push('/');
     },
     changeErrorState() {
-      this.setErrorStatus('');
+      this.setErrorMessage('');
       this.setErrorState(false)
     }
   },
@@ -93,6 +93,7 @@ export default {
     },
     ...mapGetters({
       errorState: 'isErrorState',
+      errorMessage: 'isErrorMessage',
       isSelectedItem: 'isSelectedItem',
       height: 'userHeight',
       shoulders: 'userShoulders',

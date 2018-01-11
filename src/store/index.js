@@ -101,7 +101,8 @@ export default new Vuex.Store({
       });
     },
     compareSingle({ commit, state }, payload) {
-      commit('setError', '');
+      commit('setErrorMessage', '');
+      commit('setErrorState', false);
       return new Promise(resolve => {
         async function getItem() {
           try {
@@ -132,10 +133,14 @@ export default new Vuex.Store({
               type: state.itemType,
               params: state.userParams,
             });
+            if (state.isErrorState) {
+              commit('setErrorState', false);
+            }
             commit('setItems', response.data);
             resolve();
           } catch (error) {
-            commit('setError', error.response.data.message);
+            commit('setErrorMessage', error.response.data.message);
+            commit('setErrorState', true);
             throw new Error(error);
           }
         }
