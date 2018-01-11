@@ -90,7 +90,6 @@ import { mapGetters } from 'vuex';
 import uniq from 'lodash/uniq';
 
 import Results from '../Shared/Results';
-
 export default {
   components: {
     'app-results': Results,
