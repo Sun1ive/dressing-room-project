@@ -86,7 +86,7 @@ import createContainer from '../templates/CreateContainer';
 import { withHeaders } from '../../services/api';
 import { SessionStorage } from '../../utils/storage';
 
-import { colors, typeList, brandList } from './formData';
+import { colors, typeList, brandList } from './data';
 
 export default {
   components: {

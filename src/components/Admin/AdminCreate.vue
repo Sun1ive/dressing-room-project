@@ -101,7 +101,7 @@ import { withHeaders } from '../../services/api';
 import { SessionStorage } from '@/utils/storage';
 
 import createContainer from '../templates/CreateContainer';
-import { colors, typeList, brandList } from './formData';
+import { colors, typeList, brandList } from './data';
 
 export default {
   components: {
