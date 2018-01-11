@@ -91,7 +91,7 @@ new Vue({
   },
   mounted() {
     const pathname = window.location.href;
-    this.$store.commit('setSelectedItem', path(pathname));
+    this.$store.commit('setSelectedItem', path(pathname.trim()));
   },
   render: h => h(App),
 });

@@ -31,6 +31,7 @@
         <app-modal>
           <div class="headline" slot="title">{{ errorMessage }}</div>
           <div slot="text">Пока что, по данной ссылке у нашего сервиса нет возможности точно определить на сколько подходит эта вещь по данным параметрам</div>
+          <div>Хотите посмотреть все товары?</div>
           <v-btn @click="changeErrorState" slot="buttonAccept">Посмотреть все</v-btn>
         </app-modal>
       </v-dialog>

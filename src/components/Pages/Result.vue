@@ -53,7 +53,7 @@
       </v-flex>
       <v-flex xs12>
         <v-container fluid grid-list-xl>
-          <v-layout row wrap justify-center>
+          <!-- <v-layout row wrap justify-center>
             <v-flex xs12 sm6 md4 lg3 v-for="item in filteredItems" :key="item._id">
               <v-card>
                 <v-card-media height="600" :src="item.src" />
@@ -74,7 +74,11 @@
                 </v-card-actions>
               </v-card>
             </v-flex>
-          </v-layout>
+          </v-layout> -->
+          <app-results 
+            @checkAll="checkAll" 
+            :filteredItems="filteredItems">
+          </app-results>
         </v-container>
       </v-flex>
     </v-layout>
@@ -85,7 +89,12 @@
 import { mapGetters } from 'vuex';
 import uniq from 'lodash/uniq';
 
+import Results from '../Shared/Results';
+
 export default {
+  components: {
+    'app-results': Results,
+  },
   data() {
     return {
       selectedColor: null,
