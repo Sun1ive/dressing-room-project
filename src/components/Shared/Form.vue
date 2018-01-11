@@ -27,6 +27,7 @@ export default {
     sendMail() {
       // validate
       // send mail
+      console.log(1234);
       this.$emit('closeForm');
     }
   }

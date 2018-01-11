@@ -105,13 +105,13 @@ export default {
     async onEdit() {
       try {
         const token = `Bearer ${SessionStorage.get('AuthToken')}`;
-        if (this.items.sizes.length < 1) {
+        if (this.item.sizes.length < 1) {
           this.item.sizes.push(this.xs, this.s, this.m, this.l);
         }
 
         await withHeaders(token).patch(`/products/${this.id}`, this.item);
-
         await this.$store.dispatch('getItems');
+
         this.$router.push('/admin/view');
       } catch (error) {
         throw new Error('Something bad happened ', error);

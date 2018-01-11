@@ -96,16 +96,16 @@ export default {
   computed: {
     ...mapGetters(['items', 'isLoading', 'availableItemTypes']),
     isEqual() {
-      return this.minPrice === this.maxPrice ? true : false
+      return this.minPrice === this.maxPrice ? true : false;
     },
     itemsByColor() {
       return uniq(this.$store.getters.items.map(item => item.color));
     },
     pricePool() {
       if (this.selectedColor) {
-        return uniq(this.filteredItems.map(item => item.price))
+        return uniq(this.filteredItems.map(item => item.price));
       }
-      return uniq(this.items.map(item => item.price))
+      return uniq(this.items.map(item => item.price));
     },
     minPrice() {
       return this.pricePool.reduce((prev, current) => Math.min(prev, current));
@@ -118,21 +118,25 @@ export default {
         return this.items.filter(item => item.color === this.selectedColor);
       }
       if (this.selectedPrice) {
-        return this.items.filter(item => item.price <= this.selectedPrice);
+        return this.items.filter(item => item.price >= this.selectedPrice);
       }
       return this.items;
     },
   },
   methods: {
     async checkAll() {
-      this.selectedColor = null;
-      this.selectedType = null;
-      this.selectedPrice = null;
+      this.reset();
       // await this.$store.dispatch('compareProductsWithType');
     },
     async findByType() {
       this.$store.commit('setItemType', this.selectedType);
+      this.reset();
       await this.$store.dispatch('compareProductsWithType');
+    },
+    reset() {
+      this.selectedColor = null;
+      this.selectedType = null;
+      this.selectedPrice = null;
     },
   },
 };
