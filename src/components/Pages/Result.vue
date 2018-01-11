@@ -31,7 +31,7 @@
                   <v-divider></v-divider>
                 </v-list>
                 <v-list>
-                  <v-flex class="text-xs-center"><div>От {{ minPrice }}</div></v-flex>
+                  <v-flex class="text-xs-center"><div>От {{ minPrice }} грн</div></v-flex>
                   <v-list-tile>
                     <v-flex xs10 offset-xs1>
                       <v-slider 
@@ -40,10 +40,11 @@
                         :min="minPrice"
                         :max="maxPrice"
                         thumb-label
+                        :disabled="isEqual"
                       ></v-slider>
                     </v-flex>
                   </v-list-tile>
-                    <v-flex class="text-xs-center"><div>До {{ maxPrice }}</div></v-flex>
+                    <v-flex class="text-xs-center"><div>До {{ maxPrice }} грн</div></v-flex>
                   <v-btn @click="checkAll">Сбросить</v-btn>
                 </v-list>
               </v-card>
@@ -94,6 +95,9 @@ export default {
   },
   computed: {
     ...mapGetters(['items', 'isLoading', 'availableItemTypes']),
+    isEqual() {
+      return this.minPrice === this.maxPrice ? true : false
+    },
     itemsByColor() {
       return uniq(this.$store.getters.items.map(item => item.color));
     },

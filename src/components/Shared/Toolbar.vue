@@ -2,10 +2,6 @@
 <nav>
   <v-toolbar dark color="primary">
       <v-spacer />
-      <!-- <v-toolbar-side-icon
-        class="hidden-md-and-up"
-        @click="drawer = !drawer"
-      ></v-toolbar-side-icon> -->
       <v-toolbar-items class="hidden-sm-and-down">
         <v-btn
           flat
@@ -27,7 +23,7 @@
       <v-toolbar-items v-else>
         <v-btn 
           flat 
-          to="/admin"
+          to="/admin/view"
         >Admin</v-btn>
       </v-toolbar-items>
     </v-toolbar>

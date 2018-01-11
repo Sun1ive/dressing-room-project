@@ -42,7 +42,15 @@
             required
           ></v-select>
           <v-text-field required v-model.number.lazy="item.price" label="price грн" />
-          <v-text-field required v-model.lazy="item.color" label="color" />
+          <!-- <v-text-field required v-model.lazy="item.color" label="color" /> -->
+          <v-select
+            :items="colors"
+            v-model="item.color"
+            label="select color"
+            single-line
+            bottom
+            required
+          ></v-select>
           <v-text-field required v-model.number.lazy="item.length" label="item length см" />
 
           <app-create>
@@ -103,6 +111,23 @@ export default {
       error: '',
       typeList: ['Плечевые', 'Поясные'],
       brandList: ['inDresser'],
+      colors: [
+        'Красный',
+        'Синий',
+        'Зеленый',
+        'Желтый',
+        'Розовый',
+        'Белый',
+        'Черный',
+        'Фиолетовый',
+        'Оранжевый',
+        'Серый',
+        'Темно-розовый',
+        'Темно-зеленый',
+        'Темно-синий',
+        'Бежевый',
+        'Бордовый',
+      ],
       item: {
         sizes: [],
       },
