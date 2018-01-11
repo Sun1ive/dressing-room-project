@@ -82,11 +82,11 @@
 </template>
 
 <script>
-import createContainer from '../templates/CreateContainer';
+import createContainer from '../Templates/CreateContainer';
 import { withHeaders } from '../../services/api';
 import { SessionStorage } from '../../utils/storage';
 
-import { colors, typeList, brandList } from './data';
+import { colors, typeList, brandList } from '@/utils/data';
 
 export default {
   components: {

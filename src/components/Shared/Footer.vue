@@ -2,8 +2,7 @@
   <footer>
     <v-container fluid>
       <v-layout class="primary" justify-center align-center>
-        <v-flex class="text-xs-center white--text">
-          &copy; <a class="white--text" target="_blank" href="http://github.com/sun1ive">Sunlive</a> 2017</v-flex>
+        <v-flex class="text-xs-center white--text">&copy; <a class="white--text">Sunlive</a> 2017</v-flex>
       </v-layout>
     </v-container>
   </footer>

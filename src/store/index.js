@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 
 import { withOutAuth } from '../services/api';
 import { SessionStorage } from '../utils/storage';
+import { typeList, brandList } from '../utils/data';
 
 Vue.use(Vuex);
 
@@ -10,7 +11,9 @@ export default new Vuex.Store({
   state: {
     items: [],
     itemType: 'Плечевые',
-    availableItemTypes: ['Плечевые', 'Поясные'],
+    brand: 'inDresser',
+    availableItemTypes: typeList,
+    avaliableBrands: brandList,
     selectedItem: null,
     userParams: {
       height: null,
@@ -41,6 +44,9 @@ export default new Vuex.Store({
       state.items = payload;
     },
     setItemType(state, payload) {
+      state.itemType = payload;
+    },
+    setItemBrand(state, payload) {
       state.itemType = payload;
     },
     setSelectedItem(state, payload) {
@@ -211,6 +217,7 @@ export default new Vuex.Store({
     items: state => state.items,
     itemType: state => state.itemType,
     availableItemTypes: state => state.availableItemTypes,
+    avaliableBrands: state => state.avaliableBrands,
     isSelectedItem: state => state.selectedItem,
     userHeight: state => state.userParams.height,
     userShoulders: state => state.userParams.shoulders,
