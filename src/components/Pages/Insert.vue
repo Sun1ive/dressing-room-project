@@ -39,9 +39,11 @@
 </template>
 
 <script>
-import myMixin from '../../mixins/functional';
+import myMixin from '@/mixins/functional';
+import { LocalStorage, setLocalData } from '@/utils/storage';
 
-/* export default {
+export default {
+  mixins: [myMixin],
   data() {
     return {
       link: '',
@@ -49,7 +51,6 @@ import myMixin from '../../mixins/functional';
     };
   },
   methods: {
-    ...mapMutations(['setSelectedItem', 'setErrorMessage', 'setErrorState']),
     async onCheckout() {
       if (!this.height || !this.shoulders || !this.breast || !this.waist || !this.hips) {
         this.paramDialog = true;
@@ -69,46 +70,6 @@ import myMixin from '../../mixins/functional';
     cancel() {
       this.$router.push('/');
     },
-    async changeErrorState() {
-      this.setErrorState(false);
-      this.setSelectedItem(null);
-      // this.setErrorMessage('');
-      await this.$store.dispatch('compareProductsWithType');
-      this.$router.push('/result');
-    },
-  },
-  computed: {
-    isFilled() {
-      return this.link.length <= 0;
-    },
-    ...mapGetters({
-      errorState: 'isErrorState',
-      errorMessage: 'isErrorMessage',
-      isSelectedItem: 'isSelectedItem',
-      height: 'userHeight',
-      shoulders: 'userShoulders',
-      breast: 'userBreast',
-      waist: 'userWaist',
-      hips: 'userHips',
-    }),
-  },
-}; */
-export default {
-  mixins: [myMixin],
-   data() {
-    return {
-      link: '',
-      paramDialog: false,
-    };
-  },
-  methods: {
-    accept() {
-      this.setSelectedItem(this.link);
-      this.$router.push('/');
-    },
-    cancel() {
-      this.$router.push('/');
-    },
   },
   computed: {
     isFilled() {
@@ -116,7 +77,6 @@ export default {
     },
   },
 };
-
 </script>
 
 <style lang="stylus" scoped>

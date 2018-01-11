@@ -121,12 +121,12 @@
 
 
 <script>
-import { mapGetters, mapMutations } from 'vuex';
 import { setLocalData } from '../../utils/storage';
+import myMixin from '@/mixins/functional';
 
 export default {
+  mixins: [myMixin],
   methods: {
-    ...mapMutations(['setErrorMessage', 'setErrorState', 'setSelectedItem']),
     async onCheckout() {
       setLocalData(this.height, this.shoulders, this.breast, this.waist, this.hips);
       if (this.isSelectedItem) {
@@ -137,27 +137,11 @@ export default {
         this.$router.push('/result');
       }
     },
-    async changeErrorState() {
-      this.setErrorState(false);
-      this.setSelectedItem(null)
-      await this.$store.dispatch('compareProductsWithType');
-      this.$router.push('/result');
-    },
   },
   computed: {
     isReadyToCheckout() {
       return !this.height || !this.breast || !this.waist || !this.hips || !this.shoulders;
     },
-    ...mapGetters({
-      errorState: 'isErrorState',
-      errorMessage: 'isErrorMessage',
-      height: 'userHeight',
-      shoulders: 'userShoulders',
-      breast: 'userBreast',
-      waist: 'userWaist',
-      hips: 'userHips',
-      isSelectedItem: 'isSelectedItem',
-    }),
   },
 };
 </script>
