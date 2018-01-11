@@ -39,11 +39,11 @@
       </v-dialog>
     </v-layout>
     <v-layout>
-      <v-dialog max-width="500" v-model="errorDialog">
+      <v-dialog max-width="500" v-model="errorState">
         <app-modal>
-          <div class="headline" slot="title">Пожалуйста введите параметры</div>
-          <div slot="text">Для того, что бы воспользоваться нашей примерочной Вам нужно указать свои параметры</div>
-          <v-btn @click="errorDialog = false" slot="buttonAccept">Ок</v-btn>
+          <div class="headline" slot="title">404 Not found</div>
+          <div slot="text">Пока что, по данной ссылке у нашего сервиса нет возможности точно определить на сколько подходит эта вещь по данным параметрам</div>
+          <v-btn @click="changeErrorState" slot="buttonAccept">Ок</v-btn>
         </app-modal>
       </v-dialog>
     </v-layout>
@@ -59,11 +59,10 @@ export default {
     return {
       link: '',
       paramDialog: false,
-      errorDialog: false,
     };
   },
   methods: {
-    ...mapMutations(['setSelectedItem']),
+    ...mapMutations(['setSelectedItem', 'setErrorMessage', 'setErrorState']),
     async onCheckout() {
       if (!this.height || !this.shoulders || !this.breast || !this.waist || !this.hips) {
         this.paramDialog = true;
@@ -82,6 +81,10 @@ export default {
     },
     cancel() {
       this.$router.push('/');
+    },
+    changeErrorState() {
+      this.setErrorStatus('');
+      this.setErrorState(false)
     }
   },
   computed: {

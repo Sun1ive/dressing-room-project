@@ -21,15 +21,15 @@ export default new Vuex.Store({
     },
     isLoading: false,
     isErrorState: false,
-    isErrorStatus: '',
+    isErrorMessage: '',
     isUserLoginState: false,
   },
   mutations: {
     setErrorState(state, payload) {
       state.isErrorState = payload;
     },
-    setErrorStatus(state, payload) {
-      state.isErrorStatus = payload;
+    setErrorMessage(state, payload) {
+      state.isErrorMessage = payload;
     },
     setLoading(state, payload) {
       state.isLoading = payload;
@@ -109,10 +109,14 @@ export default new Vuex.Store({
               link: payload,
               params: state.userParams,
             });
+            if (state.isErrorState) {
+              commit('setErrorState', false);
+            }
             commit('setItems', response.data);
             resolve();
           } catch (error) {
-            commit('setError', error.response.data.message);
+            commit('setErrorMessage', error.response.data.message);
+            commit('setErrorState', true);
             throw new Error(error);
           }
         }
@@ -146,13 +150,13 @@ export default new Vuex.Store({
             params: state.userParams,
             color: payload,
           });
-          if (state.isErrorStatus) {
-            commit('setErrorStatus', false);
+          if (state.isErrorState) {
+            commit('setErrorState', false);
           }
           commit('setItems', response.data);
         } catch (error) {
-          commit('setErrorStatus', true);
-          commit('setErrorState', error.response.data);
+          commit('setErrorState', true);
+          commit('setErrorMessage', error.response.data);
         }
       }
       compareByTypeAndColor();
@@ -169,14 +173,14 @@ export default new Vuex.Store({
             SessionStorage.set('AuthToken', token);
 
             if (state.error) {
-              commit('setErrorStatus', false);
-              commit('setErrorState', '');
+              commit('setErrorState', false);
+              commit('setErrorMessage', '');
             }
             commit('setUserLoginState', true);
             resolve();
           } catch (error) {
-            commit('setErrorState', error.response.data.message);
-            commit('setErrorStatus', true);
+            commit('setErrorMessage', error.response.data.message);
+            commit('setErrorState', true);
             reject(Error('Something went wrong'));
             throw new Error(error);
           }
@@ -197,7 +201,7 @@ export default new Vuex.Store({
     userHips: state => state.userParams.hips,
     userLoginState: state => state.isUserLoginState,
     isErrorState: state => state.isErrorState,
-    isErrorStatus: state => state.isErrorStatus,
+    isErrorMessage: state => state.isErrorMessage,
     isLoading: state => state.isLoading,
   },
 });
