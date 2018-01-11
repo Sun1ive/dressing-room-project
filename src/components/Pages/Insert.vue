@@ -32,6 +32,9 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+import { LocalStorage, setLocalData } from '../../utils/storage';
+
 export default {
   data() {
     return {
@@ -40,22 +43,35 @@ export default {
   },
   methods: {
     async onCheckout() {
-      this.$store.commit('setSelectedItem', this.link);
-      await this.$store.dispatch('compareSingle', this.$store.getters.isSelectedItem);
-      this.$router.push('/result');
+      if (!this.height || !this.shoulders || !this.breast || !this.waist || !this.hips) {
+        alert('пожалуйста укажите параметры');
+        this.$store.commit('setSelectedItem', this.link);
+        this.$router.push('/');
+      } else {
+        if (!LocalStorage.get('DressingUserData')) {
+          setLocalData(this.height, this.shoulders, this.breast, this.waist, this.hips);
+        }
+        this.$store.commit('setSelectedItem', this.link);
+        await this.$store.dispatch('compareSingle', this.$store.getters.isSelectedItem);
+        this.$router.push('/result');
+      }
     },
   },
   computed: {
     isFilled() {
       return this.link.length <= 0;
     },
-    error() {
-      return this.$store.getters.isError;
-    }
+    ...mapGetters({
+      error: 'isError',
+      height: 'userHeight',
+      shoulders: 'userShoulders',
+      breast: 'userBreast',
+      waist: 'userWaist',
+      hips: 'userHips',
+    }),
   },
 };
 </script>
 
 <style lang="stylus" scoped>
-
 </style>
