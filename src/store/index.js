@@ -44,7 +44,7 @@ export default new Vuex.Store({
       state.itemType = payload;
     },
     setSelectedItem(state, payload) {
-      state.selectedItem = payload.trim();
+      state.selectedItem = payload;
     },
     setUserParams(state, payload) {
       switch (payload.name) {

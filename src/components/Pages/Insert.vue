@@ -58,13 +58,13 @@ export default {
         if (!LocalStorage.get('DressingUserData')) {
           setLocalData(this.height, this.shoulders, this.breast, this.waist, this.hips);
         }
-        this.setSelectedItem(this.link);
+        this.setSelectedItem(this.strLink);
         await this.$store.dispatch('compareSingle', this.isSelectedItem);
         this.$router.push('/result');
       }
     },
     accept() {
-      this.setSelectedItem(this.link);
+      this.setSelectedItem(this.strLink);
       this.$router.push('/');
     },
     cancel() {
@@ -74,6 +74,13 @@ export default {
   computed: {
     isFilled() {
       return this.link.length > 0;
+    },
+    strLink() {
+      if (typeof this.link !== String) {
+        return this.link.toString().trim();
+      } else {
+        return thisl.link.trim();
+      }
     },
   },
 };
