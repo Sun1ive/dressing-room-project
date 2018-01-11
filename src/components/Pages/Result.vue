@@ -40,7 +40,6 @@
                         :min="minPrice"
                         :max="maxPrice"
                         thumb-label
-                        :disabled="isEqual"
                       ></v-slider>
                     </v-flex>
                   </v-list-tile>
@@ -96,9 +95,6 @@ export default {
   },
   computed: {
     ...mapGetters(['items', 'isLoading', 'availableItemTypes']),
-    isEqual() {
-      return this.minPrice === this.maxPrice;
-    },
     itemsByColor() {
       return uniq(this.$store.getters.items.map(item => item.color));
     },
@@ -116,11 +112,7 @@ export default {
     },
     filteredItems() {
       if (this.selectedColor) {
-        let arr = this.items.filter(item => item.color === this.selectedColor);
-        if (arr.length > 1) {
-          return arr.filter(item => item.price >= this.selectedPrice)
-        }
-        return arr
+        return this.items.filter(item => item.color === this.selectedColor);
       }
       if (this.selectedPrice) {
         return this.items.filter(item => item.price >= this.selectedPrice);

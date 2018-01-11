@@ -29,7 +29,15 @@
             required
           ></v-select>
           <v-text-field required v-model.number.lazy="item.price" label="price" />
-          <v-text-field required v-model.lazy="item.color" label="color" />
+          <!-- <v-text-field required v-model.lazy="item.color" label="color" /> -->
+          <v-select
+            :items="colors"
+            v-model="item.color"
+            label="select color"
+            single-line
+            bottom
+            required
+          ></v-select>
 
           <app-create>
             <v-card-text slot="size">XS</v-card-text>
@@ -78,6 +86,8 @@ import createContainer from '../templates/CreateContainer';
 import { withHeaders } from '../../services/api';
 import { SessionStorage } from '../../utils/storage';
 
+import { colors, typeList, brandList } from './formData';
+
 export default {
   components: {
     'app-create': createContainer,
@@ -90,8 +100,9 @@ export default {
   },
   data() {
     return {
-      brandList: ['inDresser'],
-      typeList: ['Плечевые', 'Поясные'],
+      brandList,
+      typeList,
+      colors,
       item: {
         sizes: [],
       },

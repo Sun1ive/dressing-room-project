@@ -101,6 +101,7 @@ import { withHeaders } from '../../services/api';
 import { SessionStorage } from '@/utils/storage';
 
 import createContainer from '../templates/CreateContainer';
+import { colors, typeList, brandList } from './formData';
 
 export default {
   components: {
@@ -109,25 +110,9 @@ export default {
   data() {
     return {
       error: '',
-      typeList: ['Плечевые', 'Поясные'],
-      brandList: ['inDresser'],
-      colors: [
-        'Красный',
-        'Синий',
-        'Зеленый',
-        'Желтый',
-        'Розовый',
-        'Белый',
-        'Черный',
-        'Фиолетовый',
-        'Оранжевый',
-        'Серый',
-        'Темно-розовый',
-        'Темно-зеленый',
-        'Темно-синий',
-        'Бежевый',
-        'Бордовый',
-      ],
+      typeList,
+      brandList,
+      colors,
       item: {
         sizes: [],
       },
