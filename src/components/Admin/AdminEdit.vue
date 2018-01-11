@@ -29,7 +29,15 @@
             required
           ></v-select>
           <v-text-field required v-model.number.lazy="item.price" label="price" />
-          <v-text-field required v-model.lazy="item.color" label="color" />
+          <!-- <v-text-field required v-model.lazy="item.color" label="color" /> -->
+          <v-select
+            :items="colors"
+            v-model="item.color"
+            label="select color"
+            single-line
+            bottom
+            required
+          ></v-select>
 
           <app-create>
             <v-card-text slot="size">XS</v-card-text>
@@ -78,6 +86,8 @@ import createContainer from '../templates/CreateContainer';
 import { withHeaders } from '../../services/api';
 import { SessionStorage } from '../../utils/storage';
 
+import { colors, typeList, brandList } from './data';
+
 export default {
   components: {
     'app-create': createContainer,
@@ -90,9 +100,12 @@ export default {
   },
   data() {
     return {
-      brandList: ['inDresser'],
-      typeList: ['Плечевые', 'Поясные'],
-      item: {},
+      brandList,
+      typeList,
+      colors,
+      item: {
+        sizes: [],
+      },
       xs: {},
       s: {},
       m: {},
@@ -103,11 +116,13 @@ export default {
     async onEdit() {
       try {
         const token = `Bearer ${SessionStorage.get('AuthToken')}`;
-        this.item.sizes.push(this.xs, this.s, this.m, this.l);
+        if (this.item.sizes.length < 1) {
+          this.item.sizes.push(this.xs, this.s, this.m, this.l);
+        }
 
         await withHeaders(token).patch(`/products/${this.id}`, this.item);
+        await this.$store.dispatch('getItems');
 
-        this.$store.dispatch('getDresses');
         this.$router.push('/admin/view');
       } catch (error) {
         throw new Error('Something bad happened ', error);

@@ -14,7 +14,7 @@
           prepend-icon="search"
           placeholder="Поиск"
           v-model="query"
-          />
+        />
       </v-flex>
     </v-layout>
     <v-layout 
@@ -71,7 +71,7 @@ export default {
       if (confirm('Are you sure ?')) {
         try {
           const token = `Bearer ${SessionStorage.get('AuthToken')}`;
-          this.$store.commit('removeFromItemList', id);
+          this.$store.commit('removeElementFromItemsInState', id);
           await withHeaders(token).delete(`/products/${id}`);
         } catch (error) {
           throw new Error(`Something wrong ${error.response}`);

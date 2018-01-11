@@ -16,8 +16,7 @@
                       v-model="selectedType"
                       label="Классификация"
                       @input="findByType"
-                    >
-                    </v-select>
+                    />
                   </v-flex>
                 </v-list> 
                 <v-divider></v-divider>
@@ -31,7 +30,7 @@
                   <v-divider></v-divider>
                 </v-list>
                 <v-list>
-                  <v-flex class="text-xs-center"><div>От {{ minPrice }}</div></v-flex>
+                  <v-flex class="text-xs-center"><div>От {{ minPrice }} грн</div></v-flex>
                   <v-list-tile>
                     <v-flex xs10 offset-xs1>
                       <v-slider 
@@ -43,7 +42,7 @@
                       ></v-slider>
                     </v-flex>
                   </v-list-tile>
-                    <v-flex class="text-xs-center"><div>До {{ maxPrice }}</div></v-flex>
+                    <v-flex class="text-xs-center"><div>До {{ maxPrice }} грн</div></v-flex>
                   <v-btn @click="checkAll">Сбросить</v-btn>
                 </v-list>
               </v-card>
@@ -53,7 +52,7 @@
       </v-flex>
       <v-flex xs12>
         <v-container fluid grid-list-xl>
-          <v-layout row wrap justify-center>
+          <!-- <v-layout row wrap justify-center>
             <v-flex xs12 sm6 md4 lg3 v-for="item in filteredItems" :key="item._id">
               <v-card>
                 <v-card-media height="600" :src="item.src" />
@@ -62,6 +61,7 @@
                   <div>Коэффициент совместимости: <strong>{{ item.percent }} %</strong></div>
                   <div>Ваш предпочитаемый размер: <strong>{{ item.size }}</strong></div>
                   <div>Длинна: <strong>{{ item.difference }}</strong></div>
+                  <h1><b>{{ item.price }} GRN</b></h1>
                 </v-card-text>
                 <v-card-actions>
                   <v-btn :href="`${item.link}`" target="_blank">Купить</v-btn>
@@ -73,7 +73,11 @@
                 </v-card-actions>
               </v-card>
             </v-flex>
-          </v-layout>
+          </v-layout> -->
+          <app-results 
+            @checkAll="checkAll" 
+            :filteredItems="filteredItems">
+          </app-results>
         </v-container>
       </v-flex>
     </v-layout>
@@ -84,7 +88,11 @@
 import { mapGetters } from 'vuex';
 import uniq from 'lodash/uniq';
 
+import Results from '../Shared/Results';
 export default {
+  components: {
+    'app-results': Results,
+  },
   data() {
     return {
       selectedColor: null,
@@ -99,9 +107,9 @@ export default {
     },
     pricePool() {
       if (this.selectedColor) {
-        return uniq(this.filteredItems.map(item => item.price))
+        return uniq(this.filteredItems.map(item => item.price));
       }
-      return uniq(this.items.map(item => item.price))
+      return uniq(this.items.map(item => item.price));
     },
     minPrice() {
       return this.pricePool.reduce((prev, current) => Math.min(prev, current));
@@ -114,21 +122,26 @@ export default {
         return this.items.filter(item => item.color === this.selectedColor);
       }
       if (this.selectedPrice) {
-        return this.items.filter(item => item.price <= this.selectedPrice);
+        return this.items.filter(item => item.price >= this.selectedPrice);
       }
       return this.items;
     },
   },
   methods: {
     async checkAll() {
-      this.selectedColor = null;
-      this.selectedType = null;
-      this.selectedPrice = null;
-      // await this.$store.dispatch('compareProductsWithType');
+      this.reset();
+      this.$store.commit('setSelectedItem', null);
+      await this.$store.dispatch('compareProductsWithType');
     },
     async findByType() {
       this.$store.commit('setItemType', this.selectedType);
+      this.reset();
       await this.$store.dispatch('compareProductsWithType');
+    },
+    reset() {
+      this.selectedColor = null;
+      this.selectedType = null;
+      this.selectedPrice = null;
     },
   },
 };

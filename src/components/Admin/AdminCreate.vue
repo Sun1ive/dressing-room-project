@@ -42,7 +42,15 @@
             required
           ></v-select>
           <v-text-field required v-model.number.lazy="item.price" label="price грн" />
-          <v-text-field required v-model.lazy="item.color" label="color" />
+          <!-- <v-text-field required v-model.lazy="item.color" label="color" /> -->
+          <v-select
+            :items="colors"
+            v-model="item.color"
+            label="select color"
+            single-line
+            bottom
+            required
+          ></v-select>
           <v-text-field required v-model.number.lazy="item.length" label="item length см" />
 
           <app-create>
@@ -93,6 +101,7 @@ import { withHeaders } from '../../services/api';
 import { SessionStorage } from '@/utils/storage';
 
 import createContainer from '../templates/CreateContainer';
+import { colors, typeList, brandList } from './data';
 
 export default {
   components: {
@@ -101,8 +110,9 @@ export default {
   data() {
     return {
       error: '',
-      typeList: ['Плечевые', 'Поясные'],
-      brandList: ['inDresser'],
+      typeList,
+      brandList,
+      colors,
       item: {
         sizes: [],
       },
@@ -125,7 +135,7 @@ export default {
       try {
         const token = `Bearer ${SessionStorage.get('AuthToken')}`;
 
-        if (this.item.sizes.length === 0) {
+        if (this.item.sizes.length < 1) {
           this.item.sizes.push(this.xs, this.s, this.m, this.l);
         }
         await withHeaders(token).post('/products', this.item);
@@ -141,7 +151,7 @@ export default {
           length: null,
         }; */
 
-        this.$store.commit('addToItems', this.item);
+        this.$store.commit('addElementToItemsInState', this.item);
       } catch (err) {
         this.item.sizes = [];
         this.error = err.response.data.error.message;

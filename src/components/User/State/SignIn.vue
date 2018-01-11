@@ -4,12 +4,12 @@
       <v-flex xs12 sm6 lg4>
         <transition enter-active-class="animated tada">
           <v-alert
-            v-if="isError.length > 0"
+            v-if="isErrorMessage.length > 0"
             color="error" 
             icon="warning" 
             value="true"
           >
-            {{ isError }}
+            {{ isErrorMessage }}
           </v-alert>
         </transition>
       </v-flex>
@@ -65,7 +65,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      isError: 'isError',
+      isErrorMessage: 'isErrorMessage',
       isUserLoginState: 'userLoginState',
     }),
   },

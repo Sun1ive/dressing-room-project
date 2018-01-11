@@ -3,31 +3,52 @@
     <v-layout justify-center align-center>
       <v-flex xs12 sm6 class="text-xs-center">
         <h1>¯\_(ツ)_/¯</h1>
-        <p>{{ errorMessage }}</p>
-        <p>Попробуйте изменить Ваши значения</p>
+        <p>К сожалению по заданным Вами параметрам, у нас пока-что нет подходящего товара</p>
+        <p>Хотите мы с Вам свяжемся, когда у нас обновится ассортимент?</p>
+        <v-btn @click="dialog = true">Да</v-btn>
+        <v-btn exact to="/">Нет, изменить параметры</v-btn>
       </v-flex>
+    </v-layout>
+    <v-layout>
+      <v-dialog v-model="dialog" max-width="500px">
+        <app-form @closeForm="closeForm"></app-form>
+      </v-dialog>
     </v-layout>
   </v-container>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
+import Form from '../Shared/Form';
 
 export default {
+  components: {
+    'app-form': Form,
+  },
+  data() {
+    return {
+      dialog: false,
+    }
+  },
+  methods: {
+    closeForm() {
+      this.dialog = false;
+    }
+  },
   computed: {
     ...mapGetters({
       items: 'items',
     }),
     errorMessage() {
       if (this.items.length < 1) {
-        return 'К сожалению под Ваши параметры не подходит ни один товар'
+        return 'К сожалению по заданным Вами параметрам, у нас пока-что нет подходящего товара';
       }
-    }
+    },
   },
 };
 </script>
 
 
-<style scoped>
+<style scoped lang="stylus">
 
 </style>

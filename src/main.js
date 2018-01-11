@@ -2,6 +2,7 @@ import Vue from 'vue';
 import 'babel-polyfill';
 import pWrapper from '@/components/Templates/ParamsWrapper';
 import preLoader from '@/components/Shared/Loader';
+import Modal from '@/components/Shared/Modal';
 
 import {
   Vuetify,
@@ -23,6 +24,7 @@ import {
   VDivider,
   VSubHeader,
   VRadioGroup,
+  VDialog,
   transitions,
 } from 'vuetify';
 import '../node_modules/vuetify/src/stylus/app.styl';
@@ -35,6 +37,7 @@ import path from './utils/path';
 
 Vue.component('app-params', pWrapper);
 Vue.component('app-loader', preLoader);
+Vue.component('app-modal', Modal);
 
 Vue.use(Vuetify, {
   components: {
@@ -56,6 +59,7 @@ Vue.use(Vuetify, {
     VDivider,
     VSubHeader,
     VRadioGroup,
+    VDialog,
     transitions,
   },
   theme: {
@@ -87,7 +91,7 @@ new Vue({
   },
   mounted() {
     const pathname = window.location.href;
-    this.$store.commit('setSelectedItem', path(pathname));
+    this.$store.commit('setSelectedItem', path(pathname.trim()));
   },
   render: h => h(App),
 });

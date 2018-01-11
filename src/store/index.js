@@ -20,12 +20,16 @@ export default new Vuex.Store({
       hips: null,
     },
     isLoading: false,
-    isError: '',
+    isErrorState: false,
+    isErrorMessage: '',
     isUserLoginState: false,
   },
   mutations: {
-    setError(state, payload) {
-      state.isError = payload;
+    setErrorState(state, payload) {
+      state.isErrorState = payload;
+    },
+    setErrorMessage(state, payload) {
+      state.isErrorMessage = payload;
     },
     setLoading(state, payload) {
       state.isLoading = payload;
@@ -63,6 +67,13 @@ export default new Vuex.Store({
           break;
       }
     },
+    removeElementFromItemsInState(state, payload) {
+      const index = state.items.map(item => item._id).indexOf(payload);
+      state.items.splice(index, 1);
+    },
+    addElementToItemsInState(state, payload) {
+      state.items.push(payload);
+    },
   },
   actions: {
     getItems({ commit }) {
@@ -89,8 +100,9 @@ export default new Vuex.Store({
         });
       });
     },
-    compareSingle({ commit, state }, payload) {
-      commit('setError', '');
+    compareSingle({ commit, dispatch, state }, payload) {
+      commit('setErrorMessage', '');
+      commit('setErrorState', false);
       return new Promise(resolve => {
         async function getItem() {
           try {
@@ -98,10 +110,15 @@ export default new Vuex.Store({
               link: payload,
               params: state.userParams,
             });
+            if (state.isErrorState) {
+              commit('setErrorState', false);
+            }
             commit('setItems', response.data);
             resolve();
           } catch (error) {
-            commit('setError', error.response.data.message);
+            commit('setErrorMessage', error.response.data.message);
+            dispatch('sendMail', payload);
+            commit('setErrorState', true);
             throw new Error(error);
           }
         }
@@ -117,10 +134,14 @@ export default new Vuex.Store({
               type: state.itemType,
               params: state.userParams,
             });
+            if (state.isErrorState) {
+              commit('setErrorState', false);
+            }
             commit('setItems', response.data);
             resolve();
           } catch (error) {
-            commit('setError', error.response.data.message);
+            commit('setErrorMessage', error.response.data.message);
+            commit('setErrorState', true);
             throw new Error(error);
           }
         }
@@ -135,9 +156,13 @@ export default new Vuex.Store({
             params: state.userParams,
             color: payload,
           });
+          if (state.isErrorState) {
+            commit('setErrorState', false);
+          }
           commit('setItems', response.data);
         } catch (error) {
-          commit('setError', error.response.data);
+          commit('setErrorState', true);
+          commit('setErrorMessage', error.response.data);
         }
       }
       compareByTypeAndColor();
@@ -154,18 +179,32 @@ export default new Vuex.Store({
             SessionStorage.set('AuthToken', token);
 
             if (state.error) {
-              commit('setError', null);
+              commit('setErrorState', false);
+              commit('setErrorMessage', '');
             }
             commit('setUserLoginState', true);
             resolve();
           } catch (error) {
-            commit('setError', error.response.data.message);
+            commit('setErrorMessage', error.response.data.message);
+            commit('setErrorState', true);
             reject(Error('Something went wrong'));
             throw new Error(error);
           }
         }
         onLogIn();
       });
+    },
+    sendMail(state, payload) {
+      async function sendMail() {
+        try {
+          await withOutAuth().post('/mail', {
+            link: payload,
+          });
+        } catch (error) {
+          throw new Error(error);
+        }
+      }
+      sendMail();
     },
   },
   getters: {
@@ -179,7 +218,8 @@ export default new Vuex.Store({
     userWaist: state => state.userParams.waist,
     userHips: state => state.userParams.hips,
     userLoginState: state => state.isUserLoginState,
-    isError: state => state.isError,
+    isErrorState: state => state.isErrorState,
+    isErrorMessage: state => state.isErrorMessage,
     isLoading: state => state.isLoading,
   },
 });
