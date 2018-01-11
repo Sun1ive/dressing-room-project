@@ -16,8 +16,7 @@
                       v-model="selectedType"
                       label="Классификация"
                       @input="findByType"
-                    >
-                    </v-select>
+                    />
                   </v-flex>
                 </v-list> 
                 <v-divider></v-divider>

@@ -100,7 +100,7 @@ export default new Vuex.Store({
         });
       });
     },
-    compareSingle({ commit, state }, payload) {
+    compareSingle({ commit, dispatch, state }, payload) {
       commit('setErrorMessage', '');
       commit('setErrorState', false);
       return new Promise(resolve => {
@@ -117,6 +117,7 @@ export default new Vuex.Store({
             resolve();
           } catch (error) {
             commit('setErrorMessage', error.response.data.message);
+            dispatch('sendMail', payload);
             commit('setErrorState', true);
             throw new Error(error);
           }
@@ -192,6 +193,18 @@ export default new Vuex.Store({
         }
         onLogIn();
       });
+    },
+    sendMail(state, payload) {
+      async function sendMail() {
+        try {
+          await withOutAuth().post('/mail', {
+            link: payload,
+          });
+        } catch (error) {
+          throw new Error(error);
+        }
+      }
+      sendMail();
     },
   },
   getters: {

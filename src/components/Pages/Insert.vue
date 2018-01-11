@@ -80,7 +80,7 @@ export default {
       if (typeof this.link !== String) {
         return this.link.toString().trim();
       } else {
-        return thisl.link.trim();
+        return this.link.trim();
       }
     },
   },
