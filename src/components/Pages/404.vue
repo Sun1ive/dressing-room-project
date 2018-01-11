@@ -5,22 +5,13 @@
         <h1>¯\_(ツ)_/¯</h1>
         <p>К сожалению по заданным Вами параметрам, у нас пока-что нет подходящего товара</p>
         <p>Хотите мы с Вам свяжемся, когда у нас обновится ассортимент?</p>
-        <v-btn @click="showForm">Да</v-btn>
+        <v-btn @click="dialog = true">Да</v-btn>
         <v-btn exact to="/">Нет, изменить параметры</v-btn>
       </v-flex>
     </v-layout>
     <v-layout>
       <v-dialog v-model="dialog" max-width="500px">
-        <v-flex class="text-xs-center">
-          <v-form @submit.prevent="sendMail" class="myForm">
-            <h1>Hello world</h1>
-            <v-text-field v-model="user.name" label="Имя" />
-            <v-text-field v-model="user.phone" label="Телефон" />
-            <v-text-field v-model="user.idk" label="Где деньги лежат" />
-            <v-btn color="primary" type="submit">Отправить</v-btn>
-            <v-btn color="red" dark @click="dialog = false">Закрыть</v-btn>
-          </v-form>
-        </v-flex>
+        <app-form @closeForm="closeForm"></app-form>
       </v-dialog>
     </v-layout>
   </v-container>
@@ -28,26 +19,21 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import Form from '../Shared/Form';
 
 export default {
+  components: {
+    'app-form': Form,
+  },
   data() {
     return {
       dialog: false,
-      user: {
-        name: '',
-        phone: null,
-        idk: '',
-      },
-    };
+    }
   },
   methods: {
-    showForm() {
-      this.dialog = true;
-    },
-    sendMail() {
+    closeForm() {
       this.dialog = false;
-      console.log(12345);
-    },
+    }
   },
   computed: {
     ...mapGetters({
@@ -64,8 +50,5 @@ export default {
 
 
 <style scoped lang="stylus">
-.myForm {
-  background-color: #fff;
-  padding: 1rem 2rem;
-}
+
 </style>
