@@ -5,6 +5,7 @@ import Home from '@/components/Pages/Home';
 import Insert from '@/components/Pages/Insert';
 import Result from '@/components/Pages/Result';
 import SignIn from '@/components/User/State/SignIn';
+import ErrorPage from '@/components/Pages/404';
 
 import Height from '@/components/User/Params/Height';
 import Shoulders from '@/components/User/Params/Shoulders';
@@ -17,7 +18,8 @@ import AdminCreate from '@/components/Admin/AdminCreate';
 import AdminView from '@/components/Admin/AdminView';
 import AdminEdit from '@/components/Admin/AdminEdit';
 
-import beforeAdmin from './adminGuard'
+import beforeAdmin from './adminGuard';
+import beforeResult from './resultGuard';
 
 Vue.use(Router);
 
@@ -57,8 +59,13 @@ export default new Router({
       component: Hips,
     },
     {
+      path: '/404',
+      component: ErrorPage,
+    },
+    {
       path: '/result',
       component: Result,
+      beforeEnter: beforeResult,
     },
     {
       path: '/admin',

@@ -8,8 +8,9 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    items: null,
+    items: [],
     itemType: 'Плечевые',
+    availableItemTypes: ['Плечевые', 'Поясные'],
     selectedItem: null,
     userParams: {
       height: null,
@@ -34,6 +35,9 @@ export default new Vuex.Store({
     },
     setItems(state, payload) {
       state.items = payload;
+    },
+    setItemType(state, payload) {
+      state.itemType = payload;
     },
     setSelectedItem(state, payload) {
       state.selectedItem = payload;
@@ -62,7 +66,6 @@ export default new Vuex.Store({
   },
   actions: {
     getItems({ commit }) {
-      commit('setLoading', true);
       return new Promise((resolve, reject) => {
         async function fetchData() {
           try {
@@ -70,10 +73,8 @@ export default new Vuex.Store({
             const { data } = response;
             commit('setItems', data);
             resolve();
-            commit('setLoading', false);
           } catch (error) {
             reject(Error('Its failed'));
-            commit('setLoading', false);
             throw new Error(`Could not fetch data ${error.response.data}`);
           }
         }
@@ -81,53 +82,67 @@ export default new Vuex.Store({
       });
     },
     setUserParams({ commit }, payload) {
-      commit('setLoading', true);
       Object.keys(payload).forEach(key => {
         commit('setUserParams', {
           name: key,
           value: payload[key],
         });
       });
-      commit('setLoading', false);
     },
     compareSingle({ commit, state }, payload) {
-      commit('setLoading', true);
-      async function getItem() {
-        try {
-          const response = await withOutAuth().post('/products/item', {
-            link: payload,
-            params: state.userParams,
-          });
-          commit('setItems', response.data);
-          commit('setLoading', false);
-        } catch (error) {
-          commit('setError', error.response.data.message);
-          commit('setLoading', false);
-          throw new Error(error);
+      commit('setError', '');
+      return new Promise(resolve => {
+        async function getItem() {
+          try {
+            const response = await withOutAuth().post('/products/item', {
+              link: payload,
+              params: state.userParams,
+            });
+            commit('setItems', response.data);
+            resolve();
+          } catch (error) {
+            commit('setError', error.response.data.message);
+            throw new Error(error);
+          }
         }
-      }
-      getItem();
+        getItem();
+      });
     },
-    compareAll({ commit, state }) {
+    compareProductsWithType({ commit, state }) {
       commit('setLoading', true);
-      async function compareAll() {
+      return new Promise(resolve => {
+        async function compareAll() {
+          try {
+            const response = await withOutAuth().post('/products/all', {
+              type: state.itemType,
+              params: state.userParams,
+            });
+            commit('setItems', response.data);
+            resolve();
+          } catch (error) {
+            commit('setError', error.response.data.message);
+            throw new Error(error);
+          }
+        }
+        compareAll();
+      });
+    },
+    compareProductsWithTypeAndColor({ commit, state }, payload) {
+      async function compareByTypeAndColor() {
         try {
-          const response = await withOutAuth().post('/products/all', {
+          const response = await withOutAuth().post('/products/all/color', {
             type: state.itemType,
             params: state.userParams,
+            color: payload,
           });
           commit('setItems', response.data);
-          commit('setLoading', false);
         } catch (error) {
-          commit('setError', error.response.data.message);
-          commit('setLoading', false);
-          throw new Error(error);
+          commit('setError', error.response.data);
         }
       }
-      compareAll();
+      compareByTypeAndColor();
     },
     onSignIn({ commit, state }, payload) {
-      commit('setLoading', true);
       return new Promise((resolve, reject) => {
         async function onLogIn() {
           try {
@@ -143,11 +158,9 @@ export default new Vuex.Store({
             }
             commit('setUserLoginState', true);
             resolve();
-            commit('setLoading', false);
           } catch (error) {
             commit('setError', error.response.data.message);
             reject(Error('Something went wrong'));
-            commit('setLoading', false);
             throw new Error(error);
           }
         }
@@ -157,6 +170,8 @@ export default new Vuex.Store({
   },
   getters: {
     items: state => state.items,
+    itemType: state => state.itemType,
+    availableItemTypes: state => state.availableItemTypes,
     isSelectedItem: state => state.selectedItem,
     userHeight: state => state.userParams.height,
     userShoulders: state => state.userParams.shoulders,
