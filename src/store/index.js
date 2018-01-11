@@ -63,6 +63,13 @@ export default new Vuex.Store({
           break;
       }
     },
+    removeElementFromItemsInState(state, payload) {
+      const index = state.items.map(item => item._id).indexOf(payload);
+      state.items.splice(index, 1);
+    },
+    addElementToItemsInState(state, payload) {
+      state.items.push(payload);
+    },
   },
   actions: {
     getItems({ commit }) {

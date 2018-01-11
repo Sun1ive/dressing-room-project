@@ -125,7 +125,7 @@ export default {
       try {
         const token = `Bearer ${SessionStorage.get('AuthToken')}`;
 
-        if (this.item.sizes.length === 0) {
+        if (this.item.sizes.length < 1) {
           this.item.sizes.push(this.xs, this.s, this.m, this.l);
         }
         await withHeaders(token).post('/products', this.item);
@@ -141,7 +141,7 @@ export default {
           length: null,
         }; */
 
-        this.$store.commit('addToItems', this.item);
+        this.$store.commit('addElementToItemsInState', this.item);
       } catch (err) {
         this.item.sizes = [];
         this.error = err.response.data.error.message;
