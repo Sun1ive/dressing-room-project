@@ -23,6 +23,7 @@ import {
   VDivider,
   VSubHeader,
   VRadioGroup,
+  VDialog,
   transitions,
 } from 'vuetify';
 import '../node_modules/vuetify/src/stylus/app.styl';
@@ -56,6 +57,7 @@ Vue.use(Vuetify, {
     VDivider,
     VSubHeader,
     VRadioGroup,
+    VDialog,
     transitions,
   },
   theme: {
