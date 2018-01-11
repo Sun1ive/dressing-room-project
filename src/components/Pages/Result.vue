@@ -63,6 +63,7 @@
                   <div>Коэффициент совместимости: <strong>{{ item.percent }} %</strong></div>
                   <div>Ваш предпочитаемый размер: <strong>{{ item.size }}</strong></div>
                   <div>Длинна: <strong>{{ item.difference }}</strong></div>
+                  <h1><b>{{ item.price }} GRN</b></h1>
                 </v-card-text>
                 <v-card-actions>
                   <v-btn :href="`${item.link}`" target="_blank">Купить</v-btn>
@@ -96,7 +97,7 @@ export default {
   computed: {
     ...mapGetters(['items', 'isLoading', 'availableItemTypes']),
     isEqual() {
-      return this.minPrice === this.maxPrice ? true : false;
+      return this.minPrice === this.maxPrice;
     },
     itemsByColor() {
       return uniq(this.$store.getters.items.map(item => item.color));
@@ -115,7 +116,11 @@ export default {
     },
     filteredItems() {
       if (this.selectedColor) {
-        return this.items.filter(item => item.color === this.selectedColor);
+        let arr = this.items.filter(item => item.color === this.selectedColor);
+        if (arr.length > 1) {
+          return arr.filter(item => item.price >= this.selectedPrice)
+        }
+        return arr
       }
       if (this.selectedPrice) {
         return this.items.filter(item => item.price >= this.selectedPrice);
