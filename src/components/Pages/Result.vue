@@ -123,7 +123,8 @@ export default {
   methods: {
     async checkAll() {
       this.reset();
-      // await this.$store.dispatch('compareProductsWithType');
+      this.$store.commit('setSelectedItem', null);
+      await this.$store.dispatch('compareProductsWithType');
     },
     async findByType() {
       this.$store.commit('setItemType', this.selectedType);
