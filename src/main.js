@@ -2,6 +2,7 @@ import Vue from 'vue';
 import 'babel-polyfill';
 import pWrapper from '@/components/Templates/ParamsWrapper';
 import preLoader from '@/components/Shared/Loader';
+import Modal from '@/components/Shared/Modal';
 
 import {
   Vuetify,
@@ -36,6 +37,7 @@ import path from './utils/path';
 
 Vue.component('app-params', pWrapper);
 Vue.component('app-loader', preLoader);
+Vue.component('app-modal', Modal);
 
 Vue.use(Vuetify, {
   components: {

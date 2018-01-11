@@ -20,12 +20,16 @@ export default new Vuex.Store({
       hips: null,
     },
     isLoading: false,
-    isError: '',
+    isErrorState: false,
+    isErrorStatus: '',
     isUserLoginState: false,
   },
   mutations: {
-    setError(state, payload) {
-      state.isError = payload;
+    setErrorState(state, payload) {
+      state.isErrorState = payload;
+    },
+    setErrorStatus(state, payload) {
+      state.isErrorStatus = payload;
     },
     setLoading(state, payload) {
       state.isLoading = payload;
@@ -142,9 +146,13 @@ export default new Vuex.Store({
             params: state.userParams,
             color: payload,
           });
+          if (state.isErrorStatus) {
+            commit('setErrorStatus', false);
+          }
           commit('setItems', response.data);
         } catch (error) {
-          commit('setError', error.response.data);
+          commit('setErrorStatus', true);
+          commit('setErrorState', error.response.data);
         }
       }
       compareByTypeAndColor();
@@ -161,12 +169,14 @@ export default new Vuex.Store({
             SessionStorage.set('AuthToken', token);
 
             if (state.error) {
-              commit('setError', null);
+              commit('setErrorStatus', false);
+              commit('setErrorState', '');
             }
             commit('setUserLoginState', true);
             resolve();
           } catch (error) {
-            commit('setError', error.response.data.message);
+            commit('setErrorState', error.response.data.message);
+            commit('setErrorStatus', true);
             reject(Error('Something went wrong'));
             throw new Error(error);
           }
@@ -186,7 +196,8 @@ export default new Vuex.Store({
     userWaist: state => state.userParams.waist,
     userHips: state => state.userParams.hips,
     userLoginState: state => state.isUserLoginState,
-    isError: state => state.isError,
+    isErrorState: state => state.isErrorState,
+    isErrorStatus: state => state.isErrorStatus,
     isLoading: state => state.isLoading,
   },
 });
