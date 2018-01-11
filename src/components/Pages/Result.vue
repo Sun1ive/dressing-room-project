@@ -31,7 +31,7 @@
                   <v-divider></v-divider>
                 </v-list>
                 <v-list>
-                  <div>От {{ minPrice }}</div>
+                  <v-flex class="text-xs-center"><div>От {{ minPrice }}</div></v-flex>
                   <v-list-tile>
                     <v-flex xs10 offset-xs1>
                       <v-slider 
@@ -43,8 +43,8 @@
                       ></v-slider>
                     </v-flex>
                   </v-list-tile>
-                    <div>До {{ maxPrice }}</div>
-                  <!-- <v-btn @click="checkAll">Сбросить</v-btn> -->
+                    <v-flex class="text-xs-center"><div>До {{ maxPrice }}</div></v-flex>
+                  <v-btn @click="checkAll">Сбросить</v-btn>
                 </v-list>
               </v-card>
             </v-flex>
@@ -98,7 +98,10 @@ export default {
       return uniq(this.$store.getters.items.map(item => item.color));
     },
     pricePool() {
-      return uniq(this.filteredItems.map(item => item.price));
+      if (this.selectedColor) {
+        return uniq(this.filteredItems.map(item => item.price))
+      }
+      return uniq(this.items.map(item => item.price))
     },
     minPrice() {
       return this.pricePool.reduce((prev, current) => Math.min(prev, current));
@@ -109,6 +112,9 @@ export default {
     filteredItems() {
       if (this.selectedColor) {
         return this.items.filter(item => item.color === this.selectedColor);
+      }
+      if (this.selectedPrice) {
+        return this.items.filter(item => item.price <= this.selectedPrice);
       }
       return this.items;
     },
