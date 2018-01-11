@@ -83,8 +83,8 @@ export default {
       this.$router.push('/');
     },
     changeErrorState() {
-      this.setErrorMessage('');
       this.setErrorState(false)
+      // this.setErrorMessage('');
     }
   },
   computed: {

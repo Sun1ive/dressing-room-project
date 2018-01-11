@@ -99,6 +99,16 @@
       </v-card-text>
     </app-params>
 
+    <v-layout>
+      <v-dialog max-width="500" v-model="errorState">
+        <app-modal>
+          <div class="headline" slot="title">{{ errorMessage }}</div>
+          <div slot="text">Пока что, по данной ссылке у нашего сервиса нет возможности точно определить на сколько подходит эта вещь по данным параметрам</div>
+          <v-btn @click="changeErrorState" slot="buttonAccept">Ок</v-btn>
+        </app-modal>
+      </v-dialog>
+    </v-layout>
+
     <app-params>
       <v-btn
       slot="button"
@@ -111,11 +121,12 @@
 
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapMutations } from 'vuex';
 import { setLocalData } from '../../utils/storage';
 
 export default {
   methods: {
+    ...mapMutations(['setErrorMessage', 'setErrorState', 'setSelectedItem']),
     async onCheckout() {
       setLocalData(this.height, this.shoulders, this.breast, this.waist, this.hips);
       if (this.isSelected) {
@@ -126,12 +137,19 @@ export default {
         this.$router.push('/result');
       }
     },
+    changeErrorState() {
+      this.setErrorState(false);
+      this.setSelectedItem(null)
+      // this.setErrorMessage('');
+    },
   },
   computed: {
     isReadyToCheckout() {
       return !this.height || !this.breast || !this.waist || !this.hips || !this.shoulders;
     },
     ...mapGetters({
+      errorState: 'isErrorState',
+      errorMessage: 'isErrorMessage',
       height: 'userHeight',
       shoulders: 'userShoulders',
       breast: 'userBreast',
