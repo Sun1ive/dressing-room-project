@@ -12,7 +12,6 @@ export default new Vuex.Store({
   state: {
     items: [],
     itemType: 'Плечевые',
-    brand: 'inDresser',
     availableItemTypes: typeList,
     selectedItem: null,
     userParams: {
