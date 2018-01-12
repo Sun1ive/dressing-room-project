@@ -7,7 +7,7 @@ export default {
     async changeErrorState() {
       this.setErrorState(false);
       this.setSelectedItem(null);
-      await this.compareProductsWithType;
+      await this.compareProductsWithType();
       this.$router.push('/result');
     },
   },
