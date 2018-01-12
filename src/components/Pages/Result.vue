@@ -91,11 +91,14 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(['items', 'isLoading', 'availableItemTypes', 'avaliableBrands']),
+    ...mapGetters(['items', 'isLoading', 'availableItemTypes']),
     itemsByColor() {
       return uniq(this.$store.getters.items.map(item => item.color));
     },
-    pricePool() {
+    avaliableBrands() {
+      return this.items.map(item => item.brand);
+    },
+    /* pricePool() {
       if (this.selectedColor) {
         return uniq(this.filteredItems.map(item => item.price));
       }
@@ -106,14 +109,14 @@ export default {
     },
     maxPrice() {
       return this.pricePool.reduce((prev, curr) => Math.max(prev, curr));
-    },
+    }, */
     filteredItems() {
       if (this.selectedColor) {
         return this.items.filter(item => item.color === this.selectedColor);
       }
-      if (this.selectedPrice) {
+      /* if (this.selectedPrice) {
         return this.items.filter(item => item.price >= this.selectedPrice);
-      }
+      } */
       return this.items;
     },
   },

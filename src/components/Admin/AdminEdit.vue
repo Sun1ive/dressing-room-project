@@ -29,6 +29,7 @@
             required
           ></v-select>
           <v-text-field required v-model.number.lazy="item.price" label="price" />
+          
           <!-- <v-text-field required v-model.lazy="item.color" label="color" /> -->
           <v-select
             :items="colors"

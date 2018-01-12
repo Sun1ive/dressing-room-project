@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import { typeList, brandList } from '../utils/data';
+import { typeList } from '../utils/data';
 
 import mutations from './mutations';
 import actions from './actions';
@@ -14,7 +14,6 @@ export default new Vuex.Store({
     itemType: 'Плечевые',
     brand: 'inDresser',
     availableItemTypes: typeList,
-    avaliableBrands: brandList,
     selectedItem: null,
     userParams: {
       height: null,

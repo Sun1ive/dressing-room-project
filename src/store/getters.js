@@ -2,7 +2,6 @@ export default {
   items: state => state.items,
   itemType: state => state.itemType,
   availableItemTypes: state => state.availableItemTypes,
-  avaliableBrands: state => state.avaliableBrands,
   isSelectedItem: state => state.selectedItem,
   userHeight: state => state.userParams.height,
   userShoulders: state => state.userParams.shoulders,
