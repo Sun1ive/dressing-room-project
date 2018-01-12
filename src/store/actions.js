@@ -120,16 +120,30 @@ export default {
       onLogIn();
     });
   },
-  sendMail(state, payload) {
+  sendMail(context, payload) {
+    let path;
+    let settings;
+
     async function sendMail() {
       try {
-        await withOutAuth().post('/mail', {
-          link: payload,
-        });
+        await withOutAuth().post(`/mail/${path}`, settings);
       } catch (error) {
         throw new Error(error);
       }
     }
-    sendMail();
+    if (payload.mailType === '404') {
+      path = 'link';
+      settings = {
+        link: payload.link,
+      };
+      sendMail();
+    } else if (payload.mailType === 'userMail') {
+      path = 'user';
+      settings = {
+        name: payload.name,
+        phone: payload.phone,
+      };
+      sendMail();
+    }
   },
 };

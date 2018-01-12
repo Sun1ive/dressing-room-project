@@ -21,6 +21,17 @@
                 </v-list> 
                 <v-divider />
                 <v-list two-line subheader>
+                  <v-flex xs10 offset-xs1>
+                    <v-select
+                      :items="avaliableBrands"
+                      v-model="selectedBrand"
+                      label="Бренд"
+                      @input="findByBrand"
+                    />
+                  </v-flex>
+                </v-list> 
+                <v-divider />
+                <v-list two-line subheader>
                   <v-subheader>Цвета</v-subheader>
                   <v-list-tile avatar v-for="color in itemsByColor" :key="color">
                     <v-radio-group v-model="selectedColor">
@@ -44,17 +55,6 @@
                     </v-list-tile>
                     <v-flex class="text-xs-center"><div>До {{ maxPrice }} грн</div></v-flex>
                 </v-list> -->
-                <v-list two-line subheader>
-                  <v-flex xs10 offset-xs1>
-                    <v-select
-                      :items="avaliableBrands"
-                      v-model="selectedBrand"
-                      label="Бренд"
-                      @input="findByBrand"
-                    />
-                  </v-flex>
-                </v-list> 
-                <v-divider />
                 <v-btn @click="checkAll">Сбросить</v-btn>
               </v-card>
             </v-flex>
