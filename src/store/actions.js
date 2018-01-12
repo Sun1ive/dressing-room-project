@@ -43,7 +43,10 @@ export default {
           resolve();
         } catch (error) {
           commit('setErrorMessage', error.response.data.message);
-          dispatch('sendMail', payload);
+          dispatch('sendMail', {
+            mailType: '404',
+            link: payload,
+          });
           commit('setErrorState', true);
           throw new Error(error);
         }
@@ -123,7 +126,6 @@ export default {
   sendMail(context, payload) {
     let path;
     let settings;
-
     async function sendMail() {
       try {
         await withOutAuth().post(`/mail/${path}`, settings);
@@ -133,9 +135,7 @@ export default {
     }
     if (payload.mailType === '404') {
       path = 'link';
-      settings = {
-        link: payload.link,
-      };
+      settings = payload;
       sendMail();
     } else if (payload.mailType === 'userMail') {
       path = 'user';
