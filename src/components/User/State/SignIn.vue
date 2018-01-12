@@ -52,15 +52,9 @@ export default {
       try {
         await this.$store.dispatch('onSignIn', this.credentials);
         this.$router.push('/');
-      } catch (error) {}
-
-      /* Надо переписать это. вместо таймаута сделать лоадер мб */
-      /* setTimeout(() => {
-        if (this.isUserLoginState) {
-          this.$router.push('/');
-        }
-      }, 500);
-       */
+      } catch (error) {
+        throw new Error(error);
+      }
     },
   },
   computed: {
