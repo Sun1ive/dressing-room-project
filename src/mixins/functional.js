@@ -1,12 +1,13 @@
-import { mapGetters, mapMutations } from 'vuex';
+import { mapGetters, mapMutations, mapActions } from 'vuex';
 
 export default {
   methods: {
     ...mapMutations(['setSelectedItem', 'setErrorMessage', 'setErrorState']),
+    ...mapActions(['compareProductsWithType', 'compareSingle']),
     async changeErrorState() {
       this.setErrorState(false);
       this.setSelectedItem(null);
-      await this.$store.dispatch('compareProductsWithType');
+      await this.compareProductsWithType;
       this.$router.push('/result');
     },
   },

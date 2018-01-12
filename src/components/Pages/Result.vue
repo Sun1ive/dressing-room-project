@@ -19,7 +19,7 @@
                     />
                   </v-flex>
                 </v-list> 
-                <v-divider></v-divider>
+                <v-divider />
                 <v-list two-line subheader>
                   <v-subheader>Цвета</v-subheader>
                   <v-list-tile avatar v-for="color in itemsByColor" :key="color">
@@ -27,9 +27,9 @@
                       <v-radio :label="color" :value="color"></v-radio>
                     </v-radio-group>
                   </v-list-tile>
-                  <v-divider></v-divider>
+                  <v-divider />
                 </v-list>
-                <v-list>
+           <!--      <v-list>
                   <v-flex class="text-xs-center"><div>От {{ minPrice }} грн</div></v-flex>
                     <v-list-tile>
                       <v-flex xs10 offset-xs1>
@@ -43,8 +43,7 @@
                       </v-flex>
                     </v-list-tile>
                     <v-flex class="text-xs-center"><div>До {{ maxPrice }} грн</div></v-flex>
-                  <v-btn @click="checkAll">Сбросить</v-btn>
-                </v-list>
+                </v-list> -->
                 <v-list two-line subheader>
                   <v-flex xs10 offset-xs1>
                     <v-select
@@ -55,7 +54,8 @@
                     />
                   </v-flex>
                 </v-list> 
-                <v-divider></v-divider>
+                <v-divider />
+                <v-btn @click="checkAll">Сбросить</v-btn>
               </v-card>
             </v-flex>
           </v-layout>
@@ -63,28 +63,6 @@
       </v-flex>
       <v-flex xs12>
         <v-container fluid grid-list-xl>
-          <!-- <v-layout row wrap justify-center>
-            <v-flex xs12 sm6 md4 lg3 v-for="item in filteredItems" :key="item._id">
-              <v-card>
-                <v-card-media height="600" :src="item.src" />
-                <v-card-text>
-                  <div><strong>{{ item.title }}</strong></div>
-                  <div>Коэффициент совместимости: <strong>{{ item.percent }} %</strong></div>
-                  <div>Ваш предпочитаемый размер: <strong>{{ item.size }}</strong></div>
-                  <div>Длинна: <strong>{{ item.difference }}</strong></div>
-                  <h1><b>{{ item.price }} GRN</b></h1>
-                </v-card-text>
-                <v-card-actions>
-                  <v-btn :href="`${item.link}`" target="_blank">Купить</v-btn>
-                  <v-spacer />
-                  <v-btn 
-                    @click="checkAll"
-                    v-if="items.length === 1"
-                  >Посмотреть все</v-btn>
-                </v-card-actions>
-              </v-card>
-            </v-flex>
-          </v-layout> -->
           <app-results 
             @checkAll="checkAll" 
             :filteredItems="filteredItems" 
@@ -96,7 +74,7 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex';
+import { mapGetters, mapMutations, mapActions } from 'vuex';
 import uniq from 'lodash/uniq';
 import Results from '../Shared/Results';
 
@@ -141,19 +119,20 @@ export default {
   },
   methods: {
     ...mapMutations(['setSelectedItem', 'setItemType', 'setItemBrand']),
+    ...mapActions(['compareProductsWithType']),
     async checkAll() {
       this.reset();
       this.setSelectedItem(null);
-      await this.$store.dispatch('compareProductsWithType');
+      await this.compareProductsWithType();
     },
     async findByType() {
-      this.reset();
       this.setItemType(this.selectedType);
-      await this.$store.dispatch('compareProductsWithType');
+      this.reset();
+      await this.compareProductsWithType();
     },
     async findByBrand() {
       this.reset();
-      this.setItemBrand(this.selectedBrand);
+      // this.setItemBrand(this.selectedBrand);
     },
     reset() {
       this.selectedColor = null;
