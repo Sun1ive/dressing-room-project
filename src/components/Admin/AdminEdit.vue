@@ -12,11 +12,12 @@
           <v-select
             :items="typeList"
             v-model="item.type"
-            label="select type"
+            label="select"
             single-line
             bottom
             required
           ></v-select>
+
           <v-text-field required v-model.lazy="item.title" label="title" />
           <v-text-field required v-model.lazy="item.src" label="src" />
           <v-text-field required v-model.lazy="item.link" label="link" />
@@ -29,6 +30,7 @@
             required
           ></v-select>
           <v-text-field required v-model.number.lazy="item.price" label="price" />
+
           <!-- <v-text-field required v-model.lazy="item.color" label="color" /> -->
           <v-select
             :items="colors"
@@ -82,11 +84,11 @@
 </template>
 
 <script>
-import createContainer from '../templates/CreateContainer';
+import createContainer from '../Templates/CreateContainer';
 import { withHeaders } from '../../services/api';
 import { SessionStorage } from '../../utils/storage';
 
-import { colors, typeList, brandList } from './data';
+import { colors, typeList, brandList } from '@/utils/data';
 
 export default {
   components: {

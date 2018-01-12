@@ -100,8 +100,8 @@
 import { withHeaders } from '../../services/api';
 import { SessionStorage } from '@/utils/storage';
 
-import createContainer from '../templates/CreateContainer';
-import { colors, typeList, brandList } from './data';
+import createContainer from '../Templates/CreateContainer';
+import { colors, typeList, brandList } from '@/utils/data';
 
 export default {
   components: {

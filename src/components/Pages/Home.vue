@@ -130,10 +130,10 @@ export default {
     async onCheckout() {
       setLocalData(this.height, this.shoulders, this.breast, this.waist, this.hips);
       if (this.isSelectedItem) {
-        await this.$store.dispatch('compareSingle', this.isSelectedItem);
+        await this.compareSingle(this.isSelectedItem);
         this.$router.push('/result');
       } else {
-        await this.$store.dispatch('compareProductsWithType');
+        await this.compareProductsWithType();
         this.$router.push('/result');
       }
     },

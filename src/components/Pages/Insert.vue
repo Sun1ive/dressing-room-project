@@ -60,7 +60,7 @@ export default {
           setLocalData(this.height, this.shoulders, this.breast, this.waist, this.hips);
         }
         this.setSelectedItem(this.strLink);
-        await this.$store.dispatch('compareSingle', this.isSelectedItem);
+        await this.compareSingle(this.isSelectedItem);
         this.$router.push('/result');
       }
     },
