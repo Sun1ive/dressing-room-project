@@ -93,7 +93,10 @@ export default {
   computed: {
     ...mapGetters(['items', 'isLoading', 'availableItemTypes']),
     itemsByColor() {
-      return uniq(this.$store.getters.items.map(item => item.color));
+      if (this.selectedBrand) {
+        return uniq(this.items.filter(item => item.brand === this.selectedBrand).map(item => item.color));
+      }
+      return uniq(this.items.map(item => item.color));
     },
     avaliableBrands() {
       return this.items.map(item => item.brand);
@@ -112,7 +115,14 @@ export default {
     }, */
     filteredItems() {
       if (this.selectedColor) {
-        return this.items.filter(item => item.color === this.selectedColor);
+        let arr = this.items.filter(item => item.color === this.selectedColor);
+        if (this.selectedBrand) {
+          return arr.filter(item => item.brand === this.selectedBrand);
+        }
+        return arr;
+      }
+      if (this.selectedBrand) {
+        return this.items.filter(item => item.brand === this.selectedBrand);
       }
       /* if (this.selectedPrice) {
         return this.items.filter(item => item.price >= this.selectedPrice);
@@ -130,11 +140,11 @@ export default {
     },
     async findByType() {
       this.setItemType(this.selectedType);
-      this.reset();
+      // this.reset();
       await this.compareProductsWithType();
     },
     async findByBrand() {
-      this.reset();
+      // this.reset();
       // this.setItemBrand(this.selectedBrand);
     },
     reset() {
