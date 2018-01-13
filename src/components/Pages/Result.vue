@@ -65,8 +65,17 @@
         <v-container fluid grid-list-xl>
           <app-results 
             @checkAll="checkAll" 
-            :filteredItems="filteredItems" 
+            :filteredItems="filteredItems"
+            v-if="filteredItems.length > 0"
           />
+          <v-alert
+            color="error" 
+            icon="warning" 
+            value="true"
+            v-else
+          >
+            Шота не пошло
+          </v-alert>
         </v-container>
       </v-flex>
     </v-layout>
@@ -94,7 +103,9 @@ export default {
     ...mapGetters(['items', 'isLoading', 'availableItemTypes']),
     itemsByColor() {
       if (this.selectedBrand) {
-        return uniq(this.items.filter(item => item.brand === this.selectedBrand).map(item => item.color));
+        return uniq(
+          this.items.filter(item => item.brand === this.selectedBrand).map(item => item.color),
+        );
       }
       return uniq(this.items.map(item => item.color));
     },
@@ -131,7 +142,7 @@ export default {
     },
   },
   methods: {
-    ...mapMutations(['setSelectedItem', 'setItemType', 'setItemBrand']),
+    ...mapMutations(['setSelectedItem', 'setItemType']),
     ...mapActions(['compareProductsWithType']),
     async checkAll() {
       this.reset();
@@ -140,12 +151,13 @@ export default {
     },
     async findByType() {
       this.setItemType(this.selectedType);
-      // this.reset();
+      if (this.selectedColor) {
+        this.selectedColor = null;
+      }
       await this.compareProductsWithType();
     },
     async findByBrand() {
       // this.reset();
-      // this.setItemBrand(this.selectedBrand);
     },
     reset() {
       this.selectedColor = null;

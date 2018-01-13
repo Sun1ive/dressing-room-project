@@ -17,9 +17,6 @@ export default {
   setItemType(state, payload) {
     state.itemType = payload;
   },
-  setItemBrand(state, payload) {
-    state.itemType = payload;
-  },
   setSelectedItem(state, payload) {
     state.selectedItem = payload;
   },

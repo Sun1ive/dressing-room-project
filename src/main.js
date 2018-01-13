@@ -81,6 +81,8 @@ new Vue({
   store,
   router,
   created() {
+    // need fake request for waking up server;
+    
     if (LocalStorage.get('DressingUserData')) {
       const userInfo = LocalStorage.get('DressingUserData');
       this.$store.dispatch('setUserParams', userInfo);
