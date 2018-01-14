@@ -1,5 +1,8 @@
 <template>
   <v-container fluid>
+    <transition mode="out-in" enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
+      <app-success v-if="isSuccess" />
+    </transition>
     <v-layout justify-center align-center>
       <v-flex xs10 sm6 lg4 class="text-xs-center">
         <h1>Форма редактирования вещи</h1>
@@ -8,7 +11,6 @@
     <v-layout justify-center align-center>
       <v-flex xs12 sm10 md9 lg7>
         <v-form class="form" @submit.prevent="onEdit">
-
           <v-select
             :items="typeList"
             v-model="item.type"
@@ -117,14 +119,16 @@
 
 <script>
 import createContainer from '../Templates/CreateContainer';
-import { withHeaders } from '../../services/api';
-import { SessionStorage } from '../../utils/storage';
-
+import { withHeaders } from '@/services/api';
+import { SessionStorage } from '@/utils/storage';
 import { colors, typeList, brandList } from '@/utils/data';
+
+import AlertSuccess from '../Shared/Alerts/AlertSuccessful';
 
 export default {
   components: {
     'app-create': createContainer,
+    'app-success': AlertSuccess,
   },
   props: {
     id: {
@@ -134,6 +138,7 @@ export default {
   },
   data() {
     return {
+      isSuccess: false,
       brandList,
       typeList,
       colors,
@@ -153,11 +158,14 @@ export default {
         if (this.item.sizes.length < 1) {
           this.item.sizes.push(this.xs, this.s, this.m, this.l);
         }
-
         await withHeaders(token).patch(`/products/${this.id}`, this.item);
         await this.$store.dispatch('getItems');
+        this.isSuccess = true
+        setTimeout(() => {
+          this.isSuccess = false
+        }, 1000);
 
-        this.$router.push('/admin/view');
+        // this.$router.push('/admin/view');
       } catch (error) {
         throw new Error('Something bad happened ', error);
       }
@@ -165,7 +173,6 @@ export default {
   },
   created() {
     const item = this.$store.getters.items.filter(x => x._id === this.id);
-
     item.forEach(x => {
       x.sizes.forEach(size => {
         this.item = {
@@ -177,6 +184,7 @@ export default {
           brand: x.brand,
           price: x.price,
           color: x.color,
+          length: x.itemLength,
         };
         switch (size.size) {
           case 'XS':

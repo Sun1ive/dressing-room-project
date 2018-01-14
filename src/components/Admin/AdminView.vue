@@ -1,12 +1,5 @@
 <template>
   <v-container fluid>
-    <v-layout class="mt-4" justify-center align-center>
-      <v-pagination 
-        :length="totalPages"
-        v-model="currentPage"
-        @input="changePage"
-      />
-    </v-layout>
     <v-layout class="pt-4" justify-center align-center>
       <v-flex xs10 sm6 class="text-xs-center">
         <h2>Поиск по названию товара</h2>
@@ -69,8 +62,6 @@ export default {
   data() {
     return {
       query: '',
-      currentPage: 1,
-      perPage: 2,
     };
   },
   methods: {
@@ -85,24 +76,12 @@ export default {
         }
       }
     },
-    changePage() {
-      console.log(1234);
-    },
   },
   computed: {
     searchQuery() {
-      if (this.query.length > 0) {
-        return this.$store.getters.items.filter(item =>
-          item.title.toLowerCase().match(this.query.toLowerCase()),
-        );
-      }
-      return this.$store.getters.items.splice(this.spliceFrom, this.sliceFrom + this.perPage);
-    },
-    totalPages() {
-      return Math.ceil(this.$store.getters.items.length / this.perPage - 1);
-    },
-    sliceFrom() {
-      return this.currentPage * this.perPage;
+      return this.$store.getters.items.filter(item =>
+        item.title.toLowerCase().match(this.query.toLowerCase()),
+      );
     },
   },
 };

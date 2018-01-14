@@ -1,38 +1,13 @@
 <template>
   <v-container fluid>
-    <v-layout justify-center align-center >
-      <v-flex xs10 sm6 lg4>
-        <v-alert
-          v-if="isError.length > 0"
-          color="error" 
-          icon="warning" 
-          value="true"
-        >
-          {{ isError }}
-        </v-alert>
-        <transition 
-          mode="out-in" 
-          enter-active-class="animated bounceIn"
-          leave-active-class="animated bounceOut">
-          <v-alert
-          v-if="isOk"
-            color="success"
-            icon="check_circle"
-            value="true"
-          >
-            Ok
-          </v-alert>
-        </transition>
-      </v-flex>    
-    </v-layout>
+
+    
     <v-layout class="pt-5" justify-center align-center>
       <v-flex xs10 sm8 lg6>
         <v-form
           class="form text-xs-center" 
-          @submit.prevent="addToBase"
-        >
+          @submit.prevent="addToBase" >
           <h1>Форма добавления вещи в базу</h1>
-
           <p>Параметры которых нет, можно не указывать</p>
 
           <v-select
@@ -102,13 +77,11 @@
           <app-create>
             <v-card-text slot="size">XS</v-card-text>
             <v-text-field 
-              v-if="itemType === 'Плечевые'"
               v-model.number.lazy="xs.shoulders"
               label="Плечи"
               slot="shoulders"
             />
             <v-text-field 
-              v-if="itemType === 'Плечевые'"
               v-model.number.lazy="xs.breast"
               label="Грудь"
               slot="breast"
@@ -128,12 +101,10 @@
           <app-create>
             <v-card-text slot="size">S</v-card-text>
             <v-text-field 
-            v-if="itemType === 'Плечевые'" 
             v-model.number.lazy="s.shoulders" 
             label="Плечи" 
             slot="shoulders" />
             <v-text-field 
-            v-if="itemType === 'Плечевые'" 
             v-model.number.lazy="s.breast" 
             label="Грудь" 
             slot="breast" />
@@ -150,12 +121,10 @@
           <app-create>
             <v-card-text slot="size">M</v-card-text>
             <v-text-field 
-            v-if="itemType === 'Плечевые'" 
             v-model.number.lazy="m.shoulders" 
             label="Плечи" 
             slot="shoulders" />
             <v-text-field 
-            v-if="itemType === 'Плечевые'" 
             v-model.number.lazy="m.breast" 
             label="Грудь" 
             slot="breast" />
@@ -172,11 +141,9 @@
           <app-create>
             <v-card-text slot="size">L</v-card-text>
             <v-text-field 
-            v-if="itemType === 'Плечевые'" 
             v-model.number.lazy="l.shoulders" 
             label="Плечи" slot="shoulders" />
             <v-text-field 
-            v-if="itemType === 'Плечевые'" 
             v-model.number.lazy="l.breast" 
             label="Грудь" 
             slot="breast" />

@@ -3,7 +3,7 @@
     <v-flex xs12 sm6 md4 lg3 v-for="item in filteredItems" :key="item._id">
       <v-card>
         <v-card-media height="600" :src="item.src" />
-        <v-card-text>
+        <v-card-text id="text">
           <div><strong>{{ item.title }}</strong></div>
           <div>Коэффициент совместимости: <strong>{{ item.percent }} %</strong></div>
           <div>Ваш предпочитаемый размер: <strong>{{ item.size }}</strong></div>
@@ -39,6 +39,8 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="stylus">
+#text
+  min-height 250px
 
 </style>
