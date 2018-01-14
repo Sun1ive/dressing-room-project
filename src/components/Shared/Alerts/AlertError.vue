@@ -6,7 +6,7 @@
         icon="warning"
         value="true"
       >
-        Error!
+        <slot></slot>
       </v-alert>
     </v-flex>    
   </v-layout>

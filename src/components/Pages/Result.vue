@@ -68,14 +68,6 @@
             :filteredItems="filteredItems"
             v-if="filteredItems.length > 0"
           />
-          <v-alert
-            color="error" 
-            icon="warning" 
-            value="true"
-            v-else
-          >
-            Шота не пошло
-          </v-alert>
         </v-container>
       </v-flex>
     </v-layout>

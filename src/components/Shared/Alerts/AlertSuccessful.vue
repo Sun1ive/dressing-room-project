@@ -6,7 +6,7 @@
         icon="check_circle"
         value="true"
       >
-        Successful!
+        <slot></slot>
       </v-alert>
     </v-flex>    
   </v-layout>

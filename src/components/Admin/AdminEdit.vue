@@ -1,7 +1,13 @@
 <template>
   <v-container fluid>
-    <transition mode="out-in" enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
-      <app-success v-if="isSuccess" />
+    <transition 
+      mode="out-in"
+      enter-active-class="animated fadeIn"
+      leave-active-class="animated fadeOut"
+    >
+      <app-success v-if="isSuccess">
+        Successful!
+      </app-success>
     </transition>
     <v-layout justify-center align-center>
       <v-flex xs10 sm6 lg4 class="text-xs-center">

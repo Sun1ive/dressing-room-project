@@ -6,7 +6,7 @@
         icon="priority_high"
         value="true"
       >
-        Warning!
+        <slot></slot>
       </v-alert>
     </v-flex>    
   </v-layout>
