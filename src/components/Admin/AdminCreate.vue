@@ -10,6 +10,19 @@
         >
           {{ isError }}
         </v-alert>
+        <transition 
+          mode="out-in" 
+          enter-active-class="animated bounceIn"
+          leave-active-class="animated bounceOut">
+          <v-alert
+          v-if="isOk"
+            color="success"
+            icon="check_circle"
+            value="true"
+          >
+            Ok
+          </v-alert>
+        </transition>
       </v-flex>    
     </v-layout>
     <v-layout class="pt-5" justify-center align-center>
@@ -88,34 +101,93 @@
 
           <app-create>
             <v-card-text slot="size">XS</v-card-text>
-            <v-text-field v-model.number.lazy="xs.shoulders" label="Плечи" slot="shoulders" />
-            <v-text-field v-model.number.lazy="xs.breast" label="Грудь" slot="breast" />
-            <v-text-field v-model.number.lazy="xs.waist" label="Талия" slot="waist" />
-            <v-text-field v-model.number.lazy="xs.hips" label="Бедра" slot="hips" />
+            <v-text-field 
+              v-if="itemType === 'Плечевые'"
+              v-model.number.lazy="xs.shoulders"
+              label="Плечи"
+              slot="shoulders"
+            />
+            <v-text-field 
+              v-if="itemType === 'Плечевые'"
+              v-model.number.lazy="xs.breast"
+              label="Грудь"
+              slot="breast"
+            />
+            <v-text-field 
+              v-model.number.lazy="xs.waist"
+              label="Талия"
+               slot="waist"
+            />
+            <v-text-field 
+              v-model.number.lazy="xs.hips"
+              label="Бедра"
+              slot="hips"
+            />
           </app-create>
 
           <app-create>
             <v-card-text slot="size">S</v-card-text>
-            <v-text-field v-model.number.lazy="s.shoulders" label="Плечи" slot="shoulders" />
-            <v-text-field v-model.number.lazy="s.breast" label="Грудь" slot="breast" />
-            <v-text-field v-model.number.lazy="s.waist" label="Талия" slot="waist" />
-            <v-text-field v-model.number.lazy="s.hips" label="Бедра" slot="hips" />
+            <v-text-field 
+            v-if="itemType === 'Плечевые'" 
+            v-model.number.lazy="s.shoulders" 
+            label="Плечи" 
+            slot="shoulders" />
+            <v-text-field 
+            v-if="itemType === 'Плечевые'" 
+            v-model.number.lazy="s.breast" 
+            label="Грудь" 
+            slot="breast" />
+            <v-text-field 
+            v-model.number.lazy="s.waist" 
+            label="Талия" 
+            slot="waist" />
+            <v-text-field 
+            v-model.number.lazy="s.hips"
+            label="Бедра" 
+            slot="hips" />
           </app-create>
 
           <app-create>
             <v-card-text slot="size">M</v-card-text>
-            <v-text-field v-model.number.lazy="m.shoulders" label="Плечи" slot="shoulders" />
-            <v-text-field v-model.number.lazy="m.breast" label="Грудь" slot="breast" />
-            <v-text-field v-model.number.lazy="m.waist" label="Талия" slot="waist" />
-            <v-text-field v-model.number.lazy="m.hips" label="Бедра" slot="hips" />
+            <v-text-field 
+            v-if="itemType === 'Плечевые'" 
+            v-model.number.lazy="m.shoulders" 
+            label="Плечи" 
+            slot="shoulders" />
+            <v-text-field 
+            v-if="itemType === 'Плечевые'" 
+            v-model.number.lazy="m.breast" 
+            label="Грудь" 
+            slot="breast" />
+            <v-text-field 
+            v-model.number.lazy="m.waist" 
+            label="Талия" 
+            slot="waist" />
+            <v-text-field 
+            v-model.number.lazy="m.hips" 
+            label="Бедра" 
+            slot="hips" />
           </app-create>
 
           <app-create>
             <v-card-text slot="size">L</v-card-text>
-            <v-text-field v-model.number.lazy="l.shoulders" label="Плечи" slot="shoulders" />
-            <v-text-field v-model.number.lazy="l.breast" label="Грудь" slot="breast" />
-            <v-text-field v-model.number.lazy="l.waist" label="Талия" slot="waist" />
-            <v-text-field v-model.number.lazy="l.hips" label="Бедра" slot="hips" />
+            <v-text-field 
+            v-if="itemType === 'Плечевые'" 
+            v-model.number.lazy="l.shoulders" 
+            label="Плечи" slot="shoulders" />
+            <v-text-field 
+            v-if="itemType === 'Плечевые'" 
+            v-model.number.lazy="l.breast" 
+            label="Грудь" 
+            slot="breast" />
+            <v-text-field 
+            v-model.number.lazy="l.waist" 
+            label="Талия" 
+            slot="waist" />
+            <v-text-field 
+            v-model.number.lazy="l.hips" 
+            label="Бедра" 
+            slot="hips" />
           </app-create>
 
           <v-btn
@@ -143,6 +215,7 @@ export default {
   data() {
     return {
       error: '',
+      success: false,
       typeList,
       brandList,
       colors,
@@ -172,7 +245,8 @@ export default {
           this.item.sizes.push(this.xs, this.s, this.m, this.l);
         }
         await withHeaders(token).post('/products', this.item);
-        /*    this.item = {
+
+        this.item = {
           title: '',
           type: '',
           link: '',
@@ -182,10 +256,15 @@ export default {
           price: null,
           color: '',
           length: null,
-        }; */
+        };
 
         this.$store.commit('addElementToItemsInState', this.item);
+        this.success = true;
+        setTimeout(() => {
+          this.success = false;
+        }, 1000);
       } catch (err) {
+        this.success = false;
         this.item.sizes = [];
         this.error = err.response.data.error.message;
         throw new Error('Something bad happened', err);
@@ -196,6 +275,12 @@ export default {
     isError() {
       return this.error;
     },
+    isOk() {
+      return this.success;
+    },
+    itemType() {
+      return this.item.type;
+    }
   },
 };
 </script>

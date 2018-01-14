@@ -10,4 +10,5 @@ export default {
   userHips: state => state.userParams.hips,
   userLoginState: state => state.isUserLoginState,
   isLoading: state => state.isLoading,
+  isError: state => state.isError
 };

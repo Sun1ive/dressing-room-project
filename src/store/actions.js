@@ -40,6 +40,11 @@ export default {
             mailType: '404',
             link: payload,
           });
+          commit('setError', {
+            state: true,
+            status: 404,
+            message: 'Not found',
+          });
           throw new Error(error);
         }
       }

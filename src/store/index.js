@@ -23,6 +23,11 @@ export default new Vuex.Store({
     },
     isUserLoginState: false,
     isLoading: false,
+    isError: {
+      state: false,
+      status: 200,
+      message: '',
+    },
   },
   mutations,
   actions,

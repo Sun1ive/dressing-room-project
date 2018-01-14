@@ -25,6 +25,7 @@ import {
   VSubheader,
   VRadioGroup,
   VDialog,
+  VPagination,
   transitions,
 } from 'vuetify';
 import '../node_modules/vuetify/src/stylus/app.styl';
@@ -60,6 +61,7 @@ Vue.use(Vuetify, {
     VSubheader,
     VRadioGroup,
     VDialog,
+    VPagination,
     transitions,
   },
   theme: {

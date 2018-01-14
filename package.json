@@ -17,7 +17,6 @@
   "dependencies": {
     "axios": "^0.17.1",
     "lodash": "^4.17.4",
-    "vee-validate": "^2.0.2",
     "vue": "^2.5.13",
     "vue-router": "^3.0.1",
     "vuetify": "^0.17.6",
@@ -47,7 +46,7 @@
     "eslint-loader": "^1.9.0",
     "eslint-plugin-html": "^4.0.1",
     "eslint-plugin-import": "^2.7.0",
-    "eslint-plugin-vue": "next",
+    "eslint-plugin-vue": "^4.2.0",
     "eventsource-polyfill": "^0.9.6",
     "extract-text-webpack-plugin": "^3.0.0",
     "file-loader": "^1.1.4",
