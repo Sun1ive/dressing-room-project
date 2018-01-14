@@ -29,10 +29,30 @@
             single-line
             bottom
             required
+            :rules="[() => !!item.type || 'This field is required']"
           ></v-select>
-          <v-text-field required v-model.lazy="item.title" label="title" />
-          <v-text-field required v-model.lazy="item.src" label="src" />
-          <v-text-field required v-model.lazy="item.link" label="link" />
+
+          <v-text-field 
+            v-model.lazy="item.title"
+            label="title"
+            required
+            :rules="[() => !!item.title || 'This field is required']"
+          />
+
+          <v-text-field 
+            required
+            v-model.lazy="item.src"
+            label="src"
+            :rules="[() => !!item.src || 'This field is required']"
+          />
+
+          <v-text-field 
+            required
+            v-model.lazy="item.link"
+            label="link"
+            :rules="[() => !!item.link || 'This field is required']"
+            />
+
           <v-select
             :items="brandList"
             v-model="item.brand"
@@ -40,9 +60,15 @@
             single-line
             bottom
             required
+            :rules="[() => !!item.brand || 'This field is required']"
           ></v-select>
-          <v-text-field required v-model.number.lazy="item.price" label="price грн" />
-          <!-- <v-text-field required v-model.lazy="item.color" label="color" /> -->
+
+          <v-text-field required
+            v-model.number.lazy="item.price"
+            label="price грн"
+            :rules="[() => !!item.price || 'This field is required']"
+          />
+
           <v-select
             :items="colors"
             v-model="item.color"
@@ -50,8 +76,15 @@
             single-line
             bottom
             required
+            :rules="[() => !!item.color || 'This field is required']"
           ></v-select>
-          <v-text-field required v-model.number.lazy="item.length" label="item length см" />
+          
+          <v-text-field 
+            required
+            v-model.number.lazy="item.length"
+            label="item length см"
+            :rules="[() => !!item.length || 'This field is required']"
+            />
 
           <app-create>
             <v-card-text slot="size">XS</v-card-text>
@@ -157,7 +190,7 @@ export default {
         this.error = err.response.data.error.message;
         throw new Error('Something bad happened', err);
       }
-    },
+    }
   },
   computed: {
     isError() {
