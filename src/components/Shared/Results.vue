@@ -5,10 +5,10 @@
         <v-card-media height="600" :src="item.src" />
         <v-card-text id="text">
           <div><strong>{{ item.title }}</strong></div>
-          <div>Коэффициент совместимости: <strong>{{ item.percent }} %</strong></div>
-          <div>Ваш предпочитаемый размер: <strong>{{ item.size }}</strong></div>
+          <div>Коэффициент: <strong>{{ item.percent }} %</strong></div>
+          <div>Ваш размер: <strong>{{ item.size }}</strong></div>
           <div>Длинна: <strong>{{ item.difference }}</strong></div>
-          <h1><b>{{ item.price }} GRN</b></h1>
+          <div>Цена: <strong>{{ item.price }} грн</strong></div>
         </v-card-text>
         <v-card-actions>
           <v-btn :href="`${item.link}`" target="_blank">Купить</v-btn>
@@ -41,6 +41,6 @@ export default {
 
 <style scoped lang="stylus">
 #text
-  min-height 250px
+  min-height 180px
 
 </style>
