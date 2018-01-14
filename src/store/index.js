@@ -22,8 +22,6 @@ export default new Vuex.Store({
       hips: null,
     },
     isUserLoginState: false,
-    isErrorState: false,
-    isErrorMessage: '',
     isLoading: false,
   },
   mutations,

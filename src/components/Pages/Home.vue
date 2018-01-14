@@ -102,7 +102,7 @@
     <v-layout>
       <v-dialog max-width="500" v-model="errorState">
         <app-modal>
-          <div class="headline" slot="title">{{ errorMessage }}</div>
+          <div class="headline" slot="title">not found</div>
           <div slot="text">Пока что, по данной ссылке у нашего сервиса нет возможности точно определить на сколько подходит эта вещь по данным параметрам</div>
           <v-btn @click="changeErrorState" slot="buttonAccept">Посмотреть все</v-btn>
         </app-modal>
@@ -126,6 +126,11 @@ import myMixin from '@/mixins/functional';
 
 export default {
   mixins: [myMixin],
+  data() {
+    return {
+      errorState: null,
+    }
+  },
   methods: {
     async onCheckout() {
       setLocalData(this.height, this.shoulders, this.breast, this.waist, this.hips);

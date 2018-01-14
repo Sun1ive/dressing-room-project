@@ -9,7 +9,5 @@ export default {
   userWaist: state => state.userParams.waist,
   userHips: state => state.userParams.hips,
   userLoginState: state => state.isUserLoginState,
-  isErrorState: state => state.isErrorState,
-  isErrorMessage: state => state.isErrorMessage,
   isLoading: state => state.isLoading,
 };
