@@ -158,7 +158,7 @@
           <v-btn
             color="primary"
             type="submit"
-            :disabled="isFilled"
+            :disabled="!isFilled"
           >Submit</v-btn>
         </v-form>
       </v-flex>
@@ -186,7 +186,15 @@ export default {
       brandList,
       colors,
       item: {
+        title: '',
+        type: '',
+        link: '',
+        src: '',
         sizes: [],
+        brand: '',
+        price: null,
+        color: '',
+        length: null,
       },
       xs: {
         size: 'XS',
@@ -245,16 +253,10 @@ export default {
       return this.success;
     },
     isFilled() {
-      return (
-        !this.item.type &&
-        !this.item.title &&
-        !this.item.src &&
-        !this.item.link &&
-        !this.item.brand &&
-        !this.item.price &&
-        !this.item.color &&
-        !this.item.length
-      );
+      const i = this.item;
+      return i.type && i.title && i.src && i.link && i.brand && i.price && i.color && i.length
+        ? true
+        : false;
     },
     itemType() {
       return this.item.type;

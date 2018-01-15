@@ -138,12 +138,12 @@ export default {
       this.setLoading(true);
       setLocalData(this.height, this.shoulders, this.breast, this.waist, this.hips);
       if (this.isSelectedItem) {
-        this.setLoading(false);
         await this.compareSingle(this.isSelectedItem);
+        this.setLoading(false);
         this.$router.push('/result');
       } else {
-        this.setLoading(false);
         await this.compareProductsWithType();
+        this.setLoading(false);
         this.$router.push('/result');
       }
     },

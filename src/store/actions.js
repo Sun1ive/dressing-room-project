@@ -45,6 +45,7 @@ export default {
             status: 404,
             message: 'Not found',
           });
+          commit('setLoading', false);
           throw new Error(error);
         }
       }
@@ -79,8 +80,10 @@ export default {
           const { token } = response.data;
           SessionStorage.set('AuthToken', token);
           commit('setUserLoginState', true);
+          commit('setError', { state: false, status: 200, message: '' });
           resolve();
         } catch (error) {
+          commit('setError', { state: true, status: 401, message: 'Unauthorized' });
           throw new Error(error);
         }
       }
