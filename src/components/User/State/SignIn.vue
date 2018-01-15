@@ -1,6 +1,10 @@
 <template>
   <v-container fluid>
-    <transition mode="out-in" enter-active-class="animated bounceIn" leave-active-class="animated bounceOut">
+    <transition 
+      mode="out-in"
+      enter-active-class="animated bounceIn"
+      leave-active-class="animated bounceOut"
+    >
       <v-container fluid v-if="isError.state">
         <app-error>
           {{ isError.message }}

@@ -1,8 +1,8 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
-import Home from '@/components/Pages/Home';
-import Insert from '@/components/Pages/Insert';
+// import Home from '@/components/Pages/Home';
+/* import Insert from '@/components/Pages/Insert';
 import Result from '@/components/Pages/Result';
 import SignIn from '@/components/User/State/SignIn';
 import ErrorPage from '@/components/Pages/404';
@@ -16,7 +16,7 @@ import Hips from '@/components/User/Params/Hips';
 import Admin from '@/components/Admin/Admin';
 import AdminCreate from '@/components/Admin/AdminCreate';
 import AdminView from '@/components/Admin/AdminView';
-import AdminEdit from '@/components/Admin/AdminEdit';
+import AdminEdit from '@/components/Admin/AdminEdit'; */
 
 import beforeAdmin from './adminGuard';
 import beforeResult from './resultGuard';
@@ -29,74 +29,74 @@ export default new Router({
     {
       path: '/',
       name: 'Home',
-      component: Home,
+      component: () => import('@/components/Pages/Home'),
     },
     {
       path: '/signin',
-      name: '',
-      component: SignIn,
+      name: 'SignIn',
+      component: () => import('@/components/User/State/SignIn'),
     },
     {
       path: '/insert',
-      name: '',
-      component: Insert,
+      name: 'Insert',
+      component: () => import('@/components/Pages/Insert'),
     },
     {
       path: '/shoulders',
-      name: '',
-      component: Shoulders,
+      name: 'Shoulders',
+      component: () => import('@/components/User/Params/Shoulders'),
     },
     {
       path: '/breast',
-      name: '',
-      component: Breast,
+      name: 'Breast',
+      component: () => import('@/components/User/Params/Breast'),
     },
     {
       path: '/height',
-      name: '',
-      component: Height,
+      name: 'Height',
+      component: () => import('@/components/User/Params/Height'),
     },
     {
       path: '/waist',
-      name: '',
-      component: Waist,
+      name: 'Waist',
+      component: () => import('@/components/User/Params/Waist'),
     },
     {
       path: '/hips',
-      name: '',
-      component: Hips,
+      name: 'Hips',
+      component: () => import('@/components/User/Params/Hips'),
     },
     {
       path: '/404',
-      name: '',
-      component: ErrorPage,
+      name: 'FourOFour',
+      component: () => import('@/components/Pages/404'),
     },
     {
       path: '/result',
-      name: '',
-      component: Result,
+      name: 'Result',
+      component: () => import('@/components/Pages/Result'),
       beforeEnter: beforeResult,
     },
     {
       path: '/admin',
-      name: '',
-      component: Admin,
+      name: 'Admin',
+      component: () => import('@/components/Admin/Admin'),
       beforeEnter: beforeAdmin,
       children: [
         {
           path: 'view',
-          name: '',
-          component: AdminView,
+          name: 'adminView',
+          component: () => import('@/components/Admin/AdminView'),
         },
         {
           path: 'create',
-          name: '',
-          component: AdminCreate,
+          name: 'adminCreate',
+          component: () => import('@/components/Admin/AdminCreate'),
         },
         {
           path: 'edit/:id',
-          name: '',
-          component: AdminEdit,
+          name: 'adminEdit',
+          component: () => import('@/components/Admin/AdminEdit'),
           props: true,
         },
       ],
