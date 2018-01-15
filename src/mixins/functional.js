@@ -4,7 +4,7 @@ export default {
   methods: {
     ...mapMutations(['setSelectedItem', 'setLoading', 'setError']),
     ...mapActions(['compareProductsWithType', 'compareSingle']),
-    async changeErrorState() {
+    async checkAllProducts() {
       if (this.isError.state) {
         this.setError({ state: false, status: 200, message: '' });
       }

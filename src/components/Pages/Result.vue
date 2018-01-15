@@ -1,63 +1,68 @@
 <template>
   <v-container fluid>
-    <v-layout>
-      <v-flex xs6 sm3 v-if="items.length > 1">
-        <v-container fluid>
-          <v-layout justify-center class="mt-4" row>
-            <v-flex xs10>
-              <v-card>
-                <v-toolbar color="teal" dark>
-                  <v-toolbar-title>Фильтр</v-toolbar-title>
-                </v-toolbar>
-                <v-list two-line subheader>
-                  <v-flex xs10 offset-xs1>
-                    <v-select
-                      :items="availableItemTypes"
-                      v-model="selectedType"
-                      label="Классификация"
-                      @input="findByType"
-                    />
-                  </v-flex>
-                </v-list> 
-                <v-divider />
-                <!-- <v-list two-line subheader>
-                  <v-flex xs10 offset-xs1>
-                    <v-select
-                      :items="avaliableBrands"
-                      v-model="selectedBrand"
-                      label="Бренд"
-                    />
-                  </v-flex>
-                </v-list> 
-                <v-divider /> -->
-                <v-list two-line subheader>
-                  <v-subheader>Цвета</v-subheader>
-                  <v-list-tile avatar v-for="color in itemsByColor" :key="color">
-                    <v-radio-group v-model="selectedColor">
-                      <v-radio :label="color" :value="color"></v-radio>
-                    </v-radio-group>
-                  </v-list-tile>
+      <v-container fluid v-if="isLoading">
+        <app-loader />
+      </v-container>
+    <v-container fluid v-if="!isLoading">
+      <v-layout>
+        <v-flex xs6 sm3 v-if="items.length > 1">
+          <v-container fluid>
+            <v-layout justify-center class="mt-4" row>
+              <v-flex xs10>
+                <v-card>
+                  <v-toolbar color="teal" dark>
+                    <v-toolbar-title>Фильтр</v-toolbar-title>
+                  </v-toolbar>
+                  <v-list two-line subheader>
+                    <v-flex xs10 offset-xs1>
+                      <v-select
+                        :items="availableItemTypes"
+                        v-model="selectedType"
+                        label="Классификация"
+                        @input="findByType"
+                      />
+                    </v-flex>
+                  </v-list> 
                   <v-divider />
-                </v-list>
-                <v-btn @click="checkAll">Сбросить</v-btn>
-              </v-card>
-            </v-flex>
-          </v-layout>
-        </v-container>
-      </v-flex>
-      <v-flex xs12>
-        <v-container fluid grid-list-xl>
-          <app-results 
-            @checkAll="checkAll" 
-            :filteredItems="filteredItems"
-            v-if="filteredItems.length > 0"
-          />
-          <app-error v-else>
-            Something bad happenned
-          </app-error>
-        </v-container>
-      </v-flex>
-    </v-layout>
+                  <!-- <v-list two-line subheader>
+                    <v-flex xs10 offset-xs1>
+                      <v-select
+                        :items="avaliableBrands"
+                        v-model="selectedBrand"
+                        label="Бренд"
+                      />
+                    </v-flex>
+                  </v-list> 
+                  <v-divider /> -->
+                  <v-list two-line subheader>
+                    <v-subheader>Цвета</v-subheader>
+                    <v-list-tile avatar v-for="color in itemsByColor" :key="color">
+                      <v-radio-group v-model="selectedColor">
+                        <v-radio :label="color" :value="color"></v-radio>
+                      </v-radio-group>
+                    </v-list-tile>
+                    <v-divider />
+                  </v-list>
+                  <v-btn @click="checkAll">Сбросить</v-btn>
+                </v-card>
+              </v-flex>
+            </v-layout>
+          </v-container>
+        </v-flex>
+        <v-flex xs12>
+          <v-container fluid grid-list-xl>
+            <app-results 
+              @checkAll="checkAll" 
+              :filteredItems="filteredItems"
+              v-if="filteredItems.length > 0"
+            />
+            <app-error v-else>
+              Something bad happenned
+            </app-error>
+          </v-container>
+        </v-flex>
+      </v-layout>
+    </v-container>
   </v-container>
 </template>
 
@@ -82,7 +87,8 @@ export default {
   computed: {
     ...mapGetters([
       'items',
-      'availableItemTypes'
+      'availableItemTypes',
+      'isLoading',
     ]),
     itemsByColor() {
       if (this.selectedBrand) {
@@ -109,20 +115,28 @@ export default {
     },
   },
   methods: {
-    ...mapMutations(['setSelectedItem', 'setItemType']),
+    ...mapMutations(['setSelectedItem', 'setItemType', 'setLoading']),
     ...mapActions(['compareProductsWithType']),
     async checkAll() {
+      this.setLoading(true);
       this.reset();
       this.setSelectedItem(null);
       this.setItemType('Плечевые');
       await this.compareProductsWithType();
+      setTimeout(() => {
+        this.setLoading(false);
+      }, 1000);
     },
     async findByType() {
+      this.setLoading(true);
       this.setItemType(this.selectedType);
       if (this.selectedColor) {
         this.selectedColor = null;
       }
       await this.compareProductsWithType();
+      setTimeout(() => {
+        this.setLoading(false);
+      }, 1000);
     },
     reset() {
       this.selectedColor = null;
