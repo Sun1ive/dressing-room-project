@@ -106,11 +106,11 @@
       </app-params>
 
       <v-layout>
-        <v-dialog max-width="500" v-model="errorState">
+        <v-dialog max-width="500" v-model="isError.state">
           <app-modal>
             <div class="headline" slot="title">not found</div>
             <div slot="text">Пока что, по данной ссылке у нашего сервиса нет возможности точно определить на сколько подходит эта вещь по данным параметрам</div>
-            <v-btn @click="changeErrorState" slot="buttonAccept">Посмотреть все</v-btn>
+            <v-btn @click="checkAllProducts" slot="buttonAccept">Посмотреть все</v-btn>
           </app-modal>
         </v-dialog>
       </v-layout>
@@ -133,11 +133,6 @@ import myMixin from '@/mixins/functional';
 
 export default {
   mixins: [myMixin],
-  data() {
-    return {
-      errorState: null,
-    };
-  },
   methods: {
     async onCheckout() {
       this.setLoading(true);
@@ -156,7 +151,7 @@ export default {
   computed: {
     isReadyToCheckout() {
       return !this.height || !this.breast || !this.waist || !this.hips || !this.shoulders;
-    },
+    }
   },
 };
 </script>

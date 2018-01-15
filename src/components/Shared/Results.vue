@@ -1,4 +1,5 @@
 <template>
+  <transition enter-active-class="animated fadeIn" leave-active-class="fadeOut">
   <v-layout row wrap justify-center>
     <v-flex xs12 sm6 md4 lg3 v-for="item in filteredItems" :key="item._id">
       <v-card>
@@ -21,6 +22,7 @@
       </v-card>
     </v-flex>
   </v-layout>
+  </transition>
 </template>
 
 <script>

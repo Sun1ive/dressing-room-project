@@ -2,9 +2,12 @@ import { mapGetters, mapMutations, mapActions } from 'vuex';
 
 export default {
   methods: {
-    ...mapMutations(['setSelectedItem', 'setLoading']),
+    ...mapMutations(['setSelectedItem', 'setLoading', 'setError']),
     ...mapActions(['compareProductsWithType', 'compareSingle']),
-    async changeErrorState() {
+    async checkAllProducts() {
+      if (this.isError.state) {
+        this.setError({ state: false, status: 200, message: '' });
+      }
       this.setSelectedItem(null);
       await this.compareProductsWithType();
       this.$router.push('/result');
@@ -13,6 +16,7 @@ export default {
   computed: {
     ...mapGetters({
       isSelectedItem: 'isSelectedItem',
+      isError: 'isError',
       isLoading: 'isLoading',
       height: 'userHeight',
       shoulders: 'userShoulders',

@@ -28,60 +28,74 @@ export default new Router({
   routes: [
     {
       path: '/',
+      name: 'Home',
       component: Home,
     },
     {
       path: '/signin',
+      name: '',
       component: SignIn,
     },
     {
       path: '/insert',
+      name: '',
       component: Insert,
     },
     {
       path: '/shoulders',
+      name: '',
       component: Shoulders,
     },
     {
       path: '/breast',
+      name: '',
       component: Breast,
     },
     {
       path: '/height',
+      name: '',
       component: Height,
     },
     {
       path: '/waist',
+      name: '',
       component: Waist,
     },
     {
       path: '/hips',
+      name: '',
       component: Hips,
     },
     {
       path: '/404',
+      name: '',
       component: ErrorPage,
     },
     {
       path: '/result',
+      name: '',
       component: Result,
       beforeEnter: beforeResult,
     },
     {
       path: '/admin',
+      name: '',
       component: Admin,
       beforeEnter: beforeAdmin,
       children: [
         {
           path: 'view',
+          name: '',
           component: AdminView,
         },
         {
           path: 'create',
+          name: '',
           component: AdminCreate,
         },
         {
           path: 'edit/:id',
+          name: '',
           component: AdminEdit,
           props: true,
         },

@@ -1,5 +1,14 @@
 <template>
   <v-container fluid>
+    <transition 
+        mode="out-in"
+        enter-active-class="animated fadeIn"
+        leave-active-class="animated fadeOut"
+      >
+        <app-success v-if="isOk">
+          Successful!
+        </app-success>
+    </transition>
     <v-layout class="pt-5" justify-center align-center>
       <v-flex xs10 sm8 lg6>
         <v-form
@@ -158,7 +167,7 @@
           <v-btn
             color="primary"
             type="submit"
-            :disabled="isFilled"
+            :disabled="!isFilled"
           >Submit</v-btn>
         </v-form>
       </v-flex>
@@ -168,25 +177,35 @@
 </template>
 
 <script>
-import { withHeaders } from '../../services/api';
+import { withHeaders } from '@/services/api';
 import { SessionStorage } from '@/utils/storage';
 
 import createContainer from '../Templates/CreateContainer';
 import { colors, typeList, brandList } from '@/utils/data';
+import AlertSuccess from '../Shared/Alerts/AlertSuccessful';
 
 export default {
   components: {
     'app-create': createContainer,
+    'app-success': AlertSuccess,
   },
   data() {
     return {
+      isSuccess: false,
       error: '',
-      success: false,
       typeList,
       brandList,
       colors,
       item: {
+        title: '',
+        type: '',
+        link: '',
+        src: '',
         sizes: [],
+        brand: '',
+        price: null,
+        color: '',
+        length: null,
       },
       xs: {
         size: 'XS',
@@ -206,11 +225,11 @@ export default {
     async addToBase() {
       try {
         const token = `Bearer ${SessionStorage.get('AuthToken')}`;
-
         if (this.item.sizes.length < 1) {
           this.item.sizes.push(this.xs, this.s, this.m, this.l);
         }
         await withHeaders(token).post('/products', this.item);
+        this.isSuccess = true;
 
         this.item = {
           title: '',
@@ -225,12 +244,11 @@ export default {
         };
 
         this.$store.commit('addElementToItemsInState', this.item);
-        this.success = true;
         setTimeout(() => {
-          this.success = false;
-        }, 1000);
+          this.isSuccess = false;
+        }, 2000);
       } catch (err) {
-        this.success = false;
+        this.isSuccess = false;
         this.item.sizes = [];
         this.error = err.response.data.error.message;
         throw new Error('Something bad happened', err);
@@ -242,19 +260,13 @@ export default {
       return this.error;
     },
     isOk() {
-      return this.success;
+      return this.isSuccess;
     },
     isFilled() {
-      return (
-        !this.item.type &&
-        !this.item.title &&
-        !this.item.src &&
-        !this.item.link &&
-        !this.item.brand &&
-        !this.item.price &&
-        !this.item.color &&
-        !this.item.length
-      );
+      const i = this.item;
+      return i.type && i.title && i.src && i.link && i.brand && i.price && i.color && i.length
+        ? true
+        : false;
     },
     itemType() {
       return this.item.type;
