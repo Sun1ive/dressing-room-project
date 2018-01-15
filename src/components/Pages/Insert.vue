@@ -60,6 +60,7 @@ export default {
     async onCheckout() {
       this.setLoading(true)
       if (!this.height || !this.shoulders || !this.breast || !this.waist || !this.hips) {
+        this.setLoading(false);
         this.paramDialog = true;
       } else {
         if (!LocalStorage.get('DressingUserData')) {

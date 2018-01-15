@@ -106,7 +106,7 @@
       </app-params>
 
       <v-layout>
-        <v-dialog max-width="500" v-model="errorState">
+        <v-dialog max-width="500" v-model="isError.state">
           <app-modal>
             <div class="headline" slot="title">not found</div>
             <div slot="text">Пока что, по данной ссылке у нашего сервиса нет возможности точно определить на сколько подходит эта вещь по данным параметрам</div>
@@ -133,22 +133,17 @@ import myMixin from '@/mixins/functional';
 
 export default {
   mixins: [myMixin],
-  data() {
-    return {
-      errorState: null,
-    };
-  },
   methods: {
     async onCheckout() {
       this.setLoading(true);
-      setLocalData(this.height, this.shoulders, this.breast, this.waist, this.hips);
+      // setLocalData(this.height, this.shoulders, this.breast, this.waist, this.hips);
       if (this.isSelectedItem) {
-        await this.compareSingle(this.isSelectedItem);
         this.setLoading(false);
+        await this.compareSingle(this.isSelectedItem);
         this.$router.push('/result');
       } else {
-        await this.compareProductsWithType();
         this.setLoading(false);
+        await this.compareProductsWithType();
         this.$router.push('/result');
       }
     },
@@ -156,7 +151,7 @@ export default {
   computed: {
     isReadyToCheckout() {
       return !this.height || !this.breast || !this.waist || !this.hips || !this.shoulders;
-    },
+    }
   },
 };
 </script>
