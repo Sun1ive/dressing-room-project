@@ -1,7 +1,5 @@
 <template>
   <v-container fluid>
-
-    
     <v-layout class="pt-5" justify-center align-center>
       <v-flex xs10 sm8 lg6>
         <v-form
@@ -160,6 +158,7 @@
           <v-btn
             color="primary"
             type="submit"
+            :disabled="isFilled"
           >Submit</v-btn>
         </v-form>
       </v-flex>
@@ -236,7 +235,7 @@ export default {
         this.error = err.response.data.error.message;
         throw new Error('Something bad happened', err);
       }
-    }
+    },
   },
   computed: {
     isError() {
@@ -245,9 +244,21 @@ export default {
     isOk() {
       return this.success;
     },
+    isFilled() {
+      return (
+        !this.item.type &&
+        !this.item.title &&
+        !this.item.src &&
+        !this.item.link &&
+        !this.item.brand &&
+        !this.item.price &&
+        !this.item.color &&
+        !this.item.length
+      );
+    },
     itemType() {
       return this.item.type;
-    }
+    },
   },
 };
 </script>

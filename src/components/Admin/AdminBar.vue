@@ -12,7 +12,7 @@
             <v-toolbar-side-icon
               @click="miniVariant = !miniVariant"
             ></v-toolbar-side-icon>
-            <v-toolbar-title v-if="!miniVariant">Menu</v-toolbar-title>
+            <v-toolbar-title v-if="!miniVariant">Admin menu</v-toolbar-title>
           </v-toolbar>
           <v-list>
             <v-list-tile 
