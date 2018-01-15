@@ -39,11 +39,6 @@ export default {
     ...mapGetters({
       items: 'items',
     }),
-    errorMessage() {
-      if (this.items.length < 1) {
-        return 'К сожалению по заданным Вами параметрам, у нас пока-что нет подходящего товара';
-      }
-    },
   },
 };
 </script>

@@ -11,7 +11,6 @@ export default {
           commit('setItems', data);
           resolve();
         } catch (error) {
-          // reject(Error('Its failed'));
           throw new Error(`Could not fetch data ${error.response.data}`);
         }
       }
@@ -27,8 +26,6 @@ export default {
     });
   },
   compareSingle({ commit, dispatch, state }, payload) {
-    // commit('setErrorMessage', '');
-    // commit('setErrorState', false);
     return new Promise(resolve => {
       async function getItem() {
         try {
@@ -36,18 +33,18 @@ export default {
             link: payload,
             params: state.userParams,
           });
-          // if (state.isErrorState) {
-          //   commit('setErrorState', false);
-          // }
           commit('setItems', response.data);
           resolve();
         } catch (error) {
-          // commit('setErrorMessage', error.response.data.message);
           dispatch('sendMail', {
             mailType: '404',
             link: payload,
           });
-          // commit('setErrorState', true);
+          commit('setError', {
+            state: true,
+            status: 404,
+            message: 'Not found',
+          });
           throw new Error(error);
         }
       }
@@ -55,7 +52,6 @@ export default {
     });
   },
   compareProductsWithType({ commit, state }) {
-    // commit('setLoading', true);
     return new Promise(resolve => {
       async function compareAll() {
         try {
@@ -63,14 +59,9 @@ export default {
             type: state.itemType,
             params: state.userParams,
           });
-          // if (state.isErrorState) {
-          //   commit('setErrorState', false);
-          // }
           commit('setItems', response.data);
           resolve();
         } catch (error) {
-          // commit('setErrorMessage', error.response.data.message);
-          // commit('setErrorState', true);
           throw new Error(error);
         }
       }
@@ -87,16 +78,9 @@ export default {
           });
           const { token } = response.data;
           SessionStorage.set('AuthToken', token);
-
-          // if (state.error) {
-          //   commit('setErrorState', false);
-          //   commit('setErrorMessage', '');
-          // }
           commit('setUserLoginState', true);
           resolve();
         } catch (error) {
-          // commit('setErrorMessage', error.response.data.message);
-          // commit('setErrorState', true);
           throw new Error(error);
         }
       }

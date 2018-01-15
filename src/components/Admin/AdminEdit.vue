@@ -1,5 +1,14 @@
 <template>
   <v-container fluid>
+    <transition 
+      mode="out-in"
+      enter-active-class="animated fadeIn"
+      leave-active-class="animated fadeOut"
+    >
+      <app-success v-if="isSuccess">
+        Successful!
+      </app-success>
+    </transition>
     <v-layout justify-center align-center>
       <v-flex xs10 sm6 lg4 class="text-xs-center">
         <h1>Форма редактирования вещи</h1>
@@ -8,19 +17,37 @@
     <v-layout justify-center align-center>
       <v-flex xs12 sm10 md9 lg7>
         <v-form class="form" @submit.prevent="onEdit">
-
           <v-select
             :items="typeList"
             v-model="item.type"
-            label="select"
+            label="select type"
             single-line
             bottom
             required
+            :rules="[() => !!item.type || 'This field is required']"
           ></v-select>
 
-          <v-text-field required v-model.lazy="item.title" label="title" />
-          <v-text-field required v-model.lazy="item.src" label="src" />
-          <v-text-field required v-model.lazy="item.link" label="link" />
+          <v-text-field 
+            v-model.lazy="item.title"
+            label="title"
+            required
+            :rules="[() => !!item.title || 'This field is required']"
+          />
+
+          <v-text-field 
+            required
+            v-model.lazy="item.src"
+            label="src"
+            :rules="[() => !!item.src || 'This field is required']"
+          />
+
+          <v-text-field 
+            required
+            v-model.lazy="item.link"
+            label="link"
+            :rules="[() => !!item.link || 'This field is required']"
+            />
+
           <v-select
             :items="brandList"
             v-model="item.brand"
@@ -28,10 +55,15 @@
             single-line
             bottom
             required
+            :rules="[() => !!item.brand || 'This field is required']"
           ></v-select>
-          <v-text-field required v-model.number.lazy="item.price" label="price" />
 
-          <!-- <v-text-field required v-model.lazy="item.color" label="color" /> -->
+          <v-text-field required
+            v-model.number.lazy="item.price"
+            label="price грн"
+            :rules="[() => !!item.price || 'This field is required']"
+          />
+
           <v-select
             :items="colors"
             v-model="item.color"
@@ -39,7 +71,15 @@
             single-line
             bottom
             required
+            :rules="[() => !!item.color || 'This field is required']"
           ></v-select>
+          
+          <v-text-field 
+            required
+            v-model.number.lazy="item.length"
+            label="item length см"
+            :rules="[() => !!item.length || 'This field is required']"
+            />
 
           <app-create>
             <v-card-text slot="size">XS</v-card-text>
@@ -85,14 +125,16 @@
 
 <script>
 import createContainer from '../Templates/CreateContainer';
-import { withHeaders } from '../../services/api';
-import { SessionStorage } from '../../utils/storage';
-
+import { withHeaders } from '@/services/api';
+import { SessionStorage } from '@/utils/storage';
 import { colors, typeList, brandList } from '@/utils/data';
+
+import AlertSuccess from '../Shared/Alerts/AlertSuccessful';
 
 export default {
   components: {
     'app-create': createContainer,
+    'app-success': AlertSuccess,
   },
   props: {
     id: {
@@ -102,6 +144,7 @@ export default {
   },
   data() {
     return {
+      isSuccess: false,
       brandList,
       typeList,
       colors,
@@ -121,11 +164,14 @@ export default {
         if (this.item.sizes.length < 1) {
           this.item.sizes.push(this.xs, this.s, this.m, this.l);
         }
-
         await withHeaders(token).patch(`/products/${this.id}`, this.item);
         await this.$store.dispatch('getItems');
+        this.isSuccess = true
+        setTimeout(() => {
+          this.isSuccess = false
+        }, 1000);
 
-        this.$router.push('/admin/view');
+        // this.$router.push('/admin/view');
       } catch (error) {
         throw new Error('Something bad happened ', error);
       }
@@ -133,7 +179,6 @@ export default {
   },
   created() {
     const item = this.$store.getters.items.filter(x => x._id === this.id);
-
     item.forEach(x => {
       x.sizes.forEach(size => {
         this.item = {
@@ -145,6 +190,7 @@ export default {
           brand: x.brand,
           price: x.price,
           color: x.color,
+          length: x.itemLength,
         };
         switch (size.size) {
           case 'XS':

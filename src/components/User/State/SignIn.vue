@@ -2,7 +2,7 @@
   <v-container fluid>
     <v-layout justify-center align-center>
       <v-flex xs12 sm6 lg4>
-        <transition enter-active-class="animated tada">
+<!--         <transition enter-active-class="animated tada">
           <v-alert
             v-if="isErrorMessage.length > 0"
             color="error" 
@@ -11,7 +11,7 @@
           >
             {{ isErrorMessage }}
           </v-alert>
-        </transition>
+        </transition> -->
       </v-flex>
     </v-layout>
     <v-layout justify-center align-center>

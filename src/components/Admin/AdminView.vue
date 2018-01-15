@@ -5,7 +5,6 @@
         <h2>Поиск по названию товара</h2>
       </v-flex>
     </v-layout>
-    
     <v-layout justify-center>
       <v-flex xs10>
         <v-text-field
@@ -49,7 +48,6 @@
               </v-btn>
             </v-flex>
           </v-layout>
-            
         </v-card>
       </v-flex>
     </v-layout>

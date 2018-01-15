@@ -10,7 +10,7 @@ module.exports = {
   env: {
     browser: true,
   },
-  extends: ['airbnb-base', 'prettier', 'plugin:vue/recommended'],
+  extends: ['airbnb-base', 'prettier', 'plugin:vue/essential'],
   // required to lint *.vue files
   plugins: ['html', 'vue', 'import'],
   // check if imports actually resolve

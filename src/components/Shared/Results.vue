@@ -3,12 +3,12 @@
     <v-flex xs12 sm6 md4 lg3 v-for="item in filteredItems" :key="item._id">
       <v-card>
         <v-card-media height="600" :src="item.src" />
-        <v-card-text>
+        <v-card-text id="text">
           <div><strong>{{ item.title }}</strong></div>
-          <div>Коэффициент совместимости: <strong>{{ item.percent }} %</strong></div>
-          <div>Ваш предпочитаемый размер: <strong>{{ item.size }}</strong></div>
-          <div>Длинна: <strong>{{ item.difference }}</strong></div>
-          <h1><b>{{ item.price }} GRN</b></h1>
+          <div>Коэффициент: <strong>{{ item.percent }} %</strong></div>
+          <div>Ваш размер: <strong>{{ item.size }}</strong></div>
+          <div >Длинна: <strong>{{ item.difference }}</strong></div>
+          <div>Цена: <strong>{{ item.price }} грн</strong></div>
         </v-card-text>
         <v-card-actions>
           <v-btn :href="`${item.link}`" target="_blank">Купить</v-btn>
@@ -24,6 +24,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   props: {
     filteredItems: {
@@ -32,13 +34,16 @@ export default {
     },
   },
   computed: {
-    items() {
-      return this.$store.getters.items;
-    },
+    ...mapGetters(['items']),
+    itemType() {
+      return this.items.map(item => item.type);
+    }
   },
 };
 </script>
 
-<style scoped>
+<style scoped lang="stylus">
+#text
+  min-height 180px
 
 </style>

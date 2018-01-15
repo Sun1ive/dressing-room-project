@@ -4,7 +4,7 @@
       <v-flex xs10 class="text-xs-center">
         <v-card>
           <slot name="size"></slot>
-          <v-layout justify-center>
+          <v-layout justify-center row>
             <v-flex xs2 class="mx-2">
               <slot name="shoulders"></slot>
             </v-flex>

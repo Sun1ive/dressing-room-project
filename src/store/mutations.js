@@ -1,10 +1,4 @@
 export default {
-  setErrorState(state, payload) {
-    state.isErrorState = payload;
-  },
-  setErrorMessage(state, payload) {
-    state.isErrorMessage = payload;
-  },
   setLoading(state, payload) {
     state.isLoading = payload;
   },
@@ -19,6 +13,9 @@ export default {
   },
   setSelectedItem(state, payload) {
     state.selectedItem = payload;
+  },
+  setError(state, payload) {
+    state.isError = payload;
   },
   setUserParams(state, payload) {
     switch (payload.name) {
