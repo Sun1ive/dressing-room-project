@@ -126,6 +126,8 @@ export default {
       settings = {
         name: payload.name,
         phone: payload.phone,
+        email: payload.email,
+        messenger: payload.messenger
       };
       sendMail();
     }
