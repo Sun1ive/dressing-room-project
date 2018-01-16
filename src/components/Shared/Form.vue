@@ -28,23 +28,10 @@
         </v-radio-group>
 
         <v-text-field
-          type="email"
           label="Email"
           v-if="userSelected === 'Email'"
           v-model="user.email"
           :rules="[() => !!user.email || 'Это поле обязательно!']" 
-        />
-        <v-text-field 
-          label="Messenger"
-          v-if="userSelected === 'Messenger'"
-          v-model="user.messenger"
-          :rules="[() => !!user.messenger || 'Это поле обязательно!']" 
-        />
-        <v-text-field 
-          label="Phone"
-          v-if="userSelected === 'Phone'"
-          v-model.number="user.phone"
-          :rules="[() => !!user.phone || 'Это поле обязательно!']" 
         />
 
         <v-btn 
