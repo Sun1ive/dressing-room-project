@@ -7,6 +7,11 @@ export default async (to, from, next) => {
     next(false);
     /* eslint-disable no-alert */
     alert('Укажите параметры!');
+  } else if (store.getters.isSelectedItem) {
+    store.commit('setLoading', true);
+    await store.dispatch('compareSingle', store.getters.isSelectedItem);
+    next();
+    store.commit('setLoading', false);
   } else {
     store.commit('setLoading', true);
     setLocalData(

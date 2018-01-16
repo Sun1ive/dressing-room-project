@@ -17,6 +17,23 @@ export default {
       fetchData();
     });
   },
+  // getPartOfItems({ commit }) {
+  //   let page = 1;
+  //   async function fetch() {
+  //     try {
+  //       const response = await withOutAuth().post('/products/items', {
+  //         page,
+  //       });
+  //       page += 1;
+  //       /* eslint-disable no-console */
+  //       console.log(response);
+  //     } catch (error) {
+  //       /* eslint-disable no-console */
+  //       console.log(error);
+  //     }
+  //   };
+  //   fetch();
+  // },
   setUserParams({ commit }, payload) {
     Object.keys(payload).forEach(key => {
       commit('setUserParams', {

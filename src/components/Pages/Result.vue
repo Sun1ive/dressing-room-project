@@ -60,6 +60,11 @@
               Something bad happenned
             </app-error>
           </v-container>
+          <v-container>
+            <v-layout justify-center align-center>
+              <v-btn color="primary" @click="loadMore">sad</v-btn>
+            </v-layout>
+          </v-container>
         </v-flex>
       </v-layout>
     </v-container>
@@ -85,14 +90,12 @@ export default {
     };
   },
   computed: {
-    ...mapGetters([
-      'items',
-      'availableItemTypes',
-      'isLoading',
-    ]),
+    ...mapGetters(['items', 'availableItemTypes', 'isLoading']),
     itemsByColor() {
       if (this.selectedBrand) {
-        return uniq(this.items.filter(item => item.brand === this.selectedBrand).map(item => item.color));
+        return uniq(
+          this.items.filter(item => item.brand === this.selectedBrand).map(item => item.color),
+        );
       }
       return uniq(this.items.map(item => item.color));
     },
@@ -108,10 +111,10 @@ export default {
         return arr;
       }
       return this.items;
-      /*       if (this.selectedBrand) {
+      if (this.selectedBrand) {
         return this.items.filter(item => item.brand === this.selectedBrand);
       }
-      return this.items; */
+      return this.items;
     },
   },
   methods: {
@@ -142,6 +145,9 @@ export default {
       this.selectedColor = null;
       this.selectedType = null;
       this.selectedBrand = null;
+    },
+    loadMore() {
+      console.log(12345);
     },
   },
 };
