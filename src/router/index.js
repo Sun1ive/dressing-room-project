@@ -1,23 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
-import Home from '@/components/Pages/Home';
-import Insert from '@/components/Pages/Insert';
-import Result from '@/components/Pages/Result';
-import SignIn from '@/components/User/State/SignIn';
-import ErrorPage from '@/components/Pages/404';
-
-import Height from '@/components/User/Params/Height';
-import Shoulders from '@/components/User/Params/Shoulders';
-import Breast from '@/components/User/Params/Breast';
-import Waist from '@/components/User/Params/Waist';
-import Hips from '@/components/User/Params/Hips';
-
-import Admin from '@/components/Admin/Admin';
-import AdminCreate from '@/components/Admin/AdminCreate';
-import AdminView from '@/components/Admin/AdminView';
-import AdminEdit from '@/components/Admin/AdminEdit';
-
+import * as LazyLoad from './lazyLoad';
 import beforeAdmin from './adminGuard';
 import beforeResult from './resultGuard';
 
@@ -29,74 +13,74 @@ export default new Router({
     {
       path: '/',
       name: 'Home',
-      component: Home,
-    },
-    {
-      path: '/signin',
-      name: '',
-      component: SignIn,
+      component: LazyLoad.Home,
     },
     {
       path: '/insert',
-      name: '',
-      component: Insert,
+      name: 'Insert',
+      component: LazyLoad.Insert,
+    },
+    {
+      path: '/signin',
+      name: 'SignIn',
+      component: LazyLoad.SignIn,
     },
     {
       path: '/shoulders',
-      name: '',
-      component: Shoulders,
+      name: 'Shoulders',
+      component: LazyLoad.Shoulders,
     },
     {
       path: '/breast',
-      name: '',
-      component: Breast,
+      name: 'Breast',
+      component: LazyLoad.Breast,
     },
     {
       path: '/height',
-      name: '',
-      component: Height,
+      name: 'Height',
+      component: LazyLoad.Height,
     },
     {
       path: '/waist',
-      name: '',
-      component: Waist,
+      name: 'Waist',
+      component: LazyLoad.Waist,
     },
     {
       path: '/hips',
-      name: '',
-      component: Hips,
+      name: 'Hips',
+      component: LazyLoad.Hips,
     },
     {
       path: '/404',
-      name: '',
-      component: ErrorPage,
+      name: 'FourOFour',
+      component: LazyLoad.FourOFour,
     },
     {
       path: '/result',
-      name: '',
-      component: Result,
+      name: 'Result',
+      component: LazyLoad.Result,
       beforeEnter: beforeResult,
     },
     {
       path: '/admin',
-      name: '',
-      component: Admin,
+      name: 'Admin',
       beforeEnter: beforeAdmin,
+      component: LazyLoad.Admin,
       children: [
         {
           path: 'view',
-          name: '',
-          component: AdminView,
+          name: 'adminView',
+          component: LazyLoad.AdminView,
         },
         {
           path: 'create',
-          name: '',
-          component: AdminCreate,
+          name: 'adminCreate',
+          component: LazyLoad.AdminCreate,
         },
         {
           path: 'edit/:id',
-          name: '',
-          component: AdminEdit,
+          name: 'adminEdit',
+          component: LazyLoad.AdminEdit,
           props: true,
         },
       ],

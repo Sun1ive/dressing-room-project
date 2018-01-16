@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import 'babel-polyfill';
+import 'animate.css';
 import pWrapper from '@/components/Templates/ParamsWrapper';
 import preLoader from '@/components/Shared/Loader';
 import Modal from '@/components/Shared/Modal';

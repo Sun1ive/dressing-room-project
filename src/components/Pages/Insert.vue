@@ -10,7 +10,7 @@
             <h1>Вставьте ссылку на товар</h1>
             <v-text-field
               label="Вставьте ссылку"
-              v-model.lazy="link"
+              v-model.lazy.trim="link"
             ></v-text-field>
             <v-btn
               color="primary"
@@ -66,14 +66,14 @@ export default {
         if (!LocalStorage.get('DressingUserData')) {
           setLocalData(this.height, this.shoulders, this.breast, this.waist, this.hips);
         }
-        this.setSelectedItem(this.link.trim());
+        this.setSelectedItem(this.link);
         await this.compareSingle(this.isSelectedItem);
         this.setLoading(false)
         this.$router.push('/result');
       }
     },
     accept() {
-      this.setSelectedItem(this.link.trim());
+      this.setSelectedItem(this.link);
       this.$router.push('/');
     },
     cancel() {
