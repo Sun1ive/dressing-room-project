@@ -2,10 +2,28 @@
     <v-flex class="text-xs-center">
       <v-form @submit.prevent="sendMail" class="myForm">
         <h1>Hello world</h1>
-        <v-text-field v-model.lazy="user.name" label="Имя" />
-        <v-text-field v-model.number.lazy="user.phone" label="Телефон" />
-        <v-btn color="primary" type="submit">Отправить</v-btn>
-        <v-btn color="red" dark @click="$emit('closeForm')">Закрыть</v-btn>
+        <v-text-field 
+        v-model.lazy="user.name" 
+        label="Имя" 
+        required
+        :rules="[() => !!user.name || 'This Field is required']"
+        />
+        <v-text-field 
+        v-model.number.lazy="user.phone" 
+        label="Телефон" 
+        required
+        :rules="[() => !!user.phone || 'This field is required']"
+        />
+        <v-btn 
+        color="primary" 
+        type="submit"
+        :disabled="isFilled"
+        >Отправить</v-btn>
+        <v-btn 
+        color="red" 
+        dark 
+        @click="$emit('closeForm')"
+        >Закрыть</v-btn>
       </v-form>
     </v-flex>
 
@@ -34,6 +52,11 @@ export default {
       this.$router.push('/');
     },
   },
+  computed: {
+    isFilled() {
+      return this.user.name && this.user.phone
+    }
+  }
 };
 </script>
 

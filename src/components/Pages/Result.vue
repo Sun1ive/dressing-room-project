@@ -24,7 +24,7 @@
                     </v-flex>
                   </v-list> 
                   <v-divider />
-                  <!-- <v-list two-line subheader>
+                  <v-list two-line subheader>
                     <v-flex xs10 offset-xs1>
                       <v-select
                         :items="avaliableBrands"
@@ -33,7 +33,7 @@
                       />
                     </v-flex>
                   </v-list> 
-                  <v-divider /> -->
+                  <v-divider />
                   <v-list two-line subheader>
                     <v-subheader>Цвета</v-subheader>
                     <v-list-tile avatar v-for="color in itemsByColor" :key="color">
@@ -86,7 +86,7 @@ export default {
     return {
       selectedColor: null,
       selectedType: null,
-      // selectedBrand: null,
+      selectedBrand: null,
     };
   },
   computed: {
@@ -110,7 +110,6 @@ export default {
         }
         return arr;
       }
-      return this.items;
       if (this.selectedBrand) {
         return this.items.filter(item => item.brand === this.selectedBrand);
       }
