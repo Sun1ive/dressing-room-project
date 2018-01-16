@@ -104,11 +104,10 @@ export default {
     },
     filteredItems() {
       if (this.selectedColor) {
-        let arr = this.items.filter(item => item.color === this.selectedColor);
         if (this.selectedBrand) {
           return arr.filter(item => item.brand === this.selectedBrand);
         }
-        return arr;
+        return this.items.filter(item => item.color === this.selectedColor);
       }
       if (this.selectedBrand) {
         return this.items.filter(item => item.brand === this.selectedBrand);
@@ -121,21 +120,25 @@ export default {
     ...mapActions(['compareProductsWithType']),
     async checkAll() {
       this.setLoading(true);
+
       this.reset();
       this.setSelectedItem(null);
       this.setItemType('Плечевые');
       await this.compareProductsWithType();
+
       setTimeout(() => {
         this.setLoading(false);
       }, 1000);
     },
     async findByType() {
       this.setLoading(true);
+
       this.setItemType(this.selectedType);
       if (this.selectedColor) {
         this.selectedColor = null;
       }
       await this.compareProductsWithType();
+
       setTimeout(() => {
         this.setLoading(false);
       }, 1000);
@@ -146,6 +149,7 @@ export default {
       this.selectedBrand = null;
     },
     loadMore() {
+      // ajax to fetch more data
       console.log(12345);
     },
   },

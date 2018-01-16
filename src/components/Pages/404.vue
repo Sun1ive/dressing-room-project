@@ -6,8 +6,16 @@
         <p>К сожалению по заданным Вами параметрам, у нас пока-что нет подходящего товара</p>
         <p>Хотите мы с Вам свяжемся, как только пополнится наш ассортимент?</p>
         <p> Для этого укажите пожалуйста свои данные:</p>
-        <v-btn @click="dialog = true">Да</v-btn>
-        <v-btn exact to="/">Нет, изменить параметры</v-btn>
+        <v-btn 
+          color="primary" 
+          dark @click="dialog = true"
+        >Да</v-btn>
+        <v-btn 
+          color="red" 
+          dark 
+          exact 
+          to="/"
+        >Нет, изменить параметры</v-btn>
       </v-flex>
     </v-layout>
     <v-layout>
@@ -20,7 +28,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import Form from '../Shared/Form';
+import Form from '@/components/User/Form/Form';
 
 export default {
   components: {
