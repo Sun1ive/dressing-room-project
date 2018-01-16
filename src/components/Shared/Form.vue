@@ -27,7 +27,8 @@
           />
         </v-radio-group>
 
-        <v-text-field 
+        <v-text-field
+          type="email"
           label="Email"
           v-if="userSelected === 'Email'"
           v-model="user.email"
@@ -93,13 +94,7 @@ export default {
   },
   computed: {
     isFilled() {
-      if (!this.user.phone) {
-        return !this.user.name && !this.user.phone;
-      } else if (!this.user.email) {
-        return !this.user.name && this.user.email;
-      } else {
-        return !this.user.name && this.user.messenger;
-      }
+      return !this.user.name;
     },
     userSelected() {
       return this.user.selected;
