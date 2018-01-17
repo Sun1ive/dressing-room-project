@@ -1,8 +1,8 @@
 <template>
   <v-container fluid>
-      <v-container fluid v-if="isLoading">
-        <app-loader />
-      </v-container>
+    <v-container fluid v-if="isLoading">
+      <app-loader />
+    </v-container>
     <v-container fluid v-if="!isLoading">
       <v-layout>
         <v-flex xs6 sm3 v-if="items.length > 1">
@@ -38,7 +38,7 @@
                     <v-subheader>Цвета</v-subheader>
                     <v-list-tile avatar v-for="color in itemsByColor" :key="color">
                       <v-radio-group v-model="selectedColor">
-                        <v-radio :label="color" :value="color"></v-radio>
+                        <v-radio :label="color" :value="color" />
                       </v-radio-group>
                     </v-list-tile>
                     <v-divider />
@@ -53,7 +53,7 @@
           <v-container fluid grid-list-xl>
             <app-results 
               @checkAll="checkAll" 
-              :filteredItems="filteredItems"
+              :filtered="filteredItems"
               v-if="filteredItems.length > 0"
             />
             <app-error v-else>
@@ -104,14 +104,14 @@ export default {
     },
     filteredItems() {
       if (this.selectedColor) {
-        if (this.selectedBrand) {
-          return arr.filter(item => item.brand === this.selectedBrand);
-        }
+        // if (this.selectedBrand) {
+        //   return arr.filter(item => item.brand === this.selectedBrand);
+        // }
         return this.items.filter(item => item.color === this.selectedColor);
       }
-      if (this.selectedBrand) {
-        return this.items.filter(item => item.brand === this.selectedBrand);
-      }
+      // if (this.selectedBrand) {
+      //   return this.items.filter(item => item.brand === this.selectedBrand);
+      // }
       return this.items;
     },
   },
@@ -150,6 +150,7 @@ export default {
     },
     loadMore() {
       // ajax to fetch more data
+      /* eslint-disable no-console */
       console.log(12345);
     },
   },

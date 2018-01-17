@@ -1,7 +1,7 @@
 <template>
   <transition enter-active-class="animated fadeIn" leave-active-class="fadeOut">
     <v-layout row wrap justify-center>
-      <v-flex xs12 sm6 md4 lg3 v-for="item in filteredItems" :key="item._id">
+      <v-flex xs12 sm6 md4 lg3 v-for="item in filtered" :key="item._id">
         <v-card>
           <v-card-media height="600" :src="item.src" />
           <v-card-text id="text">
@@ -30,7 +30,7 @@ import { mapGetters } from 'vuex';
 
 export default {
   props: {
-    filteredItems: {
+    filtered: {
       type: Array,
       required: true,
     },

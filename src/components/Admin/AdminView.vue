@@ -32,9 +32,9 @@
             </v-flex>
             <v-flex>
               <v-btn
-              color="primary"
-              fab
-              :to="`/admin/edit/${item._id}`"
+                color="primary"
+                fab
+                :to="`/admin/edit/${item._id}`"
               >
                 <v-icon>edit</v-icon>
               </v-btn>
@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import { withHeaders } from '../../services/api';
+import { withHeaders } from '@/services/api';
 import { SessionStorage } from '@/utils/storage';
 
 export default {
@@ -63,6 +63,13 @@ export default {
     return {
       query: '',
     };
+  },
+  computed: {
+    searchQuery() {
+      return this.$store.getters.items.filter(item =>
+        item.title.toLowerCase().match(this.query.toLowerCase()),
+      );
+    },
   },
   methods: {
     async deleteItem(id) {
@@ -75,13 +82,6 @@ export default {
           throw new Error(`Something wrong ${error.response}`);
         }
       }
-    },
-  },
-  computed: {
-    searchQuery() {
-      return this.$store.getters.items.filter(item =>
-        item.title.toLowerCase().match(this.query.toLowerCase()),
-      );
     },
   },
 };

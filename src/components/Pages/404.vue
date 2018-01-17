@@ -20,7 +20,7 @@
     </v-layout>
     <v-layout>
       <v-dialog v-model="dialog" max-width="500px">
-        <app-form @closeForm="closeForm"></app-form>
+        <app-form @closeForm="closeForm" />
       </v-dialog>
     </v-layout>
   </v-container>
@@ -37,17 +37,17 @@ export default {
   data() {
     return {
       dialog: false,
-    }
-  },
-  methods: {
-    closeForm() {
-      this.dialog = false;
-    }
+    };
   },
   computed: {
     ...mapGetters({
       items: 'items',
     }),
+  },
+  methods: {
+    closeForm() {
+      this.dialog = false;
+    },
   },
 };
 </script>
