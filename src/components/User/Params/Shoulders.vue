@@ -6,8 +6,12 @@
           <v-card-text>Плечи {{ shoulders }} см</v-card-text>
           <v-card-text >Размер: {{ getShouldersSize }}</v-card-text>
           <v-card-text>
-            <v-slider :min="34" thumb-label :max="45" v-model="shoulders"
-            ></v-slider>
+            <v-slider 
+              :min="34" 
+              thumb-label 
+              :max="45" 
+              v-model="shoulders"
+            />
             <v-btn @click="onSave">Сохранить</v-btn>
           </v-card-text>
         </v-card>
@@ -23,15 +27,6 @@ export default {
     return {
       shoulders: null,
     };
-  },
-  methods: {
-    onSave() {
-      this.$store.commit('setUserParams', {
-        name: 'Shoulders',
-        value: this.shoulders,
-      });
-      this.$router.push('/');
-    },
   },
   computed: {
     getShouldersSize() {
@@ -65,6 +60,15 @@ export default {
     if (this.$store.getters.userShoulders) {
       this.shoulders = this.$store.getters.userShoulders;
     }
+  },
+  methods: {
+    onSave() {
+      this.$store.commit('setUserParams', {
+        name: 'Shoulders',
+        value: this.shoulders,
+      });
+      this.$router.push('/');
+    },
   },
 };
 </script>

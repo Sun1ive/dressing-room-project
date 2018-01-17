@@ -11,7 +11,7 @@
               thumb-label
               :max="97"
               v-model="breast"
-            ></v-slider>
+            />
             <v-btn @click="onSave">Сохранить</v-btn>
           </v-card-text>
         </v-card>
@@ -26,15 +26,6 @@ export default {
     return {
       breast: null,
     };
-  },
-  methods: {
-    onSave() {
-      this.$store.commit('setUserParams', {
-        name: 'Breast',
-        value: this.breast,
-      });
-      this.$router.push('/');
-    },
   },
   computed: {
     getBreastSize() {
@@ -67,6 +58,15 @@ export default {
     if (this.$store.getters.userBreast) {
       this.breast = this.$store.getters.userBreast;
     }
+  },
+  methods: {
+    onSave() {
+      this.$store.commit('setUserParams', {
+        name: 'Breast',
+        value: this.breast,
+      });
+      this.$router.push('/');
+    },
   },
 };
 </script>

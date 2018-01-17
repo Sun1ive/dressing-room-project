@@ -6,8 +6,12 @@
           <v-card-text>Охват талии {{ waist }} см</v-card-text>
           <v-card-text>Размер: {{ getWaistSize }}</v-card-text>
           <v-card-text>
-            <v-slider :min="63" thumb-label :max="77" v-model="waist"
-            ></v-slider>
+            <v-slider 
+              :min="63" 
+              thumb-label 
+              :max="77" 
+              v-model="waist"
+            />
             <v-btn @click="onSave">Сохранить</v-btn>
           </v-card-text>
         </v-card>
@@ -23,15 +27,6 @@ export default {
     return {
       waist: null,
     };
-  },
-  methods: {
-    onSave() {
-      this.$store.commit('setUserParams', {
-        name: 'Waist',
-        value: this.waist,
-      });
-      this.$router.push('/');
-    },
   },
   computed: {
     getWaistSize() {
@@ -65,6 +60,15 @@ export default {
     if (this.$store.getters.userWaist) {
       this.waist = this.$store.getters.userWaist;
     }
+  },
+  methods: {
+    onSave() {
+      this.$store.commit('setUserParams', {
+        name: 'Waist',
+        value: this.waist,
+      });
+      this.$router.push('/');
+    },
   },
 };
 </script>

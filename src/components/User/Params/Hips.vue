@@ -6,8 +6,12 @@
           <v-card-text>Охват бедер {{ hips }} см</v-card-text>
           <v-card-text>Размер: {{ getHipsSize }}</v-card-text>
           <v-card-text>
-            <v-slider :min="90" thumb-label :max="105" v-model="hips"
-            ></v-slider>
+            <v-slider
+              :min="90" 
+              thumb-label 
+              :max="105" 
+              v-model="hips"
+            />
             <v-btn @click="onSave">Сохранить</v-btn>
           </v-card-text>
         </v-card>
@@ -23,15 +27,6 @@ export default {
     return {
       hips: null,
     };
-  },
-  methods: {
-    onSave() {
-      this.$store.commit('setUserParams', {
-        name: 'Hips',
-        value: this.hips,
-      });
-      this.$router.push('/');
-    },
   },
   computed: {
     getHipsSize() {
@@ -60,11 +55,21 @@ export default {
       return params.size;
     },
   },
-  mounted() {
+  created() {
     if (this.$store.getters.userHips) {
       this.hips = this.$store.getters.userHips;
     }
   },
+  methods: {
+    onSave() {
+      this.$store.commit('setUserParams', {
+        name: 'Hips',
+        value: this.hips,
+      });
+      this.$router.push('/');
+    },
+  },
+  
 };
 </script>
 

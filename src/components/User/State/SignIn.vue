@@ -40,7 +40,7 @@ import AlertError from '@/components/Shared/Alerts/AlertError';
 
 export default {
   components: {
-    'app-error': AlertError
+    'app-error': AlertError,
   },
   data() {
     return {
@@ -49,6 +49,12 @@ export default {
         password: null,
       },
     };
+  },
+  computed: {
+    ...mapGetters({
+      isError: 'isError',
+      isUserLoginState: 'userLoginState',
+    }),
   },
   methods: {
     async onLogIn() {
@@ -60,12 +66,5 @@ export default {
       }
     },
   },
-  computed: {
-    ...mapGetters({
-      isError: 'isError',
-      isUserLoginState: 'userLoginState',
-    }),
-  },
 };
 </script>
-
