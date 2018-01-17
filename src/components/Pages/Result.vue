@@ -92,13 +92,13 @@ export default {
   },
   methods: {
     ...mapMutations(['setSelectedItem', 'setItemType', 'setLoading']),
-    ...mapActions(['compareProductsWithType', 'getItemsByPartsAndType']),
+    ...mapActions(['getItemsByPartsAndType', 'getItemsByPartsAndType']),
     async checkAll() {
       this.setLoading(true);
       this.reset();
       this.setSelectedItem(null);
       this.setItemType('Плечевые');
-      await this.compareProductsWithType();
+      await this.getItemsByPartsAndType();
       this.setLoading(false);
     },
     async findByType() {
@@ -107,7 +107,7 @@ export default {
       if (this.selectedColor) {
         this.selectedColor = null;
       }
-      await this.compareProductsWithType();
+      await this.getItemsByPartsAndType();
       this.setLoading(false);
     },
     reset() {
