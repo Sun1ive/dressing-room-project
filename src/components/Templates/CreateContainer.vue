@@ -18,23 +18,19 @@
           >
             <v-flex 
             xs2 class="mx-2">
-              <slot 
-              name="shoulders"/>
+              <slot name="shoulders" />
             </v-flex>
             <v-flex 
             xs2 class="mx-2">
-              <slot 
-              name="breast"/>
+              <slot name="breast" />
             </v-flex>
             <v-flex 
             xs2 class="mx-2">
-              <slot 
-              name="waist"/>
+              <slot name="waist" />
             </v-flex>
             <v-flex 
             xs2 class="mx-2">
-              <slot 
-              name="hips"/>
+              <slot name="hips" />
             </v-flex>
           </v-layout>
         </v-card>
@@ -49,7 +45,7 @@
               <slot name="bottom-waist"/>
             </v-flex>
             <v-flex xs5 class="mx-2">
-              <slot name="bottom-hips"/>>
+              <slot name="bottom-hips"/>
             </v-flex>
           </v-layout>
         </v-card>

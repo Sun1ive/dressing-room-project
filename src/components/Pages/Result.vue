@@ -25,16 +25,6 @@
                   </v-list> 
                   <v-divider />
                   <v-list two-line subheader>
-                    <v-flex xs10 offset-xs1>
-                      <v-select
-                        :items="avaliableBrands"
-                        v-model="selectedBrand"
-                        label="Бренд"
-                      />
-                    </v-flex>
-                  </v-list> 
-                  <v-divider />
-                  <v-list two-line subheader>
                     <v-subheader>Цвета</v-subheader>
                     <v-list-tile avatar v-for="color in itemsByColor" :key="color">
                       <v-radio-group v-model="selectedColor">
@@ -86,32 +76,17 @@ export default {
     return {
       selectedColor: null,
       selectedType: null,
-      selectedBrand: null,
     };
   },
   computed: {
     ...mapGetters(['items', 'availableItemTypes', 'isLoading']),
     itemsByColor() {
-      if (this.selectedBrand) {
-        return uniq(
-          this.items.filter(item => item.brand === this.selectedBrand).map(item => item.color),
-        );
-      }
       return uniq(this.items.map(item => item.color));
-    },
-    avaliableBrands() {
-      return this.items.map(item => item.brand);
     },
     filteredItems() {
       if (this.selectedColor) {
-        // if (this.selectedBrand) {
-        //   return arr.filter(item => item.brand === this.selectedBrand);
-        // }
         return this.items.filter(item => item.color === this.selectedColor);
       }
-      // if (this.selectedBrand) {
-      //   return this.items.filter(item => item.brand === this.selectedBrand);
-      // }
       return this.items;
     },
   },
@@ -120,33 +95,24 @@ export default {
     ...mapActions(['compareProductsWithType']),
     async checkAll() {
       this.setLoading(true);
-
       this.reset();
       this.setSelectedItem(null);
       this.setItemType('Плечевые');
       await this.compareProductsWithType();
-
-      setTimeout(() => {
-        this.setLoading(false);
-      }, 1000);
+      this.setLoading(false);
     },
     async findByType() {
       this.setLoading(true);
-
       this.setItemType(this.selectedType);
       if (this.selectedColor) {
         this.selectedColor = null;
       }
       await this.compareProductsWithType();
-
-      setTimeout(() => {
-        this.setLoading(false);
-      }, 1000);
+      this.setLoading(false);
     },
     reset() {
       this.selectedColor = null;
       this.selectedType = null;
-      this.selectedBrand = null;
     },
     loadMore() {
       // ajax to fetch more data
