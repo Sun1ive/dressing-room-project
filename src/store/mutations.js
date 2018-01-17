@@ -2,6 +2,9 @@ export default {
   setPage: state => {
     state.page += 1;
   },
+  resetPage: state => {
+    state.page = 1;
+  },
   setLoading(state, payload) {
     state.isLoading = payload;
   },

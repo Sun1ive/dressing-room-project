@@ -115,7 +115,7 @@ export default {
       this.selectedType = null;
     },
     loadMore() {
-      this.getItemsByPartsAndType(this.page);
+      this.getItemsByPartsAndType();
     },
   },
 };

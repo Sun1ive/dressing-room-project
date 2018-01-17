@@ -151,6 +151,7 @@ export default {
         this.$router.push('/result');
       } else {
         // await this.getItemsByPartsAndType();
+        this.resetPage()
         await this.getItemsByPartsAndType();
         this.setLoading(false);
         this.$router.push('/result');
