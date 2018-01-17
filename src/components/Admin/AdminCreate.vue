@@ -29,7 +29,7 @@
             bottom
             required
             :rules="[() => !!item.type || 'This field is required']"
-          ></v-select>
+          />
 
           <v-text-field 
             v-model.lazy="item.title"
@@ -50,7 +50,7 @@
             v-model.lazy="item.link"
             label="link"
             :rules="[() => !!item.link || 'This field is required']"
-            />
+          />
 
           <v-select
             :items="brandList"
@@ -60,9 +60,10 @@
             bottom
             required
             :rules="[() => !!item.brand || 'This field is required']"
-          ></v-select>
+          />
 
-          <v-text-field required
+          <v-text-field 
+            required
             v-model.number.lazy="item.price"
             label="price грн"
             :rules="[() => !!item.price || 'This field is required']"
@@ -76,14 +77,14 @@
             bottom
             required
             :rules="[() => !!item.color || 'This field is required']"
-          ></v-select>
+          />
           
           <v-text-field 
             required
             v-model.number.lazy="item.length"
             label="item length см"
             :rules="[() => !!item.length || 'This field is required']"
-            />
+          />
 
           <app-create>
             <v-card-text slot="size">XS</v-card-text>
@@ -100,7 +101,7 @@
             <v-text-field 
               v-model.number.lazy="xs.waist"
               label="Талия"
-               slot="waist"
+              slot="waist"
             />
             <v-text-field 
               v-model.number.lazy="xs.hips"
@@ -112,60 +113,60 @@
           <app-create>
             <v-card-text slot="size">S</v-card-text>
             <v-text-field 
-            v-model.number.lazy="s.shoulders" 
-            label="Плечи" 
-            slot="shoulders" />
+              v-model.number.lazy="s.shoulders" 
+              label="Плечи" 
+              slot="shoulders" />
             <v-text-field 
-            v-model.number.lazy="s.breast" 
-            label="Грудь" 
-            slot="breast" />
+              v-model.number.lazy="s.breast" 
+              label="Грудь" 
+              slot="breast" />
             <v-text-field 
-            v-model.number.lazy="s.waist" 
-            label="Талия" 
-            slot="waist" />
+              v-model.number.lazy="s.waist" 
+              label="Талия" 
+              slot="waist" />
             <v-text-field 
-            v-model.number.lazy="s.hips"
-            label="Бедра" 
-            slot="hips" />
+              v-model.number.lazy="s.hips"
+              label="Бедра" 
+              slot="hips" />
           </app-create>
 
           <app-create>
             <v-card-text slot="size">M</v-card-text>
             <v-text-field 
-            v-model.number.lazy="m.shoulders" 
-            label="Плечи" 
-            slot="shoulders" />
+              v-model.number.lazy="m.shoulders" 
+              label="Плечи" 
+              slot="shoulders" />
             <v-text-field 
-            v-model.number.lazy="m.breast" 
-            label="Грудь" 
-            slot="breast" />
+              v-model.number.lazy="m.breast" 
+              label="Грудь" 
+              slot="breast" />
             <v-text-field 
-            v-model.number.lazy="m.waist" 
-            label="Талия" 
-            slot="waist" />
+              v-model.number.lazy="m.waist" 
+              label="Талия" 
+              slot="waist" />
             <v-text-field 
-            v-model.number.lazy="m.hips" 
-            label="Бедра" 
-            slot="hips" />
+              v-model.number.lazy="m.hips" 
+              label="Бедра" 
+              slot="hips" />
           </app-create>
 
           <app-create>
             <v-card-text slot="size">L</v-card-text>
             <v-text-field 
-            v-model.number.lazy="l.shoulders" 
-            label="Плечи" slot="shoulders" />
+              v-model.number.lazy="l.shoulders" 
+              label="Плечи" slot="shoulders" />
             <v-text-field 
-            v-model.number.lazy="l.breast" 
-            label="Грудь" 
-            slot="breast" />
+              v-model.number.lazy="l.breast" 
+              label="Грудь" 
+              slot="breast" />
             <v-text-field 
-            v-model.number.lazy="l.waist" 
-            label="Талия" 
-            slot="waist" />
+              v-model.number.lazy="l.waist" 
+              label="Талия" 
+              slot="waist" />
             <v-text-field 
-            v-model.number.lazy="l.hips" 
-            label="Бедра" 
-            slot="hips" />
+              v-model.number.lazy="l.hips" 
+              label="Бедра" 
+              slot="hips" />
           </app-create>
 
           <v-btn
@@ -183,9 +184,9 @@
 <script>
 import { withHeaders } from '@/services/api';
 import { SessionStorage } from '@/utils/storage';
+import { colors, typeList, brandList } from '@/utils/data';
 
 import createContainer from '../Templates/CreateContainer';
-import { colors, typeList, brandList } from '@/utils/data';
 import AlertSuccess from '../Shared/Alerts/AlertSuccessful';
 
 export default {
@@ -225,6 +226,21 @@ export default {
       },
     };
   },
+  computed: {
+    isError() {
+      return this.error;
+    },
+    isOk() {
+      return this.isSuccess;
+    },
+    isFilled() {
+      const i = this.item;
+      return i.type && i.title && i.src && i.link && i.brand && i.price && i.color && i.length;
+    },
+    itemType() {
+      return this.item.type;
+    },
+  },
   methods: {
     async addToBase() {
       try {
@@ -257,23 +273,6 @@ export default {
         this.error = err.response.data.error.message;
         throw new Error('Something bad happened', err);
       }
-    },
-  },
-  computed: {
-    isError() {
-      return this.error;
-    },
-    isOk() {
-      return this.isSuccess;
-    },
-    isFilled() {
-      const i = this.item;
-      return i.type && i.title && i.src && i.link && i.brand && i.price && i.color && i.length
-        ? true
-        : false;
-    },
-    itemType() {
-      return this.item.type;
     },
   },
 };
