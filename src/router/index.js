@@ -59,7 +59,7 @@ export default new Router({
       path: '/result',
       name: 'Result',
       component: LazyLoad.Result,
-      beforeEnter: beforeResult,
+      // beforeEnter: beforeResult,
     },
     {
       path: '/admin',

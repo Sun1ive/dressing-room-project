@@ -17,16 +17,17 @@ export default {
       fetchData();
     });
   },
-  getItemsByPartsAndType({ commit, state }, payload) {
+  getItemsByPartsAndType({ commit, state, getters }) {
     return new Promise(resolve => {
       async function fetch() {
         try {
           const { data } = await withOutAuth().post('/products/items', {
             type: state.itemType,
             params: state.userParams,
-            page: payload
+            page: getters.page
           });
           commit('setItems', data);
+          commit('setPage');
           resolve();
         } catch (error) {
           /* eslint-disable no-console */

@@ -76,7 +76,6 @@ export default {
     return {
       selectedColor: null,
       selectedType: null,
-      page: 1,
     };
   },
   computed: {
@@ -93,7 +92,7 @@ export default {
   },
   methods: {
     ...mapMutations(['setSelectedItem', 'setItemType', 'setLoading']),
-    ...mapActions(['compareProductsWithType', 'getItemsByParts']),
+    ...mapActions(['compareProductsWithType', 'getItemsByPartsAndType']),
     async checkAll() {
       this.setLoading(true);
       this.reset();
@@ -116,8 +115,7 @@ export default {
       this.selectedType = null;
     },
     loadMore() {
-      this.getItemsByParts(this.page);
-      this.page += 1;
+      this.getItemsByPartsAndType(this.page);
     },
   },
 };

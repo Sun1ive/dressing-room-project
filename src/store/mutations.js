@@ -1,4 +1,7 @@
 export default {
+  setPage: state => {
+    state.page += 1;
+  },
   setLoading(state, payload) {
     state.isLoading = payload;
   },
@@ -45,4 +48,4 @@ export default {
   addElementToItemsInState(state, payload) {
     state.items.push(payload);
   },
-}
+};

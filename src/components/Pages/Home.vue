@@ -150,7 +150,8 @@ export default {
         this.setLoading(false);
         this.$router.push('/result');
       } else {
-        await this.compareProductsWithType();
+        // await this.compareProductsWithType();
+        await this.getItemsByPartsAndType();
         this.setLoading(false);
         this.$router.push('/result');
       }

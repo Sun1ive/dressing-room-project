@@ -3,7 +3,7 @@ import { mapGetters, mapMutations, mapActions } from 'vuex';
 export default {
   methods: {
     ...mapMutations(['setSelectedItem', 'setLoading', 'setError']),
-    ...mapActions(['compareProductsWithType', 'compareSingle']),
+    ...mapActions(['compareProductsWithType', 'compareSingle', 'getItemsByPartsAndType']),
     async checkAllProducts() {
       if (this.isError.state) {
         this.setError({ state: false, status: 200, message: '' });
