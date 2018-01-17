@@ -4,14 +4,14 @@
       <v-flex class="text-xs-center">
         <v-card>
           <v-card-title>
-            <slot name="title"></slot>
+            <slot name="title"/>
           </v-card-title>
           <v-card-text>
-            <slot name="text"></slot>
+            <slot name="text"/>
           </v-card-text>
           <v-card-actions>
-            <slot name="buttonAccept"></slot>
-            <slot name="buttonCancel"></slot>
+            <slot name="buttonAccept"/>
+            <slot name="buttonCancel"/>
           </v-card-actions>
         </v-card>
       </v-flex>

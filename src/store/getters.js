@@ -1,4 +1,5 @@
 export default {
+  page: state => state.page,
   items: state => state.items,
   itemType: state => state.itemType,
   availableItemTypes: state => state.availableItemTypes,

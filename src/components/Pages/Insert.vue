@@ -11,7 +11,7 @@
             <v-text-field
               label="Вставьте ссылку"
               v-model.lazy.trim="link"
-            ></v-text-field>
+            />
             <v-btn
               color="primary"
               type="submit"
@@ -56,9 +56,17 @@ export default {
       paramDialog: false,
     };
   },
+  computed: {
+    isFilled() {
+      return this.link.length > 0;
+    },
+    isError() {
+      return this.$store.getters.isError;
+    },
+  },
   methods: {
     async onCheckout() {
-      this.setLoading(true)
+      this.setLoading(true);
       if (!this.height || !this.shoulders || !this.breast || !this.waist || !this.hips) {
         this.setLoading(false);
         this.paramDialog = true;
@@ -68,7 +76,7 @@ export default {
         }
         this.setSelectedItem(this.link);
         await this.compareSingle(this.isSelectedItem);
-        this.setLoading(false)
+        this.setLoading(false);
         this.$router.push('/result');
       }
     },
@@ -79,14 +87,6 @@ export default {
     cancel() {
       this.$router.push('/');
     },
-  },
-  computed: {
-    isFilled() {
-      return this.link.length > 0;
-    },
-    isError() {
-      return this.$store.getters.isError;
-    }
   },
 };
 </script>

@@ -1,14 +1,14 @@
 <template>
   <v-app>
     <app-Header />
-      <v-content>
-        <transition
-          name="fade"
-          mode="out-in"
-        >
-          <router-view />
-        </transition>
-      </v-content>
+    <v-content>
+      <transition
+        name="fade"
+        mode="out-in"
+      >
+        <router-view />
+      </transition>
+    </v-content>
     <app-Footer />
   </v-app>
 </template>

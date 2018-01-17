@@ -10,9 +10,16 @@ module.exports = {
   env: {
     browser: true,
   },
-  extends: ['airbnb-base', 'prettier', 'plugin:vue/essential'],
+  extends: [
+    'airbnb-base',
+    'prettier',
+    'plugin:vue/base',
+    'plugin:vue/essential',
+    'plugin:vue/strongly-recommended',
+    'plugin:vue/recommended',
+  ],
   // required to lint *.vue files
-  plugins: ['html', 'vue', 'import'],
+  plugins: ['vue', 'import'],
   // check if imports actually resolve
   settings: {
     'import/resolver': {
@@ -28,6 +35,7 @@ module.exports = {
     'linebreak-style': 0,
     'no-param-reassign': [2, { props: false }],
     'no-underscore-dangle': 0,
+    'vue/max-attributes-per-line': 0,
     // allow optionalDependencies
     'import/no-extraneous-dependencies': [
       'error',

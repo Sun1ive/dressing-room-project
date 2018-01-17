@@ -10,6 +10,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    page: 1,
     items: [],
     itemType: 'Плечевые',
     availableItemTypes: typeList,

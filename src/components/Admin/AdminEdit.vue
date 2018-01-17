@@ -25,7 +25,7 @@
             bottom
             required
             :rules="[() => !!item.type || 'This field is required']"
-          ></v-select>
+          />
 
           <v-text-field 
             v-model.lazy="item.title"
@@ -46,7 +46,7 @@
             v-model.lazy="item.link"
             label="link"
             :rules="[() => !!item.link || 'This field is required']"
-            />
+          />
 
           <v-select
             :items="brandList"
@@ -56,9 +56,10 @@
             bottom
             required
             :rules="[() => !!item.brand || 'This field is required']"
-          ></v-select>
+          />
 
-          <v-text-field required
+          <v-text-field 
+            required
             v-model.number.lazy="item.price"
             label="price грн"
             :rules="[() => !!item.price || 'This field is required']"
@@ -72,14 +73,14 @@
             bottom
             required
             :rules="[() => !!item.color || 'This field is required']"
-          ></v-select>
+          />
           
           <v-text-field 
             required
             v-model.number.lazy="item.length"
             label="item length см"
             :rules="[() => !!item.length || 'This field is required']"
-            />
+          />
 
           <app-create>
             <v-card-text slot="size">XS</v-card-text>
@@ -114,8 +115,8 @@
           </app-create>
 
           <v-btn
-          color="primary"
-          type="submit"
+            color="primary"
+            type="submit"
           >Submit</v-btn>
         </v-form>
       </v-flex>
@@ -124,11 +125,11 @@
 </template>
 
 <script>
-import createContainer from '../Templates/CreateContainer';
 import { withHeaders } from '@/services/api';
 import { SessionStorage } from '@/utils/storage';
 import { colors, typeList, brandList } from '@/utils/data';
 
+import createContainer from '../Templates/CreateContainer';
 import AlertSuccess from '../Shared/Alerts/AlertSuccessful';
 
 export default {
@@ -156,26 +157,6 @@ export default {
       m: {},
       l: {},
     };
-  },
-  methods: {
-    async onEdit() {
-      try {
-        const token = `Bearer ${SessionStorage.get('AuthToken')}`;
-        if (this.item.sizes.length < 1) {
-          this.item.sizes.push(this.xs, this.s, this.m, this.l);
-        }
-        await withHeaders(token).patch(`/products/${this.id}`, this.item);
-        await this.$store.dispatch('getItems');
-        this.isSuccess = true
-        setTimeout(() => {
-          this.isSuccess = false
-        }, 1000);
-
-        // this.$router.push('/admin/view');
-      } catch (error) {
-        throw new Error('Something bad happened ', error);
-      }
-    },
   },
   created() {
     const item = this.$store.getters.items.filter(x => x._id === this.id);
@@ -234,6 +215,26 @@ export default {
         }
       });
     });
+  },
+  methods: {
+    async onEdit() {
+      try {
+        const token = `Bearer ${SessionStorage.get('AuthToken')}`;
+        if (this.item.sizes.length < 1) {
+          this.item.sizes.push(this.xs, this.s, this.m, this.l);
+        }
+        await withHeaders(token).patch(`/products/${this.id}`, this.item);
+        await this.$store.dispatch('getItems');
+        this.isSuccess = true;
+        setTimeout(() => {
+          this.isSuccess = false;
+        }, 1000);
+
+        // this.$router.push('/admin/view');
+      } catch (error) {
+        throw new Error('Something bad happened ', error);
+      }
+    },
   },
 };
 </script>

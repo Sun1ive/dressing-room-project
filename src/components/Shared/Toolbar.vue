@@ -1,6 +1,8 @@
 <template>
-<nav>
-  <v-toolbar dark color="primary">
+  <nav>
+    <v-toolbar 
+      dark 
+      color="primary">
       <v-spacer />
       <v-toolbar-items class="hidden-sm-and-down">
         <v-btn
@@ -9,7 +11,7 @@
           :key="index"
           :to="item.path"
           exact
-          >
+        >
           {{ item.title }}
         </v-btn>
       </v-toolbar-items>
@@ -31,7 +33,6 @@
 </template>
 
 <script>
-import uniq from 'lodash/uniq';
 import { mapGetters } from 'vuex';
 
 export default {
@@ -56,13 +57,7 @@ export default {
   computed: {
     ...mapGetters({
       isUserAuth: 'userLoginState',
-      items: 'items',
     }),
-    filterItems() {
-      if (this.items) {
-        return uniq(this.items.map(item => item.color));
-      }
-    },
   },
 };
 </script>

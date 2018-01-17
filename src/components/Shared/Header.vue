@@ -3,7 +3,7 @@
     <v-container fluid>
       <v-layout class="primary" justify-center align-center>
         <v-flex class="text-xs-center white--text">
-          <app-toolbar></app-toolbar>
+          <app-toolbar />
         </v-flex>
       </v-layout>
     </v-container>
