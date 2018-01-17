@@ -91,18 +91,18 @@ export default {
     },
   },
   methods: {
-    ...mapMutations(['setSelectedItem', 'setItemType', 'setLoading']),
-    ...mapActions(['getItemsByPartsAndType', 'getItemsByPartsAndType']),
+    ...mapMutations(['setSelectedItem', 'setItemType', 'setLoading', 'resetPage']),
+    ...mapActions(['getItemsByPartsAndType']),
     async checkAll() {
       this.setLoading(true);
       this.reset();
-      this.setSelectedItem(null);
       this.setItemType('Плечевые');
       await this.getItemsByPartsAndType();
       this.setLoading(false);
     },
     async findByType() {
       this.setLoading(true);
+      this.resetPage();
       this.setItemType(this.selectedType);
       if (this.selectedColor) {
         this.selectedColor = null;
@@ -111,6 +111,8 @@ export default {
       this.setLoading(false);
     },
     reset() {
+      this.resetPage();
+      this.setSelectedItem(null);
       this.selectedColor = null;
       this.selectedType = null;
     },
