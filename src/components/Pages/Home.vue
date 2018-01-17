@@ -21,16 +21,16 @@
 
       <app-params v-if="!height">
         <v-btn
-        slot="button"
-        color="primary"
-        to="/height"
+          slot="button"
+          color="primary"
+          to="/height"
         >Ваш рост</v-btn>
       </app-params>
 
       <app-params v-if="height">
         <v-card-text slot="params">Рост: {{ height }} см <v-btn
-        fab
-        to="/height"
+          fab
+          to="/height"
         ><v-icon>mode_edit</v-icon>
         </v-btn>
         </v-card-text>
@@ -38,16 +38,16 @@
 
       <app-params v-if="!shoulders">
         <v-btn
-        slot="button"
-        color="primary"
-        to="/shoulders"
+          slot="button"
+          color="primary"
+          to="/shoulders"
         >Ширина плеч</v-btn>
       </app-params>
 
       <app-params v-if="shoulders">
         <v-card-text slot="params">Плечи: {{ shoulders }} см <v-btn
-        fab
-        to="/shoulders"
+          fab
+          to="/shoulders"
         ><v-icon>mode_edit</v-icon>
         </v-btn>
         </v-card-text>
@@ -55,16 +55,16 @@
 
       <app-params v-if="!breast">
         <v-btn
-        slot="button"
-        color="primary"
-        to="/breast"
+          slot="button"
+          color="primary"
+          to="/breast"
         >Обхват груди</v-btn>
       </app-params>
 
       <app-params v-if="breast">
         <v-card-text slot="params">Грудь: {{ breast }} см <v-btn
-        fab
-        to="/breast"
+          fab
+          to="/breast"
         ><v-icon>mode_edit</v-icon>
         </v-btn>
         </v-card-text>
@@ -72,35 +72,35 @@
 
       <app-params v-if="!waist">
         <v-btn
-        slot="button"
-        color="primary"
-        to="/waist"
+          slot="button"
+          color="primary"
+          to="/waist"
         >Обхват талии</v-btn>
       </app-params>
 
       <app-params v-if="waist">
         <v-card-text slot="params">Талия: {{ waist }} см <v-btn
-        fab
-        to="/waist"
+          fab
+          to="/waist"
         ><v-icon>mode_edit</v-icon>
-          </v-btn>
+        </v-btn>
         </v-card-text>
       </app-params>
 
       <app-params v-if="!hips">
         <v-btn
-        slot="button"
-        color="primary"
-        to="/hips"
+          slot="button"
+          color="primary"
+          to="/hips"
         >Обхват бедер</v-btn>
       </app-params>
 
       <app-params v-if="hips">
         <v-card-text slot="params">Бедра: {{ hips }} см <v-btn
-        fab
-        to="/hips"
+          fab
+          to="/hips"
         >
-        <v-icon>mode_edit</v-icon>
+          <v-icon>mode_edit</v-icon>
         </v-btn>
         </v-card-text>
       </app-params>
@@ -117,9 +117,9 @@
 
       <app-params>
         <v-btn
-        slot="button"
-        :disabled="isReadyToCheckout"
-        @click="onCheckout"
+          slot="button"
+          :disabled="isReadyToCheckout"
+          @click="onCheckout"
         >Примерить</v-btn>
       </app-params>
     </v-container>
@@ -128,11 +128,16 @@
 
 
 <script>
-import { setLocalData } from '../../utils/storage';
 import myMixin from '@/mixins/functional';
+import { setLocalData } from '@/utils/storage';
 
 export default {
   mixins: [myMixin],
+  computed: {
+    isReadyToCheckout() {
+      return !this.height || !this.breast || !this.waist || !this.hips || !this.shoulders;
+    },
+  },
   methods: {
     async onCheckout() {
       this.setLoading(true);
@@ -148,11 +153,6 @@ export default {
       }
     },
   },
-  computed: {
-    isReadyToCheckout() {
-      return !this.height || !this.breast || !this.waist || !this.hips || !this.shoulders;
-    }
-  },
 };
 </script>
 
@@ -162,4 +162,3 @@ export default {
 
 <style lang="stylus" scoped>
 </style>
-

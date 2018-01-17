@@ -1,21 +1,40 @@
 <template>
   <v-container>
-    <v-layout justify-center class="my-2">
-      <v-flex xs10 class="text-xs-center">
+    <v-layout 
+      justify-center
+      class="my-2"
+    >
+      <v-flex
+        xs10 
+        class="text-xs-center"
+      >
         <v-card>
-          <slot name="size"></slot>
-          <v-layout justify-center row>
-            <v-flex xs2 class="mx-2">
-              <slot name="shoulders"></slot>
+          <slot 
+            name="size"
+          />
+          <v-layout 
+            justify-center
+            row
+            >
+            <v-flex 
+              xs2 class="mx-2">
+              <slot 
+              name="shoulders"></slot>
             </v-flex>
-            <v-flex xs2 class="mx-2">
-              <slot name="breast"></slot>
+            <v-flex 
+              xs2 class="mx-2">
+              <slot 
+              name="breast"></slot>
             </v-flex>
-            <v-flex xs2 class="mx-2">
-              <slot name="waist"></slot>
+            <v-flex 
+              xs2 class="mx-2">
+              <slot 
+              name="waist"></slot>
             </v-flex>
-            <v-flex xs2 class="mx-2">
-              <slot name="hips"></slot>
+            <v-flex 
+              xs2 class="mx-2">
+              <slot 
+              name="hips"></slot>
             </v-flex>
           </v-layout>
         </v-card>

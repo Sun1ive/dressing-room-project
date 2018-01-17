@@ -1,15 +1,19 @@
 <template>
   <v-container fluid>
     <transition 
-        mode="out-in"
-        enter-active-class="animated fadeIn"
-        leave-active-class="animated fadeOut"
-      >
-        <app-success v-if="isOk">
-          Successful!
-        </app-success>
+      mode="out-in"
+      enter-active-class="animated fadeIn"
+      leave-active-class="animated fadeOut"
+    >
+      <app-success v-if="isOk">
+        Successful!
+      </app-success>
     </transition>
-    <v-layout class="pt-5" justify-center align-center>
+    <v-layout 
+      class="pt-5" 
+      justify-center 
+      align-center
+    >
       <v-flex xs10 sm8 lg6>
         <v-form
           class="form text-xs-center" 
