@@ -143,16 +143,14 @@ export default {
   },
   methods: {
     async onCheckout() {
-      this.setLoading(true);
       setLocalData(this.height, this.shoulders, this.breast, this.waist, this.hips);
       if (this.isSelectedItem) {
         await this.compareSingle(this.isSelectedItem);
-        this.setLoading(false);
         this.$router.push('/result');
       } else {
-        this.setPage();
+        // this.resetPage();
+        // this.setPage();
         await this.getItemsByPartsAndType();
-        this.setLoading(false);
         this.$router.push('/result');
       }
     },

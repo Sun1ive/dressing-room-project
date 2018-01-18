@@ -50,9 +50,12 @@
               Something bad happenned
             </app-error>
           </v-container>
-          <v-container>
+          <v-container v-if="showMore">
             <v-layout justify-center align-center>
-              <v-btn color="primary" @click="loadMore">Load more</v-btn>
+              <v-btn 
+                color="primary"
+                @click="loadMore"
+              >Load more</v-btn>
             </v-layout>
           </v-container>
         </v-flex>
@@ -79,7 +82,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(['items', 'availableItemTypes', 'isLoading']),
+    ...mapGetters(['items', 'availableItemTypes', 'isLoading', 'noItems']),
     itemsByColor() {
       return uniq(this.items.map(item => item.color));
     },
@@ -89,30 +92,41 @@ export default {
       }
       return this.items;
     },
+    showMore() {
+      return this.filteredItems.length > 1 && !this.noItems;
+    },
   },
   methods: {
-    ...mapMutations(['setSelectedItem', 'setItems', 'setItemType', 'setLoading', 'setPage', 'resetPage']),
+    ...mapMutations([
+      'setSelectedItem',
+      'setItems',
+      'setItemType',
+      'setLoading',
+      'setPage',
+      'resetPage',
+    ]),
     ...mapActions(['getItemsByPartsAndType']),
     async checkAll() {
-      this.setLoading(true);
-      this.reset();
-      this.setItemType('Плечевые');
-      await this.getItemsByPartsAndType();
-      this.setLoading(false);
+      // this.setItems([]);
+      // this.setLoading(true);
+      // this.reset();
+      // this.setItemType('Плечевые');
+      // await this.getItemsByPartsAndType();
+      // this.setLoading(false);
     },
     async findByType() {
-      this.setLoading(true);
-      this.selectedColor = null;
-      this.setItems([]);
-      this.setItemType(this.selectedType);
-      await this.getItemsByPartsAndType();
-      this.setLoading(false);
+      // this.setLoading(true);
+      // this.selectedColor = null;
+      // this.setItems([]);
+      // this.setItemType(this.selectedType);
+      // await this.getItemsByPartsAndType();
+      // this.setLoading(false);
     },
     reset() {
-      this.resetPage();
-      this.setSelectedItem(null);
-      this.selectedColor = null;
-      this.selectedType = null;
+      // this.resetPage();
+      // this.setSelectedItem(null);
+      // this.selectedColor = null;
+      // this.selectedType = null;
     },
     loadMore() {
       this.setPage();

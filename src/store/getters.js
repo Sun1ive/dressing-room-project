@@ -1,6 +1,7 @@
 export default {
   page: state => state.page,
   items: state => state.items,
+  noItems: state => state.noItems,
   itemType: state => state.itemType,
   availableItemTypes: state => state.availableItemTypes,
   isSelectedItem: state => state.selectedItem,

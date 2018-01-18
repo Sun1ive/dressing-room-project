@@ -12,6 +12,7 @@ export default new Vuex.Store({
   state: {
     page: 1,
     items: [],
+    noItems: false,
     itemType: 'Плечевые',
     availableItemTypes: typeList,
     selectedItem: null,

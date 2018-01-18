@@ -10,6 +10,9 @@ export default {
       state.items.push(item);
     })
   },
+  setNoItems(state, payload) {
+    state.noItems =  payload;
+  },
   setLoading(state, payload) {
     state.isLoading = payload;
   },

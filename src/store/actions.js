@@ -26,6 +26,9 @@ export default {
             params: state.userParams,
             page: getters.page,
           });
+          if (data.length < 4) {
+            commit('setNoItems', true);
+          }
           // commit('setItems', data);
           commit('setItemsByChanks', data);
           resolve();
@@ -70,23 +73,6 @@ export default {
         }
       }
       getItem();
-    });
-  },
-  compareProductsWithType({ commit, state }) {
-    return new Promise(resolve => {
-      async function compareAll() {
-        try {
-          const response = await withOutAuth().post('/products/all', {
-            type: state.itemType,
-            params: state.userParams,
-          });
-          commit('setItems', response.data);
-          resolve();
-        } catch (error) {
-          throw new Error(error);
-        }
-      }
-      compareAll();
     });
   },
   onSignIn({ commit }, payload) {
