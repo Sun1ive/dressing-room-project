@@ -11,6 +11,12 @@ export default new Router({
   mode: 'history',
   routes: [
     {
+      path: '/result',
+      name: 'Result',
+      component: LazyLoad.Result,
+      // beforeEnter: beforeResult,
+    },
+    {
       path: '/',
       name: 'Home',
       component: LazyLoad.Home,
@@ -54,12 +60,6 @@ export default new Router({
       path: '/404',
       name: 'FourOFour',
       component: LazyLoad.FourOFour,
-    },
-    {
-      path: '/result',
-      name: 'Result',
-      component: LazyLoad.Result,
-      // beforeEnter: beforeResult,
     },
     {
       path: '/admin',
