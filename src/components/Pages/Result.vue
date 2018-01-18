@@ -41,7 +41,7 @@
         </v-flex>
         <v-flex xs12>
           <v-container fluid grid-list-xl>
-            <app-results 
+            <app-results
               @checkAll="checkAll" 
               :filtered="filteredItems"
               v-if="filteredItems.length > 0"
@@ -128,9 +128,9 @@ export default {
       // this.selectedColor = null;
       // this.selectedType = null;
     },
-    loadMore() {
+    async loadMore() {
       this.setPage();
-      this.getItemsByPartsAndType();
+      await this.getItemsByPartsAndType();
     },
   },
 };

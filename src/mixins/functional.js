@@ -22,6 +22,7 @@ export default {
   },
   computed: {
     ...mapGetters({
+      items: 'items',
       page: 'page',
       isSelectedItem: 'isSelectedItem',
       isError: 'isError',

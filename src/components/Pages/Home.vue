@@ -146,7 +146,11 @@ export default {
       setLocalData(this.height, this.shoulders, this.breast, this.waist, this.hips);
       if (this.isSelectedItem) {
         await this.compareSingle(this.isSelectedItem);
-        this.$router.push('/result');
+        if (this.items.length < 1) {
+          this.$router.push('/404');
+        } else {
+          this.$router.push('/result');
+        }
       } else {
         // this.resetPage();
         // this.setPage();
