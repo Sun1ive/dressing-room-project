@@ -33,8 +33,9 @@ export default {
           commit('setItemsByChanks', data);
           resolve();
         } catch (error) {
-          commit('setError', { state: true, status: 503, message: error });
-          throw new Error('Something went wrong', error);
+          commit('setNoItems', true);
+          // commit('setError', { state: true, status: 503, message: error });
+          // throw new Error('Something went wrong', error);
         }
       }
       fetch();
