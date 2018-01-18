@@ -143,19 +143,24 @@ export default {
   },
   methods: {
     async onCheckout() {
+      this.setLoading(true);
       setLocalData(this.height, this.shoulders, this.breast, this.waist, this.hips);
       if (this.isSelectedItem) {
         await this.compareSingle(this.isSelectedItem);
         if (this.items.length < 1) {
           this.$router.push('/404');
+          this.setLoading(false);
         } else {
           this.$router.push('/result');
+          this.setLoading(false);
         }
       } else {
-        // this.resetPage();
-        // this.setPage();
+        this.resetPage();
+        this.setItems([]);
+        this.setPage();
         await this.getItemsByPartsAndType();
         this.$router.push('/result');
+        this.setLoading(false);
       }
     },
   },

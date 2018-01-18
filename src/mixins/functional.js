@@ -3,6 +3,7 @@ import { mapGetters, mapMutations, mapActions } from 'vuex';
 export default {
   methods: {
     ...mapMutations([
+      'setItems',
       'setSelectedItem', 
       'setLoading', 
       'setError', 

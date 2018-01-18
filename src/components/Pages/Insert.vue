@@ -77,7 +77,11 @@ export default {
         this.setSelectedItem(this.link);
         await this.compareSingle(this.isSelectedItem);
         this.setLoading(false);
-        this.$router.push('/result');
+        if (this.items.length < 1) {
+          this.$router.push('/404');
+        } else {
+          this.$router.push('/result');
+        }
       }
     },
     accept() {
