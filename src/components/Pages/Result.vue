@@ -109,24 +109,23 @@ export default {
     async checkAll() {
       this.setLoading(true);
       this.reset();
+      this.selectedType = null;
       this.setItemType('Плечевые');
       await this.getItemsByPartsAndType();
       this.setLoading(false);
     },
     async findByType() {
-      // this.setLoading(true);
-      // this.selectedColor = null;
-      // this.setItems([]);
-      // this.setItemType(this.selectedType);
-      // await this.getItemsByPartsAndType();
-      // this.setLoading(false);
+      this.setLoading(true);
+      this.reset();
+      this.setItemType(this.selectedType);
+      await this.getItemsByPartsAndType();
+      this.setLoading(false);
     },
     reset() {
       this.setItems([]);
       this.resetPage();
       this.setSelectedItem(null);
       this.selectedColor = null;
-      this.selectedType = null;
     },
     async loadMore() {
       this.setPage();
