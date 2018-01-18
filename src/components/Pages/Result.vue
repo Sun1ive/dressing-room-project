@@ -61,6 +61,7 @@
         </v-flex>
       </v-layout>
     </v-container>
+    <app-scrollTop />
   </v-container>
 </template>
 
@@ -69,11 +70,13 @@ import { mapGetters, mapMutations, mapActions } from 'vuex';
 import uniq from 'lodash/uniq';
 import Results from '../Shared/Results';
 import AlertError from '../Shared/Alerts/AlertError';
+import ScrollTop from '../Shared/ScrollTop';
 
 export default {
   components: {
     'app-results': Results,
     'app-error': AlertError,
+    'app-scrollTop': ScrollTop,
   },
   data() {
     return {
