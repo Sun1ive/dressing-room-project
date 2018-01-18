@@ -4,6 +4,7 @@ import 'animate.css';
 import pWrapper from '@/components/Templates/ParamsWrapper';
 import preLoader from '@/components/Shared/Loader';
 import Modal from '@/components/Shared/Modal';
+import Scroll from 'vuetify/es5/directives/scroll';
 
 import {
   Vuetify,
@@ -64,6 +65,9 @@ Vue.use(Vuetify, {
     VDialog,
     VPagination,
     transitions,
+  },
+  directives: {
+    Scroll,
   },
   theme: {
     primary: '#1976D2',

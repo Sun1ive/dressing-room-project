@@ -3,13 +3,16 @@
     <v-container fluid v-if="isLoading">
       <app-loader />
     </v-container>
-    <v-container fluid v-if="!isLoading">
+    <v-container 
+      fluid v-if="!isLoading" 
+      v-scroll="checkPos"
+    >
       <v-layout>
         <v-flex xs6 sm3 v-if="items.length > 1">
           <v-container fluid>
             <v-layout justify-center class="mt-4" row>
               <v-flex xs10>
-                <v-card>
+                <v-card :class="{ isFixed: isFixed }">
                   <v-toolbar color="teal" dark>
                     <v-toolbar-title>Фильтр</v-toolbar-title>
                   </v-toolbar>
@@ -51,7 +54,10 @@
             </app-error>
           </v-container>
           <v-container v-if="showMore">
-            <v-layout justify-center align-center>
+            <v-layout 
+              justify-center 
+              align-center
+            >
               <v-btn 
                 color="primary"
                 @click="loadMore"
@@ -82,6 +88,7 @@ export default {
     return {
       selectedColor: null,
       selectedType: null,
+      isFixed: false,
     };
   },
   computed: {
@@ -134,9 +141,22 @@ export default {
       this.setPage();
       await this.getItemsByPartsAndType();
     },
+    checkPos() {
+      const w = window.pageYOffset;
+      if (w > 1000) {
+        this.isFixed = true
+      } else {
+        this.isFixed = false
+      }
+    }
   },
 };
 </script>
 
 <style scoped lang="stylus">
+.isFixed
+  width 300px
+  top 10px;
+  position fixed
+
 </style>
