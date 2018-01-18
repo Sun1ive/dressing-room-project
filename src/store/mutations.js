@@ -5,6 +5,11 @@ export default {
   resetPage: state => {
     state.page = 1;
   },
+  setItemsByChanks(state, payload) {
+    payload.forEach(item => {
+      state.items.push(item);
+    })
+  },
   setLoading(state, payload) {
     state.isLoading = payload;
   },

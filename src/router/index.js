@@ -3,7 +3,7 @@ import Router from 'vue-router';
 
 import * as LazyLoad from './lazyLoad';
 import beforeAdmin from './adminGuard';
-import beforeResult from './resultGuard';
+// import beforeResult from './resultGuard';
 
 Vue.use(Router);
 
@@ -59,7 +59,7 @@ export default new Router({
       path: '/result',
       name: 'Result',
       component: LazyLoad.Result,
-      beforeEnter: beforeResult,
+      // beforeEnter: beforeResult,
     },
     {
       path: '/admin',

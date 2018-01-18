@@ -52,7 +52,7 @@
           </v-container>
           <v-container>
             <v-layout justify-center align-center>
-              <v-btn color="primary" @click="loadMore">sad</v-btn>
+              <v-btn color="primary" @click="loadMore">Load more</v-btn>
             </v-layout>
           </v-container>
         </v-flex>
@@ -91,7 +91,7 @@ export default {
     },
   },
   methods: {
-    ...mapMutations(['setSelectedItem', 'setItemType', 'setLoading', 'resetPage']),
+    ...mapMutations(['setSelectedItem', 'setItems', 'setItemType', 'setLoading', 'setPage', 'resetPage']),
     ...mapActions(['getItemsByPartsAndType']),
     async checkAll() {
       this.setLoading(true);
@@ -102,11 +102,9 @@ export default {
     },
     async findByType() {
       this.setLoading(true);
-      this.resetPage();
+      this.selectedColor = null;
+      this.setItems([]);
       this.setItemType(this.selectedType);
-      if (this.selectedColor) {
-        this.selectedColor = null;
-      }
       await this.getItemsByPartsAndType();
       this.setLoading(false);
     },
@@ -117,6 +115,7 @@ export default {
       this.selectedType = null;
     },
     loadMore() {
+      this.setPage();
       this.getItemsByPartsAndType();
     },
   },

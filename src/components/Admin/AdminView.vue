@@ -73,6 +73,7 @@ export default {
   },
   methods: {
     async deleteItem(id) {
+      /* eslint-disable no-alert */ /* eslint-disable no-restricted-globals */
       if (confirm('Are you sure ?')) {
         try {
           const token = `Bearer ${SessionStorage.get('AuthToken')}`;

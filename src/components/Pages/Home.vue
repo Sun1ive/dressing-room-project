@@ -150,7 +150,7 @@ export default {
         this.setLoading(false);
         this.$router.push('/result');
       } else {
-        this.resetPage();
+        this.setPage();
         await this.getItemsByPartsAndType();
         this.setLoading(false);
         this.$router.push('/result');

@@ -23,7 +23,6 @@ export default async (to, from, next) => {
   } else {
     commit('setLoading', true);
     setLocalData(sg.userHeight, sg.userShoulders, sg.userBreast, sg.userWaist, sg.userHips);
-    store.commit('resetPage');
     await store.dispatch('getItemsByPartsAndType');
     if (sg.items.length < 1) {
       commit('setLoading', false);

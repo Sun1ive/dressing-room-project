@@ -26,8 +26,8 @@ export default {
             params: state.userParams,
             page: getters.page,
           });
-          commit('setItems', data);
-          commit('setPage');
+          // commit('setItems', data);
+          commit('setItemsByChanks', data);
           resolve();
         } catch (error) {
           commit('setError', { state: true, status: 503, message: error });
