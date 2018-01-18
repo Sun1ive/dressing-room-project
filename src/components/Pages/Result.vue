@@ -107,12 +107,11 @@ export default {
     ]),
     ...mapActions(['getItemsByPartsAndType']),
     async checkAll() {
-      // this.setItems([]);
-      // this.setLoading(true);
-      // this.reset();
-      // this.setItemType('Плечевые');
-      // await this.getItemsByPartsAndType();
-      // this.setLoading(false);
+      this.setLoading(true);
+      this.reset();
+      this.setItemType('Плечевые');
+      await this.getItemsByPartsAndType();
+      this.setLoading(false);
     },
     async findByType() {
       // this.setLoading(true);
@@ -123,10 +122,11 @@ export default {
       // this.setLoading(false);
     },
     reset() {
-      // this.resetPage();
-      // this.setSelectedItem(null);
-      // this.selectedColor = null;
-      // this.selectedType = null;
+      this.setItems([]);
+      this.resetPage();
+      this.setSelectedItem(null);
+      this.selectedColor = null;
+      this.selectedType = null;
     },
     async loadMore() {
       this.setPage();
