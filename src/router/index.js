@@ -3,13 +3,19 @@ import Router from 'vue-router';
 
 import * as LazyLoad from './lazyLoad';
 import beforeAdmin from './adminGuard';
-import beforeResult from './resultGuard';
+// import beforeResult from './resultGuard';
 
 Vue.use(Router);
 
 export default new Router({
   mode: 'history',
   routes: [
+    {
+      path: '/result',
+      name: 'Result',
+      component: LazyLoad.Result,
+      // beforeEnter: beforeResult,
+    },
     {
       path: '/',
       name: 'Home',
@@ -54,12 +60,6 @@ export default new Router({
       path: '/404',
       name: 'FourOFour',
       component: LazyLoad.FourOFour,
-    },
-    {
-      path: '/result',
-      name: 'Result',
-      component: LazyLoad.Result,
-      beforeEnter: beforeResult,
     },
     {
       path: '/admin',

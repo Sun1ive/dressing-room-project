@@ -3,13 +3,16 @@
     <v-container fluid v-if="isLoading">
       <app-loader />
     </v-container>
-    <v-container fluid v-if="!isLoading">
+    <v-container 
+      fluid v-if="!isLoading" 
+      v-scroll="checkPos"
+    >
       <v-layout>
         <v-flex xs6 sm3 v-if="items.length > 1">
           <v-container fluid>
             <v-layout justify-center class="mt-4" row>
               <v-flex xs10>
-                <v-card>
+                <v-card :class="{ isFixed: isFixed }">
                   <v-toolbar color="teal" dark>
                     <v-toolbar-title>Фильтр</v-toolbar-title>
                   </v-toolbar>
@@ -41,7 +44,7 @@
         </v-flex>
         <v-flex xs12>
           <v-container fluid grid-list-xl>
-            <app-results 
+            <app-results
               @checkAll="checkAll" 
               :filtered="filteredItems"
               v-if="filteredItems.length > 0"
@@ -50,14 +53,21 @@
               Something bad happenned
             </app-error>
           </v-container>
-          <v-container>
-            <v-layout justify-center align-center>
-              <v-btn color="primary" @click="loadMore">sad</v-btn>
+          <v-container v-if="showMore">
+            <v-layout 
+              justify-center 
+              align-center
+            >
+              <v-btn 
+                color="primary"
+                @click="loadMore"
+              >Load more</v-btn>
             </v-layout>
           </v-container>
         </v-flex>
       </v-layout>
     </v-container>
+    <app-scrollTop />
   </v-container>
 </template>
 
@@ -66,20 +76,23 @@ import { mapGetters, mapMutations, mapActions } from 'vuex';
 import uniq from 'lodash/uniq';
 import Results from '../Shared/Results';
 import AlertError from '../Shared/Alerts/AlertError';
+import ScrollTop from '../Shared/ScrollTop';
 
 export default {
   components: {
     'app-results': Results,
     'app-error': AlertError,
+    'app-scrollTop': ScrollTop,
   },
   data() {
     return {
       selectedColor: null,
       selectedType: null,
+      isFixed: false,
     };
   },
   computed: {
-    ...mapGetters(['items', 'availableItemTypes', 'isLoading']),
+    ...mapGetters(['items', 'availableItemTypes', 'isLoading', 'noItems']),
     itemsByColor() {
       return uniq(this.items.map(item => item.color));
     },
@@ -89,39 +102,61 @@ export default {
       }
       return this.items;
     },
+    showMore() {
+      return this.filteredItems.length > 1 && !this.noItems;
+    },
   },
   methods: {
-    ...mapMutations(['setSelectedItem', 'setItemType', 'setLoading', 'resetPage']),
+    ...mapMutations([
+      'setSelectedItem',
+      'setItems',
+      'setItemType',
+      'setLoading',
+      'setPage',
+      'resetPage',
+    ]),
     ...mapActions(['getItemsByPartsAndType']),
     async checkAll() {
       this.setLoading(true);
       this.reset();
+      this.selectedType = null;
       this.setItemType('Плечевые');
       await this.getItemsByPartsAndType();
       this.setLoading(false);
     },
     async findByType() {
       this.setLoading(true);
-      this.resetPage();
+      this.reset();
       this.setItemType(this.selectedType);
-      if (this.selectedColor) {
-        this.selectedColor = null;
-      }
       await this.getItemsByPartsAndType();
       this.setLoading(false);
     },
     reset() {
+      this.setItems([]);
       this.resetPage();
       this.setSelectedItem(null);
       this.selectedColor = null;
-      this.selectedType = null;
     },
-    loadMore() {
-      this.getItemsByPartsAndType();
+    async loadMore() {
+      this.setPage();
+      await this.getItemsByPartsAndType();
     },
+    checkPos() {
+      const w = window.pageYOffset;
+      if (w > 1000) {
+        this.isFixed = true
+      } else {
+        this.isFixed = false
+      }
+    }
   },
 };
 </script>
 
 <style scoped lang="stylus">
+.isFixed
+  width 300px
+  top 10px;
+  position fixed
+
 </style>

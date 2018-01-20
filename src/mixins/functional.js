@@ -2,7 +2,14 @@ import { mapGetters, mapMutations, mapActions } from 'vuex';
 
 export default {
   methods: {
-    ...mapMutations(['setSelectedItem', 'setLoading', 'setError', 'setPage', 'resetPage']),
+    ...mapMutations([
+      'setItems',
+      'setSelectedItem', 
+      'setLoading', 
+      'setError', 
+      'setPage', 
+      'resetPage'
+    ]),
     ...mapActions(['compareSingle', 'getItemsByPartsAndType']),
     async checkAllProducts() {
       if (this.isError.state) {
@@ -16,6 +23,7 @@ export default {
   },
   computed: {
     ...mapGetters({
+      items: 'items',
       page: 'page',
       isSelectedItem: 'isSelectedItem',
       isError: 'isError',

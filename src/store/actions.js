@@ -26,12 +26,16 @@ export default {
             params: state.userParams,
             page: getters.page,
           });
-          commit('setItems', data);
-          commit('setPage');
+          if (data.length < 4) {
+            commit('setNoItems', true);
+          }
+          // commit('setItems', data);
+          commit('setItemsByChanks', data);
           resolve();
         } catch (error) {
-          commit('setError', { state: true, status: 503, message: error });
-          throw new Error('Something went wrong', error);
+          commit('setNoItems', true);
+          // commit('setError', { state: true, status: 503, message: error });
+          // throw new Error('Something went wrong', error);
         }
       }
       fetch();
@@ -70,23 +74,6 @@ export default {
         }
       }
       getItem();
-    });
-  },
-  compareProductsWithType({ commit, state }) {
-    return new Promise(resolve => {
-      async function compareAll() {
-        try {
-          const response = await withOutAuth().post('/products/all', {
-            type: state.itemType,
-            params: state.userParams,
-          });
-          commit('setItems', response.data);
-          resolve();
-        } catch (error) {
-          throw new Error(error);
-        }
-      }
-      compareAll();
     });
   },
   onSignIn({ commit }, payload) {

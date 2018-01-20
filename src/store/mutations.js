@@ -5,6 +5,14 @@ export default {
   resetPage: state => {
     state.page = 1;
   },
+  setItemsByChanks(state, payload) {
+    payload.forEach(item => {
+      state.items.push(item);
+    })
+  },
+  setNoItems(state, payload) {
+    state.noItems =  payload;
+  },
   setLoading(state, payload) {
     state.isLoading = payload;
   },
