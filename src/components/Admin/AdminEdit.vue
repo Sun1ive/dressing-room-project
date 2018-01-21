@@ -224,6 +224,7 @@ export default {
           this.item.sizes.push(this.xs, this.s, this.m, this.l);
         }
         await withHeaders(token).patch(`/products/${this.id}`, this.item);
+        
         await this.$store.dispatch('getItems');
         this.isSuccess = true;
         setTimeout(() => {
@@ -232,7 +233,7 @@ export default {
 
         // this.$router.push('/admin/view');
       } catch (error) {
-        throw new Error('Something bad happened ', error);
+        throw error
       }
     },
   },

@@ -248,7 +248,7 @@ export default {
         if (this.item.sizes.length < 1) {
           this.item.sizes.push(this.xs, this.s, this.m, this.l);
         }
-        await withHeaders(token).post('/products', this.item);
+        await withHeaders(token).post('/products/create', this.item);
         this.isSuccess = true;
 
         this.item = {
@@ -270,8 +270,8 @@ export default {
       } catch (err) {
         this.isSuccess = false;
         this.item.sizes = [];
-        this.error = err.response.data.error.message;
-        throw new Error('Something bad happened', err);
+        // this.error = err.response.data.error.message;
+        throw err
       }
     },
   },

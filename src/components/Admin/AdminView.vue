@@ -77,10 +77,13 @@ export default {
       if (confirm('Are you sure ?')) {
         try {
           const token = `Bearer ${SessionStorage.get('AuthToken')}`;
+
           this.$store.commit('removeElementFromItemsInState', id);
+
           await withHeaders(token).delete(`/products/${id}`);
+
         } catch (error) {
-          throw new Error(`Something wrong ${error.response}`);
+          throw error
         }
       }
     },
